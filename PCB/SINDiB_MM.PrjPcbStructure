@@ -1,0 +1,4 @@
+Record=TopLevelDocument|FileName=main_controller.SchDoc|SheetNumber=3
+Record=NoMainPathDocument|SourceDocument=main_controller.SchDoc|FileName=motor.SchDoc|SheetNumber=4
+Record=NoMainPathDocument|SourceDocument=main_controller.SchDoc|FileName=power.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=main_controller.SchDoc|FileName=sensors.SchDoc|SheetNumber=2

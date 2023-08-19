@@ -1,0 +1,2 @@
+1. [STM32-ST Link V2 Interfacing](https://www.robotics-university.com/2016/05/mini-st-linkv2-programming-tool-for-stm8-and-stm32.html)
+2. [HC-06 Pinout](https://www.etechnophiles.com/hc06-pinout-specifications-datasheet/)
