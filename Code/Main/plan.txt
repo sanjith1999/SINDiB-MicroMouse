@@ -1,0 +1,30 @@
+high level code [main.c]
+
+states:
+    0 - IDLE
+----button press--- search file
+    1 - search idel
+    2 - search forward
+        L,R,F = readSensors()
+        floodFill()- get direction
+            left
+                turning
+                    read encorder and gyroscope
+                stering if posible
+            right
+            back
+            front
+    3 - search back
+----button press---fast file
+    4 - fast idel
+    5 - fast forward
+    6 - fast back
+----button press---
+    7 - Speed adjustment 
+
+button states
+    IDLE
+    SEARCH IDLE
+    FAST IDLE
+    SPEED ADJ
+        increse by one side decrese by other side
