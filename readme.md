@@ -32,8 +32,8 @@ Elevated sensitivity enables the detection of minute angular velocity changes, a
 ### Motor: N20-500RPM with Gear Ratio 30:1, 7PPR Encoder
 
 The N20-500RPM motor, paired with a gear box of ratio 30:1, strikes a balance between speed and torque. This combination provides the necessary power to propel the robot through the maze while maintaining control, maneuverability and a low stall current of 0.6A. 7PPR compatible encoder provides 28 Counts Per Revolution(CPR). Compatible D-hole rubber wheel with 32mm diameter and 3mm apecture is selected.
-$$\texttt{Speed}_{max}= \frac{500\times 2\pi}{60}\cdot 0.016=0.83ms^{-1}\\[10pt]
-\texttt{Accuracy} = \frac{2\pi\times 0.016}{30\times 28}= 1.196\times10^{-4}m/count=0.12mm/count $$
+$$\texttt{Speed}_{max}= \frac{500\times 2\pi}{60}\cdot 0.016=0.83ms^{-1}$$
+$$\texttt{Accuracy} = \frac{2\pi\times 0.016}{30\times 28}= 1.196\times10^{-4}m/count=0.12mm/count $$
 
 ### Motor Drivers: TC4427, ZXMHC3F38148
 
@@ -75,15 +75,15 @@ Understand the design bettery by looking at the [schematic](./PCB/Design/schemat
 
 <div style="display: flex; justify-content: space-between;">
   <img src="./body/top_route.jfif" alt="Top Track" style="width: 30%;">
-  <img src="./body/bottom_route.jfif" alt="Bottom Track" style="width: 30%;">
+  <img src="./body/bottom_route.jfif" alt="Bottom Track" style="width: 27%;">
   <img src="./body/route.jfif" alt="Tracks" style="width: 30%;">
 </div>
 
 3. Filling Copper in our Design.
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./body/top_pour.jfif" alt="Top Pour" style="width: 40%;">
-  <img src="./body/bottom_pour.jfif" alt="Bottom Pour" style="width: 40%;">
+  <img src="./body/top_pour.jfif" alt="Top Pour" style="width: 30%;">
+  <img src="./body/bottom_pour.jfif" alt="Bottom Pour" style="width: 28%;">
 </div>
 <br>
 Here is the complete PCB in a 3D view.
