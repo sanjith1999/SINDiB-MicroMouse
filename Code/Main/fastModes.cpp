@@ -1,4 +1,5 @@
-
+// #include "fastModes.h"
+#include <iostream>
 
 int fastIdle()
 {

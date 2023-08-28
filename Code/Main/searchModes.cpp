@@ -1,16 +1,17 @@
-
+// #include "searchModes.h"
+#include <iostream>
 
 int x = 0, y = 0;
 int xprev =0, yprev =0;
 int orient=0;
 
-'''
-    orients :
-        0- North
-        1- East
-        2- South
-        3- West
-'''
+
+//     orients :
+//         0- North
+//         1- East
+//         2- South
+//         3- West
+
 
 
 int searchIdle()
@@ -34,7 +35,7 @@ int searchIdle()
 
 }
 
-void searchForward()
+int searchForward()
 {
     // startPos(); // move to 
     
@@ -83,7 +84,7 @@ void searchForward()
 
 }
 
-void searchBackward()
+int searchBackward()
 {
     // backtrack();
     

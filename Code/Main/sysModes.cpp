@@ -1,3 +1,7 @@
+#include <iostream>
+// #include "sysModes.h"
+
+
 void InitMouse()
 {
     std::cin.ignore(); // temp wait until press enter 

@@ -28,3 +28,6 @@ button states
     FAST IDLE
     SPEED ADJ
         increse by one side decrese by other side
+
+
+g++ -o main main.cpp fastModes.cpp searchModes.cpp sysModes.cpp

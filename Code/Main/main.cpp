@@ -1,7 +1,8 @@
+#include <iostream>
+
 #include "searchModes.h"
 #include "fastModes.h"
 #include "sysModes.h"
-
 
 int mouseState = 0;
 
