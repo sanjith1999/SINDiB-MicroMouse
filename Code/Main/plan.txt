@@ -31,3 +31,23 @@ button states
 
 
 g++ -o main main.cpp fastModes.cpp searchModes.cpp sysModes.cpp
+
+
+
+
+
+Timmer assignment
+PIN|tag|Timer |Channel
+PB6|LPWMA|4|1|
+PB7|LPWMB|4|2|
+PB8|RPWMA|4|3|
+PB9|RPWMB|4|4|
+PA2|BUZZER|2|3|
+
+PA3|DRDY|Digital Input|
+PA4|RF_RESIVER|ADC1_IN4
+
+
+PA9|TX|USART1_TX
+PA10|RX|USART1_RX
+PC3|ADC1_IN13|VOL_METTER
