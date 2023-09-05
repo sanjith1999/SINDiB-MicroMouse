@@ -86,41 +86,41 @@ int searchForward()
 
 int searchBackward()
 {
-    // backtrack();
+    backtrack();
     
-    // while(1)
-    // {
-    //     if(backFlood[x][y]>=1) //NotInStart
-    //     {
-    //         direction= toMoveBack(x,y,xprev,yprev,orient);
+    while(1)
+    {
+        if(backFlood[x][y]>=1) //NotInStart
+        {
+            direction= toMoveBack(x,y,xprev,yprev,orient);
 
-    //         if (direction=='L')
-    //         {
-    //             searchTurnLeft()
-    //         }
-    //         elif (direction=='R'):
-    //             searchTurnRight()
+            if (direction=='L')
+            {
+                searchTurnLeft()
+            }
+            elif (direction=='R'):
+                searchTurnRight()
             
-    //         elif (direction=='B'):
-    //             searchTurnBack()
+            elif (direction=='B'):
+                searchTurnBack()
                
-    //         elif (direction=='F'):
-    //             searchGoForward()
+            elif (direction=='F'):
+                searchGoForward()
             
-    //         orient = orientation(orient,direction);
+            orient = orientation(orient,direction);
 
-    //     }
-    //     else
-    //     {
-    //         return 4;
-    //     }
+        }
+        else
+        {
+            return 4;
+        }
 
-    //     if(buttonPress())
-    //     {
-    //         return 4;
-    //     }
+        if(buttonPress())
+        {
+            return 4;
+        }
 
-    // }
+    }
 
     std::cin.ignore(); // temp wait until press enter 
     std::cin.get();   
