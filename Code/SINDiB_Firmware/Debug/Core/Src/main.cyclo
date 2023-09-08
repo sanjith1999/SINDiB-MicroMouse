@@ -1,0 +1,16 @@
+../Core/Src/main.cpp:102:5:int main()	9
+../Core/Src/main.cpp:231:6:void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*)	7
+../Core/Src/main.cpp:271:13:void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef*)	1
+../Core/Src/main.cpp:281:6:void HAL_GPIO_EXTI_Callback(uint16_t)	10
+../Core/Src/main.cpp:328:6:void SystemClock_Config()	3
+../Core/Src/main.cpp:361:13:void MX_ADC1_Init()	7
+../Core/Src/main.cpp:443:13:void MX_SPI1_Init()	2
+../Core/Src/main.cpp:474:13:void MX_SPI2_Init()	2
+../Core/Src/main.cpp:506:13:void MX_TIM2_Init()	4
+../Core/Src/main.cpp:548:13:void MX_TIM4_Init()	9
+../Core/Src/main.cpp:610:13:void MX_TIM6_Init()	3
+../Core/Src/main.cpp:641:13:void MX_TIM14_Init()	2
+../Core/Src/main.cpp:665:13:void MX_USART1_UART_Init()	2
+../Core/Src/main.cpp:691:13:void MX_DMA_Init()	1
+../Core/Src/main.cpp:703:13:void MX_GPIO_Init()	1
+../Core/Src/main.cpp:786:6:void Error_Handler()	1

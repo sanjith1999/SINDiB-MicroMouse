@@ -1,0 +1,3 @@
+../Drivers/ST_Libraries/startup/system_stm32f4xx.c:229:6:SystemInit	8	static
+../Drivers/ST_Libraries/startup/system_stm32f4xx.c:307:6:SystemCoreClockUpdate	32	static
+../Drivers/ST_Libraries/startup/system_stm32f4xx.c:365:13:SetSysClock	16	static

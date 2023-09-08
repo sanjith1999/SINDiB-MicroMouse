@@ -1580,6 +1580,7 @@ uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef* hadc)
 __weak void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
   /* Prevent unused argument(s) compilation warning */
+//	adcConversionComplete = 1;
   UNUSED(hadc);
   /* NOTE : This function Should not be modified, when the callback is needed,
             the HAL_ADC_ConvCpltCallback could be implemented in the user file

@@ -28,6 +28,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include <stdbool.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -61,10 +62,8 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define TB1_Pin GPIO_PIN_13
 #define TB1_GPIO_Port GPIOC
-#define PH0_OSC_IN_Pin GPIO_PIN_0
-#define PH0_OSC_IN_GPIO_Port GPIOH
-#define PH0_OSC_OUT_Pin GPIO_PIN_1
-#define PH0_OSC_OUT_GPIO_Port GPIOH
+#define LED10_Pin GPIO_PIN_0
+#define LED10_GPIO_Port GPIOC
 #define RF_EMITTER_Pin GPIO_PIN_1
 #define RF_EMITTER_GPIO_Port GPIOC
 #define D_C_Pin GPIO_PIN_2
@@ -91,24 +90,28 @@ void Error_Handler(void);
 #define R_RECEIVER_GPIO_Port GPIOC
 #define DIAGONAL_EMITTER_Pin GPIO_PIN_5
 #define DIAGONAL_EMITTER_GPIO_Port GPIOC
-#define l_RECEIVER_Pin GPIO_PIN_0
-#define l_RECEIVER_GPIO_Port GPIOB
+#define L_RECEIVER_Pin GPIO_PIN_0
+#define L_RECEIVER_GPIO_Port GPIOB
 #define LF_RECEIVER_Pin GPIO_PIN_1
 #define LF_RECEIVER_GPIO_Port GPIOB
-#define BOOT1_Pin GPIO_PIN_2
-#define BOOT1_GPIO_Port GPIOB
 #define INT_Pin GPIO_PIN_10
 #define INT_GPIO_Port GPIOB
 #define LED11_Pin GPIO_PIN_11
 #define LED11_GPIO_Port GPIOB
 #define LED9_Pin GPIO_PIN_12
 #define LED9_GPIO_Port GPIOB
+#define CLK_Pin GPIO_PIN_13
+#define CLK_GPIO_Port GPIOB
+#define MISO_Pin GPIO_PIN_14
+#define MISO_GPIO_Port GPIOB
+#define DATA_IN_Pin GPIO_PIN_15
+#define DATA_IN_GPIO_Port GPIOB
+#define CE_Pin GPIO_PIN_6
+#define CE_GPIO_Port GPIOC
 #define LF_EMITTER_Pin GPIO_PIN_7
 #define LF_EMITTER_GPIO_Port GPIOC
 #define CS_Pin GPIO_PIN_8
 #define CS_GPIO_Port GPIOC
-#define LED10_Pin GPIO_PIN_9
-#define LED10_GPIO_Port GPIOC
 #define LED7_Pin GPIO_PIN_8
 #define LED7_GPIO_Port GPIOA
 #define TX_Pin GPIO_PIN_9
@@ -119,6 +122,10 @@ void Error_Handler(void);
 #define LED1_GPIO_Port GPIOA
 #define LED2_Pin GPIO_PIN_12
 #define LED2_GPIO_Port GPIOA
+#define JTMS_Pin GPIO_PIN_13
+#define JTMS_GPIO_Port GPIOA
+#define JTCK_Pin GPIO_PIN_14
+#define JTCK_GPIO_Port GPIOA
 #define LENCHA_Pin GPIO_PIN_15
 #define LENCHA_GPIO_Port GPIOA
 #define LED3_Pin GPIO_PIN_10
@@ -145,6 +152,21 @@ void Error_Handler(void);
 #define RPWMB_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+// Define the I2C address of L3GD20HTR
+//#define GYRO_I2C_ADDRESS 0xD6 // Default address with R/W bit
+extern SPI_HandleTypeDef hspi1;
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim14;
+
+extern ADC_HandleTypeDef hadc1;
+
+extern int mouseState;
+
+extern bool LF;
+extern bool RF;
+extern bool LD;
+extern bool RD;
+//extern short ad;
 
 /* USER CODE END Private defines */
 
