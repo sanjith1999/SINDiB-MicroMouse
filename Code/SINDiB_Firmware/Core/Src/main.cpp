@@ -95,6 +95,16 @@ bool LD = false;
 bool RD = false;
 /* USER CODE END 0 */
 
+// Function to set motor speeds
+void SetMotorSpeeds(uint16_t lpwma_speed, uint16_t lpwmb_speed,
+		uint16_t rpwma_speed, uint16_t rpwmb_speed) {
+	// Set the duty cycles for LPWMA, LPWMB, RPWMA, and RPWMB
+	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, lpwma_speed);  // LPWMA
+	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, lpwmb_speed);  // LPWMB
+	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_3, rpwma_speed);  // RPWMA
+	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, rpwmb_speed);  // RPWMB
+}
+
 /**
  * @brief  The application entry point.
  * @retval int
@@ -171,6 +181,16 @@ int main(void) {
 //	sConfig.Channel = 14; // Replace with your desired channel for the second measurement
 //	sConfig.Rank = 4; // You can change the rank to control the order of conversions
 //	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+
+	// Assume T = 1000 : Set LPWMA to 50%, LPWMB to 75%, RPWMA to 60%, and RPWMB to 80% speed
+	SetMotorSpeeds(500, 750, 600, 800);
+
+	// Start PWM for TIM4 channels (you may need to adjust this based on your application)
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);  // LPWMA
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);  // LPWMB
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);  // RPWMA
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);  // RPWMB
+
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
@@ -181,7 +201,6 @@ int main(void) {
 //	  	HAL_Delay(100);
 //		L3GD20_loop();
 //		HAL_Delay(1);
-
 		switch (mouseState) {
 
 		case 0:
@@ -228,54 +247,46 @@ int main(void) {
 	/* USER CODE END 3 */
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  if (htim == &htim14 )
-  {
-	HAL_ADC_Start_DMA(&hadc1,(uint32_t*)adcResultsDMA, adcChannelCount);
-	while(adcConversionComplete == 0){
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	if (htim == &htim14) {
+		HAL_ADC_Start_DMA(&hadc1, (uint32_t*) adcResultsDMA, adcChannelCount);
+		while (adcConversionComplete == 0) {
+
+		}
+		adcConversionComplete = 0;
+
+		if (adcResultsDMA[0] > 1000) {
+			LF = true;
+		} else {
+			LF = false;
+		}
+		if (adcResultsDMA[1] > 1000) {
+			RF = true;
+		} else {
+			RF = false;
+		}
+		if (adcResultsDMA[2] > 1000) {
+			LD = true;
+		} else {
+			LD = false;
+		}
+		if (adcResultsDMA[3] > 1000) {
+			RD = true;
+		} else {
+			RD = false;
+		}
 
 	}
-	adcConversionComplete = 0;
-
-	if(adcResultsDMA[0]>1000){
-		LF =true;
-	}
-	else{
-		LF =false;
-	}
-	if(adcResultsDMA[1]>1000){
-		RF =true;
-	}
-	else{
-		RF =false;
-	}
-	if(adcResultsDMA[2]>1000){
-		LD =true;
-	}
-	else{
-		LD =false;
-	}
-	if(adcResultsDMA[3]>1000){
-		RD =true;
-	}
-	else{
-		RD =false;
-	}
-
-  }
 
 }
 
-
-__weak void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
-{
-  /* Prevent unused argument(s) compilation warning */
+__weak void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
+	/* Prevent unused argument(s) compilation warning */
 	adcConversionComplete = 1;
 //  UNUSED(hadc);
-  /* NOTE : This function Should not be modified, when the callback is needed,
-            the HAL_ADC_ConvCpltCallback could be implemented in the user file
-   */
+	/* NOTE : This function Should not be modified, when the callback is needed,
+	 the HAL_ADC_ConvCpltCallback could be implemented in the user file
+	 */
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
@@ -405,7 +416,7 @@ static void MX_ADC1_Init(void) {
 	sConfigInjected.InjectedNbrOfConversion = 4;
 	sConfigInjected.InjectedSamplingTime = ADC_SAMPLETIME_3CYCLES;
 	sConfigInjected.ExternalTrigInjecConvEdge =
-			ADC_EXTERNALTRIGINJECCONVEDGE_NONE;
+	ADC_EXTERNALTRIGINJECCONVEDGE_NONE;
 	sConfigInjected.ExternalTrigInjecConv = ADC_INJECTED_SOFTWARE_START;
 	sConfigInjected.AutoInjectedConv = DISABLE;
 	sConfigInjected.InjectedDiscontinuousConvMode = DISABLE;
@@ -501,7 +512,6 @@ static void MX_SPI2_Init(void) {
 	/* USER CODE END SPI2_Init 2 */
 
 }
-
 
 static void MX_TIM2_Init(void) {
 
