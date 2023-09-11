@@ -1,48 +1,5 @@
-/* USER CODE BEGIN Header */
-/**
- ******************************************************************************
- * @file           : main.c
- * @brief          : Main program body
- ******************************************************************************
- * @attention
- *
- * Copyright (c) 2023 STMicroelectronics.
- * All rights reserved.
- *
- * This software is licensed under terms that can be found in the LICENSE file
- * in the root directory of this software component.
- * If no LICENSE file comes with this software, it is provided AS-IS.
- *
- ******************************************************************************
- */
-/* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-#include <stdbool.h>
-#include "L3GD20.h"
-#include <stdio.h>
-#include "sysModes.h"
-#include "searchModes.h"
-#include "fastModes.h"
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
@@ -51,33 +8,23 @@ DMA_HandleTypeDef hdma_adc1;
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 
-TIM_HandleTypeDef htim2;
-TIM_HandleTypeDef htim4;
+
 TIM_HandleTypeDef htim6;
 TIM_HandleTypeDef htim14;
 
 UART_HandleTypeDef huart1;
 
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
-
 void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_SPI1_Init(void);
-static void MX_TIM4_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_SPI2_Init(void);
-static void MX_TIM2_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM6_Init(void);
 static void MX_TIM14_Init(void);
 /* USER CODE BEGIN PFP */
-volatile uint16_t adcResultsDMA[4];
-const int adcChannelCount = sizeof(adcResultsDMA) / sizeof(adcResultsDMA[0]);
+volatile uint16_t adcResultsDMA[5];
+int adcChannelCount = sizeof(adcResultsDMA) / sizeof(adcResultsDMA[0]);
 volatile int adcConversionComplete = 0;
 
 /* USER CODE END PFP */
@@ -93,61 +40,44 @@ bool LF = false;
 bool RF = false;
 bool LD = false;
 bool RD = false;
+
+
 /* USER CODE END 0 */
 
-// Function to set motor speeds
-void SetMotorSpeeds(uint16_t lpwma_speed, uint16_t lpwmb_speed,
-		uint16_t rpwma_speed, uint16_t rpwmb_speed) {
-	// Set the duty cycles for LPWMA, LPWMB, RPWMA, and RPWMB
-	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, lpwma_speed);  // LPWMA
-	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, lpwmb_speed);  // LPWMB
-	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_3, rpwma_speed);  // RPWMA
-	__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, rpwmb_speed);  // RPWMB
-}
+
 
 /**
  * @brief  The application entry point.
  * @retval int
  */
 int main(void) {
-	/* USER CODE BEGIN 1 */
 
-	/* USER CODE END 1 */
-
-	/* MCU Configuration--------------------------------------------------------*/
-
-	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
-
-	/* USER CODE BEGIN Init */
-
-	/* USER CODE END Init */
-
-	/* Configure the system clock */
+ 	HAL_Init();
 	SystemClock_Config();
 
 	/* USER CODE BEGIN SysInit */
 	ITM_Port32(31) = 1;
 	/* USER CODE END SysInit */
-
-	/* Initialize all configured peripherals */
-
 	MX_GPIO_Init();
 	MX_DMA_Init();
 	MX_SPI1_Init();
-	MX_TIM4_Init();
 	MX_ADC1_Init();
 	MX_SPI2_Init();
-	MX_TIM2_Init();
 	MX_USART1_UART_Init();
 	MX_TIM6_Init();
 	MX_TIM14_Init();
+
+	encoderInit();
+	motorInit();
 
 	/* USER CODE BEGIN 2 */
 	printf("hello world\r\n");
 	ITM_Port32(31) = 2;
 
-	L3GD20_Init();
+//	L3GD20_Init();
+
+
+
 
 //  UartInit();
 //  GyroInit();
@@ -182,103 +112,116 @@ int main(void) {
 //	sConfig.Rank = 4; // You can change the rank to control the order of conversions
 //	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 
-	// Assume T = 1000 : Set LPWMA to 50%, LPWMB to 75%, RPWMA to 60%, and RPWMB to 80% speed
-	SetMotorSpeeds(500, 750, 600, 800);
 
-	// Start PWM for TIM4 channels (you may need to adjust this based on your application)
-	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);  // LPWMA
-	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);  // LPWMB
-	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);  // RPWMA
-	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);  // RPWMB
+
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
-		/* USER CODE END WHILE */
-
-		/* USER CODE BEGIN 3 */
-//	  	z = DisplayAxisValues();
-//	  	HAL_Delay(100);
-//		L3GD20_loop();
+//		l_encoder_count = TIM2->CNT;
+//		r_encoder_count = TIM5->CNT;
+//		/* USER CODE END WHILE */
+//
+//		/* USER CODE BEGIN 3 */
+////	  	z = DisplayAxisValues();
+////	  	HAL_Delay(100);
+////		L3GD20_loop();
+////		HAL_Delay(1);
+//		switch (mouseState) {
+//
+//		case 0:
+//			mouseState = idle();
+//			break;
+//
+//		case 1:
+//			mouseState = searchIdle();
+//			break;
+//
+//		case 2:
+//			mouseState = searchForward();
+//			break;
+//
+//		case 3:
+//			mouseState = searchBackward();
+//			break;
+//
+//		case 4:
+//			mouseState = fastIdle();
+//			break;
+//
+//		case 5:
+//			mouseState = fastForward();
+//			break;
+//
+//		case 6:
+//			mouseState = fastBackward();
+//			break;
+//
+//		case 7:
+//			mouseState = speedAdjust();
+//			break;
+//
+//		default:
+//			break;
+//		}
+//		HAL_GPIO_WritePin(LF_EMITTER_GPIO_Port, LF_EMITTER_Pin, GPIO_PIN_SET);
+////		HAL_GPIO_WritePin(RF_EMITTER_GPIO_Port, RF_EMITTER_Pin, GPIO_PIN_SET);
+////		HAL_GPIO_WritePin(DIAGONAL_EMITTER_GPIO_Port, DIAGONAL_EMITTER_Pin, GPIO_PIN_SET);
 //		HAL_Delay(1);
-		switch (mouseState) {
-
-		case 0:
-			mouseState = idle();
-			break;
-
-		case 1:
-			mouseState = searchIdle();
-			break;
-
-		case 2:
-			mouseState = searchForward();
-			break;
-
-		case 3:
-			mouseState = searchBackward();
-			break;
-
-		case 4:
-			mouseState = fastIdle();
-			break;
-
-		case 5:
-			mouseState = fastForward();
-			break;
-
-		case 6:
-			mouseState = fastBackward();
-			break;
-
-		case 7:
-			mouseState = speedAdjust();
-			break;
-
-		default:
-			break;
-		}
-
-		HAL_Delay(100);
 		printf("i value : %i\r\n", i);
 		i = i + 1;
+		setWheels(1,1);
+		HAL_Delay(1000);
+		setWheels(0,0);
+		HAL_Delay(1000);
+//		HAL_ADC_Start_DMA(&hadc1, (uint32_t*) adcResultsDMA, adcChannelCount);
+//		adcConversionComplete = 0;
+//		adcChannelCount = adcChannelCount;
+//		HAL_Delay(1);
+//		HAL_GPIO_WritePin(LF_EMITTER_GPIO_Port, LF_EMITTER_Pin, GPIO_PIN_RESET);
+//		HAL_Delay(1);
+//		HAL_GPIO_WritePin(RF_EMITTER_GPIO_Port, RF_EMITTER_Pin, GPIO_PIN_SET);
+//		HAL_GPIO_WritePin(DIAGONAL_EMITTER_GPIO_Port, DIAGONAL_EMITTER_Pin, GPIO_PIN_SET);
+//		HAL_Delay(100);
+
+
 
 	}
 	/* USER CODE END 3 */
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-	if (htim == &htim14) {
-		HAL_ADC_Start_DMA(&hadc1, (uint32_t*) adcResultsDMA, adcChannelCount);
-		while (adcConversionComplete == 0) {
-
-		}
-		adcConversionComplete = 0;
-
-		if (adcResultsDMA[0] > 1000) {
-			LF = true;
-		} else {
-			LF = false;
-		}
-		if (adcResultsDMA[1] > 1000) {
-			RF = true;
-		} else {
-			RF = false;
-		}
-		if (adcResultsDMA[2] > 1000) {
-			LD = true;
-		} else {
-			LD = false;
-		}
-		if (adcResultsDMA[3] > 1000) {
-			RD = true;
-		} else {
-			RD = false;
-		}
-
-	}
-
-}
+//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+//	if (htim == &htim14) {
+//		HAL_ADC_Start_DMA(&hadc1, (uint32_t*) adcResultsDMA, adcChannelCount);
+//		while (adcConversionComplete == 0) {
+//
+//		}
+//		adcConversionComplete = 0;
+//
+//		if (adcResultsDMA[0] > 1000) {
+//			LF = true;
+//		} else {
+//			LF = false;
+//		}
+//		if (adcResultsDMA[1] > 1000) {
+//			RF = true;
+//		} else {
+//			RF = false;
+//		}
+//		if (adcResultsDMA[2] > 1000) {
+//			LD = true;
+//		} else {
+//			LD = false;
+//		}
+//		if (adcResultsDMA[3] > 1000) {
+//			RD = true;
+//		} else {
+//			RD = false;
+//		}
+//
+//	}
+//
+//}
 
 __weak void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
 	/* Prevent unused argument(s) compilation warning */
@@ -369,87 +312,131 @@ void SystemClock_Config(void) {
 	}
 }
 
-static void MX_ADC1_Init(void) {
+static void MX_ADC1_Init(void)
+{
 
-	/* USER CODE BEGIN ADC1_Init 0 */
+  /* USER CODE BEGIN ADC1_Init 0 */
 
-	/* USER CODE END ADC1_Init 0 */
+  /* USER CODE END ADC1_Init 0 */
 
-	ADC_ChannelConfTypeDef sConfig = { 0 };
-	ADC_InjectionConfTypeDef sConfigInjected = { 0 };
+  ADC_ChannelConfTypeDef sConfig = {0};
+  ADC_InjectionConfTypeDef sConfigInjected = {0};
 
-	/* USER CODE BEGIN ADC1_Init 1 */
+  /* USER CODE BEGIN ADC1_Init 1 */
 
-	/* USER CODE END ADC1_Init 1 */
+  /* USER CODE END ADC1_Init 1 */
 
-	/** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
-	 */
-	hadc1.Instance = ADC1;
-	hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
-	hadc1.Init.Resolution = ADC_RESOLUTION_12B;
-	hadc1.Init.ScanConvMode = ENABLE;
-	hadc1.Init.ContinuousConvMode = DISABLE;
-	hadc1.Init.DiscontinuousConvMode = DISABLE;
-	hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-	hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-	hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-	hadc1.Init.NbrOfConversion = 1;
-	hadc1.Init.DMAContinuousRequests = DISABLE;
-	hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-	if (HAL_ADC_Init(&hadc1) != HAL_OK) {
-		Error_Handler();
-	}
+  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
+  */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
+  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+  hadc1.Init.ScanConvMode = ENABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.NbrOfConversion = 5;
+  hadc1.Init.DMAContinuousRequests = DISABLE;
+  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-	 */
-	sConfig.Channel = ADC_CHANNEL_4;
-	sConfig.Rank = 1;
-	sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-		Error_Handler();
-	}
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_4;
+  sConfig.Rank = 1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_84CYCLES;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
-	 */
-	sConfigInjected.InjectedChannel = ADC_CHANNEL_4;
-	sConfigInjected.InjectedRank = 1;
-	sConfigInjected.InjectedNbrOfConversion = 4;
-	sConfigInjected.InjectedSamplingTime = ADC_SAMPLETIME_3CYCLES;
-	sConfigInjected.ExternalTrigInjecConvEdge =
-	ADC_EXTERNALTRIGINJECCONVEDGE_NONE;
-	sConfigInjected.ExternalTrigInjecConv = ADC_INJECTED_SOFTWARE_START;
-	sConfigInjected.AutoInjectedConv = DISABLE;
-	sConfigInjected.InjectedDiscontinuousConvMode = DISABLE;
-	sConfigInjected.InjectedOffset = 0;
-	if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK) {
-		Error_Handler();
-	}
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_8;
+  sConfig.Rank = 2;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
-	 */
-	sConfigInjected.InjectedRank = 2;
-	if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK) {
-		Error_Handler();
-	}
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_9;
+  sConfig.Rank = 3;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
-	 */
-	sConfigInjected.InjectedRank = 3;
-	if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK) {
-		Error_Handler();
-	}
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_13;
+  sConfig.Rank = 4;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
-	 */
-	sConfigInjected.InjectedRank = 4;
-	if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK) {
-		Error_Handler();
-	}
-	/* USER CODE BEGIN ADC1_Init 2 */
+  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
+  */
+  sConfig.Channel = ADC_CHANNEL_14;
+  sConfig.Rank = 5;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/* USER CODE END ADC1_Init 2 */
+  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
+  */
+  sConfigInjected.InjectedChannel = ADC_CHANNEL_4;
+  sConfigInjected.InjectedRank = 1;
+  sConfigInjected.InjectedNbrOfConversion = 4;
+  sConfigInjected.InjectedSamplingTime = ADC_SAMPLETIME_84CYCLES;
+  sConfigInjected.ExternalTrigInjecConvEdge = ADC_EXTERNALTRIGINJECCONVEDGE_NONE;
+  sConfigInjected.ExternalTrigInjecConv = ADC_INJECTED_SOFTWARE_START;
+  sConfigInjected.AutoInjectedConv = DISABLE;
+  sConfigInjected.InjectedDiscontinuousConvMode = DISABLE;
+  sConfigInjected.InjectedOffset = 0;
+  if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
+  */
+  sConfigInjected.InjectedRank = 2;
+  sConfigInjected.InjectedSamplingTime = ADC_SAMPLETIME_3CYCLES;
+  if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
+  */
+  sConfigInjected.InjectedRank = 3;
+  if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configures for the selected ADC injected channel its corresponding rank in the sequencer and its sample time
+  */
+  sConfigInjected.InjectedRank = 4;
+  if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC1_Init 2 */
+
+  /* USER CODE END ADC1_Init 2 */
 
 }
+
 
 static void MX_SPI1_Init(void) {
 
@@ -513,110 +500,14 @@ static void MX_SPI2_Init(void) {
 
 }
 
-static void MX_TIM2_Init(void) {
 
-	/* USER CODE BEGIN TIM2_Init 0 */
 
-	/* USER CODE END TIM2_Init 0 */
 
-	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
-	TIM_OC_InitTypeDef sConfigOC = { 0 };
-
-	/* USER CODE BEGIN TIM2_Init 1 */
-
-	/* USER CODE END TIM2_Init 1 */
-	htim2.Instance = TIM2;
-	htim2.Init.Prescaler = 0;
-	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim2.Init.Period = 4294967295;
-	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-	if (HAL_TIM_PWM_Init(&htim2) != HAL_OK) {
-		Error_Handler();
-	}
-	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-	if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig)
-			!= HAL_OK) {
-		Error_Handler();
-	}
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-	sConfigOC.Pulse = 0;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3)
-			!= HAL_OK) {
-		Error_Handler();
-	}
-	/* USER CODE BEGIN TIM2_Init 2 */
-
-	/* USER CODE END TIM2_Init 2 */
-	HAL_TIM_MspPostInit(&htim2);
-
-}
-
-static void MX_TIM4_Init(void) {
-
-	/* USER CODE BEGIN TIM4_Init 0 */
-
-	/* USER CODE END TIM4_Init 0 */
-
-	TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
-	TIM_MasterConfigTypeDef sMasterConfig = { 0 };
-	TIM_OC_InitTypeDef sConfigOC = { 0 };
-
-	/* USER CODE BEGIN TIM4_Init 1 */
-
-	/* USER CODE END TIM4_Init 1 */
-	htim4.Instance = TIM4;
-	htim4.Init.Prescaler = 0;
-	htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim4.Init.Period = 65535;
-	htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-	if (HAL_TIM_Base_Init(&htim4) != HAL_OK) {
-		Error_Handler();
-	}
-	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-	if (HAL_TIM_ConfigClockSource(&htim4, &sClockSourceConfig) != HAL_OK) {
-		Error_Handler();
-	}
-	if (HAL_TIM_PWM_Init(&htim4) != HAL_OK) {
-		Error_Handler();
-	}
-	sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-	if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig)
-			!= HAL_OK) {
-		Error_Handler();
-	}
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-	sConfigOC.Pulse = 0;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_1)
-			!= HAL_OK) {
-		Error_Handler();
-	}
-	if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_2)
-			!= HAL_OK) {
-		Error_Handler();
-	}
-	if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_3)
-			!= HAL_OK) {
-		Error_Handler();
-	}
-	if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_4)
-			!= HAL_OK) {
-		Error_Handler();
-	}
-	/* USER CODE BEGIN TIM4_Init 2 */
-
-	/* USER CODE END TIM4_Init 2 */
-	HAL_TIM_MspPostInit(&htim4);
-
-}
-
+/**
+  * @brief TIM5 Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_TIM6_Init(void) {
 
 	/* USER CODE BEGIN TIM6_Init 0 */
@@ -710,88 +601,6 @@ static void MX_DMA_Init(void) {
 
 }
 
-static void MX_GPIO_Init(void) {
-	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
-	/* USER CODE BEGIN MX_GPIO_Init_1 */
-	/* USER CODE END MX_GPIO_Init_1 */
-
-	/* GPIO Ports Clock Enable */
-	__HAL_RCC_GPIOC_CLK_ENABLE();
-	__HAL_RCC_GPIOH_CLK_ENABLE();
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-	__HAL_RCC_GPIOD_CLK_ENABLE();
-
-	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(GPIOC,
-			LED10_Pin | RF_EMITTER_Pin | D_C_Pin | DIAGONAL_EMITTER_Pin | CE_Pin
-					| LF_EMITTER_Pin | CS_Pin | LED3_Pin | LED4_Pin | LED5_Pin,
-			GPIO_PIN_RESET);
-
-	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(GPIOB, LED11_Pin | LED9_Pin | LED8_Pin, GPIO_PIN_RESET);
-
-	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(GPIOA, LED7_Pin | LED1_Pin | LED2_Pin, GPIO_PIN_RESET);
-
-	/*Configure GPIO pin Output Level */
-	HAL_GPIO_WritePin(LED6_GPIO_Port, LED6_Pin, GPIO_PIN_RESET);
-
-	/*Configure GPIO pin : TB1_Pin */
-	GPIO_InitStruct.Pin = TB1_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(TB1_GPIO_Port, &GPIO_InitStruct);
-
-	/*Configure GPIO pins : LED10_Pin RF_EMITTER_Pin D_C_Pin DIAGONAL_EMITTER_Pin
-	 CE_Pin LF_EMITTER_Pin CS_Pin LED3_Pin
-	 LED4_Pin LED5_Pin */
-	GPIO_InitStruct.Pin = LED10_Pin | RF_EMITTER_Pin | D_C_Pin
-			| DIAGONAL_EMITTER_Pin | CE_Pin | LF_EMITTER_Pin | CS_Pin | LED3_Pin
-			| LED4_Pin | LED5_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-	/*Configure GPIO pins : RENCHA_Pin RENCHB_Pin DRDY_Pin LENCHA_Pin */
-	GPIO_InitStruct.Pin = RENCHA_Pin | RENCHB_Pin | DRDY_Pin | LENCHA_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-	/*Configure GPIO pins : PB2 INT_Pin MISO_Pin LENCHB_Pin
-	 BOOT0_Pin */
-	GPIO_InitStruct.Pin = GPIO_PIN_2 | INT_Pin | MISO_Pin | LENCHB_Pin
-			| BOOT0_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-	/*Configure GPIO pins : LED11_Pin LED9_Pin LED8_Pin */
-	GPIO_InitStruct.Pin = LED11_Pin | LED9_Pin | LED8_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-	/*Configure GPIO pins : LED7_Pin LED1_Pin LED2_Pin */
-	GPIO_InitStruct.Pin = LED7_Pin | LED1_Pin | LED2_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-	/*Configure GPIO pin : LED6_Pin */
-	GPIO_InitStruct.Pin = LED6_Pin;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(LED6_GPIO_Port, &GPIO_InitStruct);
-
-	/* USER CODE BEGIN MX_GPIO_Init_2 */
-	/* USER CODE END MX_GPIO_Init_2 */
-}
 
 void Error_Handler(void) {
 	/* USER CODE BEGIN Error_Handler_Debug */

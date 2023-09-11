@@ -1,23 +1,3 @@
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.h
-  * @brief          : Header for main.c file.
-  *                   This file contains the common defines of the application.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2023 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
-
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -29,28 +9,14 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include <stdbool.h>
-
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
-
-/* USER CODE END ET */
-
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
-
-/* USER CODE END EC */
-
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
-
-/* USER CODE END EM */
-
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+#include "L3GD20.h"
+#include <stdio.h>
+#include "sysModes.h"
+#include "searchModes.h"
+#include "fastModes.h"
+#include "led.h"
+#include "motor.h"
+#include "encoder.h"
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
@@ -70,10 +36,6 @@ void Error_Handler(void);
 #define D_C_GPIO_Port GPIOC
 #define VOL_METER_Pin GPIO_PIN_3
 #define VOL_METER_GPIO_Port GPIOC
-#define RENCHA_Pin GPIO_PIN_0
-#define RENCHA_GPIO_Port GPIOA
-#define RENCHB_Pin GPIO_PIN_1
-#define RENCHB_GPIO_Port GPIOA
 #define BUZZER_Pin GPIO_PIN_2
 #define BUZZER_GPIO_Port GPIOA
 #define DRDY_Pin GPIO_PIN_3
@@ -126,8 +88,6 @@ void Error_Handler(void);
 #define JTMS_GPIO_Port GPIOA
 #define JTCK_Pin GPIO_PIN_14
 #define JTCK_GPIO_Port GPIOA
-#define LENCHA_Pin GPIO_PIN_15
-#define LENCHA_GPIO_Port GPIOA
 #define LED3_Pin GPIO_PIN_10
 #define LED3_GPIO_Port GPIOC
 #define LED4_Pin GPIO_PIN_11
@@ -136,8 +96,6 @@ void Error_Handler(void);
 #define LED5_GPIO_Port GPIOC
 #define LED6_Pin GPIO_PIN_2
 #define LED6_GPIO_Port GPIOD
-#define LENCHB_Pin GPIO_PIN_3
-#define LENCHB_GPIO_Port GPIOB
 #define LED8_Pin GPIO_PIN_4
 #define LED8_GPIO_Port GPIOB
 #define BOOT0_Pin GPIO_PIN_5
@@ -155,7 +113,7 @@ void Error_Handler(void);
 // Define the I2C address of L3GD20HTR
 //#define GYRO_I2C_ADDRESS 0xD6 // Default address with R/W bit
 extern SPI_HandleTypeDef hspi1;
-extern TIM_HandleTypeDef htim2;
+
 extern TIM_HandleTypeDef htim14;
 
 extern ADC_HandleTypeDef hadc1;
