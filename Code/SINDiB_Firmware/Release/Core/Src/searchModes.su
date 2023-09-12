@@ -1,3 +1,0 @@
-../Core/Src/searchModes.cpp:17:5:int searchIdle()	0	static
-../Core/Src/searchModes.cpp:36:5:int searchForward()	0	static
-../Core/Src/searchModes.cpp:83:5:int searchBackward()	0	static

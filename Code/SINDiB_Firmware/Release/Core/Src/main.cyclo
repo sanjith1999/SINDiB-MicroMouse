@@ -1,3 +1,5 @@
-../Core/Src/main.cpp:190:6:void SystemClock_Config()	3
-../Core/Src/main.cpp:90:5:int main()	25
-../Core/Src/main.cpp:604:6:void Error_Handler()	1
+../Core/Src/main.cpp:235:13:void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef*)	1
+../Core/Src/main.cpp:244:6:void HAL_GPIO_EXTI_Callback(uint16_t)	6
+../Core/Src/main.cpp:291:6:void SystemClock_Config()	3
+../Core/Src/main.cpp:59:5:int main()	31
+../Core/Src/main.cpp:860:6:void Error_Handler()	1

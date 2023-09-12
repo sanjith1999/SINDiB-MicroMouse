@@ -1,0 +1,2 @@
+../Libs/Src/L3GD20.c:447:6:L3GD20_Init	8	static
+../Libs/Src/L3GD20.c:502:6:L3GD20_loop	128	static

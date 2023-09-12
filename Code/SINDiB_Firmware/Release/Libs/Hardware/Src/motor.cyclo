@@ -1,0 +1,4 @@
+../Libs/Hardware/Src/motor.c:7:6:motorInit	1
+../Libs/Hardware/Src/motor.c:16:6:setLeftWheel	3
+../Libs/Hardware/Src/motor.c:25:6:setRightWheel	3
+../Libs/Hardware/Src/motor.c:36:6:setWheels	1

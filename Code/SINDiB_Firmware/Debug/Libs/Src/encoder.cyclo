@@ -1,0 +1,2 @@
+../Libs/Src/encoder.c:5:6:encoderInit	1
+../Libs/Src/encoder.c:13:6:resetEncoder	1

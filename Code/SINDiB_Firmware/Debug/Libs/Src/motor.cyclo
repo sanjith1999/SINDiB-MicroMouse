@@ -1,0 +1,6 @@
+../Libs/Src/motor.c:7:6:motorInit	1
+../Libs/Src/motor.c:17:6:setLeftWheel	3
+../Libs/Src/motor.c:26:6:setRightWheel	3
+../Libs/Src/motor.c:37:6:setWheels	1
+../Libs/Src/motor.c:42:6:straightCounts	5
+../Libs/Src/motor.c:55:6:goLong	2

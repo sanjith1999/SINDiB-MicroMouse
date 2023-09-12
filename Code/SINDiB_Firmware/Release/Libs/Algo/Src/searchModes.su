@@ -1,0 +1,3 @@
+../Libs/Algo/Src/searchModes.cpp:16:5:int searchIdle()	0	static
+../Libs/Algo/Src/searchModes.cpp:36:5:int searchForward()	0	static
+../Libs/Algo/Src/searchModes.cpp:84:5:int searchBackward()	0	static

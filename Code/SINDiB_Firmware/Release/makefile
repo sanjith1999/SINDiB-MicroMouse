@@ -9,6 +9,8 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Libs/Hardware/Src/subdir.mk
+-include Libs/Algo/Src/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
@@ -75,8 +77,8 @@ all: main-build
 main-build: MicromouseFirmware.elf secondary-outputs
 
 # Tool invocations
-MicromouseFirmware.elf MicromouseFirmware.map: $(OBJS) $(USER_OBJS) D:\OneDrive\ -\ University\ of\ Moratuwa\Volume\ D\Competitions\micromouse\Workspace\MicromouseFirmware\STM32F405RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "MicromouseFirmware.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\OneDrive - University of Moratuwa\Volume D\Competitions\micromouse\Workspace\MicromouseFirmware\STM32F405RGTX_FLASH.ld" -Wl,-Map="MicromouseFirmware.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+MicromouseFirmware.elf MicromouseFirmware.map: $(OBJS) $(USER_OBJS) F:\PROJECTS\SINDiB-MICROMOUSE\code\SINDiB_Firmware\STM32F405RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "MicromouseFirmware.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"F:\PROJECTS\SINDiB-MICROMOUSE\code\SINDiB_Firmware\STM32F405RGTX_FLASH.ld" -Wl,-Map="MicromouseFirmware.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

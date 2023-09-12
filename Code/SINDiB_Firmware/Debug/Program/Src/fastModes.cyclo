@@ -1,0 +1,3 @@
+../Program/Src/fastModes.cpp:1:5:int fastIdle()	1
+../Program/Src/fastModes.cpp:20:5:int fastForward()	1
+../Program/Src/fastModes.cpp:63:5:int fastBackward()	1

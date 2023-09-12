@@ -1,0 +1,2 @@
+../Libs/Hardware/Src/L3GD20.c:447:6:L3GD20_Init	1
+../Libs/Hardware/Src/L3GD20.c:502:6:L3GD20_loop	26

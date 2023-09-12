@@ -1,0 +1,3 @@
+../Libs/Algo/Src/fastModes.cpp:1:5:int fastIdle()	0	static
+../Libs/Algo/Src/fastModes.cpp:20:5:int fastForward()	0	static
+../Libs/Algo/Src/fastModes.cpp:63:5:int fastBackward()	0	static

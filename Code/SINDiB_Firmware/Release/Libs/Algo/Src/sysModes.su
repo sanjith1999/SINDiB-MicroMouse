@@ -1,0 +1,3 @@
+../Libs/Algo/Src/sysModes.cpp:10:6:void InitMouse()	0	static
+../Libs/Algo/Src/sysModes.cpp:14:5:int idle()	8	static
+../Libs/Algo/Src/sysModes.cpp:26:5:int speedAdjust()	8	static

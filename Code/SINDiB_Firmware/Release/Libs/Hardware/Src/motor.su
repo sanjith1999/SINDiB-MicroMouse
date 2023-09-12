@@ -1,0 +1,4 @@
+../Libs/Hardware/Src/motor.c:7:6:motorInit	8	static
+../Libs/Hardware/Src/motor.c:16:6:setLeftWheel	0	static
+../Libs/Hardware/Src/motor.c:25:6:setRightWheel	0	static
+../Libs/Hardware/Src/motor.c:36:6:setWheels	8	static

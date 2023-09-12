@@ -1,3 +1,23 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.h
+  * @brief          : Header for main.c file.
+  *                   This file contains the common defines of the application.
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2023 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
@@ -8,15 +28,29 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include <stdbool.h>
-#include "L3GD20.h"
-#include <stdio.h>
-#include "sysModes.h"
-#include "searchModes.h"
-#include "fastModes.h"
-#include "led.h"
-#include "motor.h"
-#include "encoder.h"
+#include "cppmain.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+
+/* USER CODE END Includes */
+
+/* Exported types ------------------------------------------------------------*/
+/* USER CODE BEGIN ET */
+
+/* USER CODE END ET */
+
+/* Exported constants --------------------------------------------------------*/
+/* USER CODE BEGIN EC */
+
+/* USER CODE END EC */
+
+/* Exported macro ------------------------------------------------------------*/
+/* USER CODE BEGIN EM */
+
+/* USER CODE END EM */
+
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
@@ -114,16 +148,16 @@ void Error_Handler(void);
 //#define GYRO_I2C_ADDRESS 0xD6 // Default address with R/W bit
 extern SPI_HandleTypeDef hspi1;
 
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim4;
+extern TIM_HandleTypeDef htim5;
 extern TIM_HandleTypeDef htim14;
 
 extern ADC_HandleTypeDef hadc1;
 
 extern int mouseState;
 
-extern bool LF;
-extern bool RF;
-extern bool LD;
-extern bool RD;
+extern bool LF, RF, LD, RD;
 //extern short ad;
 
 /* USER CODE END Private defines */
