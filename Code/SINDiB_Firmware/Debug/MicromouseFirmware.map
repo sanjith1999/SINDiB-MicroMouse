@@ -54,6 +54,10 @@ D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltoo
                               D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-malloc.o) (_free_r)
 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-fflush.o)
                               D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-findfp.o) (_fflush_r)
+D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
+                              ./Program/Src/sysModes.o (__aeabi_dsub)
+D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
+                              ./Program/Src/sysModes.o (__aeabi_d2f)
 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
                               ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o (__aeabi_uldivmod)
 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
@@ -4114,8 +4118,12 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./Program/Src/cppmain.o
  .bss.pos_l     0x0000000000000000        0x2 ./Program/Src/cppmain.o
  .bss.pos_r     0x0000000000000000        0x2 ./Program/Src/cppmain.o
+ .bss.buttonPress
+                0x0000000000000000        0x1 ./Program/Src/cppmain.o
  .data.mouseState
                 0x0000000000000000        0x4 ./Program/Src/cppmain.o
+ .text.HAL_GPIO_EXTI_Callback
+                0x0000000000000000       0x28 ./Program/Src/cppmain.o
  .debug_macro   0x0000000000000000       0x22 ./Program/Src/cppmain.o
  .debug_macro   0x0000000000000000       0x5b ./Program/Src/cppmain.o
  .debug_macro   0x0000000000000000       0x2a ./Program/Src/cppmain.o
@@ -4240,22 +4248,28 @@ Discarded input sections
  .group         0x0000000000000000        0xc ./Program/Src/fastModes.o
  .group         0x0000000000000000        0xc ./Program/Src/fastModes.o
  .group         0x0000000000000000        0xc ./Program/Src/fastModes.o
+ .group         0x0000000000000000        0xc ./Program/Src/fastModes.o
  .text          0x0000000000000000        0x0 ./Program/Src/fastModes.o
  .data          0x0000000000000000        0x0 ./Program/Src/fastModes.o
  .bss           0x0000000000000000        0x0 ./Program/Src/fastModes.o
+ .bss._ZL2XY    0x0000000000000000        0x8 ./Program/Src/fastModes.o
+ .bss._ZL7XY_prev
+                0x0000000000000000        0x8 ./Program/Src/fastModes.o
+ .bss._ZL6orient
+                0x0000000000000000        0x4 ./Program/Src/fastModes.o
  .text.fastIdle
-                0x0000000000000000       0x10 ./Program/Src/fastModes.o
+                0x0000000000000000       0x2c ./Program/Src/fastModes.o
  .text.fastForward
-                0x0000000000000000       0x10 ./Program/Src/fastModes.o
+                0x0000000000000000      0x128 ./Program/Src/fastModes.o
  .text.fastBackward
-                0x0000000000000000       0x10 ./Program/Src/fastModes.o
- .debug_info    0x0000000000000000       0xce ./Program/Src/fastModes.o
- .debug_abbrev  0x0000000000000000       0x4e ./Program/Src/fastModes.o
+                0x0000000000000000      0x110 ./Program/Src/fastModes.o
+ .debug_info    0x0000000000000000      0x2fb ./Program/Src/fastModes.o
+ .debug_abbrev  0x0000000000000000      0x160 ./Program/Src/fastModes.o
  .debug_aranges
                 0x0000000000000000       0x30 ./Program/Src/fastModes.o
  .debug_rnglists
-                0x0000000000000000       0x1f ./Program/Src/fastModes.o
- .debug_macro   0x0000000000000000      0x347 ./Program/Src/fastModes.o
+                0x0000000000000000       0x21 ./Program/Src/fastModes.o
+ .debug_macro   0x0000000000000000      0x350 ./Program/Src/fastModes.o
  .debug_macro   0x0000000000000000      0xb80 ./Program/Src/fastModes.o
  .debug_macro   0x0000000000000000      0x2a7 ./Program/Src/fastModes.o
  .debug_macro   0x0000000000000000       0x2e ./Program/Src/fastModes.o
@@ -4324,10 +4338,11 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 ./Program/Src/fastModes.o
  .debug_macro   0x0000000000000000       0x34 ./Program/Src/fastModes.o
  .debug_macro   0x0000000000000000      0x201 ./Program/Src/fastModes.o
- .debug_line    0x0000000000000000      0xa27 ./Program/Src/fastModes.o
- .debug_str     0x0000000000000000    0xcaa9f ./Program/Src/fastModes.o
+ .debug_macro   0x0000000000000000       0x16 ./Program/Src/fastModes.o
+ .debug_line    0x0000000000000000      0xae5 ./Program/Src/fastModes.o
+ .debug_str     0x0000000000000000    0xcacc0 ./Program/Src/fastModes.o
  .comment       0x0000000000000000       0x44 ./Program/Src/fastModes.o
- .debug_frame   0x0000000000000000       0x70 ./Program/Src/fastModes.o
+ .debug_frame   0x0000000000000000       0x7c ./Program/Src/fastModes.o
  .ARM.attributes
                 0x0000000000000000       0x34 ./Program/Src/fastModes.o
  .group         0x0000000000000000        0x8 ./Program/Src/floodfill.o
@@ -4416,17 +4431,21 @@ Discarded input sections
                 0x0000000000000000      0x1a4 ./Program/Src/floodfill.o
  .rodata        0x0000000000000000       0x10 ./Program/Src/floodfill.o
  .text._Z6toMove10coordinateS_i
-                0x0000000000000000      0x23c ./Program/Src/floodfill.o
+                0x0000000000000000      0x22c ./Program/Src/floodfill.o
  .text._Z10toMoveBack10coordinateS_i
-                0x0000000000000000      0x1a8 ./Program/Src/floodfill.o
+                0x0000000000000000      0x198 ./Program/Src/floodfill.o
  .text._Z9backtrackv
                 0x0000000000000000      0x28c ./Program/Src/floodfill.o
- .debug_info    0x0000000000000000      0x870 ./Program/Src/floodfill.o
+ .text._Z11orientationic
+                0x0000000000000000       0x80 ./Program/Src/floodfill.o
+ .text._Z17updateCoordinates10coordinatei
+                0x0000000000000000       0x4e ./Program/Src/floodfill.o
+ .debug_info    0x0000000000000000      0x8cc ./Program/Src/floodfill.o
  .debug_abbrev  0x0000000000000000      0x2e6 ./Program/Src/floodfill.o
  .debug_aranges
-                0x0000000000000000       0x88 ./Program/Src/floodfill.o
+                0x0000000000000000       0x98 ./Program/Src/floodfill.o
  .debug_rnglists
-                0x0000000000000000       0x78 ./Program/Src/floodfill.o
+                0x0000000000000000       0x85 ./Program/Src/floodfill.o
  .debug_macro   0x0000000000000000      0x21a ./Program/Src/floodfill.o
  .debug_macro   0x0000000000000000      0xb80 ./Program/Src/floodfill.o
  .debug_macro   0x0000000000000000      0x2a7 ./Program/Src/floodfill.o
@@ -4474,10 +4493,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x295 ./Program/Src/floodfill.o
  .debug_macro   0x0000000000000000      0x12d ./Program/Src/floodfill.o
  .debug_macro   0x0000000000000000       0x16 ./Program/Src/floodfill.o
- .debug_line    0x0000000000000000     0x177b ./Program/Src/floodfill.o
- .debug_str     0x0000000000000000    0xc6d33 ./Program/Src/floodfill.o
+ .debug_line    0x0000000000000000     0x17dd ./Program/Src/floodfill.o
+ .debug_str     0x0000000000000000    0xc6d95 ./Program/Src/floodfill.o
  .comment       0x0000000000000000       0x44 ./Program/Src/floodfill.o
- .debug_frame   0x0000000000000000      0x23c ./Program/Src/floodfill.o
+ .debug_frame   0x0000000000000000      0x28c ./Program/Src/floodfill.o
  .ARM.attributes
                 0x0000000000000000       0x34 ./Program/Src/floodfill.o
  .group         0x0000000000000000        0xc ./Program/Src/searchModes.o
@@ -4552,18 +4571,19 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./Program/Src/searchModes.o
  .data          0x0000000000000000        0x0 ./Program/Src/searchModes.o
  .bss           0x0000000000000000        0x0 ./Program/Src/searchModes.o
- .bss.XY        0x0000000000000000        0x8 ./Program/Src/searchModes.o
- .bss.XY_prev   0x0000000000000000        0x8 ./Program/Src/searchModes.o
+ .bss._ZL2XY    0x0000000000000000        0x8 ./Program/Src/searchModes.o
+ .bss._ZL7XY_prev
+                0x0000000000000000        0x8 ./Program/Src/searchModes.o
  .bss._ZL6orient
                 0x0000000000000000        0x4 ./Program/Src/searchModes.o
  .text.searchIdle
-                0x0000000000000000       0x10 ./Program/Src/searchModes.o
+                0x0000000000000000       0x2c ./Program/Src/searchModes.o
  .text.searchForward
-                0x0000000000000000       0xd8 ./Program/Src/searchModes.o
+                0x0000000000000000      0x168 ./Program/Src/searchModes.o
  .text.searchBackward
-                0x0000000000000000       0x88 ./Program/Src/searchModes.o
- .debug_info    0x0000000000000000      0x2ef ./Program/Src/searchModes.o
- .debug_abbrev  0x0000000000000000      0x1b3 ./Program/Src/searchModes.o
+                0x0000000000000000      0x114 ./Program/Src/searchModes.o
+ .debug_info    0x0000000000000000      0x368 ./Program/Src/searchModes.o
+ .debug_abbrev  0x0000000000000000      0x1b0 ./Program/Src/searchModes.o
  .debug_aranges
                 0x0000000000000000       0x30 ./Program/Src/searchModes.o
  .debug_rnglists
@@ -4638,8 +4658,8 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x34 ./Program/Src/searchModes.o
  .debug_macro   0x0000000000000000      0x201 ./Program/Src/searchModes.o
  .debug_macro   0x0000000000000000       0x16 ./Program/Src/searchModes.o
- .debug_line    0x0000000000000000      0xa97 ./Program/Src/searchModes.o
- .debug_str     0x0000000000000000    0xcacb3 ./Program/Src/searchModes.o
+ .debug_line    0x0000000000000000      0xaf6 ./Program/Src/searchModes.o
+ .debug_str     0x0000000000000000    0xcad43 ./Program/Src/searchModes.o
  .comment       0x0000000000000000       0x44 ./Program/Src/searchModes.o
  .debug_frame   0x0000000000000000       0x7c ./Program/Src/searchModes.o
  .ARM.attributes
@@ -4715,6 +4735,18 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./Program/Src/sensors.o
  .data          0x0000000000000000        0x0 ./Program/Src/sensors.o
  .bss           0x0000000000000000        0x0 ./Program/Src/sensors.o
+ .data._ZZ7irBlinkvE2t3
+                0x0000000000000000        0x4 ./Program/Src/sensors.o
+ .text._Z7irBlinkv
+                0x0000000000000000       0x38 ./Program/Src/sensors.o
+ .data._ZZ12rightIrBlinkvE2t2
+                0x0000000000000000        0x4 ./Program/Src/sensors.o
+ .text._Z12rightIrBlinkv
+                0x0000000000000000       0x28 ./Program/Src/sensors.o
+ .data._ZZ11leftIrBlinkvE2t1
+                0x0000000000000000        0x4 ./Program/Src/sensors.o
+ .text._Z11leftIrBlinkv
+                0x0000000000000000       0x28 ./Program/Src/sensors.o
  .data._ZZ17getSensorReadingsvE2t1
                 0x0000000000000000        0x4 ./Program/Src/sensors.o
  .data._ZZ17getSensorReadingsvE2t2
@@ -4723,12 +4755,12 @@ Discarded input sections
                 0x0000000000000000        0x4 ./Program/Src/sensors.o
  .text._Z17getSensorReadingsv
                 0x0000000000000000      0x240 ./Program/Src/sensors.o
- .debug_info    0x0000000000000000      0x131 ./Program/Src/sensors.o
- .debug_abbrev  0x0000000000000000       0x82 ./Program/Src/sensors.o
+ .debug_info    0x0000000000000000      0x1b7 ./Program/Src/sensors.o
+ .debug_abbrev  0x0000000000000000       0xbe ./Program/Src/sensors.o
  .debug_aranges
-                0x0000000000000000       0x20 ./Program/Src/sensors.o
+                0x0000000000000000       0x38 ./Program/Src/sensors.o
  .debug_rnglists
-                0x0000000000000000       0x14 ./Program/Src/sensors.o
+                0x0000000000000000       0x26 ./Program/Src/sensors.o
  .debug_macro   0x0000000000000000      0x351 ./Program/Src/sensors.o
  .debug_macro   0x0000000000000000      0xb80 ./Program/Src/sensors.o
  .debug_macro   0x0000000000000000       0x2e ./Program/Src/sensors.o
@@ -4798,10 +4830,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 ./Program/Src/sensors.o
  .debug_macro   0x0000000000000000      0x201 ./Program/Src/sensors.o
  .debug_macro   0x0000000000000000       0x2e ./Program/Src/sensors.o
- .debug_line    0x0000000000000000      0xb7c ./Program/Src/sensors.o
- .debug_str     0x0000000000000000    0xcaab8 ./Program/Src/sensors.o
+ .debug_line    0x0000000000000000      0xbed ./Program/Src/sensors.o
+ .debug_str     0x0000000000000000    0xcab08 ./Program/Src/sensors.o
  .comment       0x0000000000000000       0x44 ./Program/Src/sensors.o
- .debug_frame   0x0000000000000000       0x34 ./Program/Src/sensors.o
+ .debug_frame   0x0000000000000000       0x94 ./Program/Src/sensors.o
  .ARM.attributes
                 0x0000000000000000       0x34 ./Program/Src/sensors.o
  .group         0x0000000000000000        0xc ./Program/Src/sysModes.o
@@ -4877,16 +4909,16 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./Program/Src/sysModes.o
  .text.InitMouse
                 0x0000000000000000        0xe ./Program/Src/sysModes.o
- .text.idle     0x0000000000000000       0x34 ./Program/Src/sysModes.o
+ .text.idle     0x0000000000000000       0x24 ./Program/Src/sysModes.o
  .text.speedAdjust
-                0x0000000000000000       0x34 ./Program/Src/sysModes.o
- .debug_info    0x0000000000000000      0x1fc ./Program/Src/sysModes.o
- .debug_abbrev  0x0000000000000000      0x129 ./Program/Src/sysModes.o
+                0x0000000000000000       0xe4 ./Program/Src/sysModes.o
+ .debug_info    0x0000000000000000      0x132 ./Program/Src/sysModes.o
+ .debug_abbrev  0x0000000000000000       0xcd ./Program/Src/sysModes.o
  .debug_aranges
                 0x0000000000000000       0x30 ./Program/Src/sysModes.o
  .debug_rnglists
-                0x0000000000000000       0x1f ./Program/Src/sysModes.o
- .debug_macro   0x0000000000000000      0x347 ./Program/Src/sysModes.o
+                0x0000000000000000       0x20 ./Program/Src/sysModes.o
+ .debug_macro   0x0000000000000000      0x34b ./Program/Src/sysModes.o
  .debug_macro   0x0000000000000000      0xb80 ./Program/Src/sysModes.o
  .debug_macro   0x0000000000000000      0x2a7 ./Program/Src/sysModes.o
  .debug_macro   0x0000000000000000       0x2e ./Program/Src/sysModes.o
@@ -4955,10 +4987,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 ./Program/Src/sysModes.o
  .debug_macro   0x0000000000000000       0x34 ./Program/Src/sysModes.o
  .debug_macro   0x0000000000000000      0x201 ./Program/Src/sysModes.o
- .debug_line    0x0000000000000000      0xa38 ./Program/Src/sysModes.o
- .debug_str     0x0000000000000000    0xcab55 ./Program/Src/sysModes.o
+ .debug_line    0x0000000000000000      0xa4e ./Program/Src/sysModes.o
+ .debug_str     0x0000000000000000    0xcaaf4 ./Program/Src/sysModes.o
  .comment       0x0000000000000000       0x44 ./Program/Src/sysModes.o
- .debug_frame   0x0000000000000000       0x68 ./Program/Src/sysModes.o
+ .debug_frame   0x0000000000000000       0x6c ./Program/Src/sysModes.o
  .ARM.attributes
                 0x0000000000000000       0x34 ./Program/Src/sysModes.o
  .text          0x0000000000000000        0x0 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libstdc++_nano.a(del_ops.o)
@@ -5253,6 +5285,18 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x5c D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-fflush.o)
  .ARM.attributes
                 0x0000000000000000       0x34 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-fflush.o)
+ .text          0x0000000000000000      0x378 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
+ .data          0x0000000000000000        0x0 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
+ .bss           0x0000000000000000        0x0 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x0000000000000000       0xac D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
+ .ARM.attributes
+                0x0000000000000000       0x1e D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_addsubdf3.o)
+ .text          0x0000000000000000       0xa0 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
+ .data          0x0000000000000000        0x0 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
+ .bss           0x0000000000000000        0x0 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
+ .debug_frame   0x0000000000000000       0x24 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
+ .ARM.attributes
+                0x0000000000000000       0x1e D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_arm_truncdfsf2.o)
  .data          0x0000000000000000        0x0 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
  .bss           0x0000000000000000        0x0 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
  .data          0x0000000000000000        0x0 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
@@ -6089,7 +6133,7 @@ LOAD D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.extern
  .comment       0x0000000000000043       0x44 ./Libs/Src/motor.o
  .comment       0x0000000000000043       0x44 ./Program/Src/cppmain.o
 
-.debug_info     0x0000000000000000    0x12975
+.debug_info     0x0000000000000000    0x129c4
  .debug_info    0x0000000000000000     0x1c0f ./Core/Src/main.o
  .debug_info    0x0000000000001c0f     0x17c4 ./Core/Src/stm32f4xx_hal_msp.o
  .debug_info    0x00000000000033d3      0x72c ./Core/Src/stm32f4xx_it.o
@@ -6108,10 +6152,10 @@ LOAD D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.extern
  .debug_info    0x000000000000db17     0x2fb8 ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o
  .debug_info    0x0000000000010acf      0xbab ./Libs/Src/L3GD20.o
  .debug_info    0x000000000001167a      0x6b3 ./Libs/Src/encoder.o
- .debug_info    0x0000000000011d2d      0xa3b ./Libs/Src/motor.o
- .debug_info    0x0000000000012768      0x20d ./Program/Src/cppmain.o
+ .debug_info    0x0000000000011d2d      0xa4b ./Libs/Src/motor.o
+ .debug_info    0x0000000000012778      0x24c ./Program/Src/cppmain.o
 
-.debug_abbrev   0x0000000000000000     0x2a4a
+.debug_abbrev   0x0000000000000000     0x2a74
  .debug_abbrev  0x0000000000000000      0x2f2 ./Core/Src/main.o
  .debug_abbrev  0x00000000000002f2      0x25e ./Core/Src/stm32f4xx_hal_msp.o
  .debug_abbrev  0x0000000000000550      0x1a6 ./Core/Src/stm32f4xx_it.o
@@ -6131,9 +6175,9 @@ LOAD D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.extern
  .debug_abbrev  0x000000000000238b      0x221 ./Libs/Src/L3GD20.o
  .debug_abbrev  0x00000000000025ac      0x17f ./Libs/Src/encoder.o
  .debug_abbrev  0x000000000000272b      0x23b ./Libs/Src/motor.o
- .debug_abbrev  0x0000000000002966       0xe4 ./Program/Src/cppmain.o
+ .debug_abbrev  0x0000000000002966      0x10e ./Program/Src/cppmain.o
 
-.debug_aranges  0x0000000000000000     0x10a0
+.debug_aranges  0x0000000000000000     0x10a8
  .debug_aranges
                 0x0000000000000000       0x88 ./Core/Src/main.o
  .debug_aranges
@@ -6173,10 +6217,10 @@ LOAD D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.extern
  .debug_aranges
                 0x0000000000001018       0x68 ./Libs/Src/motor.o
  .debug_aranges
-                0x0000000000001080       0x20 ./Program/Src/cppmain.o
+                0x0000000000001080       0x28 ./Program/Src/cppmain.o
 
 .debug_rnglists
-                0x0000000000000000      0xd05
+                0x0000000000000000      0xd0b
  .debug_rnglists
                 0x0000000000000000       0x67 ./Core/Src/main.o
  .debug_rnglists
@@ -6216,7 +6260,7 @@ LOAD D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.extern
  .debug_rnglists
                 0x0000000000000ca2       0x50 ./Libs/Src/motor.o
  .debug_rnglists
-                0x0000000000000cf2       0x13 ./Program/Src/cppmain.o
+                0x0000000000000cf2       0x19 ./Program/Src/cppmain.o
 
 .debug_macro    0x0000000000000000    0x24038
  .debug_macro   0x0000000000000000      0x348 ./Core/Src/main.o
@@ -6319,7 +6363,7 @@ LOAD D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.extern
  .debug_macro   0x0000000000022fb5     0x102d ./Program/Src/cppmain.o
  .debug_macro   0x0000000000023fe2       0x56 ./Program/Src/cppmain.o
 
-.debug_line     0x0000000000000000    0x15d16
+.debug_line     0x0000000000000000    0x15d31
  .debug_line    0x0000000000000000      0xe85 ./Core/Src/main.o
  .debug_line    0x0000000000000e85      0xcc3 ./Core/Src/stm32f4xx_hal_msp.o
  .debug_line    0x0000000000001b48      0xaee ./Core/Src/stm32f4xx_it.o
@@ -6339,9 +6383,9 @@ LOAD D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.extern
  .debug_line    0x0000000000012c87      0xdc6 ./Libs/Src/L3GD20.o
  .debug_line    0x0000000000013a4d      0xa0c ./Libs/Src/encoder.o
  .debug_line    0x0000000000014459      0xea7 ./Libs/Src/motor.o
- .debug_line    0x0000000000015300      0xa16 ./Program/Src/cppmain.o
+ .debug_line    0x0000000000015300      0xa31 ./Program/Src/cppmain.o
 
-.debug_str      0x0000000000000000    0xcfa10
+.debug_str      0x0000000000000000    0xcfa1c
  .debug_str     0x0000000000000000    0xcb93c ./Core/Src/main.o
                                       0xcbd67 (size before relaxing)
  .debug_str     0x00000000000cb93c      0x191 ./Core/Src/stm32f4xx_hal_msp.o
@@ -6380,10 +6424,10 @@ LOAD D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.extern
                                       0xcab83 (size before relaxing)
  .debug_str     0x00000000000cf066      0x161 ./Libs/Src/motor.o
                                       0xcacd3 (size before relaxing)
- .debug_str     0x00000000000cf1c7      0x849 ./Program/Src/cppmain.o
-                                      0xcabeb (size before relaxing)
+ .debug_str     0x00000000000cf1c7      0x855 ./Program/Src/cppmain.o
+                                      0xcac17 (size before relaxing)
 
-.debug_frame    0x0000000000000000     0x45a4
+.debug_frame    0x0000000000000000     0x45cc
  .debug_frame   0x0000000000000000      0x1d4 ./Core/Src/main.o
  .debug_frame   0x00000000000001d4      0x20c ./Core/Src/stm32f4xx_hal_msp.o
  .debug_frame   0x00000000000003e0      0x140 ./Core/Src/stm32f4xx_it.o
@@ -6402,11 +6446,11 @@ LOAD D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.extern
  .debug_frame   0x00000000000042ac       0x58 ./Libs/Src/L3GD20.o
  .debug_frame   0x0000000000004304       0x4c ./Libs/Src/encoder.o
  .debug_frame   0x0000000000004350      0x17c ./Libs/Src/motor.o
- .debug_frame   0x00000000000044cc       0x2c ./Program/Src/cppmain.o
- .debug_frame   0x00000000000044f8       0x20 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memset.o)
- .debug_frame   0x0000000000004518       0x2c D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
- .debug_frame   0x0000000000004544       0x2c D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
- .debug_frame   0x0000000000004570       0x34 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
+ .debug_frame   0x00000000000044cc       0x54 ./Program/Src/cppmain.o
+ .debug_frame   0x0000000000004520       0x20 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-memset.o)
+ .debug_frame   0x0000000000004540       0x2c D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
+ .debug_frame   0x000000000000456c       0x2c D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_aeabi_uldivmod.o)
+ .debug_frame   0x0000000000004598       0x34 D:/STM32CubeIDE_1.13.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/thumb/v7e-m+fp/hard\libgcc.a(_udivmoddi4.o)
 
 .debug_line_str
                 0x0000000000000000       0x70

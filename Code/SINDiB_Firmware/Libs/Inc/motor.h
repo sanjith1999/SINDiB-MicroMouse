@@ -30,5 +30,7 @@ extern float correction;
 extern int cnt;
 extern float run_speed_l;
 extern float run_speed_r;
+extern float base_speed_l;
+extern float base_speed_r;
 
 #endif /* INC_MOTOR_H_ */

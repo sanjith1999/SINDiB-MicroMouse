@@ -24,6 +24,8 @@ void floodFill(struct coordinate p, struct coordinate prev);
 char toMove(struct coordinate p, struct coordinate prevPos, int orient);
 char toMoveBack(struct coordinate p, struct coordinate prevPos, int orient);
 void backtrack();
+int orientation(int orient, char turning);
+coordinate updateCoordinates(struct coordinate coordi, int orient);
 
 
 #endif /* INC_FLOODFILL_HPP_ */

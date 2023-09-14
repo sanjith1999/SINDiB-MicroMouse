@@ -28,6 +28,9 @@ extern bool R;
 extern bool F;
 
 void getSensorReadings();
+bool irBlink();
+bool rightIrBlink();
+bool leftIrBlink();
 
 
 #define LF_EM_ON   HAL_GPIO_WritePin(LF_EMITTER_GPIO_Port, LF_EMITTER_Pin, GPIO_PIN_SET)

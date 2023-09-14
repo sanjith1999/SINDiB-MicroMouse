@@ -5,14 +5,13 @@
  */
 
 #include "cppmain.h"
+
 uint16_t i;
 uint16_t pos_l =0, pos_r=0;
 
+bool buttonPress = false;
+
 int mouseState = 2;
-
-
-
-
 
 
 void cppmain(void) {
@@ -110,7 +109,11 @@ void cppmain(void) {
 }
 
 
-
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	if (GPIO_Pin == TB1_Pin) {
+		buttonPress = true;
+	}
+}
 
 
 

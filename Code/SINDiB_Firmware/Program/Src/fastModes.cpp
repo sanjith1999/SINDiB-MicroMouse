@@ -1,111 +1,104 @@
 #include "main.h"
 #include "motor.h"
+#include "floodfill.hpp"
 
-int fastIdle()
-{
-    return 5;
+static coordinate XY; // Declare a coordinate struct
+static coordinate XY_prev; // Declare a coordinate struct
 
-    // while(1)
-    // {
-    //     if(irBlink())
-    //     {
-    //         return 5;
-    //     }
-    //     if(buttonPress())
-    //     {
-    //         return 7;
-    //     }
+static int orient = 0;
 
-    // }
+int fastIdle() {
 
+	while (1) {
+		if (irBlink()) {
+			return 5;
+		}
+
+		if (buttonPress) {
+			buttonPress = false;
+			return 7;
+		}
+	}
 }
 
-int fastForward()
-{
-    // while(1)
-    // {
-    //     if(flood[x][y]>=1) //NotInCenter
-    //     {
-    //         direction= toMoveFront(x,y,xprev,yprev,orient);
+int fastForward() {
 
-    //         if (direction=='L')
-    //         {
-    //             fastTurnLeft();
-    //         }
-    //         else if (direction=='R')
-    //         {
-    //             fastTurnRight();
-    //         }
-    //         else if (direction=='B'):
-    //         {
-    //             fastTurnBack();
-    //         }
+	XY.x = 0;
+	XY.y = 0;
 
-    //         else if (direction=='F')
-    //         {
-    //             fastGoForward();
-    //         }
-    //         orient = orientation(orient,direction);
+	XY_prev.x = 0;
+	XY_prev.y = 0;
 
-    //     }
-    //     else
-    //     {
-    //         return 6;
-    //     }
+	while (1) {
+		if (flood[XY.x][XY.y] >= 1) //NotInCenter
+				{
+			char direction = toMove(XY, XY_prev, orient);
 
+			if (direction == 'L') {
+				turnLeft(68);
+				orient = orientation(orient, direction);
+			} else if (direction == 'R') {
+				turnRight(68);
+				orient = orientation(orient, direction);
+			} else if (direction == 'B') {
+				turnLeft(68);
+				orient = orientation(orient, direction);
+				turnLeft(68);
+				orient = orientation(orient, direction);
+			}
 
-    //     if(buttonPress())
-    //     {
-    //         return 7;
-    //     }
-    // }
+			straightCountsPID(100);
+			XY_prev = XY;
+			XY = updateCoordinates(XY, orient);
 
-    return 6;
+		} else {
+			return 6;
+		}
+
+		if (buttonPress) {
+			buttonPress = false;
+			return 7;
+		}
+	}
+
+	return 6;
 }
 
-int fastBackward()
-{
-    // while(1)
-    // {
-    //     if(backFlood[x][y]>=1) //NotInCenter
-    //     {
-    //         direction= toMoveBack(x,y,xprev,yprev,orient);
+int fastBackward() {
 
-    //         if (direction=='L')
-    //         {
-    //             fastTurnLeft()
-    //         }
-    //         else if (direction=='R')
-    //         {
-    //             fastTurnRight()
-    //         }
-    //         else if (direction=='B'):
-    //         {
-    //             fastTurnBack()
-    //         }
+	while (1) {
+		if (backFlood[XY.x][XY.y] >= 1) //NotInCenter
+				{
+			char direction = toMoveBack(XY, XY_prev, orient);
 
-    //         else if (direction=='F')
-    //         {
-    //             fastGoForward()
-    //         }
-    //         orient = orientation(orient,direction);
+			if (direction == 'L') {
+				turnLeft(68);
+				orient = orientation(orient, direction);
+			} else if (direction == 'R') {
+				turnRight(68);
+				orient = orientation(orient, direction);
+			} else if (direction == 'B') {
+				turnLeft(68);
+				orient = orientation(orient, direction);
+				turnLeft(68);
+				orient = orientation(orient, direction);
+			}
 
-    //     }
-    //     else
-    //     {
-    //         return 7;
-    //     }
+			straightCountsPID(100);
+			XY_prev = XY;
+			XY = updateCoordinates(XY, orient);
 
+		} else {
+			return 7;
+		}
 
-    //     if(buttonPress())
-    //     {
-    //         return 7;
-    //     }
+		if (buttonPress) {
+			buttonPress = false;
+			return 7;
+		}
 
-    // }
+	}
 
-    return 7;
+	return 7;
 }
-
-
 

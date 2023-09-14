@@ -12,3 +12,5 @@
 ../Program/Src/floodfill.cpp:462:6:char toMove(coordinate, coordinate, int)	32
 ../Program/Src/floodfill.cpp:542:6:char toMoveBack(coordinate, coordinate, int)	21
 ../Program/Src/floodfill.cpp:591:6:void backtrack()	25
+../Program/Src/floodfill.cpp:653:5:int orientation(int, char)	10
+../Program/Src/floodfill.cpp:685:19:coordinate updateCoordinates(coordinate, int)	5

@@ -38,6 +38,7 @@ Program/Src/sysModes.o: ../Program/Src/sysModes.cpp ../Core/Inc/main.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sysModes.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h \
+ D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sensors.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sensors.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -79,4 +80,5 @@ D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD2
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sysModes.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h:
+D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sensors.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sensors.h:

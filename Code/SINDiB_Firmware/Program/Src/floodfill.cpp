@@ -461,7 +461,7 @@ void floodFill(struct coordinate p, struct coordinate prev) {
 
 char toMove(struct coordinate p, struct coordinate prevPos, int orient) {
 	struct surroundCoor surr = getSurrounds(p);
-	int val = flood[p.x][p.y];
+//	int val = flood[p.x][p.y];
 	int minVals[4]={1000,1000,1000,1000};
 	int prevDir = 0;
 	if (surr.N.x>=0 && surr.N.y>=0){
@@ -541,7 +541,7 @@ char toMove(struct coordinate p, struct coordinate prevPos, int orient) {
 
 char toMoveBack(struct coordinate p, struct coordinate prevPos, int orient) {
 	struct surroundCoor surr = getSurrounds(p);
-	int val = backFlood[p.x][p.y];
+//	int val = backFlood[p.x][p.y];
 	int minVals[4]={1000,1000,1000,1000};
 
 	if (surr.N.x>=0 && surr.N.y>=0){
@@ -650,4 +650,50 @@ void backtrack() {
 }
 
 
+int orientation(int orient, char turning){
+ if (turning== 'L'){
+  orient-=1;
+        if (orient==-1){
+   orient=3;
+  }
+ }
+
+    else if(turning== 'R'){
+  orient+=1;
+        if (orient==4){
+   orient=0;
+  }
+ }
+
+    else if(turning== 'B'){
+  if (orient==0){
+   orient=2;
+  }
+        else if (orient==1){
+   orient=3;
+  }
+        else if (orient==2){
+   orient=0;
+  }
+        else if (orient==3){
+   orient=1;
+  }
+ }
+ return orient;
+}
+
+struct coordinate updateCoordinates(struct coordinate coordi, int orient){
+ if (orient==0){
+  coordi.y+=1;
+ }
+    if (orient==1){
+  coordi.x+=1;
+ }
+    if (orient==2){
+  coordi.y-=1;
+ }
+    if (orient==3){
+  coordi.x-=1;
+ }
+}
 

@@ -1,1 +1,4 @@
-../Program/Src/sensors.cpp:112:6:void getSensorReadings()	31
+../Program/Src/sensors.cpp:112:6:bool irBlink()	3
+../Program/Src/sensors.cpp:120:6:bool rightIrBlink()	2
+../Program/Src/sensors.cpp:128:6:bool leftIrBlink()	2
+../Program/Src/sensors.cpp:136:6:void getSensorReadings()	31

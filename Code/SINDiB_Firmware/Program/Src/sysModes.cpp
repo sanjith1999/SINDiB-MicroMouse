@@ -8,6 +8,8 @@
 //#include "sysModes.h"
 #include "main.h"
 #include "motor.h"
+#include "cppmain.h"
+#include "sensors.h"
 
 void InitMouse() {
 
@@ -16,32 +18,30 @@ void InitMouse() {
 int idle() {
 
 	while (1) {
-		if (HAL_GPIO_ReadPin(TB1_GPIO_Port, TB1_Pin)) {
-			break;
+		if (buttonPress) {
+			buttonPress = false;
+			return 1;
 		}
 	}
-	HAL_Delay(1000);
-	return 1;
-	//if button press return 1
 }
 
 int speedAdjust() {
-	 while(1)
-	 {
-//	     if(leftIrBlink())
-//	     {
-//	         speed+=10;
-//	     }
-//	     if(RighIrBlink())
-//	     {
-//	         speed-=10;
-//	     }
-			if (HAL_GPIO_ReadPin(TB1_GPIO_Port, TB1_Pin)) {
-				break;
-			}
+	while (1) {
 
-	 }
-	 HAL_Delay(1000);
-	 return 0;
+		if (rightIrBlink()) {
+			base_speed_l += 0.1;
+			base_speed_r += 0.1;
+		}
+		if (leftIrBlink()) {
+			base_speed_l -= 0.1;
+			base_speed_r -= 0.1;
+		}
+
+		if (buttonPress) {
+			buttonPress = false;
+			return 0;
+		}
+		HAL_Delay(1000);
+	}
 
 }

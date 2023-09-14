@@ -2,10 +2,10 @@
 #include "motor.h"
 #include "sensors.h"
 #include "floodfill.hpp"
+#include "cppmain.h"
 
-coordinate XY; // Declare a coordinate struct
-coordinate XY_prev; // Declare a coordinate struct
-
+static coordinate XY; // Declare a coordinate struct
+static coordinate XY_prev; // Declare a coordinate struct
 
 static int orient = 0;
 
@@ -17,24 +17,19 @@ static int orient = 0;
 
 int searchIdle() {
 
-	return 2;
+	while (1) {
+		if (irBlink()) {
+			return 2;
+		}
 
-	// while(1)
-	// {
-	//     if(irBlink())
-	//     {
-	//         return 2;
-	//     }
-	//     if(buttonPress())
-	//     {
-	//         return 4;
-	//     }
-
-	// }
+		if (buttonPress) {
+			buttonPress = false;
+			return 4;
+		}
+	}
 }
 
 int searchForward() {
-//	startPos(); // move to
 
 	XY.x = 0;
 	XY.y = 0;
@@ -53,24 +48,28 @@ int searchForward() {
 
 			if (direction == 'L') {
 				turnLeft(68);
-//				orient = orientation(orient, direction);
+				orient = orientation(orient, direction);
 			} else if (direction == 'R') {
 				turnRight(68);
-//				orient = orientation(orient, direction);
+				orient = orientation(orient, direction);
 			} else if (direction == 'B') {
 				turnLeft(68);
-//				orient = orientation(orient, direction);
+				orient = orientation(orient, direction);
 				turnLeft(68);
-//				orient = orientation(orient, direction);
+				orient = orientation(orient, direction);
 			}
 
 			straightCountsPID(100);
 			XY_prev = XY;
-//			XY = updateCoordinates(XY, orient);
-
+			XY = updateCoordinates(XY, orient);
 
 		} else {
 			return 3;
+		}
+
+		if (buttonPress) {
+			buttonPress = false;
+			return 4;
 		}
 	}
 
@@ -83,26 +82,31 @@ int searchBackward() {
 	while (1) {
 		if (backFlood[XY.x][XY.y] >= 1) //NotInStart
 				{
-			char direction = toMove(XY, XY_prev, orient);
+			char direction = toMoveBack(XY, XY_prev, orient);
 
 			if (direction == 'L') {
 				turnLeft(68);
-//				orient = orientation(orient, direction);
+				orient = orientation(orient, direction);
 			} else if (direction == 'R') {
 				turnRight(68);
-//				orient = orientation(orient, direction);
+				orient = orientation(orient, direction);
 			} else if (direction == 'B') {
 				turnLeft(68);
-//				orient = orientation(orient, direction);
+				orient = orientation(orient, direction);
 				turnLeft(68);
-//				orient = orientation(orient, direction);
+				orient = orientation(orient, direction);
 			}
 
 			straightCountsPID(100);
 			XY_prev = XY;
-			// XY = updateCoordinates(XY, orient);
+			 XY = updateCoordinates(XY, orient);
 
 		} else {
+			return 4;
+		}
+
+		if (buttonPress) {
+			buttonPress = false;
 			return 4;
 		}
 	}

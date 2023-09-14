@@ -109,6 +109,30 @@
 
 #include "sensors.h"
 
+bool irBlink() {
+	static uint32_t t3 = 76;
+	if (lf < t3 && rf < t3) {
+			return true;
+		}
+	return false;
+}
+
+bool rightIrBlink(){
+	static uint32_t t2 = 32;
+	if (rd < t2) {
+			return true;
+		}
+	return false;
+}
+
+bool leftIrBlink(){
+	static uint32_t t1 = 32;
+	if (ld < t1) {
+			return true;
+		}
+	return false;
+}
+
 void getSensorReadings() {
 	static uint32_t t1 = 24;
 	static uint32_t t2 = 32;

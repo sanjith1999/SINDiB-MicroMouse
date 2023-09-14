@@ -25,6 +25,7 @@ extern TIM_HandleTypeDef htim14;
 
 extern uint16_t pos_l, pos_r;
 
+extern bool buttonPress;
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 

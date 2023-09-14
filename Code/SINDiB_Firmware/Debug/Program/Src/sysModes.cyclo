@@ -1,3 +1,3 @@
-../Program/Src/sysModes.cpp:12:6:void InitMouse()	1
-../Program/Src/sysModes.cpp:16:5:int idle()	2
-../Program/Src/sysModes.cpp:28:5:int speedAdjust()	2
+../Program/Src/sysModes.cpp:14:6:void InitMouse()	1
+../Program/Src/sysModes.cpp:18:5:int idle()	2
+../Program/Src/sysModes.cpp:28:5:int speedAdjust()	4
