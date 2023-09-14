@@ -28,6 +28,8 @@ void cppmain(void) {
 		L3GD20_loop();
 		HAL_Delay(1);
 
+		searchForward();
+
 //		turnLeftGyro(0);
 
 		// goLong(500);

@@ -47,19 +47,25 @@ int searchForward() {
 			char direction = toMove(XY, XY_prev, orient);
 
 			if (direction == 'L') {
+				straightCountsPID(50);
 				turnLeft(68);
 				orient = orientation(orient, direction);
+				straightCountsPID(50);
 			} else if (direction == 'R') {
+				straightCountsPID(50);
 				turnRight(68);
 				orient = orientation(orient, direction);
+				straightCountsPID(50);
 			} else if (direction == 'B') {
 				turnLeft(68);
 				orient = orientation(orient, direction);
 				turnLeft(68);
 				orient = orientation(orient, direction);
+				straightCountsPID(100);
+			} else if (direction == 'F') {
+				straightCountsPID(100);
 			}
 
-			straightCountsPID(100);
 			XY_prev = XY;
 			XY = updateCoordinates(XY, orient);
 
@@ -85,21 +91,27 @@ int searchBackward() {
 			char direction = toMoveBack(XY, XY_prev, orient);
 
 			if (direction == 'L') {
+				straightCountsPID(50);
 				turnLeft(68);
 				orient = orientation(orient, direction);
+				straightCountsPID(50);
 			} else if (direction == 'R') {
+				straightCountsPID(50);
 				turnRight(68);
 				orient = orientation(orient, direction);
+				straightCountsPID(50);
 			} else if (direction == 'B') {
 				turnLeft(68);
 				orient = orientation(orient, direction);
 				turnLeft(68);
 				orient = orientation(orient, direction);
+				straightCountsPID(100);
+			} else if (direction == 'F') {
+				straightCountsPID(100);
 			}
 
-			straightCountsPID(100);
 			XY_prev = XY;
-			 XY = updateCoordinates(XY, orient);
+			XY = updateCoordinates(XY, orient);
 
 		} else {
 			return 4;
