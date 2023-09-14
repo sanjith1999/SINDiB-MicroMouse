@@ -183,11 +183,70 @@ void turnLeft(int count) {
 				setRightWheel(0);
 				break;
 			}
+		}
+	}
+}
 
+void turnRight(int count) {
+
+	uint16_t rmp = 1000;
+	l_start = l_position;
+	r_start = r_position;
+
+	cnt = 0;
+	run_speed_l = 0;
+	run_speed_r = 0;
+
+	while (1) {
+
+		if (l_position >= l_start) {
+			l_dist = l_position - l_start;
+		} else {
+			l_dist = max_limit + l_position - l_start;
+		}
+		if (r_position <= r_start) {
+			r_dist = r_position - r_start;
+		} else {
+			r_dist = max_limit + r_position - r_start;
 		}
 
-	}
+		error = l_dist - r_dist;
+		I = I + error;
 
+		correction =
+				(float) (error * StKp + I * StKi + (error - lastErr) * StKd)
+						/ 50.0;
+		lastErr = error;
+
+		if (l_dist < count && r_dist < count) {
+
+			if (cnt < rmp) {
+				run_speed_l += base_speed_l / (float) rmp;
+				run_speed_r += base_speed_r / (float) rmp;
+				cnt += 1;
+			} else {
+				run_speed_l = base_speed_l;
+				run_speed_r = base_speed_r;
+			}
+
+			setLeftWheel(run_speed_l - correction);
+			setRightWheel(-run_speed_r - correction);
+
+		} else {
+			if (cnt > 0) {
+				run_speed_l -= base_speed_l / (float) rmp;
+				run_speed_r -= base_speed_r / (float) rmp;
+				cnt -= 1;
+
+				setLeftWheel(run_speed_l - correction);
+				setRightWheel(-run_speed_r - correction);
+			} else {
+				setLeftWheel(0);
+				setRightWheel(0);
+				break;
+			}
+		}
+	}
 }
 
 void turnLeftGyro(float angle) {
@@ -197,7 +256,9 @@ void turnLeftGyro(float angle) {
 		error = Angle_Z - angle;
 		I = I + error;
 
-		correction = (float) (error * StKp + I * StKi + (error - lastErr) * StKd)/ 50.0;
+		correction =
+				(float) (error * StKp + I * StKi + (error - lastErr) * StKd)
+						/ 50.0;
 		lastErr = error;
 
 		setLeftWheel(-correction);
