@@ -1,10 +1,13 @@
 #include "main.h"
 #include "motor.h"
+#include "sensors.h"
+#include "floodfill.hpp"
 
-static int x = 0, y = 0;
-static int xprev =0, yprev =0;
-static int orient=0;
+coordinate XY; // Declare a coordinate struct
+coordinate XY_prev; // Declare a coordinate struct
 
+
+static int orient = 0;
 
 //     orients :
 //         0- North
@@ -12,116 +15,97 @@ static int orient=0;
 //         2- South
 //         3- West
 
+int searchIdle() {
 
-
-int searchIdle()
-{
-
-    return 2;
-
-    // while(1)
-    // {
-    //     if(irBlink())
-    //     {
-    //         return 2;
-    //     }
-    //     if(buttonPress())
-    //     {
-    //         return 4;
-    //     }
-
-    // }
-
-}
-
-int searchForward()
-{
-    // startPos(); // move to
-
-    // while(1)
-    // {
-    //     L,R,F = getSensorReadings();
-    //     updateWalls();
-
-    //     if(flood[x][y]>=1) //NotInCenter
-    //     {
-    //         floodFill(x,y,xprev,yprev);
-    //         char direction = toMove(x,y,xprev,yprev,orient);
-
-    //         if (direction=='L')
-    //         {
-    //             searchTurnLeft()
-    //         }
-    //         elif (direction=='R'):
-    //             searchTurnRight()
-
-    //         elif (direction=='B'):
-    //             searchTurnBack()
-
-    //         elif (direction=='F'):
-    //             searchGoForward()
-
-    //         orient = orientation(orient,direction);
-
-    //     }
-    //     else
-    //     {
-    //         return 3;
-    //     }
-
-
-    //     if(buttonPress)
-    //     {
-	//			delay(1000);
-    //         return 4;
-    //     }
-
-    // }
-
-//    return 3;
-	straightCountsPID(1000);
 	return 2;
 
+	// while(1)
+	// {
+	//     if(irBlink())
+	//     {
+	//         return 2;
+	//     }
+	//     if(buttonPress())
+	//     {
+	//         return 4;
+	//     }
+
+	// }
 }
 
-int searchBackward()
-{
-    // backtrack();
+int searchForward() {
+//	startPos(); // move to
 
-    // while(1)
-    // {
-    //     if(backFlood[x][y]>=1) //NotInStart
-    //     {
-    //         direction= toMoveBack(x,y,xprev,yprev,orient);
+	XY.x = 0;
+	XY.y = 0;
 
-    //         if (direction=='L')
-    //         {
-    //             searchTurnLeft()
-    //         }
-    //         elif (direction=='R'):
-    //             searchTurnRight()
+	XY_prev.x = 0;
+	XY_prev.y = 0;
 
-    //         elif (direction=='B'):
-    //             searchTurnBack()
+	while (1) {
+		getSensorReadings();
+		updateWalls(XY, orient, L, R, F);
 
-    //         elif (direction=='F'):
-    //             searchGoForward()
+		if (flood[XY.x][XY.y] >= 1) //NotInCenter
+				{
+			floodFill(XY, XY_prev);
+			char direction = toMove(XY, XY_prev, orient);
 
-    //         orient = orientation(orient,direction);
+			if (direction == 'L') {
+				turnLeft(68);
+//				orient = orientation(orient, direction);
+			} else if (direction == 'R') {
+				turnRight(68);
+//				orient = orientation(orient, direction);
+			} else if (direction == 'B') {
+				turnLeft(68);
+//				orient = orientation(orient, direction);
+				turnLeft(68);
+//				orient = orientation(orient, direction);
+			}
 
-    //     }
-    //     else
-    //     {
-    //         return 4;
-    //     }
+			straightCountsPID(100);
+			XY_prev = XY;
+//			XY = updateCoordinates(XY, orient);
 
-    //     if(buttonPress())
-    //     {
-    //         return 4;
-    //     }
 
-    // }
+		} else {
+			return 3;
+		}
+	}
 
-    return 7;
+	return 3;
+}
+
+int searchBackward() {
+	backtrack();
+
+	while (1) {
+		if (backFlood[XY.x][XY.y] >= 1) //NotInStart
+				{
+			char direction = toMove(XY, XY_prev, orient);
+
+			if (direction == 'L') {
+				turnLeft(68);
+//				orient = orientation(orient, direction);
+			} else if (direction == 'R') {
+				turnRight(68);
+//				orient = orientation(orient, direction);
+			} else if (direction == 'B') {
+				turnLeft(68);
+//				orient = orientation(orient, direction);
+				turnLeft(68);
+//				orient = orientation(orient, direction);
+			}
+
+			straightCountsPID(100);
+			XY_prev = XY;
+			// XY = updateCoordinates(XY, orient);
+
+		} else {
+			return 4;
+		}
+	}
+	return 7;
 }
 

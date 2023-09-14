@@ -31,23 +31,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      00000043  00000000  00000000  00020040  2**0
                   CONTENTS, READONLY
- 14 .debug_info   00012945  00000000  00000000  00020083  2**0
+ 14 .debug_info   00012975  00000000  00000000  00020083  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 00002a4a  00000000  00000000  000329c8  2**0
+ 15 .debug_abbrev 00002a4a  00000000  00000000  000329f8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00001098  00000000  00000000  00035418  2**3
+ 16 .debug_aranges 000010a0  00000000  00000000  00035448  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_rnglists 00000cfe  00000000  00000000  000364b0  2**0
+ 17 .debug_rnglists 00000d05  00000000  00000000  000364e8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  00024038  00000000  00000000  000371ae  2**0
+ 18 .debug_macro  00024038  00000000  00000000  000371ed  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   00016d7e  00000000  00000000  0005b1e6  2**0
+ 19 .debug_line   00015d16  00000000  00000000  0005b225  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    000cfa38  00000000  00000000  00071f64  2**0
+ 20 .debug_str    000cfa10  00000000  00000000  00070f3b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  0000457c  00000000  00000000  0014199c  2**2
+ 21 .debug_frame  000045a4  00000000  00000000  0014094c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 000000a2  00000000  00000000  00145f18  2**0
+ 22 .debug_line_str 00000070  00000000  00000000  00144ef0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -15268,7 +15268,7 @@ void L3GD20_Init(void) {
  8005b3e:	4b12      	ldr	r3, [pc, #72]	; (8005b88 <L3GD20_Init+0x450>)
  8005b40:	2201      	movs	r2, #1
  8005b42:	701a      	strb	r2, [r3, #0]
-					} else {
+					} else{
 					}
 					//----------------------------------------------------------------------------------------------------------
 				case (L3GD20_process_calibration_samples):

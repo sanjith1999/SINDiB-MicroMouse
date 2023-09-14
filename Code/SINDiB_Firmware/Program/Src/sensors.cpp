@@ -106,3 +106,45 @@
 ////	 */
 ////}
 //
+
+#include "sensors.h"
+
+void getSensorReadings() {
+	static uint32_t t1 = 24;
+	static uint32_t t2 = 32;
+	static uint32_t t3 = 76;
+
+	if (ld > t1 && rd > t2 && lf < t3 && rf < t3) {
+		F = true;
+		R = false;
+		L = false;
+	} else if (ld > t1 && rd < t2 && lf > t3) {
+		F = false;
+		R = true;
+		L = false;
+	} else if (ld < t1 && rd > t2 && rf > t3) {
+		F = false;
+		R = false;
+		L = true;
+	} else if (ld > t1 && rd < t2 && lf < t3 && rf < t3) {
+		F = true;
+		R = true;
+		L = false;
+	} else if (ld < t1 && rd > t2 && lf < t3 && rf < t3) {
+		F = true;
+		R = false;
+		L = true;
+	} else if (ld < t1 && rd < t2 && lf > t3 && rf > t3) {
+		F = false;
+		R = true;
+		L = true;
+	} else if (ld < t1 && rd < t2 && lf < t3 && rf < t3) {
+		F = true;
+		R = true;
+		L = true;
+	} else if (ld > t1 && rd > t2 && lf > t3 && rf > t3) {
+		F = false;
+		R = false;
+		L = false;
+	}
+}

@@ -14,6 +14,10 @@
 extern int flood[ROWS][COLUMNS];
 extern int backFlood[ROWS][COLUMNS];
 
+struct coordinate{
+	int x;
+	int y;
+};
 
 void updateWalls(struct coordinate point, int orient, bool L, bool R, bool F);
 void floodFill(struct coordinate p, struct coordinate prev);

@@ -6,4 +6,5 @@
 ../Libs/Src/motor.c:80:6:goLong	2
 ../Libs/Src/motor.c:85:6:straightCountsPID	5
 ../Libs/Src/motor.c:128:6:turnLeft	7
-../Libs/Src/motor.c:193:6:turnLeftGyro	1
+../Libs/Src/motor.c:190:6:turnRight	7
+../Libs/Src/motor.c:252:6:turnLeftGyro	1

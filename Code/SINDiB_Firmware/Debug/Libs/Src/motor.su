@@ -6,4 +6,5 @@
 ../Libs/Src/motor.c:80:6:goLong	24	static
 ../Libs/Src/motor.c:85:6:straightCountsPID	16	static
 ../Libs/Src/motor.c:128:6:turnLeft	24	static
-../Libs/Src/motor.c:193:6:turnLeftGyro	16	static
+../Libs/Src/motor.c:190:6:turnRight	24	static
+../Libs/Src/motor.c:252:6:turnLeftGyro	16	static

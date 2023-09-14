@@ -204,7 +204,7 @@ void turnRight(int count) {
 		} else {
 			l_dist = max_limit + l_position - l_start;
 		}
-		if (r_position <= r_start) {
+		if (r_position >= r_start) {
 			r_dist = r_position - r_start;
 		} else {
 			r_dist = max_limit + r_position - r_start;

@@ -23,6 +23,12 @@ extern uint32_t rf;
 extern uint32_t ld;
 extern uint32_t rd;
 
+extern bool L;
+extern bool R;
+extern bool F;
+
+void getSensorReadings();
+
 
 #define LF_EM_ON   HAL_GPIO_WritePin(LF_EMITTER_GPIO_Port, LF_EMITTER_Pin, GPIO_PIN_SET)
 #define LF_EM_OFF  HAL_GPIO_WritePin(LF_EMITTER_GPIO_Port, LF_EMITTER_Pin, GPIO_PIN_RESET)

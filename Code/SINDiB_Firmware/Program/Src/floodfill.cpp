@@ -68,6 +68,7 @@ struct coordinate{
 	int x;
 	int y;
 };
+
 struct surroundCoor{
 	struct coordinate N;
 	struct coordinate S;
