@@ -1,2 +1,2 @@
-../Libs/Src/L3GD20.c:447:6:L3GD20_Init	1
-../Libs/Src/L3GD20.c:502:6:L3GD20_loop	26
+../Libs/Src/L3GD20.c:71:6:L3GD20_Init	19
+../Libs/Src/L3GD20.c:293:6:L3GD20_loop	11

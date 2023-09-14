@@ -16,10 +16,21 @@ extern "C" {
 #include "sysModes.h"
 #include "searchModes.h"
 #include "fastModes.h"
+#include "sensors.h"
 
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim5;
+extern TIM_HandleTypeDef htim14;
+
+extern uint16_t pos_l, pos_r;
+
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+
+extern volatile uint16_t adcResultsDMA[5];
+extern int adcChannelCount;
+extern volatile int adcConversionComplete;
 
 void cppmain(void);
 

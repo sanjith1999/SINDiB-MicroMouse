@@ -127,6 +127,7 @@ int main(void) {
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
+
 	while (1) {
 //		encoderUpdate();
 //		l_encoder_count = TIM2->CNT;

@@ -1,6 +1,9 @@
-../Libs/Src/motor.c:7:6:motorInit	8	static
-../Libs/Src/motor.c:17:6:setLeftWheel	24	static
-../Libs/Src/motor.c:26:6:setRightWheel	24	static
-../Libs/Src/motor.c:37:6:setWheels	16	static
-../Libs/Src/motor.c:42:6:straightCounts	24	static
-../Libs/Src/motor.c:55:6:goLong	24	static
+../Libs/Src/motor.c:22:6:motorInit	8	static
+../Libs/Src/motor.c:32:6:setLeftWheel	24	static
+../Libs/Src/motor.c:41:6:setRightWheel	24	static
+../Libs/Src/motor.c:51:6:setWheels	16	static
+../Libs/Src/motor.c:56:6:straightCounts	24	static
+../Libs/Src/motor.c:80:6:goLong	24	static
+../Libs/Src/motor.c:85:6:straightCountsPID	16	static
+../Libs/Src/motor.c:128:6:turnLeft	24	static
+../Libs/Src/motor.c:193:6:turnLeftGyro	16	static

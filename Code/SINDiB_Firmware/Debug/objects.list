@@ -35,4 +35,5 @@
 "./Program/Src/fastModes.o"
 "./Program/Src/floodfill.o"
 "./Program/Src/searchModes.o"
+"./Program/Src/sensors.o"
 "./Program/Src/sysModes.o"

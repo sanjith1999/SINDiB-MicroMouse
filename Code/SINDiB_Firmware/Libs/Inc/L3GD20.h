@@ -24,10 +24,14 @@
 
 
 
-	 void L3GD20_Init(void);
+ void L3GD20_Init(void);
 
-	 void L3GD20_loop(void);
+ void L3GD20_loop(void);
 
+
+ extern float Angle_X;
+ extern float Angle_Y;
+ extern float Angle_Z;
 
 
 

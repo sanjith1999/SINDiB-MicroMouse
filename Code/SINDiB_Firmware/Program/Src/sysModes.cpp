@@ -5,7 +5,9 @@
  *      Author: SAMSUNG
  */
 //#include "sysModes.h"
-#include "sysModes.h"
+//#include "sysModes.h"
+#include "main.h"
+#include "motor.h"
 
 void InitMouse() {
 

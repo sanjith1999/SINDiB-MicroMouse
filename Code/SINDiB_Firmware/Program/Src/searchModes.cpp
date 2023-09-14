@@ -1,4 +1,5 @@
 #include "main.h"
+#include "motor.h"
 
 static int x = 0, y = 0;
 static int xprev =0, yprev =0;
@@ -77,7 +78,9 @@ int searchForward()
 
     // }
 
-    return 3;
+//    return 3;
+	straightCountsPID(1000);
+	return 2;
 
 }
 

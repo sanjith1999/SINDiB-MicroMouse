@@ -1,3 +1,6 @@
+#include "main.h"
+#include "motor.h"
+
 int fastIdle()
 {
     return 5;
