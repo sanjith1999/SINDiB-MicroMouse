@@ -152,6 +152,7 @@ extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim5;
 extern TIM_HandleTypeDef htim14;
+extern TIM_HandleTypeDef htim13;
 
 extern ADC_HandleTypeDef hadc1;
 

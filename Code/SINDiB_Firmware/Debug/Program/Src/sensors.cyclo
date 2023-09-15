@@ -1,6 +1,0 @@
-../Program/Src/sensors.cpp:26:10:uint32_t micros()	1
-../Program/Src/sensors.cpp:32:6:void elapseMicros(uint32_t, uint32_t)	2
-../Program/Src/sensors.cpp:115:6:bool irBlink()	3
-../Program/Src/sensors.cpp:123:6:bool rightIrBlink()	2
-../Program/Src/sensors.cpp:131:6:bool leftIrBlink()	2
-../Program/Src/sensors.cpp:139:6:void getSensorReadings()	31

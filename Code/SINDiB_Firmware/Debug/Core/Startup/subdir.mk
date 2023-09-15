@@ -16,7 +16,7 @@ OBJS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 Core/Startup/%.o: ../Core/Startup/%.s Core/Startup/subdir.mk
-	arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -I"D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers" -I"D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc" -I"D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc" -x assembler-with-cpp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -I"D:/OneDrive - University of Moratuwa/Volume D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers" -I"D:/OneDrive - University of Moratuwa/Volume D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc" -I"D:/OneDrive - University of Moratuwa/Volume D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc" -x assembler-with-cpp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@" "$<"
 
 clean: clean-Core-2f-Startup
 
