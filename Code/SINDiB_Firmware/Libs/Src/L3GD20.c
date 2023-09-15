@@ -133,8 +133,6 @@ void L3GD20_Init(void) {
 
 	while (1) {
 		switch (currentState) {
-		//---------------------------------------------------------------------------
-		//data
 		case (L3GD20_fisrt):
 			if (dataReadyFlag == L3GD20_DATA_READY) {
 				HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_RESET);
@@ -176,7 +174,10 @@ void L3GD20_Init(void) {
 				currentState = L3GD20_second;
 				dataReadyFlag = L3GD20_DATA_NOT_READY;
 			} else {
+
 			}
+			break;
+
 		case (L3GD20_second):
 			Raw_x = (spiRxBuf[2] << 8) | spiRxBuf[1];
 			Raw_y = (spiRxBuf[4] << 8) | spiRxBuf[3];
@@ -197,25 +198,20 @@ void L3GD20_Init(void) {
 						caliCounter = 0;
 
 						currentcalistate = L3GD20_process_calibration_samples;
-					} else{
+					} else {
 					}
+					break;
 					//----------------------------------------------------------------------------------------------------------
 				case (L3GD20_process_calibration_samples):
 					for (uint32_t idx = 0; idx < CALIBRATION_BUFFER_LENGTH;
 							idx++) {
-						tempSum_X = tempSum_X - averageWindow_X[windowPosition]
-								+ calibrationBuffer_X[idx];
-						tempSum_Y = tempSum_Y - averageWindow_Y[windowPosition]
-								+ calibrationBuffer_Y[idx];
-						tempSum_Z = tempSum_Z - averageWindow_Z[windowPosition]
-								+ calibrationBuffer_Z[idx];
+						tempSum_X = tempSum_X - averageWindow_X[windowPosition] + calibrationBuffer_X[idx];
+						tempSum_Y = tempSum_Y - averageWindow_Y[windowPosition] + calibrationBuffer_Y[idx];
+						tempSum_Z = tempSum_Z - averageWindow_Z[windowPosition] + calibrationBuffer_Z[idx];
 
-						averageWindow_X[windowPosition] =
-								calibrationBuffer_X[idx];
-						averageWindow_Y[windowPosition] =
-								calibrationBuffer_Y[idx];
-						averageWindow_Z[windowPosition] =
-								calibrationBuffer_Z[idx];
+						averageWindow_X[windowPosition] = calibrationBuffer_X[idx];
+						averageWindow_Y[windowPosition] = calibrationBuffer_Y[idx];
+						averageWindow_Z[windowPosition] = calibrationBuffer_Z[idx];
 
 						offset_x = tempSum_X / (int32_t) AVERAGE_WINDOW_SIZE;
 						offset_y = tempSum_Y / (int32_t) AVERAGE_WINDOW_SIZE;
@@ -231,34 +227,22 @@ void L3GD20_Init(void) {
 					}
 					for (uint32_t idx = 0; idx < CALIBRATION_BUFFER_LENGTH;
 							idx++) {
-						if (((int32_t) calibrationBuffer_X[idx] - offset_x)
-								> TempNoise_X) {
-							TempNoise_X = (int32_t) calibrationBuffer_X[idx]
-									- offset_x;
-						} else if (((int32_t) calibrationBuffer_X[idx]
-								- offset_x) < -TempNoise_X) {
-							TempNoise_X = -((int32_t) calibrationBuffer_X[idx]
-									- offset_x);
+						if (((int32_t) calibrationBuffer_X[idx] - offset_x) > TempNoise_X) {
+							TempNoise_X = (int32_t) calibrationBuffer_X[idx] - offset_x;
+						} else if (((int32_t) calibrationBuffer_X[idx] - offset_x) < -TempNoise_X) {
+							TempNoise_X = -((int32_t) calibrationBuffer_X[idx] - offset_x);
 						}
 
-						if (((int32_t) calibrationBuffer_Y[idx] - offset_y)
-								> TempNoise_Y) {
-							TempNoise_Y = (int32_t) calibrationBuffer_Y[idx]
-									- offset_y;
-						} else if (((int32_t) calibrationBuffer_Y[idx]
-								- offset_y) < -TempNoise_Y) {
-							TempNoise_Y = -((int32_t) calibrationBuffer_Y[idx]
-									- offset_y);
+						if (((int32_t) calibrationBuffer_Y[idx] - offset_y)> TempNoise_Y) {
+							TempNoise_Y = (int32_t) calibrationBuffer_Y[idx] - offset_y;
+						} else if (((int32_t) calibrationBuffer_Y[idx] - offset_y) < -TempNoise_Y) {
+							TempNoise_Y = -((int32_t) calibrationBuffer_Y[idx] - offset_y);
 						}
 
-						if (((int32_t) calibrationBuffer_Z[idx] - offset_z)
-								> TempNoise_Z) {
-							TempNoise_Z = (int32_t) calibrationBuffer_Z[idx]
-									- offset_z;
-						} else if (((int32_t) calibrationBuffer_Z[idx]
-								- offset_z) < -TempNoise_Z) {
-							TempNoise_Z = -((int32_t) calibrationBuffer_Z[idx]
-									- offset_z);
+						if (((int32_t) calibrationBuffer_Z[idx] - offset_z) > TempNoise_Z) {
+							TempNoise_Z = (int32_t) calibrationBuffer_Z[idx] - offset_z;
+						} else if (((int32_t) calibrationBuffer_Z[idx] - offset_z) < -TempNoise_Z) {
+							TempNoise_Z = -((int32_t) calibrationBuffer_Z[idx] - offset_z);
 						}
 					}
 
@@ -274,6 +258,7 @@ void L3GD20_Init(void) {
 
 				default:
 					currentcalistate = L3GD20_collect_calibration_samples;
+					break;
 				}
 
 			}
@@ -283,6 +268,9 @@ void L3GD20_Init(void) {
 		default:
 			currentState = L3GD20_fisrt;
 
+		}
+		if (currentcalistate == L3GD20_calibrated) {
+			break;
 		}
 
 		HAL_Delay(1);
@@ -295,14 +283,14 @@ void L3GD20_loop(void) {
 	Raw_y = 0;
 	Raw_z = 0;
 
-	int16_t averageWindow_X[AVERAGE_WINDOW_SIZE] = { 0 };
-	int16_t averageWindow_Y[AVERAGE_WINDOW_SIZE] = { 0 };
-	int16_t averageWindow_Z[AVERAGE_WINDOW_SIZE] = { 0 };
 
-	uint32_t windowPosition = 0;
-	int32_t tempSum_X = 0;
-	int32_t tempSum_Y = 0;
-	int32_t tempSum_Z = 0;
+//	Noise_X = 0.9;
+//	Noise_Y = 0.9;
+//	Noise_Z = 0.9;
+//
+//	offset_x = 0;
+//	offset_y = 0;
+//	offset_z = 0;
 
 //		currentTime = __HAL_TIM_GET_COUNTER(&htim2);
 //
@@ -361,7 +349,6 @@ void L3GD20_loop(void) {
 			dataReadyFlag = L3GD20_DATA_NOT_READY;
 		} else {
 		}
-
 		break;
 		//-----------------------------------------------------------------------------------
 		//varibla
@@ -370,129 +357,36 @@ void L3GD20_loop(void) {
 		Raw_y = (spiRxBuf[4] << 8) | spiRxBuf[3];
 		Raw_z = (spiRxBuf[6] << 8) | spiRxBuf[5];
 
-		if (currentcalistate == L3GD20_calibrated) {
-			HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-			angleRate_x = (float) (Raw_x - (offset_x)) * L3GD20_SENSITIVITY;
-			angleRate_y = (float) (Raw_y - (offset_y)) * L3GD20_SENSITIVITY;
-			angleRate_z = (float) (Raw_z - (offset_z)) * L3GD20_SENSITIVITY;
+		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+		angleRate_x = (float) (Raw_x - (offset_x)) * L3GD20_SENSITIVITY;
+		angleRate_y = (float) (Raw_y - (offset_y)) * L3GD20_SENSITIVITY;
+		angleRate_z = (float) (Raw_z - (offset_z)) * L3GD20_SENSITIVITY;
 
-			timeDifference = 0.001;
+		timeDifference = 0.001;
 
-			if ((angleRate_x > Noise_X) || (angleRate_x < -Noise_X)) {
-				Angle_X += ((angleRate_x + LastAngleRate_X) * timeDifference)
-						/ (2.0f);
-				LastAngleRate_X = angleRate_x;
-			} else {
-			}
-			if ((angleRate_y > Noise_Y) || (angleRate_y < -Noise_Y)) {
-				Angle_Y += ((angleRate_y + LastAngleRate_Y) * timeDifference)
-						/ (2.0f);
-				LastAngleRate_Y = angleRate_y;
-			} else {
-			}
-			if ((angleRate_z > Noise_Z) || (angleRate_z < -Noise_Z)) {//57.29577951308232
-				Angle_Z += ((angleRate_z + LastAngleRate_Z) * timeDifference)
-						/ (2.0f);
-				LastAngleRate_Z = angleRate_z;
-			} else {
-			}
+		if ((angleRate_x > Noise_X) || (angleRate_x < -Noise_X)) {
+			Angle_X += ((angleRate_x + LastAngleRate_X) * timeDifference)/ (2.0f);
+			LastAngleRate_X = angleRate_x;
 		} else {
-			// 	switch (currentcalistate) {
-			// 	//---------------------------------------------------------------------------------------------------------
-			// 	case (L3GD20_collect_calibration_samples):
-			// 		calibrationBuffer_X[caliCounter] = Raw_x;
-			// 		calibrationBuffer_Y[caliCounter] = Raw_y;
-			// 		calibrationBuffer_Z[caliCounter] = Raw_z;
-			// 		caliCounter++;
-
-			// 		if (caliCounter >= CALIBRATION_BUFFER_LENGTH) {
-			// 			caliCounter = 0;
-
-			// 			currentcalistate = L3GD20_process_calibration_samples;
-			// 		} else {
-			// 		}
-			// 		break;
-			// 		//----------------------------------------------------------------------------------------------------------
-			// 	case (L3GD20_process_calibration_samples):
-			// 		for (uint32_t idx = 0; idx < CALIBRATION_BUFFER_LENGTH; idx++) {
-			// 			tempSum_X = tempSum_X - averageWindow_X[windowPosition]
-			// 					+ calibrationBuffer_X[idx];
-			// 			tempSum_Y = tempSum_Y - averageWindow_Y[windowPosition]
-			// 					+ calibrationBuffer_Y[idx];
-			// 			tempSum_Z = tempSum_Z - averageWindow_Z[windowPosition]
-			// 					+ calibrationBuffer_Z[idx];
-
-			// 			averageWindow_X[windowPosition] = calibrationBuffer_X[idx];
-			// 			averageWindow_Y[windowPosition] = calibrationBuffer_Y[idx];
-			// 			averageWindow_Z[windowPosition] = calibrationBuffer_Z[idx];
-
-			// 			offset_x = tempSum_X / (int32_t) AVERAGE_WINDOW_SIZE;
-			// 			offset_y = tempSum_Y / (int32_t) AVERAGE_WINDOW_SIZE;
-			// 			offset_z = tempSum_Z / (int32_t) AVERAGE_WINDOW_SIZE;
-
-			// 			windowPosition++;
-
-			// 			if (windowPosition >= AVERAGE_WINDOW_SIZE) {
-			// 				windowPosition = 0;
-			// 			} else {
-			// 			}
-
-			// 		}
-			// 		for (uint32_t idx = 0; idx < CALIBRATION_BUFFER_LENGTH; idx++) {
-			// 			if (((int32_t) calibrationBuffer_X[idx] - offset_x)
-			// 					> TempNoise_X) {
-			// 				TempNoise_X = (int32_t) calibrationBuffer_X[idx]
-			// 						- offset_x;
-			// 			} else if (((int32_t) calibrationBuffer_X[idx] - offset_x)
-			// 					< -TempNoise_X) {
-			// 				TempNoise_X = -((int32_t) calibrationBuffer_X[idx]
-			// 						- offset_x);
-			// 			}
-
-			// 			if (((int32_t) calibrationBuffer_Y[idx] - offset_y)
-			// 					> TempNoise_Y) {
-			// 				TempNoise_Y = (int32_t) calibrationBuffer_Y[idx]
-			// 						- offset_y;
-			// 			} else if (((int32_t) calibrationBuffer_Y[idx] - offset_y)
-			// 					< -TempNoise_Y) {
-			// 				TempNoise_Y = -((int32_t) calibrationBuffer_Y[idx]
-			// 						- offset_y);
-			// 			}
-
-			// 			if (((int32_t) calibrationBuffer_Z[idx] - offset_z)
-			// 					> TempNoise_Z) {
-			// 				TempNoise_Z = (int32_t) calibrationBuffer_Z[idx]
-			// 						- offset_z;
-			// 			} else if (((int32_t) calibrationBuffer_Z[idx] - offset_z)
-			// 					< -TempNoise_Z) {
-			// 				TempNoise_Z = -((int32_t) calibrationBuffer_Z[idx]
-			// 						- offset_z);
-			// 			}
-			// 		}
-
-			// 		Noise_X = (float) TempNoise_X * L3GD20_SENSITIVITY;
-			// 		Noise_Y = (float) TempNoise_Y * L3GD20_SENSITIVITY;
-			// 		Noise_Z = (float) TempNoise_Z * L3GD20_SENSITIVITY;
-
-			// 		currentcalistate = L3GD20_calibrated;
-			// 		break;
-
-			// 	case (L3GD20_calibrated):
-			// 		break;
-
-			// 	default:
-			// 		break;
-			// 	}
-
-			// }
-			currentState = L3GD20_fisrt;
-			dataReadyFlag = L3GD20_DATA_READY;
-			break;
-
-			default:
-			break;
-
 		}
+		if ((angleRate_y > Noise_Y) || (angleRate_y < -Noise_Y)) {
+			Angle_Y += ((angleRate_y + LastAngleRate_Y) * timeDifference) / (2.0f);
+			LastAngleRate_Y = angleRate_y;
+		} else {
+		}
+		if ((angleRate_z > Noise_Z) || (angleRate_z < -Noise_Z)) {//57.29577951308232
+			Angle_Z += ((angleRate_z + LastAngleRate_Z) * timeDifference) / (2.0f);
+			LastAngleRate_Z = angleRate_z;
+		} else {
+		}
+		currentState = L3GD20_fisrt;
+		dataReadyFlag = L3GD20_DATA_READY;
+		break;
+
+	default:
+		break;
+
 	}
 }
+
 
