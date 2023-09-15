@@ -120,12 +120,9 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM14_Init();
   MX_TIM5_Init();
-<<<<<<< HEAD
-=======
   MX_TIM13_Init();
-  L3GD20_Init();
->>>>>>> origin/master
   /* USER CODE BEGIN 2 */
+  L3GD20_Init();
   ITM_Port32(31) = 2;
   HAL_TIM_Base_Start_IT(&htim14);
   HAL_TIM_Base_Start_IT(&htim13);

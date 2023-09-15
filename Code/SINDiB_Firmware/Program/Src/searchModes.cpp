@@ -9,6 +9,7 @@ static coordinate XY_prev; // Declare a coordinate struct
 
 static int orient = 0;
 
+
 //     orients :
 //         0- North
 //         1- East
@@ -38,6 +39,7 @@ int searchForward() {
 	XY_prev.y = 0;
 
 	while (1) {
+
 		getSensorReadings();
 		updateWalls(XY, orient, L, R, F);
 

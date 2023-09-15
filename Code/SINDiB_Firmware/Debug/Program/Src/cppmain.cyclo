@@ -1,6 +1,2 @@
 ../Program/Src/cppmain.cpp:17:6:void cppmain()	1
-<<<<<<< HEAD
-../Program/Src/cppmain.cpp:120:6:void HAL_GPIO_EXTI_Callback(uint16_t)	2
-=======
 ../Program/Src/cppmain.cpp:134:6:void HAL_GPIO_EXTI_Callback(uint16_t)	2
->>>>>>> origin/master

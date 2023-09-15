@@ -66,6 +66,19 @@ void readSensor(void)
 	// elapseMicros(500,curt);
 }
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+
+  if (htim == &htim13){
+		L3GD20_loop();
+  }
+  if (htim == &htim14 )
+  {
+    readSensor();
+  }
+}
+
+
 
 
 /*read voltage meter*/
@@ -77,13 +90,6 @@ void readVolMeter(void)
 
 
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  if (htim == &htim14 )
-  {
-    readSensor();
-  }
-}
 
 
 
