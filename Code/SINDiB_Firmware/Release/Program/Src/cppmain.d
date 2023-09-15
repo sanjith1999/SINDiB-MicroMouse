@@ -1,3 +1,4 @@
+<<<<<<< HEAD:Code/SINDiB_Firmware/Release/Program/Src/cppmain.d
 Program/Src/cppmain.o: ../Program/Src/cppmain.cpp \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/cppmain.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
@@ -81,3 +82,6 @@ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/sysModes.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/searchModes.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/fastModes.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/sensors.h:
+=======
+Program/Src/sensors.o: ../Program/Src/sensors.cpp
+>>>>>>> origin/master:Code/SINDiB_Firmware/Debug/Program/Src/sensors.d

@@ -19,15 +19,24 @@ void cppmain(void) {
 	// INITIALIZATION OF HARDWARES
 	motorInit();
 	encoderInit();
+<<<<<<< HEAD
 //	L3GD20_Init();
 //	straightCounts(1000);
 //	turnRight(68);
 //	straightCounts(1000);
 //	i = 0;
+=======
+>>>>>>> origin/master
 
 
+	int dist = 170;
+
+	HAL_Delay(2000);
+
+//	straightCountsPID(dist);
 
 	while (1) {
+<<<<<<< HEAD
 		l_adc = read_LF_Sensor;
 		r_adc = read_RF_Sensor;
 //		L3GD20_loop();
@@ -35,6 +44,28 @@ void cppmain(void) {
 
 //		searchForward();
 
+=======
+		turnGyro(0);
+//		searchForward();
+
+
+//		straightCountsPID(dist);
+//		HAL_Delay(1000);
+
+//		straightCountsPID(dist/2);
+//		HAL_Delay(1000);
+//		turnLeft(67);
+//		HAL_Delay(1000);
+//		straightCountsPID(dist/2);
+//		HAL_Delay(1000);
+//
+//		straightCountsPID(dist/2);
+//		HAL_Delay(1000);
+//		turnRight(67);
+//		HAL_Delay(1000);
+//		straightCountsPID(dist/2);
+//		HAL_Delay(1000);
+>>>>>>> origin/master
 
 //		turnLeftGyro(0);
 

@@ -33,6 +33,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "cppmain.h"
 #include <stdbool.h>
+#include "L3GD20.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -152,6 +153,7 @@ extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim5;
 extern TIM_HandleTypeDef htim14;
+extern TIM_HandleTypeDef htim13;
 
 extern ADC_HandleTypeDef hadc1;
 

@@ -16,7 +16,11 @@ OBJS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 Core/Startup/%.o: ../Core/Startup/%.s Core/Startup/subdir.mk
+<<<<<<< HEAD
 	arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -I"F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers" -I"F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc" -I"F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc" -x assembler-with-cpp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@" "$<"
+=======
+	arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -I"E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers" -I"E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc" -I"E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc" -x assembler-with-cpp -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@" "$<"
+>>>>>>> origin/master
 
 clean: clean-Core-2f-Startup
 

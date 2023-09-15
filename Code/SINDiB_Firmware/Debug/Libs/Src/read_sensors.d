@@ -1,9 +1,13 @@
 Libs/Src/read_sensors.o: ../Libs/Src/read_sensors.c \
+<<<<<<< HEAD
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/read_sensors.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
+=======
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h \
+>>>>>>> origin/master
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
@@ -12,6 +16,13 @@ Libs/Src/read_sensors.o: ../Libs/Src/read_sensors.c \
  ../Drivers/CMSIS/Include/cmsis_gcc.h \
  ../Drivers/CMSIS/Include/mpu_armv7.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
+<<<<<<< HEAD
+=======
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
+ ../Core/Inc/stm32f4xx_hal_conf.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
+>>>>>>> origin/master
  ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h \
@@ -32,6 +43,7 @@ Libs/Src/read_sensors.o: ../Libs/Src/read_sensors.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
+<<<<<<< HEAD
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/cppmain.h \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/adc.h \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/typedefs.h \
@@ -50,6 +62,18 @@ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:
+=======
+ ../Core/Inc/main.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sysModes.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sensors.h
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
+>>>>>>> origin/master
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
@@ -58,6 +82,13 @@ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
 ../Drivers/CMSIS/Include/cmsis_gcc.h:
 ../Drivers/CMSIS/Include/mpu_armv7.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h:
+<<<<<<< HEAD
+=======
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
+../Core/Inc/stm32f4xx_hal_conf.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:
+>>>>>>> origin/master
 ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h:
@@ -78,6 +109,7 @@ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+<<<<<<< HEAD
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/cppmain.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/adc.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/typedefs.h:
@@ -90,3 +122,14 @@ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/fastModes.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/led.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/typedefs.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/adc.h:
+=======
+../Core/Inc/main.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sysModes.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sensors.h:
+>>>>>>> origin/master

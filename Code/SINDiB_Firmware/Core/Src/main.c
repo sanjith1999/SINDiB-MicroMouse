@@ -50,6 +50,7 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim4;
 TIM_HandleTypeDef htim5;
 TIM_HandleTypeDef htim6;
+TIM_HandleTypeDef htim13;
 TIM_HandleTypeDef htim14;
 
 UART_HandleTypeDef huart1;
@@ -71,6 +72,7 @@ static void MX_USART1_UART_Init(void);
 static void MX_TIM6_Init(void);
 static void MX_TIM14_Init(void);
 static void MX_TIM5_Init(void);
+static void MX_TIM13_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -118,9 +120,15 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM14_Init();
   MX_TIM5_Init();
+<<<<<<< HEAD
+=======
+  MX_TIM13_Init();
+  L3GD20_Init();
+>>>>>>> origin/master
   /* USER CODE BEGIN 2 */
   ITM_Port32(31) = 2;
   HAL_TIM_Base_Start_IT(&htim14);
+  HAL_TIM_Base_Start_IT(&htim13);
   cppmain();
 
   /* USER CODE END 2 */
@@ -512,6 +520,37 @@ static void MX_TIM6_Init(void)
   /* USER CODE BEGIN TIM6_Init 2 */
 
   /* USER CODE END TIM6_Init 2 */
+
+}
+
+/**
+  * @brief TIM13 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM13_Init(void)
+{
+
+  /* USER CODE BEGIN TIM13_Init 0 */
+
+  /* USER CODE END TIM13_Init 0 */
+
+  /* USER CODE BEGIN TIM13_Init 1 */
+
+  /* USER CODE END TIM13_Init 1 */
+  htim13.Instance = TIM13;
+  htim13.Init.Prescaler = 0;
+  htim13.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim13.Init.Period = 16000;
+  htim13.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim13.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim13) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM13_Init 2 */
+
+  /* USER CODE END TIM13_Init 2 */
 
 }
 

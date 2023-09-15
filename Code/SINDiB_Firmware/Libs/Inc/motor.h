@@ -19,6 +19,7 @@ void goLong(int count);
 void straightCountsPID(int count);
 void turnLeft(int count);
 void turnRight(int count);
+void turnGyro(float angle);
 
 //extern uint16_t pos_l, pos_r;
 

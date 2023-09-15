@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ../Libs/Src/read_sensors.c:17:6:readSensor	5
 ../Libs/Src/read_sensors.c:72:6:readVolMeter	1
 ../Libs/Src/read_sensors.c:80:6:HAL_TIM_PeriodElapsedCallback	2
@@ -5,3 +6,10 @@
 ../Libs/Src/read_sensors.c:99:6:rightIrBlink	2
 ../Libs/Src/read_sensors.c:107:6:leftIrBlink	2
 ../Libs/Src/read_sensors.c:115:6:getSensorReadings	31
+=======
+../Libs/Src/read_sensors.c:4:6:HAL_TIM_PeriodElapsedCallback	2
+../Libs/Src/read_sensors.c:60:6:irBlink	3
+../Libs/Src/read_sensors.c:68:6:rightIrBlink	2
+../Libs/Src/read_sensors.c:76:6:leftIrBlink	2
+../Libs/Src/read_sensors.c:84:6:getSensorReadings	31
+>>>>>>> origin/master
