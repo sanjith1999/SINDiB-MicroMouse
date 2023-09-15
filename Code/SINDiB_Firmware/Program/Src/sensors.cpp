@@ -1,39 +1,39 @@
-/////*
-//// * sensors.cpp
-//// *
-//// *  Created on: Sep 13, 2023
-//// *      Author: SAMSUNG
-//// */
-//#include "main.h"
-//#include "sensors.h"
-//
-//
-//volatile uint16_t adcResultsDMA[5],l_value,r_value;
-//int adcChannelCount = sizeof(adcResultsDMA) / sizeof(adcResultsDMA[0]);
-//volatile int adcConversionComplete = 0;
-//
-//uint32_t sel = 0;
-//
-//uint32_t lf;
-//uint32_t rf;
-//uint32_t ld;
-//uint32_t rd;
-//
-//uint32_t curt;
-//volatile uint32_t Micros;
-//volatile uint32_t Millis;
-//
-//uint32_t micros(void)
-//{
-//	Micros = Millis*1000 + 1000 - SysTick->VAL/systemFrequency;//=Millis*1000+(SystemCoreClock/1000-SysTick->VAL)/168;
-//	return Micros;
-//}
-//
-//void elapseMicros(uint32_t targetTime, uint32_t oldt)
-//{
-//	while((micros()-oldt)<targetTime);
-//}
-//
+///*
+// * sensors.cpp
+// *
+// *  Created on: Sep 13, 2023
+// *      Author: SAMSUNG
+// */
+#include "main.h"
+#include "sensors.h"
+
+
+volatile uint16_t adcResultsDMA[5],l_value,r_value;
+int adcChannelCount = sizeof(adcResultsDMA) / sizeof(adcResultsDMA[0]);
+volatile int adcConversionComplete = 0;
+
+uint32_t sel = 0;
+
+uint32_t lf;
+uint32_t rf;
+uint32_t ld;
+uint32_t rd;
+
+uint32_t curt;
+volatile uint32_t Micros;
+volatile uint32_t Millis;
+
+uint32_t micros(void)
+{
+	Micros = Millis*1000 + 1000 - SysTick->VAL/systemFrequency;//=Millis*1000+(SystemCoreClock/1000-SysTick->VAL)/168;
+	return Micros;
+}
+
+void elapseMicros(uint32_t targetTime, uint32_t oldt)
+{
+	while((micros()-oldt)<targetTime);
+}
+
 //void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 //{
 //  if (htim == &htim14 )
@@ -96,18 +96,21 @@
 //  }
 //
 //}
-//
-////__weak void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
-////	/* Prevent unused argument(s) compilation warning */
-////	adcConversionComplete = 1;
-//////  UNUSED(hadc);
-////	/* NOTE : This function Should not be modified, when the callback is needed,
-////	 the HAL_ADC_ConvCpltCallback could be implemented in the user file
-////	 */
-////}
-//
 
-#include "sensors.h"
+//__weak void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
+//	/* Prevent unused argument(s) compilation warning */
+//	adcConversionComplete = 1;
+////  UNUSED(hadc);
+//	/* NOTE : This function Should not be modified, when the callback is needed,
+//	 the HAL_ADC_ConvCpltCallback could be implemented in the user file
+//	 */
+//}
+
+
+
+bool F = false;
+bool R = false;
+bool L = false;
 
 bool irBlink() {
 	static uint32_t t3 = 76;

@@ -19,16 +19,39 @@ void cppmain(void) {
 	// INITIALIZATION OF HARDWARES
 	motorInit();
 	encoderInit();
-	L3GD20_Init();
+//	L3GD20_Init();
 
 	i = 0;
 
+	int dist = 170;
+
+	HAL_Delay(2000);
+
+//	straightCountsPID(dist);
 
 	while (1) {
-		L3GD20_loop();
-		HAL_Delay(1);
+//		L3GD20_loop();
+//		HAL_Delay(1);
 
-		searchForward();
+//		searchForward();
+
+
+		straightCountsPID(dist);
+		HAL_Delay(1000);
+
+//		straightCountsPID(dist/2);
+//		HAL_Delay(1000);
+//		turnLeft(67);
+//		HAL_Delay(1000);
+//		straightCountsPID(dist/2);
+//		HAL_Delay(1000);
+//
+//		straightCountsPID(dist/2);
+//		HAL_Delay(1000);
+//		turnRight(67);
+//		HAL_Delay(1000);
+//		straightCountsPID(dist/2);
+//		HAL_Delay(1000);
 
 //		turnLeftGyro(0);
 
