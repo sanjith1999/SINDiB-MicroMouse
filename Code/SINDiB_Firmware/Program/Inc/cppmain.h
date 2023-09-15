@@ -1,22 +1,24 @@
 #ifndef INC_CPPMAIN_H_
 #define INC_CPPMAIN_H_
 
-#include <stdbool.h>
-#include <stdio.h>
+
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-
+#include <stdbool.h>
+#include <stdio.h>
 #include "stm32f4xx_hal.h"
+#include <adc.h>
 #include "motor.h"
 #include "encoder.h"
 #include "L3GD20.h"
 #include "sysModes.h"
 #include "searchModes.h"
 #include "fastModes.h"
-#include "sensors.h"
+#include "read_sensors.h"
+#include <typedefs.h>
 
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim4;

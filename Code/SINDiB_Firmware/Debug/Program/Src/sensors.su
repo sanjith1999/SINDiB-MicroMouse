@@ -1,4 +1,0 @@
-../Program/Src/sensors.cpp:112:6:bool irBlink()	4	static
-../Program/Src/sensors.cpp:120:6:bool rightIrBlink()	4	static
-../Program/Src/sensors.cpp:128:6:bool leftIrBlink()	4	static
-../Program/Src/sensors.cpp:136:6:void getSensorReadings()	4	static

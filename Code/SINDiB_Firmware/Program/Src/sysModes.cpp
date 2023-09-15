@@ -9,7 +9,7 @@
 #include "main.h"
 #include "motor.h"
 #include "cppmain.h"
-#include "sensors.h"
+#include "read_sensors.h"
 
 void InitMouse() {
 

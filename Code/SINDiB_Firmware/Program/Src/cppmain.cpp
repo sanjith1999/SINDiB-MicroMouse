@@ -11,7 +11,7 @@ uint16_t pos_l =0, pos_r=0;
 
 bool buttonPress = false;
 
-int mouseState = 2;
+int mouseState = 2, l_adc, r_adc;
 
 
 void cppmain(void) {
@@ -19,16 +19,22 @@ void cppmain(void) {
 	// INITIALIZATION OF HARDWARES
 	motorInit();
 	encoderInit();
-	L3GD20_Init();
+//	L3GD20_Init();
+//	straightCounts(1000);
+//	turnRight(68);
+//	straightCounts(1000);
+//	i = 0;
 
-	i = 0;
 
 
 	while (1) {
-		L3GD20_loop();
-		HAL_Delay(1);
+		l_adc = read_LF_Sensor;
+		r_adc = read_RF_Sensor;
+//		L3GD20_loop();
+//		HAL_Delay(1);
 
-		searchForward();
+//		searchForward();
+
 
 //		turnLeftGyro(0);
 

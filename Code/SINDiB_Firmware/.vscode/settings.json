@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "adc.h": "c",
+        "main.h": "c"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "disabled"
+}

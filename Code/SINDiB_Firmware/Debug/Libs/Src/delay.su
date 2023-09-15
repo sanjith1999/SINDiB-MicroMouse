@@ -1,0 +1,6 @@
+../Libs/Src/delay.c:24:5:micros	4	static
+../Libs/Src/delay.c:30:5:millis	4	static
+../Libs/Src/delay.c:35:6:delay_ms	24	static
+../Libs/Src/delay.c:41:6:delay_us	24	static
+../Libs/Src/delay.c:47:6:elapseMicros	16	static
+../Libs/Src/delay.c:53:6:elapseMillis	16	static
