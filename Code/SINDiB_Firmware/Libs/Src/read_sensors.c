@@ -47,12 +47,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if (htim == &htim13){
 		L3GD20_loop();
 //		HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
-//		k++;
-//		if(k>=1000){
-//			k=0;
-//
-//		}
-
   }
 
 }

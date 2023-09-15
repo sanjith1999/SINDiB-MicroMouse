@@ -1,5 +1,5 @@
 Libs/Src/read_sensors.o: ../Libs/Src/read_sensors.c \
- D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h \
  ../Drivers/CMSIS/Include/core_cm4.h \
@@ -33,15 +33,15 @@ Libs/Src/read_sensors.o: ../Libs/Src/read_sensors.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Core/Inc/main.h \
- D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h \
- D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h \
- D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
- D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h \
- D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sysModes.h \
- D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h \
- D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h \
- D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sensors.h
-D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sysModes.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sensors.h
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f405xx.h:
 ../Drivers/CMSIS/Include/core_cm4.h:
@@ -75,11 +75,11 @@ D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGI
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 ../Core/Inc/main.h:
-D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h:
-D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h:
-D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
-D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h:
-D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sysModes.h:
-D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h:
-D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h:
-D:/OneDrive\ -\ University\ of\ Moratuwa/Volume\ D/Competitions/micromouse/NewGIT/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sensors.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sysModes.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sensors.h:

@@ -19,7 +19,6 @@ void cppmain(void) {
 	// INITIALIZATION OF HARDWARES
 	motorInit();
 	encoderInit();
-	L3GD20_Init();
 
 	i = 0;
 
@@ -30,9 +29,7 @@ void cppmain(void) {
 //	straightCountsPID(dist);
 
 	while (1) {
-//		L3GD20_loop();
-//		HAL_Delay(1);
-
+		turnGyro(0);
 //		searchForward();
 
 

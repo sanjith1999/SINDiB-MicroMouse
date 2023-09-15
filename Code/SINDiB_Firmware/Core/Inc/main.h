@@ -33,6 +33,7 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "cppmain.h"
 #include <stdbool.h>
+#include "L3GD20.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
