@@ -125,6 +125,10 @@ void cppmain(void) {
 //			mouseState = speedAdjust();
 //			break;
 //
+//		case 8:
+//			mouseState = startPosChange();
+//			break;
+//
 //		default:
 //			break;
 //		}

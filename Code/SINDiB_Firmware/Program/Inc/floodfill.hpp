@@ -14,6 +14,8 @@
 extern int flood[ROWS][COLUMNS];
 extern int backFlood[ROWS][COLUMNS];
 
+extern int startPos;
+
 struct coordinate{
 	int x;
 	int y;
@@ -25,7 +27,8 @@ char toMove(struct coordinate p, struct coordinate prevPos, int orient);
 char toMoveBack(struct coordinate p, struct coordinate prevPos, int orient);
 void backtrack();
 int orientation(int orient, char turning);
-coordinate updateCoordinates(struct coordinate coordi, int orient);
+struct coordinate updateCoordinates(struct coordinate coordi, int orient);
+void rotateFloodCounterClockwise();
 
 
 #endif /* INC_FLOODFILL_HPP_ */

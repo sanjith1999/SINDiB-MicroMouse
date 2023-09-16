@@ -32,6 +32,11 @@ int searchIdle() {
 
 int searchForward() {
 
+
+	for (int i = 0; i <= startPos; i++) {
+		rotateFloodCounterClockwise();
+	    }
+
 	XY.x = 0;
 	XY.y = 0;
 

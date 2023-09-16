@@ -4,12 +4,8 @@
  *  Created on: Sep 8, 2023
  *      Author: SAMSUNG
  */
-//#include "sysModes.h"
-//#include "sysModes.h"
-#include "main.h"
-#include "motor.h"
-#include "cppmain.h"
-#include "read_sensors.h"
+#include "sysModes.h"
+
 
 void InitMouse() {
 
@@ -39,9 +35,27 @@ int speedAdjust() {
 
 		if (buttonPress) {
 			buttonPress = false;
+			return 8;
+		}
+		HAL_Delay(1000);
+	}
+}
+
+int startPosChange() {
+	while (1) {
+
+		if (irBlink()) {
+			if (startPos == 3){
+				startPos = 0;
+			} else {
+				startPos += 1;
+			}
+		}
+
+		if (buttonPress) {
+			buttonPress = false;
 			return 0;
 		}
 		HAL_Delay(1000);
 	}
-
 }
