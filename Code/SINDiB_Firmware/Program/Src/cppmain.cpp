@@ -6,30 +6,36 @@
 
 #include "cppmain.h"
 
-uint16_t i;
-uint16_t pos_l =0, pos_r=0;
+u32 i,r_pos,l_pos;
 
 bool buttonPress = false;
 
-int mouseState = 2, l_adc, r_adc;
+int mouseState = 2;
 
 
 void cppmain(void) {
+	LED1_ON;
 
 	// INITIALIZATION OF HARDWARES
 	motorInit();
 	encoderInit();
+	resetEncoder();
 
 
 	int dist = 170;
-
-	HAL_Delay(2000);
+	ALL_LED_ON;
+	HAL_Delay(1000);
+	ALL_LED_OFF;
 
 //	straightCountsPID(dist);
 
 	while (1) {
+		l_pos = l_position;
+		r_pos = r_position;
 
-		turnGyro(0);
+
+
+//		turnGyro(0);
 //		searchForward();
 
 

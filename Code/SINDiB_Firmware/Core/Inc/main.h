@@ -43,7 +43,6 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
@@ -145,10 +144,16 @@ void Error_Handler(void);
 #define RPWMB_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+#define TIM13_IT_START HAL_TIM_Base_Start_IT(&htim13)
+#define TIM13_IT_STOP  HAL_TIM_Base_Stop_IT(&htim13)
+#define TIM14_IT_START HAL_TIM_Base_Start_IT(&htim14)
+#define TIM14_IT_STOP HAL_TIM_Base_Stop_IT(&htim14)
+
 // Define the I2C address of L3GD20HTR
 //#define GYRO_I2C_ADDRESS 0xD6 // Default address with R/W bit
 extern SPI_HandleTypeDef hspi1;
 
+extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim5;

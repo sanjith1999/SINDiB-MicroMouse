@@ -2,9 +2,11 @@
 #define INC_ENCODER_H_
 
 #include "main.h"
+#include "typedefs.h"
 
+#define _ENCODER_START (u32)u32_max/2
 #define l_position TIM2-> CNT
-#define r_position TIM5-> CNT
+#define r_position u32_max-TIM5-> CNT
 
 void encoderInit(void);
 void encoderUpdate(void);

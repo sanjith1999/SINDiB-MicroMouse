@@ -1,6 +1,2 @@
-../Libs/Src/delay.c:24:5:micros	1
-../Libs/Src/delay.c:30:5:millis	1
-../Libs/Src/delay.c:35:6:delay_ms	2
-../Libs/Src/delay.c:41:6:delay_us	2
-../Libs/Src/delay.c:47:6:elapseMicros	2
-../Libs/Src/delay.c:53:6:elapseMillis	2
+../Libs/Src/delay.c:3:6:delay_us	2
+../Libs/Src/delay.c:10:6:delay_ms	2

@@ -16,37 +16,35 @@ bool F = false;
 /*read IR sensors*/
 void readSensor(void)
 {
-	u32 curt;
-	
+	__HAL_TIM_SET_COUNTER(&htim1,0);
 	//read DC value	
 	LFSensor = read_LF_Sensor;	
 	RFSensor = read_RF_Sensor;	
 	DLSensor = read_DL_Sensor;
 	DRSensor = read_DR_Sensor;	
 	
-	curt = micros();
 	
     //left front sensor
 	LF_EM_ON;
-	elapseMicros(60,curt);
 	LFSensor = read_LF_Sensor - LFSensor;
+	while(__HAL_TIM_GET_COUNTER(&htim1)<60);
 	LF_EM_OFF;
 	if(LFSensor < 0)//error check
 		LFSensor = 0;
- 	elapseMicros(140,curt);
+	while(__HAL_TIM_GET_COUNTER(&htim1)<140);
 
 	//right front sensor
 	RF_EM_ON;
-	elapseMicros(200,curt);	
 	RFSensor = read_RF_Sensor - RFSensor;
+	while(__HAL_TIM_GET_COUNTER(&htim1)<200);
 	RF_EM_OFF;
 	if(RFSensor < 0)
 		RFSensor = 0;
- 	elapseMicros(280,curt);
+	while(__HAL_TIM_GET_COUNTER(&htim1)<280);
 
     //diagonal sensors
 	SIDE_EM_ON;
-	elapseMicros(340,curt);	
+	while(__HAL_TIM_GET_COUNTER(&htim1)<340);
 	DLSensor = read_DL_Sensor - DLSensor;
 	DRSensor = read_DR_Sensor - DRSensor;
     SIDE_EM_OFF;
@@ -54,6 +52,7 @@ void readSensor(void)
 		DLSensor = 0;
 	if(DRSensor < 0)
 		DRSensor = 0;
+	// while(__HAL_TIM_GET_COUNTER(&htim1)<500);
 	
 	readVolMeter();
 	
@@ -62,19 +61,19 @@ void readSensor(void)
 	DLSensor = DLSensor*reflectionRate/1000;
 	DRSensor = DRSensor*reflectionRate/1000;
 	
-	// delay_us(80);
-	// elapseMicros(500,curt);
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-
-  if (htim == &htim13){
-		L3GD20_loop();
-  }
   if (htim == &htim14 )
   {
     readSensor();
+	HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
+  }
+  if (htim == &htim13)
+  {
+	HAL_GPIO_TogglePin(LED2_GPIO_Port,LED2_Pin);
+	L3GD20_loop();
   }
 }
 

@@ -116,9 +116,6 @@ void straightCountsPID(int count)
 			r_dist = max_limit + r_start - r_position;
 		}
 
-		pos_l = l_position;
-		pos_r = r_position;
-
 		error = l_dist - r_dist;
 		I = I + error;
 
@@ -314,4 +311,90 @@ void turnGyro(float angle)
 		setLeftWheel(correction);
 		setRightWheel(-correction);
 	}
+}
+
+// TURN USING GYRO
+void turnLeftGyro(float angle)
+{
+	TIM13_IT_START;
+	Angle_Z = 0;
+
+	uint16_t rmp = 1000;
+	l_start = l_position;
+	r_start = r_position;
+
+	cnt = 0;
+	run_speed_l = 0;
+	run_speed_r = 0;
+
+	bool thres = true;
+
+	while (1)
+	{
+
+		if (thres && (Angle_Z < angle - 5.0))
+		{
+
+			if (l_position <= l_start)
+			{
+				l_dist = l_start - l_position;
+			}
+			else
+			{
+				l_dist = max_limit + l_start - l_position;
+			}
+			if (r_position <= r_start)
+			{
+				r_dist = r_start - r_position;
+			}
+			else
+			{
+				r_dist = max_limit + r_start - r_position;
+			}
+
+			error = l_dist - r_dist;
+			I = I + error;
+
+			correction = (float)(error * StKp + I * StKi + (error - lastErr) * StKd) / 50.0;
+			lastErr = error;
+
+			if (cnt < rmp)
+			{
+				run_speed_l += base_speed_l / (float)rmp;
+				run_speed_r += base_speed_r / (float)rmp;
+				cnt += 1;
+			}
+			else
+			{
+				run_speed_l = base_speed_l;
+				run_speed_r = base_speed_r;
+			}
+
+			setLeftWheel(-run_speed_l + correction);
+			setRightWheel(run_speed_r + correction);
+		}
+		else
+		{
+			thres = false;
+			if (lastErr < -0.01 && lastErr > 0.01)
+			{
+				error = Angle_Z - angle;
+				I = I + error;
+
+				correction = (float)(error * StKp + I * StKi + (error - lastErr) * StKd) / 20.0;
+				correction = (correction > .2) ? .2 : correction;
+				lastErr = error;
+
+				setLeftWheel(correction);
+				setRightWheel(-correction);
+			}
+			else
+			{
+				setLeftWheel(0);
+				setRightWheel(0);
+				break;
+			}
+		}
+	}
+	TIM13_IT_STOP;
 }
