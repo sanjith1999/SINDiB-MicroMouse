@@ -50,6 +50,7 @@ Program/Src/sysModes.o: ../Program/Src/sysModes.cpp \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/adc.h \
+ D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/floodfill.hpp \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sysModes.h:
@@ -104,5 +105,6 @@ D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fa
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/adc.h:
+D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/floodfill.hpp:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h:

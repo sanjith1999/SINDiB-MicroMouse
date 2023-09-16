@@ -89,9 +89,6 @@ void readVolMeter(void)
 
 
 
-
-
-
 bool irBlink() {
 	static uint32_t t3 = 76;
 	if (LFSensor < t3 && RFSensor < t3) {

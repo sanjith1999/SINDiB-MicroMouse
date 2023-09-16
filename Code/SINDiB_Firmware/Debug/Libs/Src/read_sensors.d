@@ -49,6 +49,7 @@ Libs/Src/read_sensors.o: ../Libs/Src/read_sensors.c \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h \
+ D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/adc.h
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
@@ -102,5 +103,6 @@ D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fl
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h:
+D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/adc.h:

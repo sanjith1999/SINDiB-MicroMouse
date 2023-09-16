@@ -133,7 +133,6 @@ int main(void)
   L3GD20_Init();
   ITM_Port32(31) = 2;
   HAL_TIM_Base_Start(&htim1);
-	HAL_TIM_PWM_Start(&htim9, TIM_CHANNEL_1); // LPWMA
   TIM14_IT_START;
 
   cppmain();
@@ -593,7 +592,7 @@ static void MX_TIM9_Init(void)
 
   /* USER CODE END TIM9_Init 1 */
   htim9.Instance = TIM9;
-  htim9.Init.Prescaler = 0;
+  htim9.Init.Prescaler = 49;
   htim9.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim9.Init.Period = 1000;
   htim9.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

@@ -35,23 +35,16 @@ int fastForward() {
 			char direction = toMove(XY, XY_prev, orient);
 
 			if (direction == 'L') {
-				straightCountsPID(50);
-				turnGyroLR(90);
+				cellTurnLeft();
 				orient = orientation(orient, direction);
-				straightCountsPID(50);
 			} else if (direction == 'R') {
-				straightCountsPID(50);
-				turnGyroLR(-90);
+				cellTurnRight();
 				orient = orientation(orient, direction);
-				straightCountsPID(50);
 			} else if (direction == 'B') {
-				turnGyroLR(90);
+				cellTurnBack();
 				orient = orientation(orient, direction);
-				turnGyroLR(90);
-				orient = orientation(orient, direction);
-				straightCountsPID(100);
 			} else if (direction == 'F') {
-				straightCountsPID(100);
+				moveStraight(14.2);
 			}
 
 			XY_prev = XY;
@@ -78,23 +71,16 @@ int fastBackward() {
 			char direction = toMoveBack(XY, XY_prev, orient);
 
 			if (direction == 'L') {
-				straightCountsPID(50);
-				turnGyroLR(90);
+				cellTurnLeft();
 				orient = orientation(orient, direction);
-				straightCountsPID(50);
 			} else if (direction == 'R') {
-				straightCountsPID(50);
-				turnGyroLR(-90);
+				cellTurnRight();
 				orient = orientation(orient, direction);
-				straightCountsPID(50);
 			} else if (direction == 'B') {
-				turnGyroLR(90);
+				cellTurnBack();
 				orient = orientation(orient, direction);
-				turnGyroLR(90);
-				orient = orientation(orient, direction);
-				straightCountsPID(100);
 			} else if (direction == 'F') {
-				straightCountsPID(100);
+				moveStraight(14.2);
 			}
 
 			XY_prev = XY;

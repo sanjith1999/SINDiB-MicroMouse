@@ -50,7 +50,8 @@ Libs/Src/L3GD20.o: ../Libs/Src/L3GD20.c ../Core/Inc/main.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/adc.h \
  D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h \
- D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h
+ D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h \
+ D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -104,3 +105,4 @@ D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/adc.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h:
 D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h:
+D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h:
