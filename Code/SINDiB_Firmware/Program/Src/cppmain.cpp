@@ -26,11 +26,12 @@ void cppmain(void) {
 	ALL_LED_ON;
 	HAL_Delay(1000);
 	ALL_LED_OFF;
-	ssd1306_Fill(Black);
-	ssd1306_SetCursor(2, 2);
-	
-    ssd1306_WriteString("INIT...!!!", Font_6x8, White);
-	ssd1306_UpdateScreen();
+	HAL_Delay(1000);
+
+	clearScreen();
+	printString_font_6x8("Hi...", 2, 2);
+	printInt_font_6x8(7, 2, 10);
+	printFloat_font_6x8(7.57, 2, 18);
 
 //	straightCountsPID(dist);
 
@@ -38,14 +39,30 @@ void cppmain(void) {
 	
 		l_pos = l_position;
 		r_pos = r_position;
+		clearScreen();
+		printInt_font_6x8(LFSensor, 80, 10);
+		printInt_font_6x8(RFSensor, 2, 10);
+		printInt_font_6x8(DLSensor, 80, 24);
+		printInt_font_6x8(DRSensor, 2, 24);
+		HAL_Delay(500);
 		
-		HAL_Delay(2000);
-		straightCountsPID(176);
-		HAL_Delay(1000);
-		turnGyroLR(90);
-		HAL_Delay(1000);
-		straightCountsPID(176);
-		HAL_Delay(2000);
+
+	    for(int x=100; x<300; x=x+1)
+	    {
+	    //   __HAL_TIM_SET_AUTORELOAD(&htim9, x*2);
+	      __HAL_TIM_SET_COMPARE(&htim9,TIM_CHANNEL_1, x);
+	      HAL_Delay(100);
+	    }
+
+	    AlignFrontRotate(500);
+
+//		HAL_Delay(2000);
+//		straightCountsPID(176);
+//		HAL_Delay(1000);
+//		turnGyroLR(90);
+//		HAL_Delay(1000);
+//		straightCountsPID(176);
+//		HAL_Delay(2000);
 
 
 

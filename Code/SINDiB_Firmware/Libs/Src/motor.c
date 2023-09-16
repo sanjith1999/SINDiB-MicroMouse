@@ -1,8 +1,9 @@
 #include "motor.h"
 #include "cppmain.h"
 #include "L3GD20.h"
+#include "read_sensors.h"
 
-int max_limit = 65534;
+int max_limit = 4095;
 float base_speed_l = 0.2;
 float base_speed_r = 0.2;
 const float StKp = 1.0;
@@ -12,12 +13,20 @@ const float RTKp = 1.0;
 const float RTKd = 0.6;
 const float RTKi = 0.1;
 
+const float AlKp = 1.0;
+const float AlKd = 0.0;
+const float AlKi = 0.0;
+
+const float Al1Kp = 1.0;
+const float Al1Kd = 0.0;
+const float Al1Ki = 0.0;
+
 int l_start, r_start;
 int l_dist, r_dist;
-int error, lastErr;
-int I;
+int error, lastErr, error1, lastErr1;
+int I,I1;
 int cnt = 0;
-float correction = 0;
+float correction = 0, correction1 = 0;
 float run_speed_l;
 float run_speed_r;
 
@@ -174,4 +183,29 @@ void turnGyroLR(float angle)
 	}
 	TIM13_IT_STOP;
 	LED6_OFF;
+}
+
+
+void AlignFrontRotate(float distance)
+{
+
+	while (abs(correction)>2)
+	{
+
+		error = LFSensor - RFSensor;
+		I = I + error;
+
+		correction = (float)(error * AlKp + I * Al1Ki + (error - lastErr) * AlKd)/20;
+		lastErr = error;
+
+		error1 = distance - (LFSensor + RFSensor)/2;
+		I1 = I1 + error1;
+
+		correction1 = (float)(error1 * Al1Kp + I1* Al1Ki + (error1 - lastErr1) * Al1Kd) / 50.0;
+		lastErr1 = error1;
+
+		setLeftWheel(correction+correction1);
+		setRightWheel(-correction+correction1);
+	}
+
 }

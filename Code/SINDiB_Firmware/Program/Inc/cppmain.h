@@ -12,9 +12,10 @@ extern "C" {
 #include <string.h>
 #include "stm32f4xx_hal.h"
 #include "adc.h"
-#include"led.h"
+#include "led.h"
 #include "motor.h"
 #include "encoder.h"
+#include "display.h"
 #include "L3GD20.h"
 #include "sysModes.h"
 #include "searchModes.h"

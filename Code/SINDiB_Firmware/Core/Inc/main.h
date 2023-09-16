@@ -70,8 +70,6 @@ void Error_Handler(void);
 #define D_C_GPIO_Port GPIOC
 #define VOL_METER_Pin GPIO_PIN_3
 #define VOL_METER_GPIO_Port GPIOC
-#define BUZZER_Pin GPIO_PIN_2
-#define BUZZER_GPIO_Port GPIOA
 #define DRDY_Pin GPIO_PIN_3
 #define DRDY_GPIO_Port GPIOA
 #define RF_RECEIVER_Pin GPIO_PIN_4
@@ -157,6 +155,7 @@ extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim5;
+extern TIM_HandleTypeDef htim9;
 extern TIM_HandleTypeDef htim14;
 extern TIM_HandleTypeDef htim13;
 

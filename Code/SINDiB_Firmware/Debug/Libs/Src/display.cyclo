@@ -1,0 +1,4 @@
+../Libs/Src/display.c:3:6:clearScreen	1
+../Libs/Src/display.c:7:6:printString_font_6x8	1
+../Libs/Src/display.c:14:6:printInt_font_6x8	1
+../Libs/Src/display.c:24:6:printFloat_font_6x8	1

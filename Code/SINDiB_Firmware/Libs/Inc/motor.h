@@ -21,6 +21,7 @@ void setWheels(float l_speed, float r_speed);
 void straightCountsPID(int count);
 void keepItPointed(float angle);
 void turnGyroLR(float angle);
+void AlignFrontRotate(float distance);
 
 //extern uint16_t pos_l, pos_r;
 

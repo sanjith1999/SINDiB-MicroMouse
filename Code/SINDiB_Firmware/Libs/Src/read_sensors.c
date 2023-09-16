@@ -27,24 +27,24 @@ void readSensor(void)
     //left front sensor
 	LF_EM_ON;
 	LFSensor = read_LF_Sensor - LFSensor;
-	while(__HAL_TIM_GET_COUNTER(&htim1)<60);
+	while(__HAL_TIM_GET_COUNTER(&htim1)<120);
 	LF_EM_OFF;
 	if(LFSensor < 0)//error check
 		LFSensor = 0;
-	while(__HAL_TIM_GET_COUNTER(&htim1)<140);
+	while(__HAL_TIM_GET_COUNTER(&htim1)<280);
 
 	//right front sensor
 	RF_EM_ON;
 	RFSensor = read_RF_Sensor - RFSensor;
-	while(__HAL_TIM_GET_COUNTER(&htim1)<200);
+	while(__HAL_TIM_GET_COUNTER(&htim1)<400);
 	RF_EM_OFF;
 	if(RFSensor < 0)
 		RFSensor = 0;
-	while(__HAL_TIM_GET_COUNTER(&htim1)<280);
+	while(__HAL_TIM_GET_COUNTER(&htim1)<560);
 
     //diagonal sensors
 	SIDE_EM_ON;
-	while(__HAL_TIM_GET_COUNTER(&htim1)<340);
+	while(__HAL_TIM_GET_COUNTER(&htim1)<680);
 	DLSensor = read_DL_Sensor - DLSensor;
 	DRSensor = read_DR_Sensor - DRSensor;
     SIDE_EM_OFF;
