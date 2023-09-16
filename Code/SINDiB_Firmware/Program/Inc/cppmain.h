@@ -17,10 +17,12 @@ extern "C" {
 #include "encoder.h"
 #include "display.h"
 #include "L3GD20.h"
+
 #include "sysModes.h"
 #include "searchModes.h"
 #include "fastModes.h"
 #include "read_sensors.h"
+
 #include "typedefs.h"
 #include "ssd1306.h"
 #include "buzzer.h"

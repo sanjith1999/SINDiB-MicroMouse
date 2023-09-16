@@ -90,65 +90,66 @@ void readVolMeter(void)
 
 
 bool irBlink() {
-	static uint32_t t3 = 76;
-	if (LFSensor < t3 && RFSensor < t3) {
+	static uint32_t t3 = 1000;
+	if (LFSensor > t3 || RFSensor > t3) {
 			return true;
 		}
 	return false;
 }
 
 bool rightIrBlink(){
-	static uint32_t t2 = 32;
-	if (DRSensor < t2) {
+	static uint32_t t2 = 1000;
+	if (DRSensor > t2) {
 			return true;
 		}
 	return false;
 }
 
 bool leftIrBlink(){
-	static uint32_t t1 = 32;
-	if (DLSensor < t1) {
+	static uint32_t t1 = 1000;
+	if (DLSensor > t1) {
 			return true;
 		}
 	return false;
 }
 
 void getSensorReadings() {
-	static uint32_t t1 = 24;
-	static uint32_t t2 = 32;
-	static uint32_t t3 = 76;
+	static uint32_t t1 = 150;
+	static uint32_t t2 = 100;
 
-	if (DLSensor > t1 && DRSensor > t2 && DRSensor < t3 && RFSensor < t3) {
-		F = true;
-		R = false;
-		L = false;
-	} else if (DLSensor > t1 && DRSensor < t2 && DRSensor > t3) {
-		F = false;
-		R = true;
-		L = false;
-	} else if (DLSensor < t1 && DRSensor > t2 && RFSensor > t3) {
-		F = false;
-		R = false;
-		L = true;
-	} else if (DLSensor > t1 && DRSensor < t2 && DRSensor < t3 && RFSensor < t3) {
+	if (DLSensor > t1 && DRSensor > t1 && DRSensor > t1 && RFSensor > t1){
 		F = true;
 		R = true;
-		L = false;
-	} else if (DLSensor < t1 && DRSensor > t2 && DRSensor < t3 && RFSensor < t3) {
-		F = true;
-		R = false;
 		L = true;
-	} else if (DLSensor < t1 && DRSensor < t2 && DRSensor > t3 && RFSensor > t3) {
+	} else if (DLSensor > t1 && DRSensor > t1){
 		F = false;
 		R = true;
 		L = true;
-	} else if (DLSensor < t1 && DRSensor < t2 && LFSensor < t3 && RFSensor < t3) {
+	} else if (LFSensor > t1 && DLSensor > t1){
+		F = true;
+		R = false;
+		L = true;
+	} else if (RFSensor > t1 && DRSensor > t1){
 		F = true;
 		R = true;
+		L = false;
+	} else if (DLSensor > t1){
+		F = false;
+		R = false;
 		L = true;
-	} else if (DLSensor > t1 && DRSensor > t2 && DRSensor > t3 && RFSensor > t3) {
+	} else if (DRSensor > t1){
+		F = false;
+		R = true;
+		L = false;
+	} else if (RFSensor > t2 || LFSensor > t2){
+		F = true;
+		R = false;
+		L = false;
+	} else {
 		F = false;
 		R = false;
 		L = false;
 	}
+
+
 }

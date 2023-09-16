@@ -16,9 +16,10 @@ int idle() {
 	while (1) {
 		if (buttonPress) {
 			buttonPress = false;
-			return 1;
+			break;
 		}
 	}
+	return 1;
 }
 
 int speedAdjust() {

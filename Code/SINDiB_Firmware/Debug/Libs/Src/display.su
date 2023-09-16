@@ -1,4 +1,5 @@
 ../Libs/Src/display.c:3:6:clearScreen	8	static
 ../Libs/Src/display.c:7:6:printString_font_6x8	24	static
-../Libs/Src/display.c:14:6:printInt_font_6x8	88	static
-../Libs/Src/display.c:24:6:printFloat_font_6x8	96	static
+../Libs/Src/display.c:14:6:printChr_font_6x8	32	static
+../Libs/Src/display.c:27:6:printInt_font_6x8	88	static
+../Libs/Src/display.c:37:6:printFloat_font_6x8	96	static

@@ -214,10 +214,12 @@ void AlignFrontRotate(float distance)
 	STOP_ROBOT;
 }
 
+float ang = 85;
+
 void cellTurnLeft(){
 	moveStraight(14.2);
 	HAL_Delay(1000);
-	turnGyroLR(90);
+	turnGyroLR(ang);
 	HAL_Delay(1000);
 	moveStraight(1.8);
 }
@@ -225,15 +227,17 @@ void cellTurnLeft(){
 void cellTurnRight(){
 	moveStraight(14.2);
 	HAL_Delay(1000);
-	turnGyroLR(-90);
+	turnGyroLR(-ang);
 	HAL_Delay(1000);
 	moveStraight(1.8);
 }
 
 void cellTurnBack(){
-	turnGyroLR(90);
+	moveStraight(14.2);
 	HAL_Delay(1000);
-	turnGyroLR(90);
+	turnGyroLR(ang);
 	HAL_Delay(1000);
-	moveStraight(6.1);
+	turnGyroLR(ang);
+	HAL_Delay(1000);
+	moveStraight(1.8);
 }

@@ -5,11 +5,11 @@
  *      Author: SAMSUNG
  */
 
-#ifndef INC_FLOODFILL_HPP_
-#define INC_FLOODFILL_HPP_
+#ifndef INC_FLOODFILL_H_
+#define INC_FLOODFILL_H_
 
-#define ROWS 16
-#define COLUMNS 16
+#define ROWS 5
+#define COLUMNS 5
 
 extern int flood[ROWS][COLUMNS];
 extern int backFlood[ROWS][COLUMNS];
@@ -28,7 +28,7 @@ char toMoveBack(struct coordinate p, struct coordinate prevPos, int orient);
 void backtrack();
 int orientation(int orient, char turning);
 struct coordinate updateCoordinates(struct coordinate coordi, int orient);
-void rotateFloodCounterClockwise();
+void rotateFloodCounterClockwise(void);
 
 
-#endif /* INC_FLOODFILL_HPP_ */
+#endif /* INC_FLOODFILL_H_ */

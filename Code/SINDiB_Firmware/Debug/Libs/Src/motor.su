@@ -8,6 +8,6 @@
 ../Libs/Src/motor.c:123:6:keepItPointed	16	static
 ../Libs/Src/motor.c:142:6:turnGyroLR	24	static
 ../Libs/Src/motor.c:193:6:AlignFrontRotate	16	static
-../Libs/Src/motor.c:217:6:cellTurnLeft	8	static
-../Libs/Src/motor.c:225:6:cellTurnRight	8	static
-../Libs/Src/motor.c:233:6:cellTurnBack	8	static
+../Libs/Src/motor.c:219:6:cellTurnLeft	8	static
+../Libs/Src/motor.c:227:6:cellTurnRight	8	static
+../Libs/Src/motor.c:235:6:cellTurnBack	8	static

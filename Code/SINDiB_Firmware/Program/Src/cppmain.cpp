@@ -34,23 +34,23 @@ void cppmain(void) {
 	
 		l_pos = l_position;
 		r_pos = r_position;
-		clearScreen();
-		printInt_font_6x8(LFSensor, 80, 10);
-		printInt_font_6x8(RFSensor, 2, 10);
-		printInt_font_6x8(DLSensor, 80, 24);
-		printInt_font_6x8(DRSensor, 2, 24);
-		HAL_Delay(500);
+//		clearScreen();
+//		printInt_font_6x8(LFSensor, 80, 10);
+//		printInt_font_6x8(RFSensor, 2, 10);
+//		printInt_font_6x8(DLSensor, 80, 24);
+//		printInt_font_6x8(DRSensor, 2, 24);
+//		HAL_Delay(500);
 
 		// HAL_Delay(2000);
-		moveStraight(14.2);
-		HAL_Delay(1000);
-		turnGyroLR(90);
-		HAL_Delay(1000);
-		moveStraight(1.8);
+//		moveStraight(14.2);
+//		HAL_Delay(1000);
+//		turnGyroLR(90);
+//		HAL_Delay(1000);
+//		moveStraight(1.8);
 		// HAL_Delay(100);
-		
-		break;
 
+
+		mouseState = searchForward();
 
 //		switch (mouseState) {
 //

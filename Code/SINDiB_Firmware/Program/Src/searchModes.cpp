@@ -1,13 +1,14 @@
+#include <floodfill.h>
 #include "main.h"
 #include "motor.h"
 #include "read_sensors.h"
-#include "floodfill.hpp"
 #include "cppmain.h"
+#include "searchModes.h"
 
 static coordinate XY; // Declare a coordinate struct
 static coordinate XY_prev; // Declare a coordinate struct
 
-static int orient = 0;
+static int orient = 2;
 
 
 //     orients :
@@ -37,7 +38,7 @@ int searchForward() {
 		rotateFloodCounterClockwise();
 	    }
 
-	XY.x = 0;
+	XY.x = 1;
 	XY.y = 0;
 
 	XY_prev.x = 0;
@@ -45,13 +46,27 @@ int searchForward() {
 
 	while (1) {
 
+
+		clearScreen();
+		printInt_font_6x8(LFSensor, 80, 10);
+		printInt_font_6x8(RFSensor, 2, 10);
+		printInt_font_6x8(DLSensor, 80, 24);
+		printInt_font_6x8(DRSensor, 2, 24);
 		getSensorReadings();
+
+		HAL_Delay(4000);
+
 		updateWalls(XY, orient, L, R, F);
 
 		if (flood[XY.x][XY.y] >= 1) //NotInCenter
 				{
 			floodFill(XY, XY_prev);
 			char direction = toMove(XY, XY_prev, orient);
+
+			clearScreen();
+			printChr_font_6x8(direction, 40, 16);
+
+			HAL_Delay(4000);
 
 			if (direction == 'L') {
 				cellTurnLeft();
@@ -63,7 +78,7 @@ int searchForward() {
 				cellTurnBack();
 				orient = orientation(orient, direction);
 			} else if (direction == 'F') {
-				moveStraight(14.2);
+				moveStraight(16);
 			}
 
 			XY_prev = XY;
@@ -101,7 +116,7 @@ int searchBackward() {
 				cellTurnBack();
 				orient = orientation(orient, direction);
 			} else if (direction == 'F') {
-				moveStraight(14.2);
+				moveStraight(16);
 			}
 
 			XY_prev = XY;

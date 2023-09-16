@@ -8,9 +8,9 @@
 #ifndef INC_SYSMODES_H_
 #define INC_SYSMODES_H_
 
+//#include <floodfill.h>
 #include "main.h"
-#include "floodfill.hpp"
-#include "motor.h"
+//#include "motor.h"
 #include "cppmain.h"
 #include "read_sensors.h"
 

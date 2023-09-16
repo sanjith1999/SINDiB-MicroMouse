@@ -4,4 +4,4 @@
 ../Libs/Src/read_sensors.c:92:6:irBlink	3
 ../Libs/Src/read_sensors.c:100:6:rightIrBlink	2
 ../Libs/Src/read_sensors.c:108:6:leftIrBlink	2
-../Libs/Src/read_sensors.c:116:6:getSensorReadings	31
+../Libs/Src/read_sensors.c:116:6:getSensorReadings	15

@@ -1,6 +1,6 @@
+#include <floodfill.h>
 #include "main.h"
 #include "motor.h"
-#include "floodfill.hpp"
 
 static coordinate XY; // Declare a coordinate struct
 static coordinate XY_prev; // Declare a coordinate struct
@@ -44,7 +44,7 @@ int fastForward() {
 				cellTurnBack();
 				orient = orientation(orient, direction);
 			} else if (direction == 'F') {
-				moveStraight(14.2);
+				moveStraight(16);
 			}
 
 			XY_prev = XY;
@@ -80,7 +80,7 @@ int fastBackward() {
 				cellTurnBack();
 				orient = orientation(orient, direction);
 			} else if (direction == 'F') {
-				moveStraight(14.2);
+				moveStraight(16);
 			}
 
 			XY_prev = XY;

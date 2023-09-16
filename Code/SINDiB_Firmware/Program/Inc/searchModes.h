@@ -8,6 +8,7 @@
 #ifndef INC_SEARCHMODES_H_
 #define INC_SEARCHMODES_H_
 
+#include <floodfill.h>
 #include "main.h"
 
 int searchIdle();
