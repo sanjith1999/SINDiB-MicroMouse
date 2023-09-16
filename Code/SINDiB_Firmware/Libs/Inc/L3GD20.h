@@ -6,7 +6,7 @@
 #endif
 
 
-
+#include "typedefs.h"
 
  void L3GD20_Init(void);
 

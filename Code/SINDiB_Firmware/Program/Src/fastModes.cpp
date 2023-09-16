@@ -36,18 +36,18 @@ int fastForward() {
 
 			if (direction == 'L') {
 				straightCountsPID(50);
-				turnLeft(68);
+				turnGyroLR(90);
 				orient = orientation(orient, direction);
 				straightCountsPID(50);
 			} else if (direction == 'R') {
 				straightCountsPID(50);
-				turnRight(68);
+				turnGyroLR(-90);
 				orient = orientation(orient, direction);
 				straightCountsPID(50);
 			} else if (direction == 'B') {
-				turnLeft(68);
+				turnGyroLR(90);
 				orient = orientation(orient, direction);
-				turnLeft(68);
+				turnGyroLR(90);
 				orient = orientation(orient, direction);
 				straightCountsPID(100);
 			} else if (direction == 'F') {
@@ -79,18 +79,18 @@ int fastBackward() {
 
 			if (direction == 'L') {
 				straightCountsPID(50);
-				turnLeft(68);
+				turnGyroLR(90);
 				orient = orientation(orient, direction);
 				straightCountsPID(50);
 			} else if (direction == 'R') {
 				straightCountsPID(50);
-				turnRight(68);
+				turnGyroLR(-90);
 				orient = orientation(orient, direction);
 				straightCountsPID(50);
 			} else if (direction == 'B') {
-				turnLeft(68);
+				turnGyroLR(90);
 				orient = orientation(orient, direction);
-				turnLeft(68);
+				turnGyroLR(90);
 				orient = orientation(orient, direction);
 				straightCountsPID(100);
 			} else if (direction == 'F') {

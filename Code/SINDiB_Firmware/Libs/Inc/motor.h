@@ -9,17 +9,18 @@
 #define INC_MOTOR_H_
 
 #include "main.h"
+#include "stdlib.h"
+
+#define STOP_ROBOT setWheels(0,0)
+
 
 void motorInit(void);
 void setLeftWheel(float l_speed);
 void setRightWheel(float r_speed);
 void setWheels(float l_speed, float r_speed);
-bool straightCounts(int count);
-void goLong(int count);
 void straightCountsPID(int count);
-void turnLeft(int count);
-void turnRight(int count);
-void turnGyro(float angle);
+void keepItPointed(float angle);
+void turnGyroLR(float angle);
 
 //extern uint16_t pos_l, pos_r;
 

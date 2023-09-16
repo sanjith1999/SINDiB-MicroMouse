@@ -9,6 +9,7 @@ extern "C" {
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 #include "stm32f4xx_hal.h"
 #include "adc.h"
 #include"led.h"
@@ -20,8 +21,7 @@ extern "C" {
 #include "fastModes.h"
 #include "read_sensors.h"
 #include "typedefs.h"
-#include "delay.h"
-
+#include "ssd1306.h"
 
 extern bool buttonPress;
 

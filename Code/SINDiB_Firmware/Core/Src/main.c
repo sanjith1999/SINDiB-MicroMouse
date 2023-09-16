@@ -125,10 +125,13 @@ int main(void)
   MX_TIM13_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+
+  HAL_Delay(2000);
   L3GD20_Init();
   ITM_Port32(31) = 2;
   HAL_TIM_Base_Start(&htim1);
   TIM14_IT_START;
+
   cppmain();
 
   /* USER CODE END 2 */

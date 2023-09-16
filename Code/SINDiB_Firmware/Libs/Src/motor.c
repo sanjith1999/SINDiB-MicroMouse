@@ -8,6 +8,9 @@ float base_speed_r = 0.2;
 const float StKp = 1.0;
 const float StKi = 0.00;
 const float StKd = 0.00;
+const float RTKp = 1.0;
+const float RTKd = 0.6;
+const float RTKi = 0.1;
 
 int l_start, r_start;
 int l_dist, r_dist;
@@ -17,6 +20,14 @@ int cnt = 0;
 float correction = 0;
 float run_speed_l;
 float run_speed_r;
+
+float min(float a, float b){
+	return (a>b)? b:a;
+}
+float max(float a, float b){
+	return (a>b)? a:b;
+}
+
 
 // INITIALIZATIONS
 void motorInit(void)
@@ -33,6 +44,8 @@ void motorInit(void)
 void setLeftWheel(float l_speed)
 {
 	uint16_t l_pwma, l_pwmb;
+
+	l_speed = (l_speed == 0)? 0:((l_speed>0) ? min(l_speed,base_speed_l):max(l_speed,-base_speed_l));
 	l_pwma = (l_speed >= 0) ? l_speed * max_limit : 0;
 	l_pwmb = (l_speed < 0) ? (-l_speed) * max_limit : 0;
 
@@ -44,6 +57,7 @@ void setRightWheel(float r_speed)
 {
 	uint16_t r_pwma, r_pwmb;
 
+	r_speed = (r_speed==0)? 0: ((r_speed>0) ? min(r_speed,base_speed_r):max(r_speed,-base_speed_r));
 	r_pwma = (r_speed >= 0) ? r_speed * max_limit : 0;
 	r_pwmb = (r_speed < 0) ? (-r_speed) * max_limit : 0;
 
@@ -57,39 +71,7 @@ void setWheels(float l_speed, float r_speed)
 	setRightWheel(r_speed);
 }
 
-bool straightCounts(int count)
-{
-	uint16_t l_temp, r_temp;
-	bool l_away = true, r_away = true;
 
-	l_temp = l_position;
-	r_temp = r_position;
-
-	while (l_away || r_away)
-	{
-		if (l_position - l_temp < count)
-			setLeftWheel(base_speed_l);
-		else
-		{
-			setLeftWheel(0);
-			l_away = false;
-		}
-		if (r_position - r_temp < count)
-			setRightWheel(base_speed_r);
-		else
-		{
-			setRightWheel(0);
-			r_away = false;
-		}
-	}
-	return true;
-}
-
-void goLong(int count)
-{
-	for (int i = 0; i < count / 100; i++)
-		straightCounts(100);
-}
 
 void straightCountsPID(int count)
 {
@@ -99,204 +81,33 @@ void straightCountsPID(int count)
 
 	while (1)
 	{
-		if (l_position >= l_start)
-		{
-			l_dist = l_position - l_start;
-		}
-		else
-		{
-			l_dist = max_limit + l_position - l_start;
-		}
-		if (r_position <= r_start)
-		{
-			r_dist = r_start - r_position;
-		}
-		else
-		{
-			r_dist = max_limit + r_start - r_position;
-		}
+		l_dist =  l_position - l_start;
+		r_dist =  r_position - r_start ;
 
 		error = l_dist - r_dist;
 		I = I + error;
 
-		correction =
-			(float)(error * StKp + I * StKi + (error - lastErr) * StKd) / 50.0;
+		correction = (float)(error * StKp + I * StKi + (error - lastErr) * StKd) / 50.0;
 		lastErr = error;
 
 		if (l_dist < count && r_dist < count)
 		{
 			setLeftWheel(base_speed_l - correction);
 			setRightWheel(base_speed_r + correction);
-			//			setLeftWheel(base_speed_l);
-			//			setRightWheel(base_speed_r);
+
 		}
 		else
 		{
-			setLeftWheel(0);
-			setRightWheel(0);
+			STOP_ROBOT;
 			break;
 		}
 	}
 	//	return true;
 }
 
-void turnLeft(int count)
+
+void keepItPointed(float angle)
 {
-
-	uint16_t rmp = 1000;
-	l_start = l_position;
-	r_start = r_position;
-
-	cnt = 0;
-	run_speed_l = 0;
-	run_speed_r = 0;
-
-	while (1)
-	{
-
-		if (l_position <= l_start)
-		{
-			l_dist = l_start - l_position;
-		}
-		else
-		{
-			l_dist = max_limit + l_start - l_position;
-		}
-		if (r_position <= r_start)
-		{
-			r_dist = r_start - r_position;
-		}
-		else
-		{
-			r_dist = max_limit + r_start - r_position;
-		}
-
-		error = l_dist - r_dist;
-		I = I + error;
-
-		correction =
-			(float)(error * StKp + I * StKi + (error - lastErr) * StKd) / 50.0;
-		lastErr = error;
-
-		if (l_dist < count && r_dist < count)
-		{
-
-			if (cnt < rmp)
-			{
-				run_speed_l += base_speed_l / (float)rmp;
-				run_speed_r += base_speed_r / (float)rmp;
-				cnt += 1;
-			}
-			else
-			{
-				run_speed_l = base_speed_l;
-				run_speed_r = base_speed_r;
-			}
-
-			setLeftWheel(-run_speed_l + correction);
-			setRightWheel(run_speed_r + correction);
-		}
-		else
-		{
-			if (cnt > 0)
-			{
-				run_speed_l -= base_speed_l / (float)rmp;
-				run_speed_r -= base_speed_r / (float)rmp;
-				cnt -= 1;
-
-				setLeftWheel(-run_speed_l + correction);
-				setRightWheel(run_speed_r + correction);
-			}
-			else
-			{
-				setLeftWheel(0);
-				setRightWheel(0);
-				break;
-			}
-		}
-	}
-}
-
-void turnRight(int count)
-{
-
-	uint16_t rmp = 1000;
-	l_start = l_position;
-	r_start = r_position;
-
-	cnt = 0;
-	run_speed_l = 0;
-	run_speed_r = 0;
-
-	while (1)
-	{
-
-		if (l_position >= l_start)
-		{
-			l_dist = l_position - l_start;
-		}
-		else
-		{
-			l_dist = max_limit + l_position - l_start;
-		}
-		if (r_position >= r_start)
-		{
-			r_dist = r_position - r_start;
-		}
-		else
-		{
-			r_dist = max_limit + r_position - r_start;
-		}
-
-		error = l_dist - r_dist;
-		I = I + error;
-
-		correction =
-			(float)(error * StKp + I * StKi + (error - lastErr) * StKd) / 50.0;
-		lastErr = error;
-
-		if (l_dist < count && r_dist < count)
-		{
-
-			if (cnt < rmp)
-			{
-				run_speed_l += base_speed_l / (float)rmp;
-				run_speed_r += base_speed_r / (float)rmp;
-				cnt += 1;
-			}
-			else
-			{
-				run_speed_l = base_speed_l;
-				run_speed_r = base_speed_r;
-			}
-
-			setLeftWheel(run_speed_l - correction);
-			setRightWheel(-run_speed_r - correction);
-		}
-		else
-		{
-			if (cnt > 0)
-			{
-				run_speed_l -= base_speed_l / (float)rmp;
-				run_speed_r -= base_speed_r / (float)rmp;
-				cnt -= 1;
-
-				setLeftWheel(run_speed_l - correction);
-				setRightWheel(-run_speed_r - correction);
-			}
-			else
-			{
-				setLeftWheel(0);
-				setRightWheel(0);
-				break;
-			}
-		}
-	}
-}
-
-void turnGyro(float angle)
-{
-
 	while (1)
 	{
 
@@ -314,43 +125,22 @@ void turnGyro(float angle)
 }
 
 // TURN USING GYRO
-void turnLeftGyro(float angle)
+void turnGyroLR(float angle)
 {
+	bool thres = true;
 	TIM13_IT_START;
-	Angle_Z = 0;
+	LED6_ON;
 
-	uint16_t rmp = 1000;
+	Angle_Z = 0;
 	l_start = l_position;
 	r_start = r_position;
 
-	cnt = 0;
-	run_speed_l = 0;
-	run_speed_r = 0;
-
-	bool thres = true;
-
 	while (1)
 	{
-
-		if (thres && (Angle_Z < angle - 5.0))
+		if (thres && (abs(Angle_Z-angle) >  10.0))
 		{
-
-			if (l_position <= l_start)
-			{
-				l_dist = l_start - l_position;
-			}
-			else
-			{
-				l_dist = max_limit + l_start - l_position;
-			}
-			if (r_position <= r_start)
-			{
-				r_dist = r_start - r_position;
-			}
-			else
-			{
-				r_dist = max_limit + r_start - r_position;
-			}
+			l_dist = l_start - l_position;
+			r_dist = -r_start + r_position;
 
 			error = l_dist - r_dist;
 			I = I + error;
@@ -358,43 +148,30 @@ void turnLeftGyro(float angle)
 			correction = (float)(error * StKp + I * StKi + (error - lastErr) * StKd) / 50.0;
 			lastErr = error;
 
-			if (cnt < rmp)
-			{
-				run_speed_l += base_speed_l / (float)rmp;
-				run_speed_r += base_speed_r / (float)rmp;
-				cnt += 1;
-			}
-			else
-			{
-				run_speed_l = base_speed_l;
-				run_speed_r = base_speed_r;
-			}
-
-			setLeftWheel(-run_speed_l + correction);
-			setRightWheel(run_speed_r + correction);
+			setWheels(-(base_speed_l - correction), base_speed_r + correction );
 		}
 		else
 		{
 			thres = false;
-			if (lastErr < -0.01 && lastErr > 0.01)
+			correction = .002;
+			if (abs(correction)>.001 )
 			{
 				error = Angle_Z - angle;
 				I = I + error;
 
-				correction = (float)(error * StKp + I * StKi + (error - lastErr) * StKd) / 20.0;
-				correction = (correction > .2) ? .2 : correction;
+				correction = (float)(error * RTKp + I * RTKi + (error - lastErr) * RTKd) / 10;
+				correction = (correction > base_speed_l) ? .2 : base_speed_l;
 				lastErr = error;
 
-				setLeftWheel(correction);
-				setRightWheel(-correction);
+				setWheels(-correction, correction);
 			}
 			else
 			{
-				setLeftWheel(0);
-				setRightWheel(0);
+				STOP_ROBOT;
 				break;
 			}
 		}
 	}
 	TIM13_IT_STOP;
+	LED6_OFF;
 }

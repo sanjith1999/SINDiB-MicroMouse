@@ -3,7 +3,6 @@
  TEAM: SINDiB
  AUTHOR: BIYON
  */
-
 #include "cppmain.h"
 
 u32 i,r_pos,l_pos;
@@ -20,18 +19,33 @@ void cppmain(void) {
 	motorInit();
 	encoderInit();
 	resetEncoder();
+	ssd1306_Init();
 
 
 	int dist = 170;
 	ALL_LED_ON;
 	HAL_Delay(1000);
 	ALL_LED_OFF;
+	ssd1306_Fill(Black);
+	ssd1306_SetCursor(2, 2);
+	
+    ssd1306_WriteString("INIT...!!!", Font_6x8, White);
+	ssd1306_UpdateScreen();
 
 //	straightCountsPID(dist);
 
 	while (1) {
+	
 		l_pos = l_position;
 		r_pos = r_position;
+		
+		HAL_Delay(2000);
+		straightCountsPID(176);
+		HAL_Delay(1000);
+		turnGyroLR(90);
+		HAL_Delay(1000);
+		straightCountsPID(176);
+		HAL_Delay(2000);
 
 
 

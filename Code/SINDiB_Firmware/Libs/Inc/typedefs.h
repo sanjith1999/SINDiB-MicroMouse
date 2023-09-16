@@ -18,4 +18,28 @@ typedef enum adc_channels
 	BAT_VOL
 }adc_channels;
 
+
+// L3GD20.h
+typedef enum
+{
+	L3GD20_collect_calibration_samples,
+	L3GD20_process_calibration_samples,
+	L3GD20_calibrated,
+} L3GD20_caliStateType;
+
+// L3GD20.h
+typedef enum
+{
+	L3GD20_DATA_NOT_READY,
+	L3GD20_DATA_READY,
+} L3GD20_DataReadyFlagType;
+
+// L3GD20.h
+typedef enum
+{
+	L3GD20_fisrt,
+	L3GD20_second,
+	L3GD20_finaly
+} L3GD20_StateType;
+
 #endif /* INC_TYPEDEFS_H_ */

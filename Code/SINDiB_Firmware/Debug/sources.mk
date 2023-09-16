@@ -36,6 +36,7 @@ CPP_DEPS :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
+Drivers/SSD1306/Src \
 Drivers/STM32F4xx_HAL_Driver/Src \
 Libs/Src \
 Program/Src \
