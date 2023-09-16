@@ -18,7 +18,7 @@ void motorInit(void);
 void setLeftWheel(float l_speed);
 void setRightWheel(float r_speed);
 void setWheels(float l_speed, float r_speed);
-void straightCountsPID(int count);
+void moveStraight(float dist_cm);
 void keepItPointed(float angle);
 void turnGyroLR(float angle);
 void AlignFrontRotate(float distance);

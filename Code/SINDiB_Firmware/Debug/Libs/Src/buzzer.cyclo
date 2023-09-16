@@ -1,0 +1,2 @@
+../Libs/Src/buzzer.c:3:6:buzzerInit	1
+../Libs/Src/buzzer.c:8:6:setBuzPWM	1

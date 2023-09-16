@@ -1,0 +1,2 @@
+../Libs/Src/buzzer.c:3:6:buzzerInit	8	static
+../Libs/Src/buzzer.c:8:6:setBuzPWM	16	static

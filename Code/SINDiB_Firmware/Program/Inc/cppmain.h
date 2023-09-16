@@ -23,6 +23,7 @@ extern "C" {
 #include "read_sensors.h"
 #include "typedefs.h"
 #include "ssd1306.h"
+#include "buzzer.h"
 
 extern bool buttonPress;
 
