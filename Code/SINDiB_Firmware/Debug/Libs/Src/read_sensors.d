@@ -50,6 +50,7 @@ Libs/Src/read_sensors.o: ../Libs/Src/read_sensors.c \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/floodfill.h \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/fastModes.h \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/buzzer.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/melody.h \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/led.h \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/adc.h
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
@@ -104,5 +105,6 @@ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/searchModes.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/floodfill.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/fastModes.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/buzzer.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/melody.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/led.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/adc.h:

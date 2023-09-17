@@ -52,6 +52,7 @@ Core/Src/stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c ../Core/Inc/main.h \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/floodfill.h \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/fastModes.h \
  F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/buzzer.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/melody.h \
  ../Core/Inc/stm32f4xx_it.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -107,4 +108,5 @@ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/searchModes.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/floodfill.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/fastModes.h:
 F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/buzzer.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/melody.h:
 ../Core/Inc/stm32f4xx_it.h:

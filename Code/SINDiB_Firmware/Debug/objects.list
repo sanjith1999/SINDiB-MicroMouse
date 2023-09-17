@@ -33,6 +33,7 @@
 "./Libs/Src/buzzer.o"
 "./Libs/Src/display.o"
 "./Libs/Src/encoder.o"
+"./Libs/Src/melody.o"
 "./Libs/Src/motor.o"
 "./Libs/Src/read_sensors.o"
 "./Program/Src/cppmain.o"

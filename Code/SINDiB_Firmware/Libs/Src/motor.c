@@ -35,15 +35,6 @@ float correction = 0, correction1 = 0;
 float run_speed_l;
 float run_speed_r;
 
-float min(float a, float b)
-{
-	return (a > b) ? b : a;
-}
-float max(float a, float b)
-{
-	return (a > b) ? a : b;
-}
-
 // INITIALIZATIONS
 void motorInit(void)
 {

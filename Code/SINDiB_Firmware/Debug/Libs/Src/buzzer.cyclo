@@ -1,2 +1,3 @@
-../Libs/Src/buzzer.c:3:6:buzzerInit	1
-../Libs/Src/buzzer.c:8:6:setBuzPWM	1
+../Libs/Src/buzzer.c:4:6:buzzerInit	1
+../Libs/Src/buzzer.c:10:5:setBuzz	1
+../Libs/Src/buzzer.c:21:6:playSound	3
