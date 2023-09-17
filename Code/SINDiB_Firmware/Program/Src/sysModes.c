@@ -1,9 +1,10 @@
 /*
- * sysModes.cpp
+ * sysModes.c
  *
- *  Created on: Sep 8, 2023
- *      Author: SAMSUNG
+ *  Created on: Sep 17, 2023
+ *      Author: Admin
  */
+
 #include "sysModes.h"
 
 
@@ -60,3 +61,5 @@ int startPosChange() {
 		HAL_Delay(1000);
 	}
 }
+
+

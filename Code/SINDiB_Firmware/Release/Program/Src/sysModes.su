@@ -1,0 +1,4 @@
+../Program/Src/sysModes.cpp:10:6:void InitMouse()	0	static
+../Program/Src/sysModes.cpp:14:5:int idle()	0	static
+../Program/Src/sysModes.cpp:25:5:int speedAdjust()	24	static
+../Program/Src/sysModes.cpp:45:5:int startPosChange()	16	static

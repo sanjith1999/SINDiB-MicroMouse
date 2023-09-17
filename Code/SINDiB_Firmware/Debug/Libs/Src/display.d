@@ -1,7 +1,7 @@
 Libs/Src/display.o: ../Libs/Src/display.c \
- D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/display.h \
- D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h \
- D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/display.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -34,10 +34,10 @@ Libs/Src/display.o: ../Libs/Src/display.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h
-D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/display.h:
-D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h:
-D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h:
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/display.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
@@ -70,4 +70,4 @@ D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD130
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-D:/Projects/micromouse/git/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h:

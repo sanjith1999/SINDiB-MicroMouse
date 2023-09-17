@@ -16,7 +16,7 @@ const float StKi = 0.00;
 const float StKd = 0.00;
 const float RTKp = 1.0;
 const float RTKd = 0.6;
-const float RTKi = 0.1;
+const float RTKi = 0;
 
 const float AlKp = 1.0;
 const float AlKd = 0.9;
@@ -168,6 +168,7 @@ void turnGyroLR(float angle)
 		{
 			thres = false;
 			correction = .002;
+			I = 0;
 			if (abs(correction) > .001)
 			{
 				error = Angle_Z - angle;
@@ -214,7 +215,7 @@ void AlignFrontRotate(float distance)
 	STOP_ROBOT;
 }
 
-float ang = 85;
+float ang = 90;
 
 void cellTurnLeft(){
 	moveStraight(14.2);

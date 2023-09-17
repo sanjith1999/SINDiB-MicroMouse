@@ -1,10 +1,8 @@
 #include <floodfill.h>
 #include "stm32f4xx_hal.h"
 #include <stdbool.h>
+#include <queue>
 
-int x = 0;
-int y = 0;
-int orient = 0;
 int debug = 0;
 
 int startPos = 0;
@@ -64,54 +62,54 @@ int startPos = 0;
 //		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
 //};
 
-// int flood[ROWS][COLUMNS]={
-// 		{6,5,4,3,3,4,5,6,7,8},
-// 		{5,4,3,2,2,3,4,5,6,7},
-// 		{4,3,2,1,1,2,3,4,5,6},
-// 		{3,2,1,0,0,1,2,3,4,5},
-// 		{3,2,1,0,0,1,2,3,4,5},
-// 		{4,3,2,1,1,2,3,4,5,6},
-// 		{5,4,3,2,2,3,4,5,6,7},
-// 		{6,5,4,3,3,4,5,6,7,8},
-// 		{7,6,5,4,4,5,4,7,8,9},
-// 		{8,7,6,5,5,6,5,8,9,10},
-//};
-//int cells[ROWS][COLUMNS]={
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//};
-//int backFlood[ROWS][COLUMNS]={
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//};
-
-int flood[ROWS][COLUMNS] = { { 2, 2, 3, 4, 5 }, { 1, 1, 2, 3, 4 }, { 0, 0, 1, 2,
-		3 }, { 0, 0, 1, 2, 3 }, { 1, 1, 2, 3, 4 },
-
+ int flood[ROWS][COLUMNS]={
+ 		{6,5,4,3,3,4,5,6,7,8},
+ 		{5,4,3,2,2,3,4,5,6,7},
+ 		{4,3,2,1,1,2,3,4,5,6},
+ 		{3,2,1,0,0,1,2,3,4,5},
+ 		{3,2,1,0,0,1,2,3,4,5},
+ 		{4,3,2,1,1,2,3,4,5,6},
+ 		{5,4,3,2,2,3,4,5,6,7},
+ 		{6,5,4,3,3,4,5,6,7,8},
+ 		{7,6,5,4,4,5,4,7,8,9},
+ 		{8,7,6,5,5,6,5,8,9,10},
 };
-int cells[ROWS][COLUMNS] =
-		{ { 9, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, },
-				{ -1, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, }, { -1, -1, -1,
-						-1, -1, }, };
-int backFlood[ROWS][COLUMNS] = { { -1, -1, -1, -1, -1, },
-		{ -1, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, },
-		{ -1, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, }, };
+int cells[ROWS][COLUMNS]={
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+};
+int backFlood[ROWS][COLUMNS]={
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+};
+
+//int flood[ROWS][COLUMNS] = { { 2, 2, 3, 4, 5 }, { 1, 1, 2, 3, 4 }, { 0, 0, 1, 2,
+//		3 }, { 0, 0, 1, 2, 3 }, { 1, 1, 2, 3, 4 },
+//
+//};
+//int cells[ROWS][COLUMNS] =
+//		{ { 9, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, },
+//				{ -1, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, }, { -1, -1, -1,
+//						-1, -1, }, };
+//int backFlood[ROWS][COLUMNS] = { { -1, -1, -1, -1, -1, },
+//		{ -1, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, },
+//		{ -1, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, }, };
 
 void rotateFloodCounterClockwise(void) {
 	int original[ROWS][COLUMNS];
@@ -136,68 +134,7 @@ struct surroundCoor {
 	struct coordinate E;
 };
 
-struct QNode {
-	struct coordinate point;
-	QNode *next;
-	QNode(struct coordinate p) {
-		point = p;
-		next = NULL;
-	}
-};
 
-struct Queue {
-	QNode *front, *rear;
-	Queue() {
-		front = rear = NULL;
-	}
-
-	bool isempty() {
-		if (front == NULL && rear == NULL) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	void enQueue(struct coordinate point) {
-
-		// Create a new LL node
-		QNode *temp = new QNode(point);
-
-		// If queue is empty, then
-		// new node is front and rear both
-		if (rear == NULL) {
-			front = rear = temp;
-			return;
-		}
-
-		// Add the new node at
-		// the end of queue and change rear
-		rear->next = temp;
-		rear = temp;
-	}
-
-	// Function to remove
-	// a key from given queue q
-	struct coordinate deQueue() {
-		// If queue is empty, return NULL.
-		if (front == NULL) {
-		} else {
-			// Store previous front and
-			// move front one node ahead
-			QNode *temp = front;
-			front = front->next;
-
-			// If front becomes NULL, then
-			// change rear also as NULL
-			if (front == NULL)
-				rear = NULL;
-
-			delete (temp);
-			return temp->point;
-		}
-	}
-};
 
 // Structure of Node.
 //struct Node
@@ -524,35 +461,36 @@ void floodFill(struct coordinate p, struct coordinate prev) {
 		flood[p.x][p.y] = flood[prev.x][prev.y] + 1;
 	}
 
-	Queue q;
-	q.enQueue(p);
+	std::queue<coordinate> q;
+	q.push(p);
 
-	while (!q.isempty()) {
-		struct coordinate crun = q.deQueue();
+	while (!q.empty()) {
+		struct coordinate crun = q.front();
+		q.pop();
 		if (isConsistant(crun)) {
 
 		} else {
 			makeConsistant(crun);
-			q.enQueue(crun);
+			q.push(crun);
 			struct surroundCoor surr = getSurrounds(crun);
 			if (surr.N.x >= 0 && surr.N.y >= 0) {
 				if (isAccessible(crun, surr.N)) {
-					q.enQueue(surr.N);
+					q.push(surr.N);
 				}
 			}
 			if (surr.E.x >= 0 && surr.E.y >= 0) {
 				if (isAccessible(crun, surr.E)) {
-					q.enQueue(surr.E);
+					q.push(surr.E);
 				}
 			}
 			if (surr.W.x >= 0 && surr.W.y >= 0) {
 				if (isAccessible(crun, surr.W)) {
-					q.enQueue(surr.W);
+					q.push(surr.W);
 				}
 			}
 			if (surr.S.x >= 0 && surr.S.y >= 0) {
 				if (isAccessible(crun, surr.S)) {
-					q.enQueue(surr.S);
+					q.push(surr.S);
 				}
 			}
 		}
@@ -688,17 +626,18 @@ void backtrack() {
 	int distance = 1;
 
 	backFlood[0][0] = 0;
-	Queue q;
+	std::queue<coordinate> q;
 
-	q.enQueue(p);
+	q.push(p);
 
-	while (!q.isempty()) {
-		Queue temq;
+	while (!q.empty()) {
+		std::queue<coordinate> temq;
 
 		int br = 0;
 
-		while (!q.isempty()) {
-			p = q.deQueue();
+		while (!q.empty()) {
+			p = q.front();
+			q.pop();
 
 			if (flood[p.x][p.y] == 0) {
 				br = 1;
@@ -709,28 +648,28 @@ void backtrack() {
 			if (surr.N.x >= 0 && surr.N.y >= 0 && cells[surr.N.x][surr.N.y] >= 0
 					&& backFlood[surr.N.x][surr.N.y] == -1) {
 				if (isAccessible(p, surr.N)) {
-					temq.enQueue(surr.N);
+					temq.push(surr.N);
 					backFlood[surr.N.x][surr.N.y] = distance;
 				}
 			}
 			if (surr.E.x >= 0 && surr.E.y >= 0 && cells[surr.E.x][surr.E.y] >= 0
 					&& backFlood[surr.E.x][surr.E.y] == -1) {
 				if (isAccessible(p, surr.E)) {
-					temq.enQueue(surr.E);
+					temq.push(surr.E);
 					backFlood[surr.E.x][surr.E.y] = distance;
 				}
 			}
 			if (surr.S.x >= 0 && surr.S.y >= 0 && cells[surr.S.x][surr.S.y] >= 0
 					&& backFlood[surr.S.x][surr.S.y] == -1) {
 				if (isAccessible(p, surr.S)) {
-					temq.enQueue(surr.S);
+					temq.push(surr.S);
 					backFlood[surr.S.x][surr.S.y] = distance;
 				}
 			}
 			if (surr.W.x >= 0 && surr.W.y >= 0 && cells[surr.W.x][surr.W.y] >= 0
 					&& backFlood[surr.W.x][surr.W.y] == -1) {
 				if (isAccessible(p, surr.W)) {
-					temq.enQueue(surr.W);
+					temq.push(surr.W);
 					backFlood[surr.W.x][surr.W.y] = distance;
 				}
 			}

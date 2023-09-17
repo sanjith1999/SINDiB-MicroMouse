@@ -9,7 +9,7 @@ u32 i,r_pos,l_pos;
 
 bool buttonPress = false;
 
-int mouseState = 2;
+int mouseState = 0;
 
 
 void cppmain(void) {
@@ -50,15 +50,19 @@ void cppmain(void) {
 		// HAL_Delay(100);
 
 
-		mouseState = searchForward();
+		 mouseState = searchForward();
 
 //		switch (mouseState) {
 //
 //		case 0:
+//			clearScreen();
+//			printString_font_6x8("idle state", 80, 0);
 //			mouseState = idle();
 //			break;
 //
 //		case 1:
+//			clearScreen();
+//			printString_font_6x8("search idle state", 80, 0);
 //			mouseState = searchIdle();
 //			break;
 //
@@ -71,6 +75,8 @@ void cppmain(void) {
 //			break;
 //
 //		case 4:
+//			clearScreen();
+//			printString_font_6x8("fast idle state", 80, 0);
 //			mouseState = fastIdle();
 //			break;
 //
@@ -83,10 +89,14 @@ void cppmain(void) {
 //			break;
 //
 //		case 7:
+//			clearScreen();
+//			printString_font_6x8("speed adjust state", 80, 0);
 //			mouseState = speedAdjust();
 //			break;
 //
 //		case 8:
+//			clearScreen();
+//			printString_font_6x8("start position change state", 80, 0);
 //			mouseState = startPosChange();
 //			break;
 //
@@ -99,6 +109,9 @@ void cppmain(void) {
 
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	clearScreen();
+	printString_font_6x8("Interrupt", 80, 0);
+	HAL_Delay(1000);
 	if (GPIO_Pin == TB1_Pin) {
 		buttonPress = true;
 	}

@@ -1,0 +1,3 @@
+../Program/Src/searchModes.cpp:20:5:int searchIdle()	3
+../Program/Src/searchModes.cpp:34:5:int searchForward()	8
+../Program/Src/searchModes.cpp:100:5:int searchBackward()	7

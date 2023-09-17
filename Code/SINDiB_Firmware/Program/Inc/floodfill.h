@@ -8,8 +8,8 @@
 #ifndef INC_FLOODFILL_H_
 #define INC_FLOODFILL_H_
 
-#define ROWS 5
-#define COLUMNS 5
+#define ROWS 10
+#define COLUMNS 10
 
 extern int flood[ROWS][COLUMNS];
 extern int backFlood[ROWS][COLUMNS];

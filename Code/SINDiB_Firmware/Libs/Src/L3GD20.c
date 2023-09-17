@@ -4,7 +4,7 @@
 
 #define AVERAGE_WINDOW_SIZE ((uint32_t)10u)
 #define CALIBRATION_BUFFER_LENGTH ((uint32_t)2000u)
-#define GYRO_SENSITIVITY ((float)0.1361)
+#define GYRO_SENSITIVITY ((float)0.1461)
 #define GYRO_NOISE_THRESHOLD ((float) 0.95)
 
 
