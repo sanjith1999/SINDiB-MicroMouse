@@ -7,8 +7,13 @@
 
 #define OFF_BUZZ __HAL_TIM_SET_COMPARE(&htim9,TIM_CHANNEL_1, 0)
 
+// INITIALIZING BUZZER PWM CHANNEL
 void buzzerInit(void);
-int setBuzz(u16 D, float amp);
+
+// GIVING PWM OF CERTAIN FREQUENCY TO BUZZER
+int setBuzz(u16 freq, float amp);
+
+// SELECTING SOUND PATTERN TO PLAY IN BUZZER
 void playSound(BUZZ_Tones tone_index);
 
 

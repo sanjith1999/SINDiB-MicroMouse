@@ -50,4 +50,25 @@ typedef enum
 	TONE4
 } BUZZ_Tones;
 
+
+///////////////////////////////////// DISPLAY.h //////////////////////////////////////
+typedef enum
+{
+	SMALL=0,  		// 6x8
+	MEDIUM,			// 7x10
+	LARGE,			// 11x18
+	HUGE			// 16x24
+} FONT_Size;
+
+
+typedef enum
+{
+	INIT = 0,
+	DEFAULT,
+	GYRO_CALIB,
+	SENSOR_READ,
+	LOW_BAT,
+	SUCESS_MSG
+} DISP_State;
+
 #endif /* INC_TYPEDEFS_H_ */

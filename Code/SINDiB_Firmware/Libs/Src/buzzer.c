@@ -1,15 +1,13 @@
 #include "buzzer.h"
 
-const float BUZZ_LOUDNESS = 0.07;
-const int SLOW_FACTOR = 30;
+const float BUZZ_LOUDNESS = 0.07;  // SOUND LEVEL OF BUZZER
+const int SLOW_FACTOR = 30;        // PARAMETER: BUZZER SOUND DURATION
 
-// BUZZER INITIALIZATION
 void buzzerInit(void)
 {
   HAL_TIM_PWM_Start(&htim9, TIM_CHANNEL_1);
 }
 
-// SETTING FREQUECY & AMPLITUDE
 int setBuzz(u16 freq, float amp)
 {
   u16 period = 500000 / freq;

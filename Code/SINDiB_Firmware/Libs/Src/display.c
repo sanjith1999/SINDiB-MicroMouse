@@ -1,46 +1,79 @@
 #include "display.h"
 
-void clearScreen(){
+void clearScreen()
+{
 	ssd1306_Fill(Black);
 }
 
-void printString_font_6x8(char* str, int x, int y){
-	ssd1306_SetCursor(x, y);
-
-	ssd1306_WriteString(str, Font_6x8, White);
-	ssd1306_UpdateScreen();
+void writeString(char *str, FONT_size font_size)
+{
+	switch (font_size)
+	{
+	case SMALL:
+		ssd1306_WriteString(str, Font_6x8, White);
+		break;
+	case MEDIUM:
+		ssd1306_WriteString(str, Font_7x10, White);
+		break;
+	case LARGE:
+		ssd1306_WriteString(str, Font_11x18, White);
+		break;
+	case HUGE:
+		ssd1306_WriteString(str, Font_16x24, White);
+		break;
+	}
 }
 
-void printChr_font_6x8(char chr, int x, int y){
+void putString(char *str, int x, int y, FONT_Size font_size)
+{
+	ssd1306_SetCursor(x, y);
+	writeString(str, font_size);
+}
+
+void putChar(char chr, int x, int y, FONT_Size font_size)
+{
 	char str[2];
 	// Copy the character into the string
 	str[0] = chr;
 	// Null-terminate the string
 	str[1] = '\0';
-
 	ssd1306_SetCursor(x, y);
-
-	ssd1306_WriteString(str, Font_6x8, White);
-	ssd1306_UpdateScreen();
+	writeString(str, font_size);
 }
 
-void printInt_font_6x8(int INT, int x, int y){
+void putInt(int INT, int x, int y, FONT_Size font_size)
+{
 	char buff[64];
 	snprintf(buff, sizeof(buff), "%d", INT);
-
 	ssd1306_SetCursor(x, y);
-
-	ssd1306_WriteString(buff, Font_6x8, White);
-	ssd1306_UpdateScreen();
+	writeString(buff, font_size);
 }
 
-void printFloat_font_6x8(float FLOAT, int x, int y) {
-    char buff[64];
-    snprintf(buff, sizeof(buff), "~%.2f", FLOAT); // Change %.2f to adjust precision
-
-    ssd1306_SetCursor(x, y);
-
-    ssd1306_WriteString(buff, Font_6x8, White);
-    ssd1306_UpdateScreen();
+void putFloat(float FLOAT, int x, int y, FONT_Size font_size)
+{
+	char buff[64];
+	snprintf(buff, sizeof(buff), "%.2f", FLOAT); // Change %.2f to adjust precision
+	ssd1306_SetCursor(x, y);
+	writeString(buff, font_size);
 }
 
+void displayUpdate(DISP_State disp_state)
+{
+	switch (disp_state)
+	{
+	case (INIT):
+		break;
+	case (DEFAULT):
+		break;
+	case (GYRO_CALIB):
+		break;
+	case (SENSOR_READ):
+		break;
+	case (LOW_BAT):
+		break;
+	case (SUCESS_MSG):
+		break;
+	}
+}
+
+int
