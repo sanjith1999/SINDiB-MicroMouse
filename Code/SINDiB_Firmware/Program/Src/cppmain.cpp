@@ -26,11 +26,10 @@ void cppmain(void)
 	ALL_LED_OFF;
 	HAL_Delay(1000);
 
-	//	straightCountsPID(dist);
 
-	__HAL_TIM_SET_COMPARE(&htim9, TIM_CHANNEL_1, (int).5*1000);
 	while (1)
 	{
+		
 	}
 }
 

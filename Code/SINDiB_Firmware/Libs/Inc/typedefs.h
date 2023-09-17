@@ -19,7 +19,7 @@ typedef enum adc_channels
 }adc_channels;
 
 
-// L3GD20.h
+////////////////////////////// L3GD20.h //////////////////////////////////////////
 typedef enum
 {
 	L3GD20_collect_calibration_samples,
@@ -27,19 +27,27 @@ typedef enum
 	L3GD20_calibrated,
 } L3GD20_caliStateType;
 
-// L3GD20.h
 typedef enum
 {
 	L3GD20_DATA_NOT_READY,
 	L3GD20_DATA_READY,
 } L3GD20_DataReadyFlagType;
 
-// L3GD20.h
 typedef enum
 {
 	L3GD20_fisrt,
 	L3GD20_second,
 	L3GD20_finaly
 } L3GD20_StateType;
+
+///////////////////////////////////// BUZZER.h //////////////////////////////////////
+typedef enum 
+{
+	WIN_TONE=0,
+	TONE1,
+	TONE2,
+	TONE3,
+	TONE4
+} BUZZ_Tones;
 
 #endif /* INC_TYPEDEFS_H_ */

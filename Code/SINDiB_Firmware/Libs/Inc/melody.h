@@ -93,12 +93,8 @@
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
 
-extern const u32 marioMelody[];
-extern const u32 secondMelody[];
-extern const u32 marioDuration[];
 extern const u32* melody[];
 extern const u32* noteDurations[];
-extern const u16 melodySlowfactor[];
 extern const u32 melodySizes[];
 
 

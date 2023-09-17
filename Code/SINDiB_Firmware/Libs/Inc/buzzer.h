@@ -5,11 +5,11 @@
 #include "typedefs.h"
 #include "melody.h"
 
-#define OFF_BUZZER __HAL_TIM_SET_COMPARE(&htim9,TIM_CHANNEL_1, 0)
+#define OFF_BUZZ __HAL_TIM_SET_COMPARE(&htim9,TIM_CHANNEL_1, 0)
 
 void buzzerInit(void);
 int setBuzz(u16 D, float amp);
-void playSound(void);
+void playSound(BUZZ_Tones tone_index);
 
 
 
