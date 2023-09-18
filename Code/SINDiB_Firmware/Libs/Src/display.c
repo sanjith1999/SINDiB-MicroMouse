@@ -61,8 +61,16 @@ void displayUpdate(DISP_State disp_state)
 {
 	switch (disp_state)
 	{
+	// INITIALIZATION BLOCK: AUDI CAR EXPECTED
 	case (INIT):
+		for (delta = 0; delta < 5; delta++)
+			ssd1306_DrawCircle(20 * delta + 30, 15, 10, White);
+
+		for (delta = 0; delta < 5; delta++)
+			ssd1306_FillCircle(23 * delta + 15, 40, 10, White);
 		break;
+
+	// DEFAULT SCREEN --> BATTERY PERCENTAGE, STATE OF THE ROBOT
 	case (DEFAULT):
 		break;
 	case (GYRO_CALIB):

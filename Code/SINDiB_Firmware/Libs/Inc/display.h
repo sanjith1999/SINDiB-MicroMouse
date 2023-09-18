@@ -1,6 +1,23 @@
 #ifndef INC_DISPLAY_H_
 #define INC_DISPLAY_H_
 
+/*
+SCREEN SIZE => 128x32
+
+     128  --> x
+------------
+|          | 32  y
+------------
+
+FONT SIZES
+----------
+SMALL    		// 6x8
+MEDIUM			// 7x10
+LARGE			// 11x18
+HUGE			// 16x24
+*/
+
+
 #include <stdio.h>
 #include <string.h>
 #include "typedefs.h"
@@ -25,9 +42,8 @@ void putInt(int INT, int x, int y, FONT_Size font_size);
 // PUTTING A FLOAT ON SPECIFIED LOCATION
 void putFloat(float FLOAT, int x, int y, FONT_Size font_size);
 
-// DISPLAY UPDATE
+// DISPLAY UPDATE -- CONTAINS ALL THE NECESSARY SCREEN DETAILS
 void displayUpdate(DISP_State disp_state)
-
 
 
 #endif /* INC_DISPLAY_H_ */
