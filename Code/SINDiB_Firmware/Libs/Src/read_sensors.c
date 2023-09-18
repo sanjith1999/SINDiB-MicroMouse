@@ -3,7 +3,7 @@
 int reflectionRate = 1000;//which is 1.000 (converted to ingeter)
 
 int32_t volMeter=0;
-int32_t voltage = 0;
+float voltage = 0;
 int32_t LFSensor = 0;
 int32_t RFSensor = 0;
 int32_t DLSensor=0;
@@ -16,6 +16,8 @@ bool F = false;
 /*read IR sensors*/
 void readSensor(void)
 {
+	LED7_ON;
+
 	__HAL_TIM_SET_COUNTER(&htim1,0);
 	//read DC value	
 	LFSensor = read_LF_Sensor;	
@@ -61,6 +63,7 @@ void readSensor(void)
 	DLSensor = DLSensor*reflectionRate/1000;
 	DRSensor = DRSensor*reflectionRate/1000;
 	
+	LED7_OFF;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
@@ -68,7 +71,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if (htim == &htim14 )
   {
     readSensor();
-	HAL_GPIO_TogglePin(LED1_GPIO_Port,LED1_Pin);
   }
   if (htim == &htim13)
   {
@@ -84,8 +86,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 void readVolMeter(void)
 {          //3240 = 7.85V
 	volMeter = read_Vol_Meter;//raw value
-	voltage = volMeter*809/3248;//actual voltage value  ex) 8.2V = 8200
+	voltage = (volMeter*ADC_REF_VOL/4095)* 2.8;//actual voltage value  ex) 8.2V = 8200
 }
+
+
 
 
 

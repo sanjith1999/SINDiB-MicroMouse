@@ -65,6 +65,8 @@ int main(void)
   MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
 
+  
+
   ITM_Port32(31) = 2;
 
   // TRANSFERRING THE CONTROL TO OUR LOOP

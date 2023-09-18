@@ -7,10 +7,11 @@
 #include "typedefs.h"
 #include "adc.h"
 
+#define ADC_REF_VOL 3.322
+
 extern int reflectionRate;
 
-extern int32_t volMeter;
-extern int32_t voltage;
+extern float voltage;
 extern int32_t LFSensor;
 extern int32_t RFSensor;
 extern int32_t DLSensor;

@@ -45,13 +45,6 @@ int searchForward() {
 	XY_prev.y = 0;
 
 	while (1) {
-
-
-		clearScreen();
-		printInt_font_6x8(LFSensor, 80, 10);
-		printInt_font_6x8(RFSensor, 2, 10);
-		printInt_font_6x8(DLSensor, 80, 24);
-		printInt_font_6x8(DRSensor, 2, 24);
 		getSensorReadings();
 
 		HAL_Delay(4000);
@@ -63,8 +56,6 @@ int searchForward() {
 			floodFill(XY, XY_prev);
 			char direction = toMove(XY, XY_prev, orient);
 
-			clearScreen();
-			printChr_font_6x8(direction, 40, 16);
 
 			HAL_Delay(4000);
 

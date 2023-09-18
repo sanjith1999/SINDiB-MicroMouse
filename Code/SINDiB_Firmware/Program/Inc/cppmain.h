@@ -10,6 +10,8 @@ extern "C" {
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "main.h"
 #include "stm32f4xx_hal.h"
 #include "adc.h"
 #include "led.h"
@@ -31,6 +33,7 @@ extern bool buttonPress;
 
 void cppmain(void);
 
+int initialization_block(void);
 
 #ifdef __cplusplus
 }
