@@ -1,8 +1,10 @@
 #include "motor.h"
 
+const float SPEED_THRESHOLD = SPEED_THRESHOLD_;
+
 uint16_t u12_max = 4095;
 float l_speed, r_speed;
-float base_l_speed = .4, base_r_speed = .4;
+float st_speed = .5, rt_speed = .3;
 
 void motorInit(void)
 {

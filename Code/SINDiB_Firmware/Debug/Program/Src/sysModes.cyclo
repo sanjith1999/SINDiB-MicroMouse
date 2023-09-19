@@ -1,4 +1,4 @@
 ../Program/Src/sysModes.c:3:6:InitMouse	1
 ../Program/Src/sysModes.c:7:5:idle	2
-../Program/Src/sysModes.c:18:5:speedAdjust	2
-../Program/Src/sysModes.c:41:5:startPosChange	4
+../Program/Src/sysModes.c:18:5:speedAdjust	3
+../Program/Src/sysModes.c:38:5:startPosChange	4

@@ -1,4 +1,4 @@
-../Libs/Src/motor.c:7:6:motorInit	1
-../Libs/Src/motor.c:17:6:setLeftWheel	5
-../Libs/Src/motor.c:31:6:setRightWheel	5
-../Libs/Src/motor.c:44:5:setWheels	1
+../Libs/Src/motor.c:9:6:motorInit	1
+../Libs/Src/motor.c:19:6:setLeftWheel	5
+../Libs/Src/motor.c:33:6:setRightWheel	5
+../Libs/Src/motor.c:46:5:setWheels	1

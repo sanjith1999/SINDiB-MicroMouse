@@ -1,2 +1,2 @@
-../Libs/Src/L3GD20.c:39:6:L3GD20_Init	48	static
-../Libs/Src/L3GD20.c:207:5:L3GD20_Update	8	static
+../Libs/Src/L3GD20.c:33:6:L3GD20_Init	48	static
+../Libs/Src/L3GD20.c:201:5:L3GD20_Update	8	static

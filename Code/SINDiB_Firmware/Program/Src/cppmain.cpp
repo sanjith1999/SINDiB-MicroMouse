@@ -5,7 +5,7 @@
  */
 #include "cppmain.h"
 
-u32 i, r_pos, l_pos;
+u32 i;
 
 bool buttonPress = false;
 
@@ -15,14 +15,12 @@ int cppmain(void)
 {
 	initialization_block();
 	disp_state = DEFAULT;
+
 	while (1)
 	{
 		i++;
-		l_pos = l_position,r_pos = r_position;
-		if (moveStraight(200))
-			HAL_Delay(2000);
-
-			// return 0;
+		if (pointTurnLR(90))
+			return 0;
 		displayUpdate();
 	}
 }
@@ -33,8 +31,9 @@ int initialization_block(void)
 	motorInit();
 	encoderInit();
 	displayInit();
-//	buzzerInit();
-	PID_Controller();
+	// buzzerInit();
+	L3GD20_Init();
+	PID_Controller(IDLE);
 
 	TIM1_START;
 	TIM14_IT_START;

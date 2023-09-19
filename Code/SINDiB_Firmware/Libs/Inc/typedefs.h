@@ -79,7 +79,7 @@ typedef enum
 {
 	IDLE,
 	MOVE_STRAIGHT,
-	TAKE_TURN,
+	POINT_TURN,
 	ALIGN
 
 }PID_State;

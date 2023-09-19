@@ -1,12 +1,7 @@
-// #include "L3GD20.h"
-#include <stdint.h>
-#include "main.h"
+#include "L3GD20.h"
 
-#define AVERAGE_WINDOW_SIZE ((uint32_t)10u)
-#define CALIBRATION_BUFFER_LENGTH ((uint32_t)2000u)
-#define GYRO_SENSITIVITY ((float)0.1461)
-#define GYRO_NOISE_THRESHOLD ((float) 0.95)
 
+float angle_z = 0;
 
 
 static L3GD20_DataReadyFlagType dataReadyFlag = L3GD20_DATA_READY;
@@ -14,17 +9,16 @@ static L3GD20_caliStateType currentcalistate = 	L3GD20_collect_calibration_sampl
 
 
 static L3GD20_StateType currentState = L3GD20_fisrt;
-
-static float angleRate_z = 0;
-static int32_t offset_z = 0;
-static float Noise_Z = 0;
-float Angle_Z = 0;
-static float LastAngleRate_Z = 0;
-static int32_t TempNoise_Z = 0;
-
+static float angle_rate = 0;
+static int32_t offset = 0;
+static float noise = 0;
+static float last_angle_rate = 0;
+static int32_t temp_noise = 0;
 volatile static uint32_t caliCounter = 0;
-
 static int16_t calibrationBuffer_Z[CALIBRATION_BUFFER_LENGTH];
+
+
+
 
 static uint8_t spiTxBuf[2];
 static uint8_t spiRxBuf[7];
@@ -157,7 +151,7 @@ void L3GD20_Init(void)
 
 						averageWindow_Z[windowPosition] = calibrationBuffer_Z[idx];
 
-						offset_z = tempSum_Z / (int32_t)AVERAGE_WINDOW_SIZE;
+						offset = tempSum_Z / (int32_t)AVERAGE_WINDOW_SIZE;
 
 						windowPosition++;
 
@@ -170,12 +164,12 @@ void L3GD20_Init(void)
 						}
 					}
 					for (uint32_t idx = 0; idx < CALIBRATION_BUFFER_LENGTH; idx++)
-						if (((int32_t)calibrationBuffer_Z[idx] - offset_z) > TempNoise_Z)
-							TempNoise_Z = (int32_t)calibrationBuffer_Z[idx] - offset_z;
-						else if (((int32_t)calibrationBuffer_Z[idx] - offset_z) < -TempNoise_Z)
-							TempNoise_Z = -((int32_t)calibrationBuffer_Z[idx] - offset_z);
+						if (((int32_t)calibrationBuffer_Z[idx] - offset) > temp_noise)
+							temp_noise = (int32_t)calibrationBuffer_Z[idx] - offset;
+						else if (((int32_t)calibrationBuffer_Z[idx] - offset) < -temp_noise)
+							temp_noise = -((int32_t)calibrationBuffer_Z[idx] - offset);
 
-					Noise_Z = (float)TempNoise_Z * GYRO_SENSITIVITY;
+					noise = (float)temp_noise * GYRO_SENSITIVITY;
 
 					currentcalistate = L3GD20_calibrated;
 					break;
@@ -208,7 +202,7 @@ int L3GD20_Update(void)
 {
 	LED8_ON;
 
-	Noise_Z = (Noise_Z>GYRO_NOISE_THRESHOLD)? GYRO_NOISE_THRESHOLD:Noise_Z;
+	noise = (noise>GYRO_NOISE_THRESHOLD)? GYRO_NOISE_THRESHOLD:noise;
 	Raw_z = 0;
 
 	if (dataReadyFlag == L3GD20_DATA_READY)
@@ -232,14 +226,14 @@ int L3GD20_Update(void)
 	{
 
 		Raw_z = (spiRxBuf[6] << 8) | spiRxBuf[5];
-		angleRate_z = (float)(Raw_z - (offset_z)) * GYRO_SENSITIVITY;
+		angle_rate = (float)(Raw_z - (offset)) * GYRO_SENSITIVITY;
 
 		timeDifference = 0.001;
 
-		if ((angleRate_z > Noise_Z) || (angleRate_z < -Noise_Z))
+		if ((angle_rate > noise) || (angle_rate < -noise))
 		{ 
-			Angle_Z += ((angleRate_z + LastAngleRate_Z) * timeDifference) / (2.0f);
-			LastAngleRate_Z = angleRate_z;
+			angle_z += ((angle_rate + last_angle_rate) * timeDifference) / (2.0f);
+			last_angle_rate = angle_rate;
 		}
 		else;
 		dataReadyFlag = L3GD20_DATA_READY;

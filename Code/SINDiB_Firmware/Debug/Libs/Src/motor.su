@@ -1,4 +1,4 @@
-../Libs/Src/motor.c:7:6:motorInit	8	static
-../Libs/Src/motor.c:17:6:setLeftWheel	24	static
-../Libs/Src/motor.c:31:6:setRightWheel	24	static
-../Libs/Src/motor.c:44:5:setWheels	8	static
+../Libs/Src/motor.c:9:6:motorInit	8	static
+../Libs/Src/motor.c:19:6:setLeftWheel	24	static
+../Libs/Src/motor.c:33:6:setRightWheel	24	static
+../Libs/Src/motor.c:46:5:setWheels	8	static

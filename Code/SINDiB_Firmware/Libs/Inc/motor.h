@@ -3,8 +3,8 @@
 
 #include "main.h"
 #include "stdlib.h"
+#include "parameters_.h"
 
-#define SPEED_THRESHOLD 0.5
 #define STOP_ROBOT \
     l_speed = 0;   \
     r_speed = 0;   \
@@ -15,8 +15,8 @@ extern float l_speed,
     r_speed;
 
 // BASE SPEEDS
-extern float base_l_speed,
-    base_r_speed;
+extern float st_speed,
+    rt_speed;
 
 // INITIALIZATION OF MOTOR
 void motorInit(void);

@@ -19,23 +19,20 @@ int speedAdjust()
 {
 	while (1)
 
+	{
 		if (rightIrBlink())
 		{
-			base_l_speed += 0.1;
-			base_r_speed += 0.1;
+			st_speed += 0.01;
+			st_speed += 0.01;
 		}
-	if (leftIrBlink())
-	{
-		base_l_speed -= 0.1;
-		base_r_speed -= 0.1;
-	}
 
-	if (buttonPress)
-	{
-		buttonPress = false;
-		return 8;
+		if (buttonPress)
+		{
+			buttonPress = false;
+			return 8;
+		}
+		HAL_Delay(1000);
 	}
-	HAL_Delay(1000);
 }
 
 int startPosChange()
