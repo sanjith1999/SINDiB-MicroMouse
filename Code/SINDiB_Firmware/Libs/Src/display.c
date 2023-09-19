@@ -90,7 +90,6 @@ void displayUpdate(void)
 	case (SENSOR_READ):
 		break;
 	case (LOW_BAT):
-
 		putString("BAT LOW...!!!",2,7,LARGE);
 		break;
 	case (SUCESS_MSG):

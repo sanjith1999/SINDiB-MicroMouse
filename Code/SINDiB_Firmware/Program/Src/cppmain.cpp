@@ -11,25 +11,30 @@ bool buttonPress = false;
 
 int mouseState = 0;
 
-void cppmain(void)
+int cppmain(void)
 {
 	initialization_block();
-	disp_state = LOW_BAT;
-	// playSound(WIN_TONE);
+	disp_state = DEFAULT;
 	while (1)
 	{
-	displayUpdate();
-	HAL_Delay(500);
+		i++;
+		l_pos = l_position,r_pos = r_position;
+		if (moveStraight(200))
+			HAL_Delay(2000);
+
+			// return 0;
+		displayUpdate();
 	}
 }
 
-int initialization_block(void){
+int initialization_block(void)
+{
 	ALL_LED_ON;
 	motorInit();
 	encoderInit();
 	displayInit();
-	buzzerInit();
-
+//	buzzerInit();
+	PID_Controller();
 
 	TIM1_START;
 	TIM14_IT_START;

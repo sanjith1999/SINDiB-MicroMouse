@@ -9,7 +9,7 @@ void encoderInit(void){
 }
 
 void resetEncoder(void){
-	TIM2->CNT = _ENCODER_START;
+	TIM2->CNT = _ENCODER_START + 1;
 	TIM5->CNT = u32_max-_ENCODER_START;
 }
 

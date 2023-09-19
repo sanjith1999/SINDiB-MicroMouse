@@ -1,7 +1,7 @@
 ../Libs/Src/read_sensors.c:17:6:readSensor	10
 ../Libs/Src/read_sensors.c:69:6:HAL_TIM_PeriodElapsedCallback	3
-../Libs/Src/read_sensors.c:86:6:readVolMeter	1
-../Libs/Src/read_sensors.c:94:6:irBlink	3
-../Libs/Src/read_sensors.c:102:6:rightIrBlink	2
-../Libs/Src/read_sensors.c:110:6:leftIrBlink	2
-../Libs/Src/read_sensors.c:118:6:getSensorReadings	15
+../Libs/Src/read_sensors.c:85:6:readVolMeter	1
+../Libs/Src/read_sensors.c:95:6:irBlink	3
+../Libs/Src/read_sensors.c:103:6:rightIrBlink	2
+../Libs/Src/read_sensors.c:111:6:leftIrBlink	2
+../Libs/Src/read_sensors.c:119:6:getSensorReadings	15

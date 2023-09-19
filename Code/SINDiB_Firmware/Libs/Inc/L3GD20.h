@@ -5,19 +5,20 @@
  extern "C" {
 #endif
 
-
+#include "led.h"
 #include "typedefs.h"
 
- void L3GD20_Init(void);
+// INITIALIZATION OF SPI COMMUNICATION AND CALIBRATION
+void L3GD20_Init(void);
 
- void L3GD20_loop(void);
+int L3GD20_Update(void);
 
- extern float Angle_Z;
-
-
+extern float Angle_Z;
 
 
-	 #ifdef __cplusplus
+
+
+	#ifdef __cplusplus
 }
 #endif
 

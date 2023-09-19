@@ -204,8 +204,10 @@ void L3GD20_Init(void)
 	LED9_OFF;LED10_OFF;LED11_OFF;
 }
 
-void L3GD20_loop(void)
+int L3GD20_Update(void)
 {
+	LED8_ON;
+
 	Noise_Z = (Noise_Z>GYRO_NOISE_THRESHOLD)? GYRO_NOISE_THRESHOLD:Noise_Z;
 	Raw_z = 0;
 
@@ -242,4 +244,6 @@ void L3GD20_loop(void)
 		else;
 		dataReadyFlag = L3GD20_DATA_READY;
 	}
+	LED8_OFF;
+	return 0;
 }

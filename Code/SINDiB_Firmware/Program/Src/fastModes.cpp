@@ -35,16 +35,16 @@ int fastForward() {
 			char direction = toMove(XY, XY_prev, orient);
 
 			if (direction == 'L') {
-				cellTurnLeft();
+				// cellTurnLeft();
 				orient = orientation(orient, direction);
 			} else if (direction == 'R') {
-				cellTurnRight();
+				// cellTurnRight();
 				orient = orientation(orient, direction);
 			} else if (direction == 'B') {
-				cellTurnBack();
+				// cellTurnBack();
 				orient = orientation(orient, direction);
 			} else if (direction == 'F') {
-				moveStraight(16);
+				// moveStraight(16);
 			}
 
 			XY_prev = XY;
@@ -71,16 +71,16 @@ int fastBackward() {
 			char direction = toMoveBack(XY, XY_prev, orient);
 
 			if (direction == 'L') {
-				cellTurnLeft();
+				// cellTurnLeft();
 				orient = orientation(orient, direction);
 			} else if (direction == 'R') {
-				cellTurnRight();
+				// cellTurnRight();
 				orient = orientation(orient, direction);
 			} else if (direction == 'B') {
-				cellTurnBack();
+				// cellTurnBack();
 				orient = orientation(orient, direction);
 			} else if (direction == 'F') {
-				moveStraight(16);
+				// moveStraight(16);
 			}
 
 			XY_prev = XY;

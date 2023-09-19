@@ -1,11 +1,4 @@
-../Libs/Src/motor.c:39:6:motorInit	8	static
-../Libs/Src/motor.c:50:6:setLeftWheel	24	static
-../Libs/Src/motor.c:64:6:setRightWheel	24	static
-../Libs/Src/motor.c:77:6:setWheels	16	static
-../Libs/Src/motor.c:83:6:moveStraight	24	static
-../Libs/Src/motor.c:114:6:keepItPointed	16	static
-../Libs/Src/motor.c:133:6:turnGyroLR	24	static
-../Libs/Src/motor.c:185:6:AlignFrontRotate	16	static
-../Libs/Src/motor.c:211:6:cellTurnLeft	8	static
-../Libs/Src/motor.c:219:6:cellTurnRight	8	static
-../Libs/Src/motor.c:227:6:cellTurnBack	8	static
+../Libs/Src/motor.c:7:6:motorInit	8	static
+../Libs/Src/motor.c:17:6:setLeftWheel	24	static
+../Libs/Src/motor.c:31:6:setRightWheel	24	static
+../Libs/Src/motor.c:44:5:setWheels	8	static

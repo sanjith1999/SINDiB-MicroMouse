@@ -28,10 +28,11 @@ extern "C" {
 #include "typedefs.h"
 #include "ssd1306.h"
 #include "buzzer.h"
+#include "PID.h"
 
 extern bool buttonPress;
 
-void cppmain(void);
+int cppmain(void);
 
 int initialization_block(void);
 

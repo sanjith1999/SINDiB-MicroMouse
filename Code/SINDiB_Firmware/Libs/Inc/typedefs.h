@@ -68,7 +68,20 @@ typedef enum
 	GYRO_CALIB,
 	SENSOR_READ,
 	LOW_BAT,
-	SUCESS_MSG
+	SUCESS_MSG,
+	SPEED_ADJ
 } DISP_State;
+
+
+
+//////////////////////////////////////////motor.h//////////////////////////////////////////////
+typedef enum
+{
+	IDLE,
+	MOVE_STRAIGHT,
+	TAKE_TURN,
+	ALIGN
+
+}PID_State;
 
 #endif /* INC_TYPEDEFS_H_ */
