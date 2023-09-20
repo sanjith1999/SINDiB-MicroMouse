@@ -1,6 +1,7 @@
 #include "read_sensors.h"
 
-int reflectionRate = 1000;//which is 1.000 (converted to ingeter)
+int reflectionRate = REFLECTION_RATE_;
+const float LOW_BAT_TH = LOW_BAT_TH_;
 
 int32_t volMeter=0;
 float voltage = 0;
@@ -74,8 +75,21 @@ void readVolMeter(void)
 {          //3240 = 7.85V
 	volMeter = read_Vol_Meter;//raw value
 	voltage = (volMeter*ADC_REF_VOL/4095)* 2.8;//actual voltage value  ex) 8.2V = 8200
+	if (voltage<LOW_BAT_TH)
+		stop_it_all();
 }
 
+void stop_it_all(void){
+	disp_state=LOW_BAT;
+	displayUpdate();
+	OFF_BUZZ;
+	STOP_ROBOT;
+	ALL_LED_OFF;
+	TIM6_IT_STOP;
+	TIM13_IT_STOP;
+	TIM14_IT_STOP;
+	return;
+}
 
 
 

@@ -35,6 +35,7 @@ int PID_Controller(PID_State pid_state)
 		PID_correction = (error * RTKp + I * RTKi + (error - last_error) * RTKd) / PID_RED_RT;
 		break;
 	}
+
 	l_speed -= PID_correction, r_speed += PID_correction;
 	last_error = error;
 
@@ -67,15 +68,14 @@ bool moveStraight(float dist_cm)
 
 bool pointTurnLR(float angle)
 {
-	LED2_ON;
-	// TIM13_IT_START;
-	start_angle = (start_angle == 0) ? angle_z : start_angle;
+	if (start_angle == 0)
+		LED2_ON, TIM13_IT_START, TIM14_IT_STOP, start_angle = angle_z;
 
-	if (abs(start_angle - angle_z) >= abs(angle-.1))
+	if (abs(start_angle - angle_z) >= abs(angle - .1))
 	{
 		PID_Controller(IDLE);
 		LED2_OFF;
-		// TIM13_IT_STOP;
+		TIM13_IT_STOP, TIM14_IT_START;
 		start_angle = 0;
 		return true;
 	}

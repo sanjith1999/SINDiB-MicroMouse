@@ -23,7 +23,8 @@
 #define __MAIN_H
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 /* Includes ------------------------------------------------------------------*/
@@ -49,10 +50,15 @@ extern "C" {
 
 /* USER CODE END EM */
 
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+    void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
+<<<<<<< HEAD
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
+=======
+    /* Exported functions prototypes*/
+    void Error_Handler(void);
+>>>>>>> 0b259ad6052df66cd732286fc31aa10d4f561300
 
 /* USER CODE BEGIN EFP */
 
@@ -142,6 +148,17 @@ void Error_Handler(void);
 #define RPWMB_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+<<<<<<< HEAD
+=======
+#define TIM1_START HAL_TIM_Base_Start(&htim1)
+#define TIM1_STOP HAL_TIM_Base_Stop(&htim1);
+#define TIM6_IT_START HAL_TIM_Base_Start_IT(&htim6)
+#define TIM6_IT_STOP HAL_TIM_Base_Stop_IT(&htim6)
+#define TIM13_IT_START HAL_TIM_Base_Start_IT(&htim13)
+#define TIM13_IT_STOP HAL_TIM_Base_Stop_IT(&htim13)
+#define TIM14_IT_START HAL_TIM_Base_Start_IT(&htim14)
+#define TIM14_IT_STOP HAL_TIM_Base_Stop_IT(&htim14)
+>>>>>>> 0b259ad6052df66cd732286fc31aa10d4f561300
 
 /* USER CODE END Private defines */
 

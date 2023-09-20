@@ -6,6 +6,10 @@
 #include "led.h"
 #include "typedefs.h"
 #include "adc.h"
+#include "motor.h"
+#include "buzzer.h"
+#include "parameters_.h"
+#include "display.h"
 
 #define ADC_REF_VOL 3.322
 
@@ -29,5 +33,6 @@ bool irBlink();
 bool rightIrBlink();
 bool leftIrBlink();
 void getSensorReadings();
+void stop_it_all(void);
 
 #endif /* INC_READ_SENSORS_H_ */

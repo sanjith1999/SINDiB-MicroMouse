@@ -84,8 +84,8 @@ all: main-build
 main-build: MicromouseFirmware.elf secondary-outputs
 
 # Tool invocations
-MicromouseFirmware.elf MicromouseFirmware.map: $(OBJS) $(USER_OBJS) F:\PROJECTS\SINDiB-MICROMOUSE\code\SINDiB_Firmware\STM32F405RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "MicromouseFirmware.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"F:\PROJECTS\SINDiB-MICROMOUSE\code\SINDiB_Firmware\STM32F405RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MicromouseFirmware.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+MicromouseFirmware.elf MicromouseFirmware.map: $(OBJS) $(USER_OBJS) E:\projects\SINDiB-MicroMouse\Code\SINDiB_Firmware\STM32F405RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "MicromouseFirmware.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\projects\SINDiB-MicroMouse\Code\SINDiB_Firmware\STM32F405RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MicromouseFirmware.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

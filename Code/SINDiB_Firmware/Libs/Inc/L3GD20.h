@@ -6,14 +6,14 @@
 #include <stdint.h>
 #include "main.h"
 #include "parameters_.h"
+#include <math.h>
 
 
-#define AVERAGE_WINDOW_SIZE ((uint32_t)10u)
-#define CALIBRATION_BUFFER_LENGTH ((uint32_t)2000u)
+#define BUFFER_LENGTH ((u32)1000u)
 
 extern float angle_z;
 extern uint8_t gyro_identity;
-extern u16 raw_z;
+extern float offset, noise;
 
 // INITIALIZATION OF SPI COMMUNICATION AND CALIBRATION
 void gyroInit(void);
@@ -22,7 +22,10 @@ void gyroInit(void);
 int gyroUpdate(void);
 
 // READING GYRO VALUE
-float readGyro(void);
+int16_t readGyro(void);
+
+// CALIBRATION IN THE BEGINNING
+void gyroCalibration(void);
 
 
 #endif
