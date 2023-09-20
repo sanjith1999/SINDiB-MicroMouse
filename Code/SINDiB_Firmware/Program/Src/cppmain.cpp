@@ -23,6 +23,15 @@ int cppmain(void)
 		i++;
 		// if (moveStraight(12))
 		// 	HAL_Delay(2000);
+
+		// testing the interrupt
+		if (buttonPress){
+			buttonPress = false;
+			clearScreen();
+			putString("button pressed",74,2,SMALL);
+			HAL_Delay(1000);
+			clearScreen();
+		}
 	}
 }
 
@@ -48,14 +57,7 @@ int initialization_block(void)
 	return 0;
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-	HAL_Delay(1000);
-	if (GPIO_Pin == TB1_Pin)
-	{
-		buttonPress = true;
-	}
-}
+
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
