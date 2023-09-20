@@ -66,18 +66,6 @@ void readSensor(void)
 	LED7_OFF;
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  if (htim == &htim14 )
-  {
-    readSensor();
-  }
-  if (htim == &htim13)
-  {
-	L3GD20_Update();
-  }
-}
-
 
 
 

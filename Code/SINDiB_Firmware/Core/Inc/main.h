@@ -102,6 +102,8 @@ void Error_Handler(void);
 /* USER CODE BEGIN Private defines */
 #define TIM1_START  HAL_TIM_Base_Start(&htim1)
 #define TIM1_STOP HAL_TIM_Base_Stop(&htim1);
+#define TIM6_IT_START HAL_TIM_Base_Start_IT(&htim6)
+#define TIM6_IT_STOP  HAL_TIM_Base_Stop_IT(&htim6)
 #define TIM13_IT_START HAL_TIM_Base_Start_IT(&htim13)
 #define TIM13_IT_STOP  HAL_TIM_Base_Stop_IT(&htim13)
 #define TIM14_IT_START HAL_TIM_Base_Start_IT(&htim14)
@@ -113,6 +115,7 @@ extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim5;
+extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim9;
 extern TIM_HandleTypeDef htim13;
 extern TIM_HandleTypeDef htim14;

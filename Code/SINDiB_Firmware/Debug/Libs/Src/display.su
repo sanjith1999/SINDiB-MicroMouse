@@ -5,4 +5,4 @@
 ../Libs/Src/display.c:41:6:putChar	32	static
 ../Libs/Src/display.c:52:6:putInt	88	static
 ../Libs/Src/display.c:60:6:putFloat	96	static
-../Libs/Src/display.c:68:6:displayUpdate	16	static
+../Libs/Src/display.c:69:6:displayUpdate	16	static

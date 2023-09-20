@@ -1,2 +1,3 @@
-../Libs/Src/L3GD20.c:33:6:L3GD20_Init	16
-../Libs/Src/L3GD20.c:201:5:L3GD20_Update	5
+../Libs/Src/L3GD20.c:17:6:gyroInit	1
+../Libs/Src/L3GD20.c:62:5:gyroUpdate	1
+../Libs/Src/L3GD20.c:72:7:readGyro	2

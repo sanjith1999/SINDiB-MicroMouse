@@ -15,6 +15,7 @@ TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim4;
 TIM_HandleTypeDef htim5;
+TIM_HandleTypeDef htim6;
 TIM_HandleTypeDef htim9;
 TIM_HandleTypeDef htim13;
 TIM_HandleTypeDef htim14;
@@ -35,6 +36,7 @@ static void MX_TIM1_Init(void);           // us_DELAY FUNCTIONALITY
 static void MX_TIM2_Init(void);           // L-ENCODER
 static void MX_TIM4_Init(void);           // PWM GENERATION FOR MOTOR DRIVER
 static void MX_TIM5_Init(void);           // R-ENCODER
+static void MX_TIM6_Init(void);           // R-ENCODER
 static void MX_TIM9_Init(void);           // BUZZER SOUND GENERATION
 static void MX_TIM13_Init(void);          // INTERRUPT GYRO UPDATE
 static void MX_TIM14_Init(void);          // INTERRUPT ADC UPDATE: IR
@@ -60,6 +62,7 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_TIM5_Init();
+  MX_TIM6_Init();
   MX_TIM9_Init();
   MX_TIM13_Init();
   MX_TIM14_Init();
@@ -339,6 +342,28 @@ static void MX_TIM5_Init(void)
     Error_Handler();
 }
 
+
+static void MX_TIM6_Init(void)
+{
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  htim6.Instance = TIM6;
+  htim6.Init.Prescaler = 1999;
+  htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim6.Init.Period = 50000/(2*FPS);
+  htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim6, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
 /**
   * @brief TIM9 Initialization Function
   * @param None
@@ -378,7 +403,7 @@ static void MX_TIM9_Init(void)
 static void MX_TIM13_Init(void)
 {
   htim13.Instance = TIM13;
-  htim13.Init.Prescaler = 0;
+  htim13.Init.Prescaler = 1;
   htim13.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim13.Init.Period = 50000;
   htim13.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

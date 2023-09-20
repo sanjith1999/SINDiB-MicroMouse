@@ -25,7 +25,6 @@ extern bool F;
 void readSensor(void);
 void readVolMeter(void);
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 bool irBlink();
 bool rightIrBlink();
 bool leftIrBlink();

@@ -5,4 +5,4 @@
 ../Libs/Src/display.c:41:6:putChar	1
 ../Libs/Src/display.c:52:6:putInt	1
 ../Libs/Src/display.c:60:6:putFloat	1
-../Libs/Src/display.c:68:6:displayUpdate	5
+../Libs/Src/display.c:69:6:displayUpdate	8

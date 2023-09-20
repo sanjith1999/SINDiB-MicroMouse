@@ -68,14 +68,14 @@ bool moveStraight(float dist_cm)
 bool pointTurnLR(float angle)
 {
 	LED2_ON;
-	TIM13_IT_START;
+	// TIM13_IT_START;
 	start_angle = (start_angle == 0) ? angle_z : start_angle;
 
 	if (abs(start_angle - angle_z) >= abs(angle-.1))
 	{
 		PID_Controller(IDLE);
 		LED2_OFF;
-		TIM13_IT_STOP;
+		// TIM13_IT_STOP;
 		start_angle = 0;
 		return true;
 	}

@@ -32,9 +32,15 @@ extern "C" {
 
 extern bool buttonPress;
 
+// MAIN LOOP
 int cppmain(void);
 
+// INITIALIZATION OF HARDWARE
 int initialization_block(void);
+
+// INTERRUPTS
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
 
 #ifdef __cplusplus
 }

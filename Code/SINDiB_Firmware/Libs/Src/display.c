@@ -65,6 +65,7 @@ void putFloat(float FLOAT, int x, int y, FONT_Size font_size)
 	writeString(buff, font_size);
 }
 
+
 void displayUpdate(void)
 {
 	clearScreen();
@@ -78,22 +79,52 @@ void displayUpdate(void)
 
 	// DEFAULT SCREEN --> BATTERY PERCENTAGE, STATE OF THE ROBOT
 	case (DEFAULT):
-
 		// DISPLAYING BATTERY VOLTAGE
-		
 		putString("BAT:",74,2,SMALL);
 		putFloat(voltage,104 , 2, SMALL);
+
+		putString("TURN:",2,16,MEDIUM);
+		// putString(turn,44,16,MEDIUM);
 		break;
 
 	case (GYRO_CALIB):
+		putString("NOISE: ",2,2,SMALL);
+		// putFloat(noise,64, 2, SMALL);
+ 
+		putString("OFFSET: ",2,11,SMALL);
+		// putInt(offset,64,11,SMALL);
+
+		putString("ANGLE: ",2,22,SMALL);
+		putFloat(angle_z,64,22,SMALL);
 		break;
+
 	case (SENSOR_READ):
+
+		putString("LF:",2,2,SMALL);
+		putInt(LFSensor,26,2, SMALL);
+
+		putString("RF:",76,2,SMALL);
+		putInt(RFSensor,100,2, SMALL);
+
+		putString("DL:",2,13,SMALL);
+		putInt(DLSensor,26,13, SMALL);
+
+		putString("DR:",76,13,SMALL);
+		putInt(DRSensor,100,13, SMALL);
+		
+		putString("ANGLE:",22,24,SMALL);
+		putFloat(angle_z,70,22, SMALL);
 		break;
+
 	case (LOW_BAT):
-		putString("BAT LOW...!!!",2,7,LARGE);
+		putString("BAT LOW...!",2,7,LARGE);
 		break;
+
 	case (SUCESS_MSG):
+		putString("HURRAYYYY!!!",2,2,LARGE);
+		putString("SINDiB na kokka",2,22,SMALL);
 		break;
 	}
 	ssd1306_UpdateScreen();
+	LED6_TOG;
 }
