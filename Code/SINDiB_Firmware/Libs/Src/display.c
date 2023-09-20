@@ -89,10 +89,10 @@ void displayUpdate(void)
 
 	case (GYRO_CALIB):
 		putString("NOISE: ",2,2,SMALL);
-		// putFloat(noise,64, 2, SMALL);
+		putFloat(noise,64, 2, SMALL);
  
 		putString("OFFSET: ",2,11,SMALL);
-		// putInt(offset,64,11,SMALL);
+		putInt(offset,64,11,SMALL);
 
 		putString("ANGLE: ",2,22,SMALL);
 		putFloat(angle_z,64,22,SMALL);

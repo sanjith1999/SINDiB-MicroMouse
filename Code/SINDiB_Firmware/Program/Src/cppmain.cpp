@@ -6,44 +6,40 @@
 #include "cppmain.h"
 
 u32 i;
-
 bool buttonPress = false;
-
 int mouseState = 0;
+
 
 int cppmain(void)
 {
 	initialization_block();
-	HAL_Delay(5000);
+	HAL_Delay(1000);
 	disp_state = SENSOR_READ;
 
 	while (1)
-	{ 
-		// QUEUE : [S S L R] 
+	{
 		i++;
-		// if (moveStraight(12))
-		// 	HAL_Delay(2000);
 	}
 }
 
 int initialization_block(void)
 {
 	ALL_LED_ON;
-	// TIM6_IT_START;
+	TIM1_START; ////////////////// CRUCIAL PART DON"T OFFFFFFFFFFFFFFFF ///////////////////////////
+	TIM6_IT_START;
 
 	motorInit();
 	encoderInit();
+	gyroInit();
 	displayInit();
 	// buzzerInit();
 	PID_Controller(IDLE);
 
 	ALL_LED_OFF;
 	HAL_Delay(1000);
-	gyroInit();
+	gyroCalibration();
 	disp_state = GYRO_CALIB;
-	TIM1_START;
-	// TIM14_IT_START;
-	TIM13_IT_START;
+	TIM14_IT_START;
 
 	return 0;
 }
@@ -62,7 +58,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &htim14)
 		readSensor();
 	else if (htim == &htim13)
-		gyroUpdate();
+		gyroUpdate(),
+			readSensor();
 	else if (htim == &htim6)
 		displayUpdate();
 }
