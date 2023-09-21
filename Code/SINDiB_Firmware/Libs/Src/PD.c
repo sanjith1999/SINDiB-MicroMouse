@@ -1,8 +1,8 @@
 #include "PD.h"
 
 // PID PARAMETERS FOR STRAIGHT MOVEMENT
-const float STKp = STKp_, RTKp = RTKp_;
-const float STKd = STKd_, RTKd = RTKd_;
+const float Kp[] = {STKp_, RTKp_};
+const float Kd[] = {STKd_, RTKd_};
 const int PD_RED_ST = PD_RED_ST_, PD_RED_RT = PD_RED_RT_;
 
 // VARIABLES
@@ -14,9 +14,9 @@ static float PD_correction = 0, last_error = 0; // STORE INTEGRAL ERROR
 int PD_Controller(PD_State pd_state)
 {
 	float error;
+	error = l_position, error -= r_position;
 	switch (pd_state)
 	{
-		error = l_position, error -= r_position;
 	// TERMINATION OPERATION
 	case (IDLE):
 		last_error = 0;
@@ -25,12 +25,12 @@ int PD_Controller(PD_State pd_state)
 
 	// STRAIGHT MOVEMENT
 	case (MOVE_STRAIGHT):
-		PD_correction = (error * STKp + (error - last_error) * STKd) / PD_RED_ST;
+		PD_correction = (error * Kp[0] + (error - last_error) * Kd[0]) / PD_RED_ST;
 		break;
 
 	// POINT-ROTATION
 	case (POINT_TURN):
-		PD_correction = (error * RTKp + (error - last_error) * RTKd) / PD_RED_RT;
+		PD_correction = (error * Kp[1] + (error - last_error) * Kd[1]) / PD_RED_RT;
 		break;
 	}
 

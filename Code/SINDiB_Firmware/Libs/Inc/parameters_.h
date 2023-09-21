@@ -14,10 +14,8 @@
 // STRAIGHT MOVEMENT PARAMETERS
 #define STKp_ 1.0
 #define STKd_ .6
-#define STKi_ .08
 #define RTKp_ 1.0
 #define RTKd_ .6
-#define RTKi_ .08
 
 // PID ERROR REDUCTION FACTOR
 #define PD_RED_ST_ 30

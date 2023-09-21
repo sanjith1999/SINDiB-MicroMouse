@@ -31,23 +31,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      00000043  00000000  00000000  00020238  2**0
                   CONTENTS, READONLY
- 14 .debug_info   00017abe  00000000  00000000  0002027b  2**0
+ 14 .debug_info   00017aab  00000000  00000000  0002027b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 000038dd  00000000  00000000  00037d39  2**0
+ 15 .debug_abbrev 000038f3  00000000  00000000  00037d26  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 000012d8  00000000  00000000  0003b618  2**3
+ 16 .debug_aranges 000012d8  00000000  00000000  0003b620  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_rnglists 00000e87  00000000  00000000  0003c8f0  2**0
+ 17 .debug_rnglists 00000e87  00000000  00000000  0003c8f8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  000281c3  00000000  00000000  0003d777  2**0
+ 18 .debug_macro  000281b7  00000000  00000000  0003d77f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   0001ad3e  00000000  00000000  0006593a  2**0
+ 19 .debug_line   0001ad4a  00000000  00000000  00065936  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    000d5e29  00000000  00000000  00080678  2**0
+ 20 .debug_str    000d5e01  00000000  00000000  00080680  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  0000612c  00000000  00000000  001564a4  2**2
+ 21 .debug_frame  0000612c  00000000  00000000  00156484  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000061  00000000  00000000  0015c5d0  2**0
+ 22 .debug_line_str 00000061  00000000  00000000  0015c5b0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -17781,7 +17781,7 @@ int PD_Controller(PD_State pd_state)
 
 	// STRAIGHT MOVEMENT
 	case (MOVE_STRAIGHT):
-		PD_correction = (error * STKp + (error - last_error) * STKd) / PD_RED_ST;
+		PD_correction = (error * Kp[0] + (error - last_error) * Kd[0]) / PD_RED_ST;
  8007064:	eeb7 7a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
  8007068:	edd7 7a03 	vldr	s15, [r7, #12]
  800706c:	ee27 7a27 	vmul.f32	s14, s14, s15
@@ -17802,7 +17802,7 @@ int PD_Controller(PD_State pd_state)
 
 	// POINT-ROTATION
 	case (POINT_TURN):
-		PD_correction = (error * RTKp + (error - last_error) * RTKd) / PD_RED_RT;
+		PD_correction = (error * Kp[1] + (error - last_error) * Kd[1]) / PD_RED_RT;
  800709e:	eeb7 7a00 	vmov.f32	s14, #112	; 0x3f800000  1.0
  80070a2:	edd7 7a03 	vldr	s15, [r7, #12]
  80070a6:	ee27 7a27 	vmul.f32	s14, s14, s15
