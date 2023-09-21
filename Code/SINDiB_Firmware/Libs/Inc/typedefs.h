@@ -78,10 +78,17 @@ typedef enum
 typedef enum
 {
 	IDLE,
-	MOVE_STRAIGHT,
-	POINT_TURN,
-	ALIGN
+	STRAIGHT_RUN,
+	POINT_TURN
+}AC_State;
 
-}PD_State;
+
+typedef enum
+{
+	SPEED1,
+	SPEED2,
+	SPEED3,
+	ROT_SPEED
+}SPEED_;
 
 #endif /* INC_TYPEDEFS_H_ */

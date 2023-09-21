@@ -6,8 +6,8 @@
 #include "main.h"
 
 /*
-LED 1: STRAIGHT RUN
-LED 2: POINT TURN
+LED 1: STRAIGHT-RUN
+LED 2: POINT-TURN
 LED 3: 
 LED 4:
 LED 5:

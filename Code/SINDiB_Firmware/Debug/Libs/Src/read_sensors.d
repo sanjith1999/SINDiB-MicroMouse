@@ -38,8 +38,8 @@ Libs/Src/read_sensors.o: ../Libs/Src/read_sensors.c \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/parameters_.h \
- E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/typedefs.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/display.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h \
@@ -101,8 +101,8 @@ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/typedefs.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/parameters_.h:
-E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/typedefs.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/display.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h:

@@ -9,7 +9,6 @@ u32 i;
 bool buttonPress = false;
 int mouseState = 0;
 
-
 int cppmain(void)
 {
 	initialization_block();
@@ -18,7 +17,13 @@ int cppmain(void)
 
 	while (1)
 	{
+		if (pointTurnLR(-180))
+		{
+			STOP_ROBOT;
+			HAL_Delay(3000);
+		}
 		i++;
+		// HAL_Delay(1);
 	}
 }
 
@@ -33,18 +38,15 @@ int initialization_block(void)
 	gyroInit();
 	displayInit();
 	// buzzerInit();
-	PD_Controller(IDLE);
 
 	ALL_LED_OFF;
 	HAL_Delay(1000);
 	gyroCalibration();
-	disp_state = GYRO_CALIB;
-	TIM14_IT_START;
+	disp_state = DEFAULT;
+	TIM13_IT_START;
 
 	return 0;
 }
-
-
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {

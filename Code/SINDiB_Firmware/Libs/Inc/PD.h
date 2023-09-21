@@ -11,12 +11,13 @@
 
 
 // ULTIMATE PID CONTROLLING STRATEGY
-int PD_Controller(PD_State pid_state);
+int angularController(AC_State ac_state);
 
 // GOING STRAIGHT SPECIFIED DISTANCE
 bool moveStraight(float dist_cm);
 
 // TAKING A TURN AT THE POINT - L-PRIORATIZED
 bool pointTurnLR(float angle);
+
 
 #endif /* INC_PD_H_ */

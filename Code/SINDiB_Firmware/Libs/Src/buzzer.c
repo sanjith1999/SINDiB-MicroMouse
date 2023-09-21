@@ -1,6 +1,6 @@
 #include "buzzer.h"
 
-const float BUZZ_LOUDNESS = 0.04;  // SOUND LEVEL OF BUZZER
+const float BUZZ_LOUDNESS = BUZZ_LOUDNESS_;  // SOUND LEVEL OF BUZZER
 const int SLOW_FACTOR = 30;        // PARAMETER: BUZZER SOUND DURATION
 
 void buzzerInit(void)

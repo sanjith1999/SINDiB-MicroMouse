@@ -1,41 +1,49 @@
 #include "PD.h"
 
-// PID PARAMETERS FOR STRAIGHT MOVEMENT
-const float Kp[] = {STKp_, RTKp_};
-const float Kd[] = {STKd_, RTKd_};
-const int PD_RED_ST = PD_RED_ST_, PD_RED_RT = PD_RED_RT_;
+// PID PARAMETERS FOR ANGULAR CONTROLLER
+const float ACKp[] = {S1Kp_, S2Kp_};
+const float ACKd[] = {S1Kd_, S2Kd_};
+const int AC_RED[] = {AC_RED_S1_, AC_RED_S2_ * 10};
+
+// PID PARAMETERS FOR SPEED CONTROLLER
+const float SCKp[] = {1, 1};
+const float SCKd[] = {1, .8};
+const int SC_RED[] = {20, 30};        // 50
 
 // VARIABLES
-static u32 start_l = 0, start_r = 0; // STORE STARTING POSITION
+static u32 l_start = 0, r_start = 0; // STORE STARTING POSITION
 static float start_angle = 0;
 
-static float PD_correction = 0, last_error = 0; // STORE INTEGRAL ERROR
+static float PD_correction_ac = 0, PD_correction_sc = 0,
+			 a_last_error = 0, s_last_error; // STORE INTEGRAL ERROR
 
-int PD_Controller(PD_State pd_state)
+static int sc_counter = 0;
+
+int angularController(AC_State ac_state)
 {
-	float error;
-	error = l_position, error -= r_position;
-	switch (pd_state)
+	float a_error;
+	float AC_Kp = ACKp[0], AC_Kd = ACKd[0], AC_RED_ = AC_RED[1];
+	switch (ac_state)
 	{
 	// TERMINATION OPERATION
 	case (IDLE):
-		last_error = 0;
-		STOP_ROBOT;
+		a_last_error = 0;
 		break;
 
-	// STRAIGHT MOVEMENT
-	case (MOVE_STRAIGHT):
-		PD_correction = (error * Kp[0] + (error - last_error) * Kd[0]) / PD_RED_ST;
+	// SPEED 1
+	case (STRAIGHT_RUN):
+		a_error = l_position, a_error -= r_position;
 		break;
 
 	// POINT-ROTATION
 	case (POINT_TURN):
-		PD_correction = (error * Kp[1] + (error - last_error) * Kd[1]) / PD_RED_RT;
+		a_error -= l_position, a_error -= r_position, a_error += (l_start + r_start); // a_error = -(l_position - l_start) - (r_position - r_start)
 		break;
 	}
 
-	l_speed -= PD_correction, r_speed += PD_correction;
-	last_error = error;
+	PD_correction_ac = (a_error * AC_Kp + (a_error - a_last_error) * AC_Kd) / (2 * AC_RED_);
+	l_speed -= PD_correction_ac, r_speed += PD_correction_ac;
+	a_last_error = a_error;
 
 	return 0;
 }
@@ -44,41 +52,70 @@ bool moveStraight(float dist_cm)
 {
 	LED1_ON;
 	u32 counts_ = abs(dist_cm * LINEAR_SENSITIVITY);
-	start_l = (start_l == 0) ? l_position : start_l;
-	start_r = (start_r == 0) ? r_position : start_r;
-	l_speed = (dist_cm > 0) ? st_speed : -st_speed, r_speed = (dist_cm > 0) ? st_speed : -st_speed;
 
-	if (abs(l_position - start_l) >= counts_ && abs(r_position - start_r) >= counts_)
+	// STARTING POSITION ASSIGNMENT
+	if (l_start == 0)
+		l_start = l_position, r_start == r_position;
+
+	// BASE SPEED ADJUSTMENT
+	if (dist_cm > 0)
+		l_speed = st_speed, r_speed = st_speed;
+	else if (dist_cm == 0)
+		l_speed = 0, r_speed = 0;
+	else
+		l_speed = -st_speed, r_speed = -st_speed;
+
+	// THRESHOLDING
+	if (abs(l_position - l_start) >= counts_ && abs(r_position - r_start) >= counts_)
 	{
-		start_l = 0, start_r = 0;
-		PID_Controller(IDLE);
+		l_start = 0, r_start = 0;
+		STOP_ROBOT;
+		angularController(IDLE);
 		LED1_OFF;
 		return true;
 	}
 
 	// REDUCING THE SPEED JUST BEFORE THE DESTINATION
-	else if (abs(l_position - start_l) >= counts_ * .95)
+	else if (abs(l_position - l_start) >= counts_ * .95)
 		l_speed = l_speed / 2, r_speed = r_speed / 2;
-	PID_Controller(MOVE_STRAIGHT);
+	angularController(STRAIGHT_RUN);
 	setWheels();
 	return false;
 }
 
 bool pointTurnLR(float angle)
 {
-	if (start_angle == 0)
-		LED2_ON, TIM13_IT_START, TIM14_IT_STOP, start_angle = angle_z;
+	float s_error = 0;
 
-	if (abs(start_angle - angle_z) >= abs(angle - .1))
+	if (start_angle == 0)
+		LED2_ON,
+			start_angle = angle_z, l_start = l_position, r_start = r_position,
+			s_last_error = 0;
+
+	s_error = (start_angle + angle) - angle_z;
+	PD_correction_sc = (float)(s_error * SCKp[1] + (s_error - s_last_error) * SCKd[1]) / SC_RED[1];
+	s_last_error = s_error;
+
+
+	if (abs(PD_correction_sc) < 1e-8 && abs(s_error)<1e-2)
 	{
-		PD_Controller(IDLE);
-		LED2_OFF;
-		TIM13_IT_STOP, TIM14_IT_START;
-		start_angle = 0;
+		if (sc_counter < 10)
+		{
+			sc_counter++;
+			HAL_Delay(20);
+			return false;
+		}
+		// angularController(IDLE);
+		LED2_OFF,
+		start_angle = 0, l_start = 0, r_start = 0;
+		resetEncoder();
+		sc_counter = 0;
 		return true;
 	}
-	l_speed = (angle > 0) ? -rt_speed : rt_speed, r_speed = (angle > 0) ? rt_speed : -rt_speed;
-	PD_Controller(POINT_TURN);
+	
+	if (abs(PD_correction_sc) > .3) PD_correction_sc = (PD_correction_sc > 0) ? .3 : -.3;
+	l_speed = -PD_correction_sc, r_speed = +PD_correction_sc;
+	// angularController(POINT_TURN);
 	setWheels();
 	return false;
 }

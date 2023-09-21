@@ -1,5 +1,5 @@
 ../Libs/Src/read_sensors.c:18:6:readSensor	10
-../Libs/Src/read_sensors.c:74:6:readVolMeter	2
+../Libs/Src/read_sensors.c:74:6:readVolMeter	1
 ../Libs/Src/read_sensors.c:82:6:stop_it_all	1
 ../Libs/Src/read_sensors.c:97:6:irBlink	3
 ../Libs/Src/read_sensors.c:105:6:rightIrBlink	2

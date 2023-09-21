@@ -12,14 +12,14 @@
 
 //////////////////////////// PID.H //////////////////////////////////////////////
 // STRAIGHT MOVEMENT PARAMETERS
-#define STKp_ 1.0
-#define STKd_ .6
-#define RTKp_ 1.0
-#define RTKd_ .6
+#define S1Kp_ 1.0
+#define S1Kd_ .6
+#define S2Kp_ 1.0
+#define S2Kd_ .6
 
 // PID ERROR REDUCTION FACTOR
-#define PD_RED_ST_ 30
-#define PD_RED_RT_ 20
+#define AC_RED_S1_ 30
+#define AC_RED_S2_ 20
 
 
 /////////////////////////////////// L3GD20.h /////////////////////////////////////////
@@ -27,9 +27,10 @@
 #define NOISE_THRESHOLD_ 1.5
 
 //////////////////////////////////// DISPLAY.h ////////////////////////////////////////
-#define FPS 2  // MIN_ALLOWED --> .5
+#define FPS 1  // MIN_ALLOWED --> .5
 
-
+/////////////////////////////////Buzzer.h /////////////////////////////////
+#define BUZZ_LOUDNESS_ .03
 
 
 #endif /* PARAMETERS__H_ */

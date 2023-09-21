@@ -4,6 +4,7 @@
 #include "main.h"
 #include "stdlib.h"
 #include "parameters_.h"
+#include "typedefs.h"
 
 #define STOP_ROBOT \
     l_speed = 0;   \
