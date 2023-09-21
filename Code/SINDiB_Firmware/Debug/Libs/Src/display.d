@@ -54,7 +54,7 @@ Libs/Src/display.o: ../Libs/Src/display.c \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/melody.h \
- E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PID.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PD.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h \
@@ -117,7 +117,7 @@ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_c
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/melody.h:
-E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PID.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PD.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h:

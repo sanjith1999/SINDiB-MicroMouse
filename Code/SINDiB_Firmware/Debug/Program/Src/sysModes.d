@@ -60,7 +60,8 @@ Program/Src/sysModes.o: ../Program/Src/sysModes.c \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PD.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
- E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/sysModes.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -124,3 +125,4 @@ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PD.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h:

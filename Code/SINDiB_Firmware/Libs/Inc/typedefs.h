@@ -82,6 +82,6 @@ typedef enum
 	POINT_TURN,
 	ALIGN
 
-}PID_State;
+}PD_State;
 
 #endif /* INC_TYPEDEFS_H_ */

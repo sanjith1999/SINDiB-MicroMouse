@@ -20,8 +20,8 @@
 #define RTKi_ .08
 
 // PID ERROR REDUCTION FACTOR
-#define PID_RED_ST_ 30
-#define PID_RED_RT_ 20
+#define PD_RED_ST_ 30
+#define PD_RED_RT_ 20
 
 
 /////////////////////////////////// L3GD20.h /////////////////////////////////////////

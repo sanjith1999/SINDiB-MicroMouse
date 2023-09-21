@@ -1,0 +1,4 @@
+../Program/Src/sysModes.c:3:6:InitMouse	4	static
+../Program/Src/sysModes.c:7:5:idle	4	static
+../Program/Src/sysModes.c:18:5:speedAdjust	8	static
+../Program/Src/sysModes.c:38:5:startPosChange	8	static

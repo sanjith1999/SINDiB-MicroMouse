@@ -1,24 +1,3 @@
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.h
-  * @brief          : Header for main.c file.
-  *                   This file contains the common defines of the application.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2023 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
-
-/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
 
@@ -27,47 +6,21 @@ extern "C"
 {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+/* Includes */
 #include "stm32f4xx_hal.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
-
-/* USER CODE END ET */
-
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
-
-/* USER CODE END EC */
-
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
-
-/* USER CODE END EM */
+#include "cppmain.h"
+#include <stdbool.h>
+#include "L3GD20.h"
 
     void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
-<<<<<<< HEAD
-/* Exported functions prototypes ---------------------------------------------*/
-void Error_Handler(void);
-=======
     /* Exported functions prototypes*/
     void Error_Handler(void);
->>>>>>> 0b259ad6052df66cd732286fc31aa10d4f561300
 
-/* USER CODE BEGIN EFP */
-
-/* USER CODE END EFP */
-
-/* Private defines -----------------------------------------------------------*/
+// PIN DEFINITIONS
 #define TB1_Pin GPIO_PIN_13
 #define TB1_GPIO_Port GPIOC
-#define TB1_EXTI_IRQn EXTI15_10_IRQn
 #define LED10_Pin GPIO_PIN_0
 #define LED10_GPIO_Port GPIOC
 #define RF_EMITTER_Pin GPIO_PIN_1
@@ -148,8 +101,6 @@ void Error_Handler(void);
 #define RPWMB_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-<<<<<<< HEAD
-=======
 #define TIM1_START HAL_TIM_Base_Start(&htim1)
 #define TIM1_STOP HAL_TIM_Base_Stop(&htim1);
 #define TIM6_IT_START HAL_TIM_Base_Start_IT(&htim6)
@@ -158,9 +109,23 @@ void Error_Handler(void);
 #define TIM13_IT_STOP HAL_TIM_Base_Stop_IT(&htim13)
 #define TIM14_IT_START HAL_TIM_Base_Start_IT(&htim14)
 #define TIM14_IT_STOP HAL_TIM_Base_Stop_IT(&htim14)
->>>>>>> 0b259ad6052df66cd732286fc31aa10d4f561300
 
-/* USER CODE END Private defines */
+extern SPI_HandleTypeDef hspi1;
+
+extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim4;
+extern TIM_HandleTypeDef htim5;
+extern TIM_HandleTypeDef htim6;
+extern TIM_HandleTypeDef htim9;
+extern TIM_HandleTypeDef htim13;
+extern TIM_HandleTypeDef htim14;
+
+extern ADC_HandleTypeDef hadc1;
+
+extern int mouseState;
+
+extern bool LF, RF, LD, RD;
 
 #ifdef __cplusplus
 }

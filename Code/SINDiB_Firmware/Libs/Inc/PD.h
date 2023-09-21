@@ -11,7 +11,7 @@
 
 
 // ULTIMATE PID CONTROLLING STRATEGY
-int PD_Controller(PID_State pid_state);
+int PD_Controller(PD_State pid_state);
 
 // GOING STRAIGHT SPECIFIED DISTANCE
 bool moveStraight(float dist_cm);

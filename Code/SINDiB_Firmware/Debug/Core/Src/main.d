@@ -58,7 +58,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/floodfill.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h \
- E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PID.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PD.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h
 ../Core/Inc/main.h:
@@ -121,6 +121,6 @@ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/searchModes.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/floodfill.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/fastModes.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h:
-E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PID.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PD.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h:

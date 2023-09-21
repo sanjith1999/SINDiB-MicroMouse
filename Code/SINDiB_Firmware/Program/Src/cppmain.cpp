@@ -19,20 +19,6 @@ int cppmain(void)
 	while (1)
 	{
 		i++;
-<<<<<<< HEAD
-		// if (moveStraight(12))
-		// 	HAL_Delay(2000);
-
-		// testing the interrupt
-		if (buttonPress){
-			buttonPress = false;
-			clearScreen();
-			putString("button pressed",74,2,SMALL);
-			HAL_Delay(1000);
-			clearScreen();
-		}
-=======
->>>>>>> 0b259ad6052df66cd732286fc31aa10d4f561300
 	}
 }
 
@@ -47,7 +33,7 @@ int initialization_block(void)
 	gyroInit();
 	displayInit();
 	// buzzerInit();
-	PID_Controller(IDLE);
+	PD_Controller(IDLE);
 
 	ALL_LED_OFF;
 	HAL_Delay(1000);

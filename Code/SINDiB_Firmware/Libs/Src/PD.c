@@ -3,7 +3,7 @@
 // PID PARAMETERS FOR STRAIGHT MOVEMENT
 const float STKp = STKp_, RTKp = RTKp_;
 const float STKd = STKd_, RTKd = RTKd_;
-const int PD_RED_ST = PD_RED_ST_, PD_RED_RT = PID_RD_RT_;
+const int PD_RED_ST = PD_RED_ST_, PD_RED_RT = PD_RED_RT_;
 
 // VARIABLES
 static u32 start_l = 0, start_r = 0; // STORE STARTING POSITION
@@ -11,10 +11,10 @@ static float start_angle = 0;
 
 static float PD_correction = 0, last_error = 0; // STORE INTEGRAL ERROR
 
-int PD_Controller(PD_State pid_state)
+int PD_Controller(PD_State pd_state)
 {
 	float error;
-	switch (pid_state)
+	switch (pd_state)
 	{
 		error = l_position, error -= r_position;
 	// TERMINATION OPERATION
