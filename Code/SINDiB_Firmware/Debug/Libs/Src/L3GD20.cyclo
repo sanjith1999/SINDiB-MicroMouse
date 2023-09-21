@@ -1,4 +1,0 @@
-../Libs/Src/L3GD20.c:18:6:gyroInit	1
-../Libs/Src/L3GD20.c:60:5:gyroUpdate	3
-../Libs/Src/L3GD20.c:71:9:readGyro	1
-../Libs/Src/L3GD20.c:91:6:gyroCalibration	3

@@ -1,4 +1,0 @@
-../Program/Src/cppmain.cpp:13:5:int cppmain()	8	static
-../Program/Src/cppmain.cpp:29:5:int initialization_block()	8	static
-../Program/Src/cppmain.cpp:51:6:void HAL_GPIO_EXTI_Callback(uint16_t)	16	static
-../Program/Src/cppmain.cpp:60:6:void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*)	16	static

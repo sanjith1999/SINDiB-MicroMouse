@@ -1,5 +1,6 @@
-Libs/Src/buzzer.o: ../Libs/Src/buzzer.c \
- E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h \
+Libs/Src/PD.o: ../Libs/Src/PD.c \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PD.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -32,9 +33,13 @@ Libs/Src/buzzer.o: ../Libs/Src/buzzer.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/parameters_.h \
  E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/typedefs.h \
- E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/melody.h
-E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h:
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h \
+ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PD.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -68,5 +73,8 @@ E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/parameters_.h:
 E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/typedefs.h:
-E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/melody.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h:
+E:/projects/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h:

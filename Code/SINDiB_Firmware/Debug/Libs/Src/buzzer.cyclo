@@ -1,3 +1,0 @@
-../Libs/Src/buzzer.c:6:6:buzzerInit	1
-../Libs/Src/buzzer.c:12:5:setBuzz	1
-../Libs/Src/buzzer.c:21:6:playSound	7

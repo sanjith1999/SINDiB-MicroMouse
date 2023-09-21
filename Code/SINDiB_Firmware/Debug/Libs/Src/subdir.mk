@@ -6,7 +6,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Libs/Src/L3GD20.c \
-../Libs/Src/PID.c \
+../Libs/Src/PD.c \
 ../Libs/Src/adc.c \
 ../Libs/Src/buzzer.c \
 ../Libs/Src/display.c \
@@ -17,7 +17,7 @@ C_SRCS += \
 
 C_DEPS += \
 ./Libs/Src/L3GD20.d \
-./Libs/Src/PID.d \
+./Libs/Src/PD.d \
 ./Libs/Src/adc.d \
 ./Libs/Src/buzzer.d \
 ./Libs/Src/display.d \
@@ -28,7 +28,7 @@ C_DEPS += \
 
 OBJS += \
 ./Libs/Src/L3GD20.o \
-./Libs/Src/PID.o \
+./Libs/Src/PD.o \
 ./Libs/Src/adc.o \
 ./Libs/Src/buzzer.o \
 ./Libs/Src/display.o \
@@ -45,7 +45,7 @@ Libs/Src/%.o Libs/Src/%.su Libs/Src/%.cyclo: ../Libs/Src/%.c Libs/Src/subdir.mk
 clean: clean-Libs-2f-Src
 
 clean-Libs-2f-Src:
-	-$(RM) ./Libs/Src/L3GD20.cyclo ./Libs/Src/L3GD20.d ./Libs/Src/L3GD20.o ./Libs/Src/L3GD20.su ./Libs/Src/PID.cyclo ./Libs/Src/PID.d ./Libs/Src/PID.o ./Libs/Src/PID.su ./Libs/Src/adc.cyclo ./Libs/Src/adc.d ./Libs/Src/adc.o ./Libs/Src/adc.su ./Libs/Src/buzzer.cyclo ./Libs/Src/buzzer.d ./Libs/Src/buzzer.o ./Libs/Src/buzzer.su ./Libs/Src/display.cyclo ./Libs/Src/display.d ./Libs/Src/display.o ./Libs/Src/display.su ./Libs/Src/encoder.cyclo ./Libs/Src/encoder.d ./Libs/Src/encoder.o ./Libs/Src/encoder.su ./Libs/Src/melody.cyclo ./Libs/Src/melody.d ./Libs/Src/melody.o ./Libs/Src/melody.su ./Libs/Src/motor.cyclo ./Libs/Src/motor.d ./Libs/Src/motor.o ./Libs/Src/motor.su ./Libs/Src/read_sensors.cyclo ./Libs/Src/read_sensors.d ./Libs/Src/read_sensors.o ./Libs/Src/read_sensors.su
+	-$(RM) ./Libs/Src/L3GD20.cyclo ./Libs/Src/L3GD20.d ./Libs/Src/L3GD20.o ./Libs/Src/L3GD20.su ./Libs/Src/PD.cyclo ./Libs/Src/PD.d ./Libs/Src/PD.o ./Libs/Src/PD.su ./Libs/Src/adc.cyclo ./Libs/Src/adc.d ./Libs/Src/adc.o ./Libs/Src/adc.su ./Libs/Src/buzzer.cyclo ./Libs/Src/buzzer.d ./Libs/Src/buzzer.o ./Libs/Src/buzzer.su ./Libs/Src/display.cyclo ./Libs/Src/display.d ./Libs/Src/display.o ./Libs/Src/display.su ./Libs/Src/encoder.cyclo ./Libs/Src/encoder.d ./Libs/Src/encoder.o ./Libs/Src/encoder.su ./Libs/Src/melody.cyclo ./Libs/Src/melody.d ./Libs/Src/melody.o ./Libs/Src/melody.su ./Libs/Src/motor.cyclo ./Libs/Src/motor.d ./Libs/Src/motor.o ./Libs/Src/motor.su ./Libs/Src/read_sensors.cyclo ./Libs/Src/read_sensors.d ./Libs/Src/read_sensors.o ./Libs/Src/read_sensors.su
 
 .PHONY: clean-Libs-2f-Src
 

@@ -1,42 +1,40 @@
-#include "PID.h"
+#include "PD.h"
 
 // PID PARAMETERS FOR STRAIGHT MOVEMENT
 const float STKp = STKp_, RTKp = RTKp_;
 const float STKd = STKd_, RTKd = RTKd_;
-const float STKi = STKi_, RTKi = RTKi_;
-const int PID_RED_ST = PID_RED_ST_, PID_RED_RT = PID_RED_RT_;
+const int PD_RED_ST = PD_RED_ST_, PD_RED_RT = PID_RD_RT_;
 
 // VARIABLES
 static u32 start_l = 0, start_r = 0; // STORE STARTING POSITION
 static float start_angle = 0;
 
-static float PID_correction = 0, I = 0, last_error = 0; // STORE INTEGRAL ERROR
+static float PD_correction = 0, last_error = 0; // STORE INTEGRAL ERROR
 
-int PID_Controller(PID_State pid_state)
+int PD_Controller(PD_State pid_state)
 {
 	float error;
 	switch (pid_state)
 	{
 		error = l_position, error -= r_position;
-		I = I + error;
 	// TERMINATION OPERATION
 	case (IDLE):
-		I = 0, last_error = 0;
+		last_error = 0;
 		STOP_ROBOT;
 		break;
 
 	// STRAIGHT MOVEMENT
 	case (MOVE_STRAIGHT):
-		PID_correction = (error * STKp + I * STKi + (error - last_error) * STKd) / PID_RED_ST;
+		PD_correction = (error * STKp + (error - last_error) * STKd) / PD_RED_ST;
 		break;
 
 	// POINT-ROTATION
 	case (POINT_TURN):
-		PID_correction = (error * RTKp + I * RTKi + (error - last_error) * RTKd) / PID_RED_RT;
+		PD_correction = (error * RTKp + (error - last_error) * RTKd) / PD_RED_RT;
 		break;
 	}
 
-	l_speed -= PID_correction, r_speed += PID_correction;
+	l_speed -= PD_correction, r_speed += PD_correction;
 	last_error = error;
 
 	return 0;
@@ -73,14 +71,14 @@ bool pointTurnLR(float angle)
 
 	if (abs(start_angle - angle_z) >= abs(angle - .1))
 	{
-		PID_Controller(IDLE);
+		PD_Controller(IDLE);
 		LED2_OFF;
 		TIM13_IT_STOP, TIM14_IT_START;
 		start_angle = 0;
 		return true;
 	}
 	l_speed = (angle > 0) ? -rt_speed : rt_speed, r_speed = (angle > 0) ? rt_speed : -rt_speed;
-	PID_Controller(POINT_TURN);
+	PD_Controller(POINT_TURN);
 	setWheels();
 	return false;
 }
