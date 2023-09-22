@@ -13,15 +13,15 @@ int cppmain(void)
 {
 	initialization_block();
 	HAL_Delay(1000);
-	disp_state = SENSOR_READ;
+	// disp_state = SENSOR_READ;
 
 	while (1)
 	{
-		if (pointTurnLR(-180))
-		{
-			STOP_ROBOT;
-			HAL_Delay(3000);
-		}
+		if (finishMove(POINT_TURN,60))
+		// {
+			// STOP_ROBOT;
+		// 	HAL_Delay(3000);
+		// }
 		i++;
 		// HAL_Delay(1);
 	}
@@ -31,7 +31,7 @@ int initialization_block(void)
 {
 	ALL_LED_ON;
 	TIM1_START; ////////////////// CRUCIAL PART DON"T OFFFFFFFFFFFFFFFF ///////////////////////////
-	TIM6_IT_START;
+	// TIM6_IT_START;
 
 	motorInit();
 	encoderInit();

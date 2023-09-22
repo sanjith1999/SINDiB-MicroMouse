@@ -46,8 +46,8 @@ void setRightWheel(float r_speed)
 
 int setWheels()
 {
-	setLeftWheel(l_speed);
 	setRightWheel(r_speed);
+	setLeftWheel(l_speed);
 	return 0;
 }
 

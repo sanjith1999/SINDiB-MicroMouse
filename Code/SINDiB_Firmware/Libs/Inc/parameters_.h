@@ -10,18 +10,6 @@
 ///////////////////////////// MOTOR.H //////////////////////////////////////////
 #define SPEED_THRESHOLD_ 0.7
 
-//////////////////////////// PID.H //////////////////////////////////////////////
-// STRAIGHT MOVEMENT PARAMETERS
-#define S1Kp_ 1.0
-#define S1Kd_ .6
-#define S2Kp_ 1.0
-#define S2Kd_ .6
-
-// PID ERROR REDUCTION FACTOR
-#define AC_RED_S1_ 30
-#define AC_RED_S2_ 20
-
-
 /////////////////////////////////// L3GD20.h /////////////////////////////////////////
 #define GYRO_SENSITIVITY_ 0.071
 #define NOISE_THRESHOLD_ 1.5

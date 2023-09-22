@@ -11,13 +11,10 @@
 
 
 // ULTIMATE PID CONTROLLING STRATEGY
-int angularController(AC_State ac_state);
+bool finishMove(MV_Type mv_type_,float dist_ang);
 
-// GOING STRAIGHT SPECIFIED DISTANCE
-bool moveStraight(float dist_cm);
-
-// TAKING A TURN AT THE POINT - L-PRIORATIZED
-bool pointTurnLR(float angle);
+void speedController(void);
+void angularController(void);
 
 
 #endif /* INC_PD_H_ */

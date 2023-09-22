@@ -80,7 +80,7 @@ typedef enum
 	IDLE,
 	STRAIGHT_RUN,
 	POINT_TURN
-}AC_State;
+}MV_Type;
 
 
 typedef enum
@@ -89,6 +89,6 @@ typedef enum
 	SPEED2,
 	SPEED3,
 	ROT_SPEED
-}SPEED_;
+}SPEED_TYPE;
 
 #endif /* INC_TYPEDEFS_H_ */
