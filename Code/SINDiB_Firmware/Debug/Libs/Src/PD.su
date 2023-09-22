@@ -1,5 +1,3 @@
-../Libs/Src/PD.c:14:6:finishMove	16	static
-../Libs/Src/PD.c:45:6:assignParameter	8	static
-../Libs/Src/PD.c:79:6:speedController	24	static
-../Libs/Src/PD.c:108:6:angularController	40	static
-../Libs/Src/PD.c:141:6:irController	8	static
+../Libs/Src/PD.c:15:6:finishMove	16	static
+../Libs/Src/PD.c:43:6:speedController	32	static
+../Libs/Src/PD.c:71:6:angularController	40	static
