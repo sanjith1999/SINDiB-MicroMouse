@@ -12,6 +12,7 @@ extern "C" {
 #include <string.h>
 
 #include "main.h"
+#include "floodfill.h"
 #include "stm32f4xx_hal.h"
 #include "adc.h"
 #include "led.h"
@@ -25,12 +26,14 @@ extern "C" {
 #include "fastModes.h"
 #include "read_sensors.h"
 
+
 #include "typedefs.h"
 #include "ssd1306.h"
 #include "buzzer.h"
 #include "PD.h"
 
 extern bool buttonPress;
+extern int mouseState;
 
 // MAIN LOOP
 int cppmain(void);

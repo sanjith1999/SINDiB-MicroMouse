@@ -1,115 +1,76 @@
 #include <floodfill.h>
-#include "stm32f4xx_hal.h"
-#include <stdbool.h>
 #include <queue>
+#include <iostream>
+#include <string>
 
-int debug = 0;
+//coordinate XY, XY_prev;
+/*
+ orients :
+ 0- North
+ 1- East
+ 2- South
+ 3- West
+ */
 
-int startPos = 0;
 
-//int flood[ROWS][COLUMNS]={
-//		{14,13,12,11,10,9,8,7,7,8,9,10,11,12,13,14},
-//		{13,12,11,10,9,8,7,6,6,7,8,9,10,11,12,13},
-//		{12,11,10,9,8,7,6,5,5,6,7,8,9,10,11,12},
-//		{11,10,9,8,7,6,5,4,4,5,6,7,8,9,10,11},
-//		{10,9,8,7,6,5,4,3,3,4,5,6,7,8,9,10},
-//		{9,8,7,6,5,4,3,2,2,3,4,5,6,7,8,9},
-//		{8,7,6,5,4,3,2,1,1,2,3,4,5,6,7,8},
-//		{7,6,5,4,3,2,1,0,0,1,2,3,4,5,6,7},
-//		{7,6,5,4,3,2,1,0,0,1,2,3,4,5,6,7},
-//		{8,7,6,5,4,3,2,1,1,2,3,4,5,6,7,8},
-//		{9,8,7,6,5,4,3,2,2,3,4,5,6,7,8,9},
-//		{10,9,8,7,6,5,4,3,3,4,5,6,7,8,9,10},
-//		{11,10,9,8,7,6,5,4,4,5,6,7,8,9,10,11},
-//		{12,11,10,9,8,7,6,5,5,6,7,8,9,10,11,12},
-//		{13,12,11,10,9,8,7,6,6,7,8,9,10,11,12,13},
-//		{14,13,12,11,10,9,8,7,7,8,9,10,11,12,13,14},
-//};
-//int cells[ROWS][COLUMNS]={
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//};
-//int backFlood[ROWS][COLUMNS]={
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-//};
 
- int flood[ROWS][COLUMNS]={
- 		{6,5,4,3,3,4,5,6,7,8},
- 		{5,4,3,2,2,3,4,5,6,7},
- 		{4,3,2,1,1,2,3,4,5,6},
- 		{3,2,1,0,0,1,2,3,4,5},
- 		{3,2,1,0,0,1,2,3,4,5},
- 		{4,3,2,1,1,2,3,4,5,6},
- 		{5,4,3,2,2,3,4,5,6,7},
- 		{6,5,4,3,3,4,5,6,7,8},
- 		{7,6,5,4,4,5,4,7,8,9},
- 		{8,7,6,5,5,6,5,8,9,10},
+
+int flood[ROWS][COLUMNS]={
+		{14,13,12,11,10,9,8,7,7,8,9,10,11,12,13,14},
+		{13,12,11,10,9,8,7,6,6,7,8,9,10,11,12,13},
+		{12,11,10,9,8,7,6,5,5,6,7,8,9,10,11,12},
+		{11,10,9,8,7,6,5,4,4,5,6,7,8,9,10,11},
+		{10,9,8,7,6,5,4,3,3,4,5,6,7,8,9,10},
+		{9,8,7,6,5,4,3,2,2,3,4,5,6,7,8,9},
+		{8,7,6,5,4,3,2,1,1,2,3,4,5,6,7,8},
+		{7,6,5,4,3,2,1,0,0,1,2,3,4,5,6,7},
+		{7,6,5,4,3,2,1,0,0,1,2,3,4,5,6,7},
+		{8,7,6,5,4,3,2,1,1,2,3,4,5,6,7,8},
+		{9,8,7,6,5,4,3,2,2,3,4,5,6,7,8,9},
+		{10,9,8,7,6,5,4,3,3,4,5,6,7,8,9,10},
+		{11,10,9,8,7,6,5,4,4,5,6,7,8,9,10,11},
+		{12,11,10,9,8,7,6,5,5,6,7,8,9,10,11,12},
+		{13,12,11,10,9,8,7,6,6,7,8,9,10,11,12,13},
+		{14,13,12,11,10,9,8,7,7,8,9,10,11,12,13,14},
 };
+
 int cells[ROWS][COLUMNS]={
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
 };
 int backFlood[ROWS][COLUMNS]={
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
-		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
+		{-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,},
 };
 
-//int flood[ROWS][COLUMNS] = { { 2, 2, 3, 4, 5 }, { 1, 1, 2, 3, 4 }, { 0, 0, 1, 2,
-//		3 }, { 0, 0, 1, 2, 3 }, { 1, 1, 2, 3, 4 },
-//
-//};
-//int cells[ROWS][COLUMNS] =
-//		{ { 9, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, },
-//				{ -1, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, }, { -1, -1, -1,
-//						-1, -1, }, };
-//int backFlood[ROWS][COLUMNS] = { { -1, -1, -1, -1, -1, },
-//		{ -1, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, },
-//		{ -1, -1, -1, -1, -1, }, { -1, -1, -1, -1, -1, }, };
 
 void rotateFloodCounterClockwise(void) {
 	int original[ROWS][COLUMNS];
@@ -127,179 +88,100 @@ void rotateFloodCounterClockwise(void) {
 	}
 }
 
-struct surroundCoor {
-	struct coordinate N;
-	struct coordinate S;
-	struct coordinate W;
-	struct coordinate E;
-};
-
-
-
-// Structure of Node.
-//struct Node
-//{
-//	struct coordinate point;
-//	Node *link;
-//};
-//
-//
-//bool isempty(struct Node front, struct Node rear)
-//{
-// if(front == NULL && rear == NULL){
-//	 return true;
-// }
-// else{
-//	 return false;
-// }
-//}
-//
-////function to enter elements in queue
-//void enqueue (struct coordinate p,struct Node front, struct Node rear)
-//{
-//	Node *ptr = new Node();
-//	ptr->point= p;
-//	ptr->link = NULL;
-//
-//	//If inserting the first element/node
-//	if( front == NULL )
-//	{
-//		front = ptr;
-//		rear = ptr;
-//	}
-//	else
-//	{
-//		rear ->link = ptr;
-//		rear = ptr;
-//	}
-//}
-//
-////function to delete/remove element from queue
-//struct coordinate dequeue(struct Node front, struct Node rear )
-//{
-//	if( isempty() ){
-//	 // cout<<"Queue is empty\n";
-//	}
-//	else{
-//		//only one element/node in queue.
-//		if( front == rear)
-//		{
-//			Node *ptr = front;
-//			delete(front);
-//			front = rear = NULL;
-//			return ptr->point;
-//		}
-//		else
-//		{
-//			Node *ptr = front;
-//			front = front->link;
-//			return ptr->point;
-//		}
-//	}
-//}
-
-/*
- orients :
- 0- North
- 1- East
- 2- South
- 3- West
- */
-
 void updateWalls(struct coordinate point, int orient, bool L, bool R, bool F) {
 	if ((L && R) && F) {
 		if (orient == 0) {
-			cells[point.x][point.y] = 13;
+			cells[point.y][point.x] = 13;
 		}            //|-|
 		else if (orient == 1) {
-			cells[point.x][point.y] = 12;
+			cells[point.y][point.x] = 12;
 		}            //_-|
 		else if (orient == 2) {
-			cells[point.x][point.y] = 11;
+			cells[point.y][point.x] = 11;
 		}            //|_|
 		else if (orient == 3) {
-			cells[point.x][point.y] = 14;
+			cells[point.y][point.x] = 14;
 		}            //|-_
 	} else if ((L && R) && (!F)) {
 		if (orient == 0) {
-			cells[point.x][point.y] = 9;
+			cells[point.y][point.x] = 9;
 		}            //| |
 		else if (orient == 1) {
-			cells[point.x][point.y] = 10;
+			cells[point.y][point.x] = 10;
 		}            //_-
 		else if (orient == 2) {
-			cells[point.x][point.y] = 9;
+			cells[point.y][point.x] = 9;
 		}            //| |
 		else if (orient == 3) {
-			cells[point.x][point.y] = 10;
+			cells[point.y][point.x] = 10;
 		}            //_-
 	} else if ((L && F) && (!R)) {
 		if (orient == 0) {
-			cells[point.x][point.y] = 8;
+			cells[point.y][point.x] = 8;
 		}            //|-
 		else if (orient == 1) {
-			cells[point.x][point.y] = 7;
+			cells[point.y][point.x] = 7;
 		}            //-|
 		else if (orient == 2) {
-			cells[point.x][point.y] = 6;
+			cells[point.y][point.x] = 6;
 		}            //_|
 		else if (orient == 3) {
-			cells[point.x][point.y] = 5;
+			cells[point.y][point.x] = 5;
 		}            //|_
 	} else if ((R && F) && (!L)) {
 		if (orient == 0) {
-			cells[point.x][point.y] = 7;
+			cells[point.y][point.x] = 7;
 		}            //-|
 		else if (orient == 1) {
-			cells[point.x][point.y] = 6;
+			cells[point.y][point.x] = 6;
 		}            //_|
 		else if (orient == 2) {
-			cells[point.x][point.y] = 5;
+			cells[point.y][point.x] = 5;
 		}            //|_
 		else if (orient == 3) {
-			cells[point.x][point.y] = 8;
+			cells[point.y][point.x] = 8;
 		}            //|-
 	} else if (F) {
 		if (orient == 0) {
-			cells[point.x][point.y] = 2;
+			cells[point.y][point.x] = 2;
 		}            //-
 		else if (orient == 1) {
-			cells[point.x][point.y] = 3;
+			cells[point.y][point.x] = 3;
 		}            // |
 		else if (orient == 2) {
-			cells[point.x][point.y] = 4;
+			cells[point.y][point.x] = 4;
 		}            //_
 		else if (orient == 3) {
-			cells[point.x][point.y] = 1;
+			cells[point.y][point.x] = 1;
 		}            //|
 	} else if (L) {
 		if (orient == 0) {
-			cells[point.x][point.y] = 1;
+			cells[point.y][point.x] = 1;
 		}            //|
 		else if (orient == 1) {
-			cells[point.x][point.y] = 2;
+			cells[point.y][point.x] = 2;
 		}            //-
 		else if (orient == 2) {
-			cells[point.x][point.y] = 3;
+			cells[point.y][point.x] = 3;
 		}            // |
 		else if (orient == 3) {
-			cells[point.x][point.y] = 4;
+			cells[point.y][point.x] = 4;
 		}            //_
 	} else if (R) {
 		if (orient == 0) {
-			cells[point.x][point.y] = 3;
+			cells[point.y][point.x] = 3;
 		}            // |
 		else if (orient == 1) {
-			cells[point.x][point.y] = 4;
+			cells[point.y][point.x] = 4;
 		}            //_
 		else if (orient == 2) {
-			cells[point.x][point.y] = 3;
+			cells[point.y][point.x] = 1;
 		}            //|
 		else if (orient == 3) {
-			cells[point.x][point.y] = 4;
+			cells[point.y][point.x] = 2;
 		}            //-
 	} else {
-		cells[point.x][point.y] = 0;            //
+		cells[point.y][point.x] = 0;            //
 	}
 }
 
@@ -310,10 +192,10 @@ bool isAccessible(struct coordinate p, struct coordinate p1) {
 
 	if (p.x == p1.x) {
 		if (p.y > p1.y) {
-			if (cells[p.x][p.y] == 4 || cells[p.x][p.y] == 5
-					|| cells[p.x][p.y] == 6 || cells[p.x][p.y] == 10
-					|| cells[p.x][p.y] == 11 || cells[p.x][p.y] == 12
-					|| cells[p.x][p.y] == 14) {
+			if (cells[p.y][p.x] == 4 || cells[p.y][p.x] == 5
+					|| cells[p.y][p.x] == 6 || cells[p.y][p.x] == 10
+					|| cells[p.y][p.x] == 11 || cells[p.y][p.x] == 12
+					|| cells[p.y][p.x] == 14) {
 				return false;
 			}
 
@@ -321,10 +203,10 @@ bool isAccessible(struct coordinate p, struct coordinate p1) {
 				return true;
 			}
 		} else {
-			if (cells[p.x][p.y] == 2 || cells[p.x][p.y] == 7
-					|| cells[p.x][p.y] == 8 || cells[p.x][p.y] == 10
-					|| cells[p.x][p.y] == 12 || cells[p.x][p.y] == 13
-					|| cells[p.x][p.y] == 14) {
+			if (cells[p.y][p.x] == 2 || cells[p.y][p.x] == 7
+					|| cells[p.y][p.x] == 8 || cells[p.y][p.x] == 10
+					|| cells[p.y][p.x] == 12 || cells[p.y][p.x] == 13
+					|| cells[p.y][p.x] == 14) {
 				return false;
 			}
 
@@ -335,19 +217,19 @@ bool isAccessible(struct coordinate p, struct coordinate p1) {
 		}
 	} else if (p.y == p1.y) {
 		if (p.x > p1.x) {
-			if (cells[p.x][p.y] == 1 || cells[p.x][p.y] == 5
-					|| cells[p.x][p.y] == 8 || cells[p.x][p.y] == 9
-					|| cells[p.x][p.y] == 11 || cells[p.x][p.y] == 13
-					|| cells[p.x][p.y] == 14) {
+			if (cells[p.y][p.x] == 1 || cells[p.y][p.x] == 5
+					|| cells[p.y][p.x] == 8 || cells[p.y][p.x] == 9
+					|| cells[p.y][p.x] == 11 || cells[p.y][p.x] == 13
+					|| cells[p.y][p.x] == 14) {
 				return false;
 			} else {
 				return true;
 			}
 		} else {
-			if (cells[p.x][p.y] == 3 || cells[p.x][p.y] == 6
-					|| cells[p.x][p.y] == 7 || cells[p.x][p.y] == 9
-					|| cells[p.x][p.y] == 11 || cells[p.x][p.y] == 12
-					|| cells[p.x][p.y] == 13) {
+			if (cells[p.y][p.x] == 3 || cells[p.y][p.x] == 6
+					|| cells[p.y][p.x] == 7 || cells[p.y][p.x] == 9
+					|| cells[p.y][p.x] == 11 || cells[p.y][p.x] == 12
+					|| cells[p.y][p.x] == 13) {
 				return false;
 			} else {
 				return true;
@@ -360,23 +242,23 @@ bool isAccessible(struct coordinate p, struct coordinate p1) {
 
 struct surroundCoor getSurrounds(struct coordinate p) {
 	struct surroundCoor surCoor;
-	surCoor.N.x = p.x - 1;
-	surCoor.N.y = p.y;
+	surCoor.N.x = p.x;
+	surCoor.N.y = p.y + 1;
 
-	surCoor.S.x = p.x + 1;
-	surCoor.S.y = p.y;
+	surCoor.S.x = p.x;
+	surCoor.S.y = p.y - 1;
 
-	surCoor.W.x = p.x;
-	surCoor.W.y = p.y - 1;
+	surCoor.W.x = p.x - 1;
+	surCoor.W.y = p.y;
 
-	surCoor.E.x = p.x;
-	surCoor.E.y = p.y + 1;
+	surCoor.E.x = p.x + 1;
+	surCoor.E.y = p.y;
 
-	if (surCoor.S.x >= ROWS) {
-		surCoor.S.x = -1;
+	if (surCoor.N.x >= ROWS) {
+		surCoor.N.x = -1;
 	}
-	if (surCoor.E.y >= COLUMNS) {
-		surCoor.E.y = -1;
+	if (surCoor.W.y >= COLUMNS) {
+		surCoor.W.y = -1;
 	}
 
 	return surCoor;
@@ -384,28 +266,28 @@ struct surroundCoor getSurrounds(struct coordinate p) {
 
 bool isConsistant(struct coordinate p) {
 	struct surroundCoor surr = getSurrounds(p);
-	int minVals[4];
+	int minVals[4]={-1,-1,-1,-1};
 	if (surr.N.x >= 0 && surr.N.y >= 0) {
 		if (isAccessible(p, surr.N)) {
-			minVals[0] = flood[surr.N.x][surr.N.y];
+			minVals[0] = flood[surr.N.y][surr.N.x];
 		}
 	}
 	if (surr.E.x >= 0 && surr.E.y >= 0) {
 		if (isAccessible(p, surr.E)) {
-			minVals[1] = flood[surr.E.x][surr.E.y];
-		}
-	}
-	if (surr.W.x >= 0 && surr.W.y >= 0) {
-		if (isAccessible(p, surr.W)) {
-			minVals[2] = flood[surr.W.x][surr.W.y];
+			minVals[1] = flood[surr.E.y][surr.E.x];
 		}
 	}
 	if (surr.S.x >= 0 && surr.S.y >= 0) {
 		if (isAccessible(p, surr.S)) {
-			minVals[3] = flood[surr.S.x][surr.S.y];
+			minVals[2] = flood[surr.S.y][surr.S.x];
 		}
 	}
-	int val = flood[p.x][p.y];
+	if (surr.W.x >= 0 && surr.W.y >= 0) {
+		if (isAccessible(p, surr.W)) {
+			minVals[3] = flood[surr.W.y][surr.W.x];
+		}
+	}
+	int val = flood[p.y][p.x];
 	int minCount = 0;
 	for (int i = 0; i < 4; i++) {
 		if (minVals[i] == val - 1 && minVals[i] != -1) {
@@ -423,25 +305,25 @@ bool isConsistant(struct coordinate p) {
 
 void makeConsistant(struct coordinate p) {
 	struct surroundCoor surr = getSurrounds(p);
-	int minVals[4];
-	if (surr.N.x >= 0 && surr.N.y >= 0) {
+	int minVals[4]={-1,-1,-1,-1};
+	if (surr.N.y >= 0 && surr.N.x >= 0) {
 		if (isAccessible(p, surr.N)) {
-			minVals[0] = flood[surr.N.x][surr.N.y];
+			minVals[0] = flood[surr.N.y][surr.N.x];
 		}
 	}
-	if (surr.E.x >= 0 && surr.E.y >= 0) {
+	if (surr.E.y >= 0 && surr.E.x >= 0) {
 		if (isAccessible(p, surr.E)) {
-			minVals[1] = flood[surr.E.x][surr.E.y];
+			minVals[1] = flood[surr.E.y][surr.E.x];
 		}
 	}
-	if (surr.W.x >= 0 && surr.W.y >= 0) {
-		if (isAccessible(p, surr.W)) {
-			minVals[2] = flood[surr.W.x][surr.W.y];
-		}
-	}
-	if (surr.S.x >= 0 && surr.S.y >= 0) {
+	if (surr.S.y >= 0 && surr.S.x >= 0) {
 		if (isAccessible(p, surr.S)) {
-			minVals[3] = flood[surr.S.x][surr.S.y];
+			minVals[2] = flood[surr.S.y][surr.S.x];
+		}
+	}
+	if (surr.W.y >= 0 && surr.W.x >= 0) {
+		if (isAccessible(p, surr.W)) {
+			minVals[3] = flood[surr.W.y][surr.W.x];
 		}
 	}
 	int minimum = 1000;
@@ -453,16 +335,38 @@ void makeConsistant(struct coordinate p) {
 			minimum = minVals[i];
 		}
 	}
-	flood[p.x][p.y] = minimum + 1;
+	flood[p.y][p.x] = minimum + 1;
 }
 
 void floodFill(struct coordinate p, struct coordinate prev) {
 	if (!isConsistant(p)) {
-		flood[p.x][p.y] = flood[prev.x][prev.y] + 1;
+		flood[p.y][p.x] = flood[prev.y][prev.x] + 1;
 	}
 
 	std::queue<coordinate> q;
 	q.push(p);
+
+    struct surroundCoor surr = getSurrounds(p);
+    if (surr.N.x >= 0 && surr.N.y >= 0) {
+        if (isAccessible(p, surr.N)) {
+            q.push(surr.N);
+        }
+    }
+    if (surr.E.x >= 0 && surr.E.y >= 0) {
+        if (isAccessible(p, surr.E)) {
+            q.push(surr.E);
+        }
+    }
+    if (surr.S.x >= 0 && surr.S.y >= 0) {
+        if (isAccessible(p, surr.S)) {
+            q.push(surr.S);
+        }
+    }
+    if (surr.W.x >= 0 && surr.W.y >= 0) {
+        if (isAccessible(p, surr.W)) {
+            q.push(surr.W);
+        }
+    }
 
 	while (!q.empty()) {
 		struct coordinate crun = q.front();
@@ -473,24 +377,24 @@ void floodFill(struct coordinate p, struct coordinate prev) {
 			makeConsistant(crun);
 			q.push(crun);
 			struct surroundCoor surr = getSurrounds(crun);
-			if (surr.N.x >= 0 && surr.N.y >= 0) {
+			if (surr.N.y >= 0 && surr.N.x >= 0) {
 				if (isAccessible(crun, surr.N)) {
 					q.push(surr.N);
 				}
 			}
-			if (surr.E.x >= 0 && surr.E.y >= 0) {
+			if (surr.E.y >= 0 && surr.E.x >= 0) {
 				if (isAccessible(crun, surr.E)) {
 					q.push(surr.E);
 				}
 			}
-			if (surr.W.x >= 0 && surr.W.y >= 0) {
-				if (isAccessible(crun, surr.W)) {
-					q.push(surr.W);
-				}
-			}
-			if (surr.S.x >= 0 && surr.S.y >= 0) {
+			if (surr.S.y >= 0 && surr.S.x >= 0) {
 				if (isAccessible(crun, surr.S)) {
 					q.push(surr.S);
+				}
+			}
+			if (surr.W.y >= 0 && surr.W.x >= 0) {
+				if (isAccessible(crun, surr.W)) {
+					q.push(surr.W);
 				}
 			}
 		}
@@ -500,41 +404,43 @@ void floodFill(struct coordinate p, struct coordinate prev) {
 
 char toMove(struct coordinate p, struct coordinate prevPos, int orient) {
 	struct surroundCoor surr = getSurrounds(p);
+
 //	int val = flood[p.x][p.y];
 	int minVals[4] = { 1000, 1000, 1000, 1000 };
 	int prevDir = 0;
-	if (surr.N.x >= 0 && surr.N.y >= 0) {
+	if (surr.N.y >= 0 && surr.N.x >= 0) {
 		if (isAccessible(p, surr.N)) {
-			minVals[0] = flood[surr.N.x][surr.N.y];
+			minVals[0] = flood[surr.N.y][surr.N.x];
 			if (surr.N.x == prevPos.x && surr.N.y == prevPos.y) {
 				prevDir = 0;
 			}
 		}
 	}
-	if (surr.E.x >= 0 && surr.E.y >= 0) {
+	if (surr.E.y >= 0 && surr.E.x >= 0) {
 		if (isAccessible(p, surr.E)) {
-			minVals[1] = flood[surr.E.x][surr.E.y];
+			minVals[1] = flood[surr.E.y][surr.E.x];
 			if (surr.E.x == prevPos.x && surr.E.y == prevPos.y) {
 				prevDir = 1;
 			}
 		}
 	}
-	if (surr.W.x >= 0 && surr.W.y >= 0) {
-		if (isAccessible(p, surr.W)) {
-			minVals[2] = flood[surr.W.x][surr.W.y];
-			if (surr.W.x == prevPos.x && surr.W.y == prevPos.y) {
+	if (surr.S.y >= 0 && surr.S.x >= 0) {
+		if (isAccessible(p, surr.S)) {
+			minVals[2] = flood[surr.S.y][surr.S.x];
+			if (surr.S.x == prevPos.x && surr.S.y == prevPos.y) {
 				prevDir = 2;
 			}
 		}
 	}
-	if (surr.S.x >= 0 && surr.S.y >= 0) {
-		if (isAccessible(p, surr.S)) {
-			minVals[3] = flood[surr.S.x][surr.S.y];
-			if (surr.S.x == prevPos.x && surr.S.y == prevPos.y) {
+	if (surr.W.y >= 0 && surr.W.x >= 0) {
+		if (isAccessible(p, surr.W)) {
+			minVals[3] = flood[surr.W.y][surr.W.x];
+			if (surr.W.x == prevPos.x && surr.W.y == prevPos.y) {
 				prevDir = 3;
 			}
 		}
 	}
+
 	int minimum = 1000;
 	int noMovements = 0;
 	for (int i = 0; i < 4; i++) {
@@ -561,6 +467,16 @@ char toMove(struct coordinate p, struct coordinate prevPos, int orient) {
 		}
 	}
 
+
+    using namespace std;
+    string line ="";
+    for(int b = 0; b < 4; b++)
+    {
+        line = line +  to_string(minVals[b])+"\t";
+    }
+    string minCellS = to_string(minCell);
+
+
 	if (minCell == orient) {
 		return 'F';
 	} else if (minCell == orient - 1 || minCell == orient + 3) {
@@ -578,31 +494,78 @@ char toMoveBack(struct coordinate p, struct coordinate prevPos, int orient) {
 //	int val = backFlood[p.x][p.y];
 	int minVals[4] = { 1000, 1000, 1000, 1000 };
 
-	if (surr.N.x >= 0 && surr.N.y >= 0) {
+	if (surr.N.y >= 0 && surr.N.x >= 0) {
 		if (isAccessible(p, surr.N)) {
-			minVals[0] = backFlood[surr.N.x][surr.N.y];
+			minVals[0] = backFlood[surr.N.y][surr.N.x];
 		}
 	}
-	if (surr.E.x >= 0 && surr.E.y >= 0) {
+	if (surr.E.y >= 0 && surr.E.x >= 0) {
 		if (isAccessible(p, surr.E)) {
-			minVals[1] = backFlood[surr.E.x][surr.E.y];
+			minVals[1] = backFlood[surr.E.y][surr.E.x];
 		}
 	}
-	if (surr.W.x >= 0 && surr.W.y >= 0) {
-		if (isAccessible(p, surr.W)) {
-			minVals[2] = backFlood[surr.W.x][surr.W.y];
-		}
-	}
-	if (surr.S.x >= 0 && surr.S.y >= 0) {
+	if (surr.S.y >= 0 && surr.S.x >= 0) {
 		if (isAccessible(p, surr.S)) {
-			minVals[3] = backFlood[surr.S.x][surr.S.y];
+			minVals[2] = backFlood[surr.S.y][surr.S.x];
+		}
+	}
+	if (surr.W.y >= 0 && surr.W.x >= 0) {
+		if (isAccessible(p, surr.W)) {
+			minVals[3] = backFlood[surr.W.y][surr.W.x];
 		}
 	}
 
 	int minimum = 1000;
 	int minCell = 0;
 	for (int i = 0; i < 4; i++) {
-		if (minVals[i] != 1000 && minVals[i] < minimum) {
+		if ((minVals[i] != 1000 && minVals[i] != -1 ) && minVals[i] < minimum) {
+			minimum = minVals[i];
+			minCell = i;
+		}
+	}
+
+	if (minCell == orient) {
+		return 'F';
+	} else if (minCell == orient - 1 || minCell == orient + 3) {
+		return 'L';
+	} else if (minCell == orient + 1 || minCell == orient - 3) {
+		return 'R';
+	} else {
+		return 'B';
+	}
+}
+
+
+char toMoveFastForward(struct coordinate p, struct coordinate prevPos, int orient) {
+	struct surroundCoor surr = getSurrounds(p);
+//	int val = backFlood[p.x][p.y];
+	int minVals[4] = { 1000, 1000, 1000, 1000 };
+
+	if (surr.N.y >= 0 && surr.N.x >= 0) {
+		if (isAccessible(p, surr.N)) {
+			minVals[0] = backFlood[surr.N.y][surr.N.x];
+		}
+	}
+	if (surr.E.y >= 0 && surr.E.x >= 0) {
+		if (isAccessible(p, surr.E)) {
+			minVals[1] = backFlood[surr.E.y][surr.E.x];
+		}
+	}
+	if (surr.S.y >= 0 && surr.S.x >= 0) {
+		if (isAccessible(p, surr.S)) {
+			minVals[2] = backFlood[surr.S.y][surr.S.x];
+		}
+	}
+	if (surr.W.y >= 0 && surr.W.x >= 0) {
+		if (isAccessible(p, surr.W)) {
+			minVals[3] = backFlood[surr.W.y][surr.W.x];
+		}
+	}
+
+	int minimum = 1000;
+	int minCell = 0;
+	for (int i = 0; i < 4; i++) {
+		if ((minVals[i] != 1000 && minVals[i] != -1 ) && minVals[i] < minimum) {
 			minimum = minVals[i];
 			minCell = i;
 		}
@@ -621,8 +584,8 @@ char toMoveBack(struct coordinate p, struct coordinate prevPos, int orient) {
 
 void backtrack() {
 	struct coordinate p;
-	p.x = 0;
 	p.y = 0;
+	p.x = 0;
 	int distance = 1;
 
 	backFlood[0][0] = 0;
@@ -639,38 +602,38 @@ void backtrack() {
 			p = q.front();
 			q.pop();
 
-			if (flood[p.x][p.y] == 0) {
+			if (flood[p.y][p.x] == 0) {
 				br = 1;
 				break;
 			}
 			struct surroundCoor surr = getSurrounds(p);
 
-			if (surr.N.x >= 0 && surr.N.y >= 0 && cells[surr.N.x][surr.N.y] >= 0
-					&& backFlood[surr.N.x][surr.N.y] == -1) {
+			if (surr.N.y >= 0 && surr.N.x >= 0 && cells[surr.N.y][surr.N.x] >= 0
+					&& backFlood[surr.N.y][surr.N.x] == -1) {
 				if (isAccessible(p, surr.N)) {
 					temq.push(surr.N);
-					backFlood[surr.N.x][surr.N.y] = distance;
+					backFlood[surr.N.y][surr.N.x] = distance;
 				}
 			}
-			if (surr.E.x >= 0 && surr.E.y >= 0 && cells[surr.E.x][surr.E.y] >= 0
-					&& backFlood[surr.E.x][surr.E.y] == -1) {
+			if (surr.E.y >= 0 && surr.E.x >= 0 && cells[surr.E.y][surr.E.x] >= 0
+					&& backFlood[surr.E.y][surr.E.x] == -1) {
 				if (isAccessible(p, surr.E)) {
 					temq.push(surr.E);
-					backFlood[surr.E.x][surr.E.y] = distance;
+					backFlood[surr.E.y][surr.E.x] = distance;
 				}
 			}
-			if (surr.S.x >= 0 && surr.S.y >= 0 && cells[surr.S.x][surr.S.y] >= 0
-					&& backFlood[surr.S.x][surr.S.y] == -1) {
+			if (surr.S.y >= 0 && surr.S.x >= 0 && cells[surr.S.y][surr.S.x] >= 0
+					&& backFlood[surr.S.y][surr.S.x] == -1) {
 				if (isAccessible(p, surr.S)) {
 					temq.push(surr.S);
-					backFlood[surr.S.x][surr.S.y] = distance;
+					backFlood[surr.S.y][surr.S.x] = distance;
 				}
 			}
-			if (surr.W.x >= 0 && surr.W.y >= 0 && cells[surr.W.x][surr.W.y] >= 0
-					&& backFlood[surr.W.x][surr.W.y] == -1) {
+			if (surr.W.y >= 0 && surr.W.x >= 0 && cells[surr.W.y][surr.W.x] >= 0
+					&& backFlood[surr.W.y][surr.W.x] == -1) {
 				if (isAccessible(p, surr.W)) {
 					temq.push(surr.W);
-					backFlood[surr.W.x][surr.W.y] = distance;
+					backFlood[surr.W.y][surr.W.x] = distance;
 				}
 			}
 
@@ -716,16 +679,18 @@ int orientation(int orient, char turning) {
 
 struct coordinate updateCoordinates(struct coordinate coordi, int orient) {
 	if (orient == 0) {
-		coordi.x -= 1;
-	}
-	if (orient == 1) {
 		coordi.y += 1;
 	}
-	if (orient == 2) {
+	if (orient == 1) {
 		coordi.x += 1;
 	}
-	if (orient == 3) {
+	if (orient == 2) {
 		coordi.y -= 1;
+	}
+	if (orient == 3) {
+		coordi.x -= 1;
 	}
 	return coordi;
 }
+
+

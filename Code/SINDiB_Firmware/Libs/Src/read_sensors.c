@@ -10,10 +10,21 @@ int32_t RFSensor = 0;
 int32_t DLSensor=0;
 int32_t DRSensor=0;
 
+int32_t LBuff[15] = {false};
+int32_t RBuff[15] = {false};
+int32_t FLBuff[15] = {false};
+int32_t FRBuff[15] = {false};
+
+int32_t averageL = 0;
+int32_t averageR = 0;
+int32_t averageFL = 0;
+int32_t averageFR = 0;
+
 bool L = false;
 bool R = false;
 bool F = false;
 
+int point = 0;
 /*read IR sensors*/
 void readSensor(void)
 {
@@ -64,6 +75,15 @@ void readSensor(void)
 	DLSensor = DLSensor*reflectionRate/1000;
 	DRSensor = DRSensor*reflectionRate/1000;
 	
+	if (point>=15){
+		point = 0;
+	}
+
+	LBuff[point] = DLSensor;
+	RBuff[point] = DRSensor;
+	FLBuff[point] = LFSensor;
+	FRBuff[point] = RFSensor;
+
 	LED7_OFF;
 }
 
@@ -119,42 +139,80 @@ bool leftIrBlink(){
 }
 
 void getSensorReadings() {
+
+	calculateAndSaveAverages();
+
 	static uint32_t t1 = 150;
 	static uint32_t t2 = 100;
 
-	if (DLSensor > t1 && DRSensor > t1 && DRSensor > t1 && RFSensor > t1){
-		F = true;
+
+
+	if (averageR > t1){
 		R = true;
-		L = true;
-	} else if (DLSensor > t1 && DRSensor > t1){
-		F = false;
-		R = true;
-		L = true;
-	} else if (LFSensor > t1 && DLSensor > t1){
-		F = true;
-		R = false;
-		L = true;
-	} else if (RFSensor > t1 && DRSensor > t1){
-		F = true;
-		R = true;
-		L = false;
-	} else if (DLSensor > t1){
-		F = false;
-		R = false;
-		L = true;
-	} else if (DRSensor > t1){
-		F = false;
-		R = true;
-		L = false;
-	} else if (RFSensor > t2 || LFSensor > t2){
-		F = true;
-		R = false;
-		L = false;
 	} else {
-		F = false;
 		R = false;
+	}
+
+	if (averageL > t1){
+		L = true;
+	} else {
 		L = false;
 	}
 
+	if ((averageFL+averageFR)/2 > t2){
+		F = true;
+	} else {
+		F = false;
+	}
 
+	// if (DLSensor > t1 && DRSensor > t1 && DRSensor > t1 && RFSensor > t1){
+	// 	F = true;
+	// 	R = true;
+	// 	L = true;
+	// } else if (DLSensor > t1 && DRSensor > t1){
+	// 	F = false;
+	// 	R = true;
+	// 	L = true;
+	// } else if (LFSensor > t1 && DLSensor > t1){
+	// 	F = true;
+	// 	R = false;
+	// 	L = true;
+	// } else if (RFSensor > t1 && DRSensor > t1){
+	// 	F = true;
+	// 	R = true;
+	// 	L = false;
+	// } else if (DLSensor > t1){
+	// 	F = false;
+	// 	R = false;
+	// 	L = true;
+	// } else if (DRSensor > t1){
+	// 	F = false;
+	// 	R = true;
+	// 	L = false;
+	// } else if (RFSensor > t2 || LFSensor > t2){
+	// 	F = true;
+	// 	R = false;
+	// 	L = false;
+	// } else {
+	// 	F = false;
+	// 	R = false;
+	// 	L = false;
+	// }
+}
+
+void calculateAndSaveAverages() {
+    int i;
+    // Calculate the average for each buffer
+    for (i = 0; i < 15; i++) {
+        averageL += LBuff[i];
+        averageR += RBuff[i];
+        averageFL += FLBuff[i];
+        averageFR += FRBuff[i];
+    }
+
+    // Divide the sums by 15 to get the average
+    averageL /= 15;
+    averageR /= 15;
+    averageFL /= 15;
+    averageFR /= 15;
 }

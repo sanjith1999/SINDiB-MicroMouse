@@ -1,7 +1,8 @@
-../Libs/Src/read_sensors.c:18:6:readSensor	10
-../Libs/Src/read_sensors.c:74:6:readVolMeter	1
-../Libs/Src/read_sensors.c:82:6:stop_it_all	1
-../Libs/Src/read_sensors.c:97:6:irBlink	3
-../Libs/Src/read_sensors.c:105:6:rightIrBlink	2
-../Libs/Src/read_sensors.c:113:6:leftIrBlink	2
-../Libs/Src/read_sensors.c:121:6:getSensorReadings	15
+../Libs/Src/read_sensors.c:29:6:readSensor	11
+../Libs/Src/read_sensors.c:94:6:readVolMeter	1
+../Libs/Src/read_sensors.c:102:6:stop_it_all	1
+../Libs/Src/read_sensors.c:117:6:irBlink	3
+../Libs/Src/read_sensors.c:125:6:rightIrBlink	2
+../Libs/Src/read_sensors.c:133:6:leftIrBlink	2
+../Libs/Src/read_sensors.c:141:6:getSensorReadings	4
+../Libs/Src/read_sensors.c:203:6:calculateAndSaveAverages	2

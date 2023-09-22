@@ -42,7 +42,7 @@ static float ac_kp = 1, ac_kd = 0, ac_red = 1e3;
 static int counts_ = 0; // CONVERTING ANGLE/ DISTANCE TO ENCODER COUNTS
 static float speed_th_ = 0;
 
-void assignParameter(void)
+void assignParameters(void)
 {
 	switch (mv_type)
 	{
