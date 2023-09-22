@@ -17,7 +17,7 @@ int cppmain(void)
 
 	while (1)
 	{
-		if (finishMove(POINT_TURN,60))
+		irController();
 		// {
 			// STOP_ROBOT;
 		// 	HAL_Delay(3000);
