@@ -12,7 +12,7 @@ int runState = 0;
 static coordinate XY;
 static coordinate XY_prev;
 
-int orient = 1;
+int orient = 0;
 char direction;
 bool starting = false;
 float edgeToCenter = 13;
@@ -22,7 +22,6 @@ float centerToEdgeBack = 3;
 float Angle180 = 180;
 float centerToEdge;
 
-
 void mouseRun();
 
 int cppmain(void)
@@ -31,17 +30,18 @@ int cppmain(void)
 	HAL_Delay(1000);
 	disp_state = DEFAULT;
 
-
-	if (orient == 1){
+	if (orient == 1)
+	{
 		XY.x = 1;
 		XY.y = 0;
+		cells[0][0] = 10;
 	}
-	else{
+	else
+	{
 		XY.x = 0;
 		XY.y = 1;
+		cells[0][0] = 9;
 	}
-
-
 
 	XY_prev.y = 0;
 	XY_prev.x = 0;
@@ -55,7 +55,7 @@ int cppmain(void)
 		// 	HAL_Delay(2000);
 		// }
 		mouseRun();
-//		getSensorReadings();
+		//		getSensorReadings();
 		i++;
 		HAL_Delay(1);
 	}
@@ -164,7 +164,7 @@ void mouseRun()
 			{ // in center
 				LED5_ON;
 				backtrack();
-				direction = 'B';
+				direction = toMoveBack(XY, XY_prev, orient);
 				mouseState = 3;
 				runState = 2;
 			}
@@ -416,15 +416,40 @@ void mouseRun()
 
 		break;
 
-	case 8:
-		//			mouseState = setInitial();
+	case 8: // set initial
+
+		if (irBlink())
+		{
+			if (state == 1)
+			{
+				orient = 0;
+			}
+			else
+			{
+				orient = 1;
+			}
+
+			if (orient == 1)
+			{
+				XY.x = 1;
+				XY.y = 0;
+				cells[0][0] = 10;
+			}
+			else
+			{
+				XY.x = 0;
+				XY.y = 1;
+				cells[0][0] = 9;
+			}
+
+			XY_prev.y = 0;
+			XY_prev.x = 0;
+		}
 
 		if (buttonPress)
 		{
-
 			HAL_Delay(1000);
 			mouseState = 0;
-
 			buttonPress = false;
 		}
 

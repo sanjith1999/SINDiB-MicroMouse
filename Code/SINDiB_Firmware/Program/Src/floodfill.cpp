@@ -21,7 +21,7 @@ int flood[ROWS][COLUMNS]={
 };
 
 int cells[ROWS][COLUMNS]={
-		{10,-1,-1,-1,-1},
+		{-1,-1,-1,-1,-1},
 		{-1,-1,-1,-1,-1},
 		{-1,-1,-1,-1,-1},
 		{-1,-1,-1,-1,-1},
@@ -657,7 +657,6 @@ void backtrack() {
 					backFlood[surr.W.y][surr.W.x] = distance;
 				}
 			}
-
 		}
 
 		if (br) {
