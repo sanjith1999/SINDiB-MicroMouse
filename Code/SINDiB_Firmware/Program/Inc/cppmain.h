@@ -21,11 +21,8 @@ extern "C" {
 #include "display.h"
 #include "L3GD20.h"
 
-#include "sysModes.h"
-#include "searchModes.h"
-#include "fastModes.h"
-#include "read_sensors.h"
 
+#include "read_sensors.h"
 
 #include "typedefs.h"
 #include "ssd1306.h"
@@ -34,6 +31,7 @@ extern "C" {
 
 extern bool buttonPress;
 extern int mouseState;
+extern int runState;
 
 // MAIN LOOP
 int cppmain(void);

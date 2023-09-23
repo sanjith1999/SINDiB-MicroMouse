@@ -34,7 +34,7 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 	// CORRECTIONS
 	speedController();
 	
-	// TERMINATION CODITION
+//	 TERMINATION CODITION
 	if (fabs(PD_correction_sc) < fabs(TERMINATION_TH))
 	{
 		if (fm_counter > 5)

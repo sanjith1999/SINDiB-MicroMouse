@@ -66,6 +66,4 @@ typedef enum
 	ROT_SPEED
 } SPEED_TYPE;
 
-
-
 #endif /* INC_TYPEDEFS_H_ */

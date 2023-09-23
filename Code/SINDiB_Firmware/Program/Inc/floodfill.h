@@ -17,8 +17,8 @@ extern "C" {
 
 
 
-#define ROWS 16
-#define COLUMNS 16
+#define ROWS 5
+#define COLUMNS 5
 
 extern int flood[ROWS][COLUMNS];
 extern int backFlood[ROWS][COLUMNS];

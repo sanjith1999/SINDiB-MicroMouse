@@ -38,7 +38,4 @@
 "./Libs/Src/motor.o"
 "./Libs/Src/read_sensors.o"
 "./Program/Src/cppmain.o"
-"./Program/Src/fastModes.o"
 "./Program/Src/floodfill.o"
-"./Program/Src/searchModes.o"
-"./Program/Src/sysModes.o"

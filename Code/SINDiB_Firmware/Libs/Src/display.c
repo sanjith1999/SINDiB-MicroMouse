@@ -2,18 +2,21 @@
 
 DISP_State disp_state;
 
-void displayInit(void) {
+void displayInit(void){
 	ssd1306_Init();
 	disp_state = INIT;
 	displayUpdate();
 }
 
-void clearScreen() {
+void clearScreen()
+{
 	ssd1306_Fill(Black);
 }
 
-void writeString(char *str, FONT_Size font_size) {
-	switch (font_size) {
+void writeString(char *str, FONT_Size font_size)
+{
+	switch (font_size)
+	{
 	case SMALL:
 		ssd1306_WriteString(str, Font_6x8, White);
 		break;
@@ -29,12 +32,14 @@ void writeString(char *str, FONT_Size font_size) {
 	}
 }
 
-void putString(char *str, int x, int y, FONT_Size font_size) {
+void putString(char *str, int x, int y, FONT_Size font_size)
+{
 	ssd1306_SetCursor(x, y);
 	writeString(str, font_size);
 }
 
-void putChar(char chr, int x, int y, FONT_Size font_size) {
+void putChar(char chr, int x, int y, FONT_Size font_size)
+{
 	char str[2];
 	// Copy the character into the string
 	str[0] = chr;
@@ -44,36 +49,41 @@ void putChar(char chr, int x, int y, FONT_Size font_size) {
 	writeString(str, font_size);
 }
 
-void putInt(int INT, int x, int y, FONT_Size font_size) {
+void putInt(int INT, int x, int y, FONT_Size font_size)
+{
 	char buff[64];
 	snprintf(buff, sizeof(buff), "%d", INT);
 	ssd1306_SetCursor(x, y);
 	writeString(buff, font_size);
 }
 
-void putFloat(float FLOAT, int x, int y, FONT_Size font_size) {
+void putFloat(float FLOAT, int x, int y, FONT_Size font_size)
+{
 	char buff[64];
 	snprintf(buff, sizeof(buff), "%.2f", FLOAT); // Change %.2f to adjust precision
 	ssd1306_SetCursor(x, y);
 	writeString(buff, font_size);
 }
 
-void displayUpdate(void) {
+
+void displayUpdate(void)
+{
 	clearScreen();
-	switch (disp_state) {
+	switch (disp_state)
+	{
 	// INITIALIZATION BLOCK: AUDI CAR EXPECTED
 	case (INIT):
 		for (int delta = 0; delta < 5; delta++)
 			ssd1306_DrawCircle(16 * delta + 35, 15, 10, White);
 		break;
 
-		// DEFAULT SCREEN --> BATTERY PERCENTAGE, STATE OF THE ROBOT
+	// DEFAULT SCREEN --> BATTERY PERCENTAGE, STATE OF THE ROBOT
 	case (DEFAULT):
 		// DISPLAYING BATTERY VOLTAGE
-		putString("BAT:", 74, 22, SMALL);
-		putFloat(voltage, 104, 22, SMALL);
+		putString("BAT:",74,2,SMALL);
+		putFloat(voltage,104 , 2, SMALL);
 
-		putString("STATE:", 2, 2, SMALL);
+		// putString(turn,44,16,MEDIUM);
 		switch (mouseState) {
 		case (0):
 			putString("IDLE", 42, 2, SMALL);break;
@@ -94,44 +104,67 @@ void displayUpdate(void) {
 		case (8):
 			putString("SET INITIAL", 42, 2, SMALL);break;
 		}
+		
+
+		switch (runState) {
+		case (0):
+			putString("STARTING", 42, 12, SMALL);break;
+		case (1):
+			putString("DECISION", 42, 12, SMALL);break;
+		case (2):
+			putString("MV_CENTER", 42, 12, SMALL);break;
+		case (3):
+			putString("TURNING", 42, 12, SMALL);break;
+		case (4):
+			putString("MV_EDGE", 42, 12, SMALL);break;		
+		}
+
+		putString("L:",2,24,SMALL);
+		putInt((int)L,20 , 24, SMALL);
+
+		putString("F:",30,24,SMALL);
+		putInt((int)F,48 , 24, SMALL);
+
+		putString("R:",58,24,SMALL);
+		putInt((int)R,76 , 24, SMALL);
 		break;
 
 	case (GYRO_CALIB):
-		putString("NOISE: ", 2, 2, SMALL);
-		putFloat(noise, 64, 2, SMALL);
+		putString("NOISE: ",2,2,SMALL);
+		putFloat(noise,64, 2, SMALL);
+ 
+		putString("OFFSET: ",2,11,SMALL);
+		putInt(offset,64,11,SMALL);
 
-		putString("OFFSET: ", 2, 11, SMALL);
-		putInt(offset, 64, 11, SMALL);
-
-		putString("ANGLE: ", 2, 22, SMALL);
-		putFloat(angle_z, 64, 22, SMALL);
+		putString("ANGLE: ",2,22,SMALL);
+		putFloat(angle_z,64,22,SMALL);
 		break;
 
 	case (SENSOR_READ):
 
-		putString("LF:", 2, 2, SMALL);
-		putInt(LFSensor, 26, 2, SMALL);
+		putString("RF:",2,2,SMALL);
+		putFloat(averageFR,26,2, SMALL);
 
-		putString("RF:", 76, 2, SMALL);
-		putInt(RFSensor, 100, 2, SMALL);
+		putString("LF:",76,2,SMALL);
+		putFloat(averageFL,100,2, SMALL);
 
-		putString("DL:", 2, 13, SMALL);
-		putInt(DLSensor, 26, 13, SMALL);
+		putString("DR:",2,13,SMALL);
+		putFloat(averageR,26,13, SMALL);
 
-		putString("DR:", 76, 13, SMALL);
-		putInt(DRSensor, 100, 13, SMALL);
-
-		putString("ANGLE:", 22, 24, SMALL);
-		putFloat(angle_z, 70, 22, SMALL);
+		putString("DL:",76,13,SMALL);
+		putFloat(averageL,100,13, SMALL);
+		
+		putString("ANGLE:",22,24,SMALL);
+		putFloat(angle_z,70,22, SMALL);
 		break;
 
 	case (LOW_BAT):
-		putString("BAT LOW...!", 2, 7, LARGE);
+		putString("BAT LOW...!",2,7,LARGE);
 		break;
 
 	case (SUCESS_MSG):
-		putString("HURRAYYYY!!!", 2, 2, LARGE);
-		putString("SINDiB na kokka", 2, 22, SMALL);
+		putString("HURRAYYYY!!!",2,2,LARGE);
+		putString("SINDiB na kokka",2,22,SMALL);
 		break;
 	}
 	ssd1306_UpdateScreen();

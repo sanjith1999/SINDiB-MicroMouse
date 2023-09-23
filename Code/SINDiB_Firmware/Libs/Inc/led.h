@@ -77,5 +77,11 @@ LED 11: GYRO CALIB
 	LED11_OFF
 
 #define LED6_TOG HAL_GPIO_TogglePin(LED6_GPIO_Port,LED6_Pin)
+#define LED9_TOG HAL_GPIO_TogglePin(LED9_GPIO_Port,LED9_Pin)
+#define LED10_TOG HAL_GPIO_TogglePin(LED10_GPIO_Port,LED10_Pin)
+#define LED11_TOG HAL_GPIO_TogglePin(LED11_GPIO_Port,LED11_Pin)
+
+
+
 
 #endif /* INC_LED_H_ */

@@ -13,11 +13,12 @@
 
 // GLOBAL VARIABLES
 extern float l_speed,
-    r_speed, al_speed;
+    r_speed;
 
 // BASE SPEEDS
 extern float st_speed,
-    rt_speed;
+    rt_speed,
+    al_speed;
 
 // INITIALIZATION OF MOTOR
 void motorInit(void);
