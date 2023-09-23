@@ -1,14 +1,6 @@
-<<<<<<< HEAD
-../Libs/Src/PD.c:14:6:finishMove	16	static
-../Libs/Src/PD.c:45:6:assignParameters	8	static
-../Libs/Src/PD.c:79:6:speedController	24	static
-../Libs/Src/PD.c:108:6:angularController	40	static
-../Libs/Src/PD.c:141:6:irController	8	static
-=======
 ../Libs/Src/PD.c:18:6:finishMove	16	static
 ../Libs/Src/PD.c:79:6:assignParameters	16	static
 ../Libs/Src/PD.c:123:6:speedController	32	static
 ../Libs/Src/PD.c:161:6:angularController	40	static
 ../Libs/Src/PD.c:194:6:notInThreshold	4	static
 ../Libs/Src/PD.c:202:6:irController	24	static
->>>>>>> fe7e2b6 (V0.15: PARAMETER TUNING - STRAIGHT RUN, TURN)

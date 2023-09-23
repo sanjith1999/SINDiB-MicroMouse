@@ -201,13 +201,6 @@ bool notInThreshold()
 // DL SENSOR ALIGNMENT
 void irController(void)
 {
-<<<<<<< HEAD
-	ir_error = LFSensor - RFSensor;
-	PD_correction_ir = (ir_error * ir_kp + (ir_error - ir_last_error) * ir_kd) / ir_red;
-	ir_last_error = ir_error;
-	l_speed = -PD_correction_ir;r_speed = PD_correction_ir;
-	setWheels();
-=======
 	if ((mv_type != STRAIGHT_RUN) || notInThreshold())
 	{
 		ir_error = DLSensor - DRSensor;
@@ -217,5 +210,4 @@ void irController(void)
 	}
 	PD_correction_ir = 0;
 	return;
->>>>>>> fe7e2b6 (V0.15: PARAMETER TUNING - STRAIGHT RUN, TURN)
 }

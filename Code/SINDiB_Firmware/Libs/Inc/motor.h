@@ -13,7 +13,7 @@
 
 // GLOBAL VARIABLES
 extern float l_speed,
-    r_speed;
+    r_speed, al_speed;
 
 // BASE SPEEDS
 extern float st_speed,
