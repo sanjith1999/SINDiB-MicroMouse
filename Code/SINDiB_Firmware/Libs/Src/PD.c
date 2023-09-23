@@ -1,7 +1,9 @@
 #include "PD.h"
 
+const float TERMINATION_TH = 4e-2;
+
 // VARIABLES
-static u32 l_start = 0, r_start = 0; // STORE STARTING POSITION
+static u32 l_start = 0, r_start = 0, previous_time = 0, current_time = 0; // STORE STARTING POSITION
 static float start_angle = 0;
 
 static MV_Type mv_type = IDLE;
@@ -11,64 +13,106 @@ static float PD_correction_sc = 0, PD_correction_ac = 0, PD_correction_ir = 0;
 static float sc_last_error = 0, ac_last_error = 0, ir_last_error = 0;
 
 /////////////////////////////////////////////////// CONTROLLER /////////////////////////////////////////////////////////////////
-bool finishMove(MV_Type mv_type_, float dist_ang_) //////////////////////////////////////// NO LOOP EXIT YET //////////////////////////////////////////
+static int fm_counter = 0;
+
+bool finishMove(MV_Type mv_type_, float dist_ang_)
 {
 	mv_type = mv_type_, dist_ang = dist_ang_;
+	current_time = HAL_GetTick();
 
 	// FIRST CALL
 	if (l_start == 0)
 	{
 		l_start = l_position, r_start = r_position, start_angle = angle_z;
-		(mv_type == STRAIGHT_RUN) ? LED1_ON : LED2_ON;
-		sc_last_error = 0, ac_last_error = 0;
+		(mv_type == STRAIGHT_RUN) ? LED1_ON : ((mv_type == POINT_TURN) ? LED2_ON : LED3_ON);
+		sc_last_error = 0, ac_last_error = 0, fm_counter = 0;
+		previous_time = current_time;
+		assignParameters();
+		return false;
 	}
 
-	// DO ALL THE ADJUSTMENTS
-	assignParameter();
+	// CORRECTIONS
 	speedController();
-	// angularController();
+	
+	// TERMINATION CODITION
+	if (fabs(PD_correction_sc) < fabs(TERMINATION_TH))
+	{
+		if (fm_counter > 5)
+		{
+			l_start = 0, r_start = 0;
+			fm_counter = 0;
+			(mv_type == STRAIGHT_RUN) ? LED1_OFF:(mv_type==POINT_TURN)?LED2_OFF:LED3_OFF;
+			return true;
+		}
+		fm_counter++;
+		HAL_Delay(20);
+	}
 
 	// SET WHEEL
-	l_speed = (mv_type == STRAIGHT_RUN) ? PD_correction_sc - PD_correction_ac : -PD_correction_ac - PD_correction_sc;
-	r_speed = (mv_type == STRAIGHT_RUN) ? PD_correction_sc + PD_correction_ac : +PD_correction_ac + PD_correction_sc;
+	switch (mv_type)
+	{
+	case STRAIGHT_RUN:
+		l_speed = PD_correction_sc - PD_correction_ac;
+		r_speed = PD_correction_sc + PD_correction_ac;
+		break;
+	case POINT_TURN:
+		l_speed = -PD_correction_sc + PD_correction_ac;
+		r_speed = +PD_correction_sc - PD_correction_ac;
+		break;
+	case FRONT_ALIGN:
+		l_speed = PD_correction_sc - PD_correction_ac;
+		r_speed = PD_correction_sc + PD_correction_ac;
+		break;
+	}
 	setWheels();
+	previous_time = current_time;
 	return false;
 }
 
 ////////////////////////////////////////////////// PARAMETER CHOICE ///////////////////////////////////////////////////////////////
 //  PARAMETERS
-static float sc_kp = 1, sc_kd = 0, sc_red = 1e3;
-static float ac_kp = 1, ac_kd = 0, ac_red = 1e3;
-static int counts_ = 0; // CONVERTING ANGLE/ DISTANCE TO ENCODER COUNTS
+static float sc_kp = 0, sc_kd = 0, sc_red = 1e3;
+static float ac_kp = 0, ac_kd = 0, ac_red = 1e3;
+static float counts_ = 0; // CONVERTING ANGLE/ DISTANCE TO ENCODER COUNTS
 static float speed_th_ = 0;
 
 void assignParameters(void)
 {
 	switch (mv_type)
 	{
+	case IDLE:
+		sc_red = 1e5, ac_red = 1e5;
+		break;
+
 	case STRAIGHT_RUN:
 		speed_th_ = st_speed;
 		counts_ = dist_ang * LINEAR_SENSITIVITY;
-		if (st_speed == .25)
+
+		if (fabs(st_speed - 0.3)<.1)
 		{
-			sc_kp = 1, sc_kd = .6, sc_red = 20;
-			ac_kp = 1, ac_kd = .6, ac_red = 20;
+			sc_kp = 1, sc_kd = 5e-3, sc_red = 100;
+			ac_kp = 1.1, ac_kd = 5e-3, ac_red = 10;
 		}
 		else
 		{
-			sc_kp = 1, sc_kd = .6, sc_red = 20;
-			ac_kp = 1, ac_kd = .6, ac_red = 20;
+			sc_kp = 1, sc_kd = 1e-2, sc_red = 90;
+			ac_kp = 1.2, ac_kd = 1e-3, ac_red = 2;
 		}
 		break;
+
 	case POINT_TURN:
 		counts_ = dist_ang * TURN_SENSITIVITY;
 		speed_th_ = rt_speed;
-		sc_kp = 1, sc_kd = .6, sc_red = 30;
-		ac_kp = 1, ac_kd = .6, ac_red = 300;
+
+		sc_kp = 1.2, sc_kd = 2e-3, sc_red =70; //2e-3
+		ac_kp = 1, ac_kd = 3e-3, ac_red = 100;
 		break;
-	case IDLE:
-		speed_th_ = 0;
-		ac_red = 1e3, sc_red = 1e3;
+
+	case FRONT_ALIGN:
+		speed_th_ = al_speed;
+		counts_ = 320;
+		sc_kp = 1, sc_kd = 0, sc_red = 100;
+		ac_kp = 1, ac_kd = 0, ac_red = 150;
 		break;
 	}
 	return;
@@ -80,6 +124,10 @@ void speedController(void)
 {
 	switch (mv_type)
 	{
+	case IDLE:
+		sc_error = 0;
+		break;
+
 	case STRAIGHT_RUN:
 		sc_error = l_start + r_start + 2 * counts_, sc_error -= l_position, sc_error -= r_position; // sc_error = (l_start + r_start + 2*counts_) - l_position - r_position
 		break;
@@ -91,15 +139,20 @@ void speedController(void)
 		sc_error = (start_angle + dist_ang) - angle_z;
 		break;
 
-	case IDLE:
-		PD_correction_sc = 0;
+	case FRONT_ALIGN:
+		sc_error = counts_ - (float)(LFSensor + RFSensor) / 2;
 		break;
 	}
 
-	PD_correction_sc = (float)(sc_error * sc_kp + (sc_error - sc_last_error) * sc_kd) / sc_red;
+	PD_correction_sc = (float)(sc_kp * sc_error + sc_kd * 1e3 * (sc_error - sc_last_error) / (current_time - previous_time)) / sc_red;
 	sc_last_error = sc_error;
-	if (abs(PD_correction_sc) > speed_th_)
-		PD_correction_sc = (PD_correction_sc > 0) ? .5 * speed_th_ : .5 * -speed_th_;
+	if (fabs(PD_correction_sc) > speed_th_)
+	{
+		PD_correction_sc = (PD_correction_sc > 0) ? speed_th_ : -speed_th_;
+		angularController();
+		return;
+	}
+	PD_correction_ac = 0;
 }
 
 ////////////////////////////////////////// ANGULAR CONTROLLER //////////////////////////////////////////////////////////
@@ -117,32 +170,52 @@ void angularController(void)
 
 	// POINT-ROTATION
 	case (POINT_TURN):
-		ac_error += l_position, ac_error += r_position, ac_error -= (l_start + r_start); // a_error = (l_position - l_start) + (r_position - r_start)
+		ac_error = r_position, ac_error += l_position, ac_error -= (l_start + r_start), ac_error = (float)ac_error; // a_error = (l_position - l_start) + (r_position - r_start)
 		break;
 
 	// AT THE END
-	case (IDLE):
-		ac_last_error = 0;
+	case (FRONT_ALIGN):
+		ac_error =( LFSensor - RFSensor)/10;
 		break;
 	}
 
-	PD_correction_ac = (ac_error * ac_kp + (ac_error - ac_last_error) * ac_kd) / ac_red;
+	PD_correction_ac = (ac_kp * ac_error + sc_kd * 1e3 * (sc_error - sc_last_error) / (current_time - previous_time)) / ac_red;
 	ac_last_error = ac_error;
-	if (abs(PD_correction_ac) > .3 * speed_th_)
-		PD_correction_ac = (PD_correction_ac > 0) ? .3 * speed_th_ : -.3 * speed_th_;
+	if (fabs(PD_correction_ac) > .6* speed_th_)
+		PD_correction_ac = (PD_correction_ac > 0) ? .5 * speed_th_ : -.5 * speed_th_;
 
 	return;
 }
 
 ///////////////////////////////////////////////////////  IR-CONTROLLER /////////////////////////////////////////////////////////////////////////////////
 static float ir_error = 0;
-static float ir_kp =1, ir_kd= 0, ir_red = 100;
+static float ir_kp = 1, ir_kd = 0, ir_red = 100;
 
+bool notInThreshold()
+{
+	if (((DLSensor - 500) * (DLSensor - 2000) > 0) && ((DLSensor - 500) * (DLSensor - 2000) > 0))
+		return true;
+	return false;
+}
+
+// DL SENSOR ALIGNMENT
 void irController(void)
 {
+<<<<<<< HEAD
 	ir_error = LFSensor - RFSensor;
 	PD_correction_ir = (ir_error * ir_kp + (ir_error - ir_last_error) * ir_kd) / ir_red;
 	ir_last_error = ir_error;
 	l_speed = -PD_correction_ir;r_speed = PD_correction_ir;
 	setWheels();
+=======
+	if ((mv_type != STRAIGHT_RUN) || notInThreshold())
+	{
+		ir_error = DLSensor - DRSensor;
+		PD_correction_ir = (ir_kp * ir_error + ir_kd * 1e3 * (ir_error - ir_last_error) / (current_time - previous_time)) / ir_red;
+		ir_last_error = ir_error;
+		return;
+	}
+	PD_correction_ir = 0;
+	return;
+>>>>>>> fe7e2b6 (V0.15: PARAMETER TUNING - STRAIGHT RUN, TURN)
 }

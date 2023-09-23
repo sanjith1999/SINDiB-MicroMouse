@@ -24,6 +24,7 @@ bool starting = false;
 int cppmain(void) {
 	initialization_block();
 	HAL_Delay(1000);
+<<<<<<< HEAD
 	disp_state = DEFAULT;
 	LED3_ON;
 	LED4_ON;
@@ -272,9 +273,66 @@ int cppmain(void) {
 		}
 		i++;
 	}
+=======
+	disp_state = SENSOR_READ;
+
+	bool run1 = true, run2 = false, run3 = false;
+
+	while (1)
+	{
+
+		// if (run1)
+		// {
+		// 	run2 = finishMove(POINT_TURN, 90);
+		// 	if (run2)
+		// 		run1 = false, HAL_Delay(3000);
+		// }
+		// if (run2)
+		// {
+		// 	run3= finishMove(POINT_TURN, -90);
+		// 	if (run3)
+		// 		run2 = false, HAL_Delay(3000);
+		// }
+		// if (run3)
+		// {
+		// 	run1= finishMove(POINT_TURN, 180);
+		// 	if (run1)
+		// 		run3=false, HAL_Delay(3000);
+		// }
+
+		if (finishMove(STRAIGHT_RUN,16))
+		{
+			STOP_ROBOT;
+			HAL_Delay(2000);
+		}
+		i++;
+		HAL_Delay(1);
+	}
+}
+
+int initialization_block(void)
+{
+	ALL_LED_ON;
+	TIM1_START; ////////////////// CRUCIAL PART DON"T OFFFFFFFFFFFFFFFF ///////////////////////////
+	TIM6_IT_START;
+
+	motorInit();
+	encoderInit();
+	gyroInit();
+	displayInit();
+	// buzzerInit();
+
+	ALL_LED_OFF;
+	HAL_Delay(1000);
+	gyroCalibration();
+	disp_state = DEFAULT;
+	TIM13_IT_START;
+	// TIM14_IT_START;
+>>>>>>> fe7e2b6 (V0.15: PARAMETER TUNING - STRAIGHT RUN, TURN)
 
 }
 
+<<<<<<< HEAD
 
 int initialization_block(void) {
 ALL_LED_ON
@@ -313,4 +371,15 @@ if (GPIO_Pin == TB1_Pin) {
 } else {
 	__NOP();
 }
+=======
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim == &htim14)
+		;
+	else if (htim == &htim13)
+		gyroUpdate(),
+			readSensor();
+	else if (htim == &htim6)
+		displayUpdate();
+>>>>>>> fe7e2b6 (V0.15: PARAMETER TUNING - STRAIGHT RUN, TURN)
 }

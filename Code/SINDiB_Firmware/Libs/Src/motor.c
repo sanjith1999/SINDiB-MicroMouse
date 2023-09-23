@@ -4,7 +4,7 @@ const float SPEED_THRESHOLD = SPEED_THRESHOLD_;
 
 uint16_t u12_max = 4095;
 float l_speed, r_speed;
-float st_speed = .6, rt_speed = .3;  // ONLY ALLOWED SPEED {.25, .6, .3}
+float st_speed = .3, rt_speed = .3, al_speed = .3;  // ONLY ALLOWED SPEED {.25, .6, .3}
 
 
 void motorInit(void)
@@ -46,8 +46,7 @@ void setRightWheel(float r_speed)
 
 int setWheels()
 {
-	setRightWheel(r_speed);
-	setLeftWheel(l_speed);
+	setRightWheel(r_speed), setLeftWheel(l_speed);
 	return 0;
 }
 
