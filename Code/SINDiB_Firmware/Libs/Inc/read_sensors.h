@@ -39,5 +39,6 @@ bool rightIrBlink();
 bool leftIrBlink();
 void getSensorReadings();
 void stop_it_all(void);
+void calculateAndSaveAverages();
 
 #endif /* INC_READ_SENSORS_H_ */

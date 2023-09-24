@@ -1,6 +1,6 @@
 Drivers/SSD1306/Src/ssd1306.o: ../Drivers/SSD1306/Src/ssd1306.c \
- F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h \
- F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h \
+ E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h \
+ E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -33,9 +33,9 @@ Drivers/SSD1306/Src/ssd1306.o: ../Drivers/SSD1306/Src/ssd1306.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h
-F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h:
-F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h:
+ E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h
+E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h:
+E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
@@ -68,4 +68,4 @@ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_c
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h:
+E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h:

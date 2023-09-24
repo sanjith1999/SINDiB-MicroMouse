@@ -6,6 +6,7 @@
 #include "cppmain.h"
 
 u32 i;
+u32 DELAY_MID = 100;
 bool buttonPress = false;
 int mouseState = 0;
 int runState = 0;
@@ -28,7 +29,7 @@ int cppmain(void)
 {
 	initialization_block();
 	HAL_Delay(1000);
-	disp_state = SENSOR_READ;
+	disp_state = DEFAULT;
 
 	if (orient == 1)
 	{
@@ -45,16 +46,25 @@ int cppmain(void)
 
 	XY_prev.y = 0;
 	XY_prev.x = 0;
-
+	bool run1 = true, run2 = false;
 	while (1)
 	{
+		// if (run1)
+		// if (finishMove(FRONT_ALIGN, 0))
+		// 	{
+		// 		run2 = true, run1 = false;
+		// 		STOP_ROBOT;
+		// 		HAL_Delay(2000);
+		// 	}
+		// if (run2)
+		// 	if (finishMove(POINT_TURN, 90))
+		// 	{
+		// 		run1 = true, run2 = false;
+		// 		STOP_ROBOT;
+		// 		HAL_Delay(2000);
+		// 	}
 
-		// if (finishMove(STRAIGHT_RUN, 16))
-		// {
-		// 	STOP_ROBOT;
-		// 	HAL_Delay(2000);
-		// }
-		// mouseRun();
+		mouseRun();
 		//		getSensorReadings();
 		i++;
 		HAL_Delay(1);
@@ -71,7 +81,7 @@ int initialization_block(void)
 	encoderInit();
 	gyroInit();
 	displayInit();
-	// buzzerInit();
+	buzzerInit();
 
 	ALL_LED_OFF;
 	HAL_Delay(1000);
@@ -142,10 +152,10 @@ void mouseRun()
 		{
 
 		case 0: // starting
-			if (finishMove(STRAIGHT_RUN, 7.5))
+			if (finishMove(STRAIGHT_RUN, 7.0))
 			{
 				STOP_ROBOT;
-				HAL_Delay(500);
+				HAL_Delay(DELAY_MID);
 				runState = 1;
 			}
 			break;
@@ -168,15 +178,34 @@ void mouseRun()
 				mouseState = 3;
 				runState = 2;
 			}
+			HAL_Delay(DELAY_MID);
 			break;
 
 		case 2: // move center
+			align_select = true;
 			if (finishMove(STRAIGHT_RUN, edgeToCenter))
 			{
 				STOP_ROBOT;
-				HAL_Delay(500);
+				HAL_Delay(DELAY_MID);
+				runState = 5;
+			}
+			break;
+
+		case 5: // align
+			if (F)
+			{
+				if (finishMove(FRONT_ALIGN, 16))
+				{
+					STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					runState = 3;
+				}
+			}
+			else
+			{
 				runState = 3;
 			}
+
 			break;
 
 		case 3: // turning
@@ -185,7 +214,7 @@ void mouseRun()
 				if (finishMove(POINT_TURN, 90))
 				{
 					STOP_ROBOT;
-					HAL_Delay(500);
+					HAL_Delay(DELAY_MID);
 					resetEncoder();
 					orient = orientation(orient, direction);
 					runState = 4;
@@ -196,7 +225,7 @@ void mouseRun()
 				if (finishMove(POINT_TURN, -90))
 				{
 					STOP_ROBOT;
-					HAL_Delay(500);
+					HAL_Delay(DELAY_MID);
 					resetEncoder();
 					orient = orientation(orient, direction);
 					runState = 4;
@@ -207,7 +236,7 @@ void mouseRun()
 				if (finishMove(POINT_TURN, Angle180))
 				{
 					STOP_ROBOT;
-					HAL_Delay(500);
+					HAL_Delay(DELAY_MID);
 					resetEncoder();
 					orient = orientation(orient, direction);
 					runState = 4;
@@ -215,7 +244,7 @@ void mouseRun()
 			}
 			else if (direction == 'F')
 			{
-				HAL_Delay(500);
+				HAL_Delay(DELAY_MID);
 				runState = 4;
 			}
 			break;
@@ -236,7 +265,7 @@ void mouseRun()
 			if (finishMove(STRAIGHT_RUN, centerToEdge))
 			{
 				STOP_ROBOT;
-				HAL_Delay(500);
+				HAL_Delay(DELAY_MID);
 				runState = 1;
 				XY_prev = XY;
 				XY = updateCoordinates(XY, orient);
@@ -261,12 +290,13 @@ void mouseRun()
 			if (finishMove(STRAIGHT_RUN, edgeToCenter))
 			{
 				STOP_ROBOT;
-				HAL_Delay(500);
+				HAL_Delay(DELAY_MID);
 				mouseState = 0;
 			}
 			break;
 
 		case 1: // decision
+			getSensorReadings();
 			direction = toMoveBack(XY, XY_prev, orient);
 
 			if (backFlood[XY.y][XY.x] == 0)
@@ -280,10 +310,27 @@ void mouseRun()
 			break;
 
 		case 2: // move center
+			align_select = true;
 			if (finishMove(STRAIGHT_RUN, edgeToCenter))
 			{
 				STOP_ROBOT;
-				HAL_Delay(500);
+				HAL_Delay(DELAY_MID);
+				runState = 3;
+			}
+			break;
+
+		case 5:
+			if (F)
+			{
+				if (finishMove(FRONT_ALIGN, 16))
+				{
+					STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					runState = 3;
+				}
+			}
+			else
+			{
 				runState = 3;
 			}
 			break;
@@ -294,7 +341,7 @@ void mouseRun()
 				if (finishMove(POINT_TURN, 90))
 				{
 					STOP_ROBOT;
-					HAL_Delay(500);
+					HAL_Delay(DELAY_MID);
 					resetEncoder();
 					orient = orientation(orient, direction);
 					runState = 4;
@@ -305,7 +352,7 @@ void mouseRun()
 				if (finishMove(POINT_TURN, -90))
 				{
 					STOP_ROBOT;
-					HAL_Delay(500);
+					HAL_Delay(DELAY_MID);
 					resetEncoder();
 					orient = orientation(orient, direction);
 					runState = 4;
@@ -316,7 +363,7 @@ void mouseRun()
 				if (finishMove(POINT_TURN, Angle180))
 				{
 					STOP_ROBOT;
-					HAL_Delay(500);
+					HAL_Delay(DELAY_MID);
 					resetEncoder();
 					orient = orientation(orient, direction);
 					runState = 4;
@@ -324,7 +371,7 @@ void mouseRun()
 			}
 			else if (direction == 'F')
 			{
-				HAL_Delay(500);
+				HAL_Delay(DELAY_MID);
 				runState = 4;
 			}
 			break;
@@ -345,7 +392,7 @@ void mouseRun()
 			if (finishMove(STRAIGHT_RUN, centerToEdge))
 			{
 				STOP_ROBOT;
-				HAL_Delay(500);
+				HAL_Delay(DELAY_MID);
 				runState = 1;
 				XY_prev = XY;
 				XY = updateCoordinates(XY, orient);

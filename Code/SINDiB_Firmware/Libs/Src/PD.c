@@ -13,6 +13,7 @@ static float sc_last_error = 0, ac_last_error = 0, ir_last_error = 0;
 /////////////////////////////////////////////////// CONTROLLER /////////////////////////////////////////////////////////////////
 static int fm_counter = 0;
 const float TERMINATION_TH = 4e-2;
+bool align_select=false;
 
 bool finishMove(MV_Type mv_type_, float dist_ang_)
 {
@@ -26,6 +27,7 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 		(mv_type == STRAIGHT_RUN) ? LED1_ON : ((mv_type == POINT_TURN) ? LED2_ON : LED3_ON);
 		sc_last_error = 0, ac_last_error = 0, fm_counter = 0;
 		previous_time = current_time;
+		last_exit_time = 0;
 		assignParameters();
 		return false;
 	}
@@ -34,7 +36,7 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 	speedController();
 
 	//	 TERMINATION CODITION
-	if (fabs(PD_correction_sc) < fabs(TERMINATION_TH) || (last_exit_time - current_time) > 300)
+	if (fabs(PD_correction_sc) < fabs(TERMINATION_TH) || (last_exit_time != 0 && (last_exit_time - current_time)) > 300)
 	{
 		if (fm_counter > 5)
 		{
@@ -60,12 +62,12 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 		r_speed = +PD_correction_sc - PD_correction_ac;
 		break;
 	case FRONT_ALIGN:
-		l_speed = PD_correction_sc - PD_correction_ac;
-		r_speed = PD_correction_sc + PD_correction_ac;
+		l_speed = -PD_correction_sc + 3* PD_correction_ac;
+		r_speed = PD_correction_sc + 3* PD_correction_ac;
 		break;
 	}
 	setWheels();
-	previous_time = current_time;
+	previous_time = current_time;align_select = false;
 	return false;
 }
 
@@ -91,7 +93,7 @@ void assignParameters(void)
 		if (fabs(st_speed - 0.3) < .1)
 		{
 			sc_kp = 1, sc_kd = 5e-3, sc_red = 100;
-			ac_kp = 1.1, ac_kd = 5e-3, ac_red = 10;
+			ac_kp = 1.1, ac_kd = 8e-3, ac_red = 10;
 		}
 		else
 		{
@@ -110,9 +112,9 @@ void assignParameters(void)
 
 	case FRONT_ALIGN:
 		speed_th_ = al_speed;
-		counts_ = 320;
-		sc_kp = 1, sc_kd = 0, sc_red = 100;
-		ac_kp = 1, ac_kd = 0, ac_red = 150;
+		counts_ = (float)3950;
+		sc_kp = 1, sc_kd = 0, sc_red = 1000;
+		ac_kp = 1, ac_kd = 0, ac_red = 1000;
 		break;
 	}
 	return;
@@ -140,7 +142,7 @@ void speedController(void)
 		break;
 
 	case FRONT_ALIGN:
-		sc_error = counts_ - (float)(LFSensor + RFSensor) / 2;
+		sc_error = (LFSensor - RFSensor);
 		break;
 	}
 
@@ -149,7 +151,7 @@ void speedController(void)
 	if (fabs(PD_correction_sc) > speed_th_)
 	{
 		PD_correction_sc = (PD_correction_sc > 0) ? speed_th_ : -speed_th_;
-		if (irController())
+		if (irController() && align_select)
 		{
 			PD_correction_ac = 0;
 			irController();
@@ -184,7 +186,8 @@ void angularController(void)
 
 	// AT THE END
 	case (FRONT_ALIGN):
-		ac_error = (LFSensor - RFSensor) / 10;
+		calculateAndSaveAverages();
+		ac_error = counts_ - (float)(averageFL + averageFR) / 2;
 		break;
 	}
 
@@ -198,34 +201,36 @@ void angularController(void)
 
 ///////////////////////////////////////////////////////  IR-CONTROLLER /////////////////////////////////////////////////////////////////////////////////
 static float ir_error = 0;
-static float ir_kp = 1, ir_kd = 0, ir_red = 100;
-const float MIDDLE_VALUE_DL = 160;
+static float ir_kp = 1, ir_kd = 3e-2, ir_red = 1000;
+const float MIDDLE_VALUE_DL = 1210;
 
 bool twoWalls(void)
 {
-	if (((averageL - 500) * (averageL - 2000) < 0) && ((averageR - 500) * (averageR - 2000) < 0))
+	if (((averageL - 500) * (averageL - 4500) < 0) && ((averageR - 500) * (averageR - 4500) < 0))
 		return true;
 	return false;
 }
 
-bool leftwall(void)
+bool leftWall(void)
 {
-	if ((averageL - 500) * (averageR - 2000) < 0)
+	if ((averageL - 500) * (averageR - 4500) < 0)
 		return true;
 	return false;
 }
 
 bool rightWall(void)
 {
-	if ((averageR - 500) * (averageR - 2000) < 0)
+	if ((averageR - 500) * (averageR - 4500) < 0)
 		return true;
 	return false;
 }
-
+static bool a = false;
 // DL SENSOR ALIGNMENT
 bool irController(void)
 {
-	if ((mv_type != STRAIGHT_RUN))
+	calculateAndSaveAverages();
+	a = leftWall();
+	if ((mv_type == STRAIGHT_RUN))
 	{
 		if (twoWalls())
 			ir_error = averageL - averageR;
@@ -234,9 +239,14 @@ bool irController(void)
 		else if (rightWall())
 			ir_error = 2 * (MIDDLE_VALUE_DL - averageR);
 		else
+		{
+			ir_error = 0;
 			return false;
+		}
 		PD_correction_ir = (ir_kp * ir_error + ir_kd * 1e3 * (ir_error - ir_last_error) / (current_time - previous_time)) / ir_red;
 		ir_last_error = ir_error;
+		if (fabs(PD_correction_ir) > speed_th_ * .1)
+			PD_correction_ir = (PD_correction_ir > 0) ? .1 * speed_th_ : -.1 * speed_th_;
 		return true;
 	}
 	PD_correction_ir = 0;

@@ -10,9 +10,9 @@
 #include "main.h"
 #include "read_sensors.h"
 
+extern bool align_select;
 // ULTIMATE PID CONTROLLING STRATEGY
 bool finishMove(MV_Type mv_type_, float dist_ang);
-
 void assignParameters(void);
 
 void speedController(void);
