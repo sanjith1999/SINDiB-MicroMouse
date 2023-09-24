@@ -18,7 +18,6 @@ bool align_select = false;
 
 bool finishMove(MV_Type mv_type_, float dist_ang_)
 {
-	float check_condition = 0;
 
 	mv_type = mv_type_, dist_ang = dist_ang_;
 	current_time = HAL_GetTick();
