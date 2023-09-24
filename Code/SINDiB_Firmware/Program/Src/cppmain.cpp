@@ -537,15 +537,29 @@ void mouseRun()
 			{
 				align_select = true;
 			}
-			if (finishMove(STRAIGHT_RUN, edgeToCenter))
-			{
-				if (direction != 'F'){
-					STOP_ROBOT;
-				}
+			if(direction =='F'){
+						if (finishMove(STRAIGHT_RUN, 16))
+						{
+							if (direction != 'F'){
+								STOP_ROBOT;
+							}
 
-				HAL_Delay(DELAY_MID);
-				runState = 5;
+							HAL_Delay(DELAY_MID);
+							runState = 5;
+						}
 			}
+			else{
+							if (finishMove(STRAIGHT_RUN, edgeToCenter))
+						{
+							if (direction != 'F'){
+								STOP_ROBOT;
+							}
+
+							HAL_Delay(DELAY_MID);
+							runState = 5;
+						}
+			}
+
 			break;
 
 		case 5: // fron align
@@ -618,14 +632,24 @@ void mouseRun()
 			{
 				centerToEdge = centerToEdgeForward;
 			}
-			if (finishMove(STRAIGHT_RUN, centerToEdge))
-			{
-//				STOP_ROBOT;
-				HAL_Delay(DELAY_MID);
+			if(direction == 'F'){
+
 				runState = 1;
 				XY_prev = XY;
 				XY = updateCoordinates(XY, orient);
+
 			}
+			else{
+				if (finishMove(STRAIGHT_RUN, centerToEdge))
+				{
+	//				STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					runState = 1;
+					XY_prev = XY;
+					XY = updateCoordinates(XY, orient);
+				}
+			}
+
 			break;
 		}
 
