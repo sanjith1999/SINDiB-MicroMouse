@@ -2,6 +2,7 @@
 #include <queue>
 #include <iostream>
 #include <string>
+#include "cppmain.h"
 
 //coordinate XY, XY_prev;
 /*
@@ -34,6 +35,7 @@ int backFlood[ROWS][COLUMNS]={
 		{-1,-1,-1,-1,-1},
 		{-1,-1,-1,-1,-1},
 };
+
 
 
 // int flood[ROWS][COLUMNS]={
@@ -93,21 +95,6 @@ int backFlood[ROWS][COLUMNS]={
 // };
 
 
-void rotateFloodCounterClockwise(void) {
-	int original[ROWS][COLUMNS];
-	// Copy the contents of 'flood' into 'original'
-	for (int i = 0; i < ROWS; i++) {
-		for (int j = 0; j < COLUMNS; j++) {
-			original[i][j] = flood[i][j];
-		}
-	}
-
-	for (int i = 0; i < ROWS; i++) {
-		for (int j = 0; j < COLUMNS; j++) {
-			flood[i][j] = original[j][ROWS - 1 - i];
-		}
-	}
-}
 
 void updateWalls(struct coordinate point, int orient, bool L, bool R, bool F) {
 	if ((L && R) && F) {
@@ -713,4 +700,34 @@ struct coordinate updateCoordinates(struct coordinate coordi, int orient) {
 	return coordi;
 }
 
+void forwardtrack(struct coordinate dumXY,struct coordinate dumXY_prev, int dumOrient){
+	while(1){
+		if (backFlood[dumXY.y][dumXY.x]==0){
+			ptr -= 1;
+			fwdPtr = ptr;
+			// log("breaking");
+			break;
+		}
+		else{
+			direction= toMoveBack(dumXY, dumXY_prev,dumOrient);
+			back_path[ptr] = direction;
+			if (direction == 'L'){
+				fwd_path[ptr] = 'R';
+			}
+			else if (direction == 'R'){
+				fwd_path[ptr] = 'L';
+			}
+			else{
+				fwd_path[ptr] = direction;
+			}
+
+			dumOrient = orientation(dumOrient, direction);
+			dumXY_prev = dumXY;
+			dumXY = updateCoordinates(dumXY, dumOrient);
+
+			ptr+=1;
+		}
+	}
+
+}
 

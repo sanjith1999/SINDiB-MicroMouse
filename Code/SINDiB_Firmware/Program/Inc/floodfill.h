@@ -24,8 +24,6 @@ extern int flood[ROWS][COLUMNS];
 extern int backFlood[ROWS][COLUMNS];
 extern int cells[ROWS][COLUMNS];
 
-extern int orient;
-extern char direction;
 
 struct coordinate{
 	int y;
@@ -41,6 +39,7 @@ struct surroundCoor {
 
 
 
+
 void updateWalls(struct coordinate point, int orient, bool L, bool R, bool F);
 void floodFill(struct coordinate p, struct coordinate prev);
 char toMove(struct coordinate p, struct coordinate prevPos, int orient);
@@ -48,7 +47,7 @@ char toMoveBack(struct coordinate p, struct coordinate prevPos, int orient);
 void backtrack();
 int orientation(int orient, char turning);
 struct coordinate updateCoordinates(struct coordinate coordi, int orient);
-void rotateFloodCounterClockwise(void);
+void forwardtrack(struct coordinate dumXY,struct coordinate dumXY_prev, int dumOrient);
 
 #ifdef __cplusplus
 }

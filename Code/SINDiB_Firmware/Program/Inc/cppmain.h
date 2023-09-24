@@ -32,6 +32,17 @@ extern "C" {
 extern bool buttonPress;
 extern int mouseState;
 extern int runState;
+extern int ORIENT;
+extern char direction;
+
+
+extern char back_path[ROWS*COLUMNS];
+extern char fwd_path[ROWS*COLUMNS];
+extern int ptr;
+
+extern int backPtr;
+extern int fwdPtr;
+
 
 // MAIN LOOP
 int cppmain(void);

@@ -13,9 +13,12 @@ int runState = 0;
 static coordinate XY;
 static coordinate XY_prev;
 
-int orient = 1;
+int orient = 0;
+int ORIENT = 0;
+
 char direction;
 bool starting = false;
+float startingDist = 7.0;
 float edgeToCenter = 12.5;
 float centerToEdgeSides = 3;
 float centerToEdgeForward = 3.5;
@@ -23,13 +26,24 @@ float centerToEdgeBack = 2;
 float Angle180 = 180;
 float centerToEdge;
 
+char back_path[ROWS * COLUMNS] = {'x'};
+char fwd_path[ROWS * COLUMNS] = {'x'};
+int ptr = 0;
+
+static coordinate dumXY;	  // Declare a coordinate struct
+static coordinate dumXY_prev; // Declare a coordinate struct
+static int dumOrient;
+
+int backPtr = 0;
+int fwdPtr;
+
 void mouseRun();
 
 int cppmain(void)
 {
 	initialization_block();
 	HAL_Delay(1000);
-	disp_state = SENSOR_READ;
+	disp_state = DEFAULT;
 
 	if (orient == 1)
 	{
@@ -46,17 +60,27 @@ int cppmain(void)
 
 	XY_prev.y = 0;
 	XY_prev.x = 0;
-	bool run1 = true, run2 = false;
+
+//	bool run1 = true, run2 = false;
 	while (1)
 	{
-		align_select = true;
-		if (finishMove(STRAIGHT_RUN, 16))
-			{
-				STOP_ROBOT;
-				HAL_Delay(2000);
-			}
+		//		align_select = true;
+//		if (run1)
+//			if (finishMove(POINT_TURN, 90))
+//			{
+//				STOP_ROBOT;
+//				HAL_Delay(2000);
+//				run2 = true, run1 = false;
+//			}
+//		if (run2)
+//			if (finishMove(POINT_TURN, -180))
+//			{
+//				STOP_ROBOT;
+//				HAL_Delay(2000);
+//				run1 = true, run2 = false;
+//			}
 
-		// mouseRun();
+		  mouseRun();
 		//		getSensorReadings();
 		i++;
 		HAL_Delay(1);
@@ -117,7 +141,7 @@ void mouseRun()
 		if (buttonPress)
 		{
 			HAL_Delay(1000);
-			mouseState = 1;
+			mouseState = 8;
 			buttonPress = false;
 		}
 		break;
@@ -127,6 +151,24 @@ void mouseRun()
 		{
 			HAL_Delay(1000);
 			mouseState = 2;
+
+			if (ORIENT == 1)
+			{
+				XY.x = 1;
+				XY.y = 0;
+				cells[0][0] = 10;
+			}
+			else
+			{
+				XY.x = 0;
+				XY.y = 1;
+				cells[0][0] = 9;
+			}
+
+			XY_prev.y = 0;
+			XY_prev.x = 0;
+
+			orient = ORIENT;
 		}
 
 		if (buttonPress)
@@ -144,7 +186,7 @@ void mouseRun()
 		{
 
 		case 0: // starting
-			if (finishMove(STRAIGHT_RUN, 7.0))
+			if (finishMove(STRAIGHT_RUN, startingDist))
 			{
 				STOP_ROBOT;
 				HAL_Delay(DELAY_MID);
@@ -164,20 +206,32 @@ void mouseRun()
 			}
 			else
 			{ // in center
-				LED5_ON;
 				backtrack();
-				direction = toMoveBack(XY, XY_prev, orient);
+
+				dumXY.x = XY.x;
+				dumXY.y = XY.y;
+				dumXY_prev.x = XY_prev.x;
+				dumXY_prev.y = XY_prev.y;
+				dumOrient = orient;
+
+				forwardtrack(dumXY, dumXY_prev, dumOrient);
+
+				playSound(TONE2);
+
 				mouseState = 3;
-				runState = 2;
+				runState = 1;
+				backPtr = 0;
+				LED5_ON;
 			}
 			HAL_Delay(DELAY_MID);
 			break;
 
 		case 2: // move center
-			if(!F){
+			if (!F)
+			{
 				align_select = true;
 			}
-			
+
 			if (finishMove(STRAIGHT_RUN, edgeToCenter))
 			{
 				STOP_ROBOT;
@@ -186,7 +240,7 @@ void mouseRun()
 			}
 			break;
 
-		case 5: // align
+		case 5: // front align
 			if (F)
 			{
 				if (finishMove(FRONT_ALIGN, 16))
@@ -292,31 +346,34 @@ void mouseRun()
 
 		case 1: // decision
 			getSensorReadings();
-			direction = toMoveBack(XY, XY_prev, orient);
 
 			if (backFlood[XY.y][XY.x] == 0)
 			{
+				backPtr = 0;
 				runState = 0;
 			}
 			else
 			{
+				direction = back_path[backPtr];
+				backPtr += 1;
 				runState = 2;
 			}
 			break;
 
 		case 2: // move center
-			if(!F){
+			if (!F)
+			{
 				align_select = true;
 			}
 			if (finishMove(STRAIGHT_RUN, edgeToCenter))
 			{
 				STOP_ROBOT;
 				HAL_Delay(DELAY_MID);
-				runState = 3;
+				runState = 5;
 			}
 			break;
 
-		case 5:
+		case 5: // front align
 			if (F)
 			{
 				if (finishMove(FRONT_ALIGN, 16))
@@ -411,6 +468,25 @@ void mouseRun()
 		{
 			HAL_Delay(1000);
 			mouseState = 5;
+
+			if (ORIENT == 1)
+			{
+				XY.x = 1;
+				XY.y = 0;
+				cells[0][0] = 10;
+			}
+			else
+			{
+				XY.x = 0;
+				XY.y = 1;
+				cells[0][0] = 9;
+			}
+
+			XY_prev.y = 0;
+			XY_prev.x = 0;
+			fwdPtr = ptr;
+
+			orient = ORIENT;
 		}
 
 		if (buttonPress)
@@ -423,8 +499,131 @@ void mouseRun()
 
 		break;
 
-	case 5:
-		//			mouseState = fastForward();
+	case 5: // fastForward
+		switch (runState)
+		{
+
+		case 0: // statig
+			if (finishMove(STRAIGHT_RUN, startingDist))
+			{
+				STOP_ROBOT;
+				HAL_Delay(DELAY_MID);
+				mouseState = 0;
+			}
+			break;
+
+		case 1: // decision
+			getSensorReadings();
+
+			if (flood[XY.y][XY.x] >= 1)
+			{
+				direction = fwd_path[fwdPtr];
+				fwdPtr -= 1;
+				runState = 2;
+			}
+			else
+			{
+				playSound(TONE2);
+				fwdPtr = ptr;
+				mouseState = 6;
+				runState = 1;
+				backPtr = 0;
+			}
+			break;
+
+		case 2: // move center
+			if (!F)
+			{
+				align_select = true;
+			}
+			if (finishMove(STRAIGHT_RUN, edgeToCenter))
+			{
+				STOP_ROBOT;
+				HAL_Delay(DELAY_MID);
+				runState = 5;
+			}
+			break;
+
+		case 5: // fron align
+			if (F)
+			{
+				if (finishMove(FRONT_ALIGN, 16))
+				{
+					STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					runState = 3;
+				}
+			}
+			else
+			{
+				runState = 3;
+			}
+			break;
+
+		case 3: // turning
+			if (direction == 'L')
+			{
+				if (finishMove(POINT_TURN, 90))
+				{
+					STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					resetEncoder();
+					orient = orientation(orient, direction);
+					runState = 4;
+				}
+			}
+			else if (direction == 'R')
+			{
+				if (finishMove(POINT_TURN, -90))
+				{
+					STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					resetEncoder();
+					orient = orientation(orient, direction);
+					runState = 4;
+				}
+			}
+			else if (direction == 'B')
+			{
+				if (finishMove(POINT_TURN, Angle180))
+				{
+					STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					resetEncoder();
+					orient = orientation(orient, direction);
+					runState = 4;
+				}
+			}
+			else if (direction == 'F')
+			{
+				HAL_Delay(DELAY_MID);
+				runState = 4;
+			}
+			break;
+
+		case 4: // move edge
+			if (direction == 'L' || direction == 'R')
+			{
+				centerToEdge = centerToEdgeSides;
+			}
+			else if (direction == 'B')
+			{
+				centerToEdge = centerToEdgeBack;
+			}
+			else if (direction == 'F')
+			{
+				centerToEdge = centerToEdgeForward;
+			}
+			if (finishMove(STRAIGHT_RUN, centerToEdge))
+			{
+				STOP_ROBOT;
+				HAL_Delay(DELAY_MID);
+				runState = 1;
+				XY_prev = XY;
+				XY = updateCoordinates(XY, orient);
+			}
+			break;
+		}
 
 		if (buttonPress)
 		{
@@ -437,6 +636,128 @@ void mouseRun()
 		break;
 
 	case 6: // fastBackward
+
+		switch (runState)
+		{
+
+		case 0: // finishing
+			if (finishMove(STRAIGHT_RUN, edgeToCenter))
+			{
+				STOP_ROBOT;
+				HAL_Delay(DELAY_MID);
+				mouseState = 0;
+			}
+			break;
+
+		case 1: // decision
+			getSensorReadings();
+
+			if (backFlood[XY.y][XY.x] == 0)
+			{
+				backPtr = 0;
+				runState = 0;
+			}
+			else
+			{
+				direction = back_path[backPtr];
+				backPtr += 1;
+				runState = 2;
+			}
+			break;
+
+		case 2: // move center
+			if (!F)
+			{
+				align_select = true;
+			}
+			if (finishMove(STRAIGHT_RUN, edgeToCenter))
+			{
+				STOP_ROBOT;
+				HAL_Delay(DELAY_MID);
+				runState = 5;
+			}
+			break;
+
+		case 5: // fron align
+			if (F)
+			{
+				if (finishMove(FRONT_ALIGN, 16))
+				{
+					STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					runState = 3;
+				}
+			}
+			else
+			{
+				runState = 3;
+			}
+			break;
+
+		case 3: // turning
+			if (direction == 'L')
+			{
+				if (finishMove(POINT_TURN, 90))
+				{
+					STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					resetEncoder();
+					orient = orientation(orient, direction);
+					runState = 4;
+				}
+			}
+			else if (direction == 'R')
+			{
+				if (finishMove(POINT_TURN, -90))
+				{
+					STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					resetEncoder();
+					orient = orientation(orient, direction);
+					runState = 4;
+				}
+			}
+			else if (direction == 'B')
+			{
+				if (finishMove(POINT_TURN, Angle180))
+				{
+					STOP_ROBOT;
+					HAL_Delay(DELAY_MID);
+					resetEncoder();
+					orient = orientation(orient, direction);
+					runState = 4;
+				}
+			}
+			else if (direction == 'F')
+			{
+				HAL_Delay(DELAY_MID);
+				runState = 4;
+			}
+			break;
+
+		case 4: // move edge
+			if (direction == 'L' || direction == 'R')
+			{
+				centerToEdge = centerToEdgeSides;
+			}
+			else if (direction == 'B')
+			{
+				centerToEdge = centerToEdgeBack;
+			}
+			else if (direction == 'F')
+			{
+				centerToEdge = centerToEdgeForward;
+			}
+			if (finishMove(STRAIGHT_RUN, centerToEdge))
+			{
+				STOP_ROBOT;
+				HAL_Delay(DELAY_MID);
+				runState = 1;
+				XY_prev = XY;
+				XY = updateCoordinates(XY, orient);
+			}
+			break;
+		}
 
 		if (buttonPress)
 		{
@@ -464,36 +785,37 @@ void mouseRun()
 
 		if (irBlink())
 		{
-			// if (state == 1)
-			// {
-			// 	orient = 0;
-			// }
-			// else
-			// {
-			// 	orient = 1;
-			// }
+			HAL_Delay(1000);
+			if (ORIENT == 1)
+			{
+				ORIENT = 0;
+			}
+			else
+			{
+				ORIENT = 1;
+			}
 
-			// if (orient == 1)
-			// {
-			// 	XY.x = 1;
-			// 	XY.y = 0;
-			// 	cells[0][0] = 10;
-			// }
-			// else
-			// {
-			// 	XY.x = 0;
-			// 	XY.y = 1;
-			// 	cells[0][0] = 9;
-			// }
+			if (ORIENT == 1)
+			{
+				XY.x = 1;
+				XY.y = 0;
+				cells[0][0] = 10;
+			}
+			else
+			{
+				XY.x = 0;
+				XY.y = 1;
+				cells[0][0] = 9;
+			}
 
-			// XY_prev.y = 0;
-			// XY_prev.x = 0;
+			XY_prev.y = 0;
+			XY_prev.x = 0;
 		}
 
 		if (buttonPress)
 		{
 			HAL_Delay(1000);
-			mouseState = 0;
+			mouseState = 1;
 			buttonPress = false;
 		}
 
