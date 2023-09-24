@@ -97,7 +97,7 @@ int initialization_block(void)
 	encoderInit();
 	gyroInit();
 	displayInit();
-	// buzzerInit();
+	buzzerInit();
 
 	ALL_LED_OFF;
 	HAL_Delay(1000);
@@ -138,6 +138,7 @@ void mouseRun()
 	{
 
 	case 0: // Idle
+		STOP_ROBOT;
 		if (buttonPress)
 		{
 			HAL_Delay(1000);
@@ -506,9 +507,9 @@ void mouseRun()
 		case 0: // statig
 			if (finishMove(STRAIGHT_RUN, startingDist))
 			{
-				STOP_ROBOT;
+//				STOP_ROBOT;
 				HAL_Delay(DELAY_MID);
-				mouseState = 0;
+				runState = 1;
 			}
 			break;
 
@@ -538,7 +539,10 @@ void mouseRun()
 			}
 			if (finishMove(STRAIGHT_RUN, edgeToCenter))
 			{
-				STOP_ROBOT;
+				if (direction != 'F'){
+					STOP_ROBOT;
+				}
+
 				HAL_Delay(DELAY_MID);
 				runState = 5;
 			}
@@ -616,7 +620,7 @@ void mouseRun()
 			}
 			if (finishMove(STRAIGHT_RUN, centerToEdge))
 			{
-				STOP_ROBOT;
+//				STOP_ROBOT;
 				HAL_Delay(DELAY_MID);
 				runState = 1;
 				XY_prev = XY;
