@@ -1,7 +1,8 @@
 #include "PD.h"
 
 // VARIABLES
-static u32 l_start = 0, r_start = 0, previous_time = 0, current_time = 0, start_time = 0, last_exit_time = 0; // STORE STARTING POSITION
+u32 l_start = 0;
+static u32 r_start = 0, previous_time = 0, current_time = 0, start_time = 0, last_exit_time = 0; // STORE STARTING POSITION
 static float start_angle = 0;
 
 static MV_Type mv_type = IDLE;
@@ -98,17 +99,17 @@ void assignParameters(void)
 		{
 			sc_kp = 1, sc_kd = 5e-3, sc_red = 200;
 			ac_kp = 1.1, ac_kd = 8e-2, ac_red = 100;
-			ir_kp = 1, ir_kd = 3e-2, ir_red = 6e2;
+			ir_kp = 1, ir_kd = 3e-2, ir_red = 5e2;
 		}
 		else if (fabs(st_speed - 0.5) < .05)
 		{
-			sc_kp = 1.1, sc_kd = 2e-3, sc_red = 500;
+			sc_kp = 1.1, sc_kd = 2e-3, sc_red = 400;
 			ac_kp = 1.3, ac_kd = 1e-3, ac_red = 500;
 			ir_kp = 1, ir_kd = 1e-3, ir_red = 2000;
 		}
 		else
 		{
-			sc_kp = 1.1, sc_kd = 2e-3, sc_red = 600;
+			sc_kp = 1.2, sc_kd = 2e-3, sc_red = 600;
 			ac_kp = 1.3, ac_kd = 1e-3, ac_red = 600;
 			ir_kp = 1, ir_kd = 1e-3, ir_red = 2500;
 		}

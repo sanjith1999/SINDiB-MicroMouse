@@ -144,6 +144,7 @@ void mouseRun()
 			HAL_Delay(1000);
 			mouseState = 8;
 			buttonPress = false;
+			l_start = 0;
 		}
 		break;
 
@@ -179,6 +180,7 @@ void mouseRun()
 			mouseState = 4;
 			buttonPress = false;
 			runState = 0;
+			l_start = 0;
 		}
 		break;
 
@@ -330,6 +332,7 @@ void mouseRun()
 			HAL_Delay(1000);
 			mouseState = 4;
 			buttonPress = false;
+			l_start = 0;
 		}
 		break;
 
@@ -462,6 +465,7 @@ void mouseRun()
 			HAL_Delay(1000);
 			mouseState = 4;
 			buttonPress = false;
+			l_start = 0;
 		}
 
 		break;
@@ -500,6 +504,7 @@ void mouseRun()
 			mouseState = 7;
 
 			buttonPress = false;
+			l_start = 0;
 		}
 
 		break;
@@ -661,6 +666,7 @@ void mouseRun()
 			HAL_Delay(1000);
 			mouseState = 7;
 			buttonPress = false;
+			l_start = 0;
 		}
 
 		break;
@@ -795,6 +801,7 @@ void mouseRun()
 			HAL_Delay(1000);
 			mouseState = 7;
 			buttonPress = false;
+			l_start = 0;
 		}
 		break;
 
@@ -815,6 +822,7 @@ void mouseRun()
 			HAL_Delay(1000);
 			mouseState = 0;
 			buttonPress = false;
+			l_start = 0;
 		}
 
 		break;
@@ -856,6 +864,7 @@ void mouseRun()
 			HAL_Delay(1000);
 			mouseState = 1;
 			buttonPress = false;
+			l_start = 0;
 		}
 
 		break;

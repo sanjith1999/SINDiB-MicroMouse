@@ -12,6 +12,7 @@
 #include <math.h>
 
 extern bool align_select;
+extern u32 l_start;
 // ULTIMATE PID CONTROLLING STRATEGY
 bool finishMove(MV_Type mv_type_, float dist_ang);
 void assignParameters(void);
