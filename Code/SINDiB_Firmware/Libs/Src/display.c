@@ -80,7 +80,7 @@ void displayUpdate(void)
 	// DEFAULT SCREEN --> BATTERY PERCENTAGE, STATE OF THE ROBOT
 	case (DEFAULT):
 		// DISPLAYING BATTERY VOLTAGE
-		putString("BAT:",74,24,SMALL);
+		putString("V:",86,24,SMALL);
 		putFloat(voltage,104 , 24, SMALL);
 
 		// putString(turn,44,16,MEDIUM);
@@ -119,8 +119,12 @@ void displayUpdate(void)
 			putString("MV_EDGE", 42, 12, SMALL);break;		
 		}
 
-		putString("ORIENT:",2,24,SMALL);
-		putInt(ORIENT,50 , 24, SMALL);
+		putString("O:",2,24,SMALL);
+		putInt(ORIENT,20 , 24, SMALL);
+
+
+		putString("S:",30,24,SMALL);
+		putFloat(st_speed,48,24, SMALL);
 		break;
 
 	case (GYRO_CALIB):

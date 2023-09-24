@@ -126,7 +126,7 @@ bool irBlink() {
 }
 
 bool rightIrBlink(){
-	static uint32_t t2 = 1000;
+	static uint32_t t2 = 3000;
 	if (DRSensor > t2) {
 			return true;
 		}
@@ -134,7 +134,7 @@ bool rightIrBlink(){
 }
 
 bool leftIrBlink(){
-	static uint32_t t1 = 1000;
+	static uint32_t t1 = 3000;
 	if (DLSensor > t1) {
 			return true;
 		}

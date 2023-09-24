@@ -35,6 +35,7 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 	}
 
 	// CORRECTIONS
+	PD_correction_ac = 0, PD_correction_ir = 0;
 	speedController();
 
 	//	 TERMINATION CODITION
@@ -93,17 +94,23 @@ void assignParameters(void)
 		speed_th_ = st_speed;
 		counts_ = dist_ang * LINEAR_SENSITIVITY;
 
-		if (fabs(st_speed - 0.3) < .1)
+		if (fabs(st_speed - 0.3) < .05)
 		{
 			sc_kp = 1, sc_kd = 5e-3, sc_red = 200;
 			ac_kp = 1.1, ac_kd = 8e-2, ac_red = 100;
-			ir_kp = 1, ir_kd = 3e-2, ir_red = 5e2;
+			ir_kp = 1, ir_kd = 3e-2, ir_red = 6e2;
+		}
+		else if (fabs(st_speed - 0.5) < .05)
+		{
+			sc_kp = 1.1, sc_kd = 2e-3, sc_red = 500;
+			ac_kp = 1.3, ac_kd = 1e-3, ac_red = 500;
+			ir_kp = 1, ir_kd = 1e-3, ir_red = 2000;
 		}
 		else
 		{
-			sc_kp = 1, sc_kd = 0, sc_red = 500;
-			// ac_kp = 1.2, ac_kd = 1e-3, ac_red = 2;
-			// ir_kp = 1, ir_kd = 3e-2, ir_red = 5e2;
+			sc_kp = 1.1, sc_kd = 2e-3, sc_red = 600;
+			ac_kp = 1.3, ac_kd = 1e-3, ac_red = 600;
+			ir_kp = 1, ir_kd = 1e-3, ir_red = 2500;
 		}
 		break;
 

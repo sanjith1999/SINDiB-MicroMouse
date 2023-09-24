@@ -138,9 +138,9 @@ void mouseRun()
 	{
 
 	case 0: // Idle
-		STOP_ROBOT;
 		if (buttonPress)
 		{
+			STOP_ROBOT;
 			HAL_Delay(1000);
 			mouseState = 8;
 			buttonPress = false;
@@ -174,6 +174,7 @@ void mouseRun()
 
 		if (buttonPress)
 		{
+			STOP_ROBOT;
 			HAL_Delay(1000);
 			mouseState = 4;
 			buttonPress = false;
@@ -325,6 +326,7 @@ void mouseRun()
 
 		if (buttonPress)
 		{
+			STOP_ROBOT;
 			HAL_Delay(1000);
 			mouseState = 4;
 			buttonPress = false;
@@ -456,6 +458,7 @@ void mouseRun()
 		}
 		if (buttonPress)
 		{
+			STOP_ROBOT;
 			HAL_Delay(1000);
 			mouseState = 4;
 			buttonPress = false;
@@ -492,6 +495,7 @@ void mouseRun()
 
 		if (buttonPress)
 		{
+			STOP_ROBOT;
 			HAL_Delay(1000);
 			mouseState = 7;
 
@@ -540,9 +544,7 @@ void mouseRun()
 			if(direction =='F'){
 						if (finishMove(STRAIGHT_RUN, 16))
 						{
-							if (direction != 'F'){
-								STOP_ROBOT;
-							}
+
 
 							HAL_Delay(DELAY_MID);
 							runState = 5;
@@ -551,9 +553,9 @@ void mouseRun()
 			else{
 							if (finishMove(STRAIGHT_RUN, edgeToCenter))
 						{
-							if (direction != 'F'){
-								STOP_ROBOT;
-							}
+							
+							STOP_ROBOT;
+							
 
 							HAL_Delay(DELAY_MID);
 							runState = 5;
@@ -655,7 +657,7 @@ void mouseRun()
 
 		if (buttonPress)
 		{
-
+			STOP_ROBOT;
 			HAL_Delay(1000);
 			mouseState = 7;
 			buttonPress = false;
@@ -789,6 +791,7 @@ void mouseRun()
 
 		if (buttonPress)
 		{
+			STOP_ROBOT;
 			HAL_Delay(1000);
 			mouseState = 7;
 			buttonPress = false;
@@ -797,13 +800,20 @@ void mouseRun()
 
 	case 7:
 		//			mouseState = speedAdjust();
+		if (rightIrBlink()){
+			HAL_Delay(1000);
+			st_speed += 0.1;
+		}
+		if (leftIrBlink()){
+			HAL_Delay(1000);
+			st_speed -= 0.1;
+		}
 
 		if (buttonPress)
 		{
-
+			STOP_ROBOT;
 			HAL_Delay(1000);
-			mouseState = 8;
-
+			mouseState = 0;
 			buttonPress = false;
 		}
 
@@ -842,6 +852,7 @@ void mouseRun()
 
 		if (buttonPress)
 		{
+			STOP_ROBOT;
 			HAL_Delay(1000);
 			mouseState = 1;
 			buttonPress = false;
