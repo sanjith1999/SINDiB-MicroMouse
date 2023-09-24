@@ -29,7 +29,7 @@ int cppmain(void)
 {
 	initialization_block();
 	HAL_Delay(1000);
-	disp_state = DEFAULT;
+	disp_state = SENSOR_READ;
 
 	if (orient == 1)
 	{
@@ -73,7 +73,7 @@ int initialization_block(void)
 	encoderInit();
 	gyroInit();
 	displayInit();
-	buzzerInit();
+	// buzzerInit();
 
 	ALL_LED_OFF;
 	HAL_Delay(1000);
@@ -91,7 +91,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		;
 	else if (htim == &htim13)
 		gyroUpdate(),
-			readSensor();
+			readSensor(), calculateAndSaveAverages();
 	else if (htim == &htim6)
 		displayUpdate();
 }

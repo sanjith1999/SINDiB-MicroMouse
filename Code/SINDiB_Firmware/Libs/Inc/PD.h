@@ -9,6 +9,7 @@
 #include "led.h"
 #include "main.h"
 #include "read_sensors.h"
+#include <math.h>
 
 extern bool align_select;
 // ULTIMATE PID CONTROLLING STRATEGY

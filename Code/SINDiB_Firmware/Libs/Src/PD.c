@@ -1,7 +1,7 @@
 #include "PD.h"
 
 // VARIABLES
-static u32 l_start = 0, r_start = 0, previous_time = 0, current_time = 0, last_exit_time = 0; // STORE STARTING POSITION
+static u32 l_start = 0, r_start = 0, previous_time = 0, current_time = 0, start_time = 0, last_exit_time = 0; // STORE STARTING POSITION
 static float start_angle = 0;
 
 static MV_Type mv_type = IDLE;
@@ -13,10 +13,12 @@ static float sc_last_error = 0, ac_last_error = 0, ir_last_error = 0;
 /////////////////////////////////////////////////// CONTROLLER /////////////////////////////////////////////////////////////////
 static int fm_counter = 0;
 const float TERMINATION_TH = 4e-2;
-bool align_select=false;
+bool align_select = false;
 
 bool finishMove(MV_Type mv_type_, float dist_ang_)
 {
+	float check_condition = 0;
+
 	mv_type = mv_type_, dist_ang = dist_ang_;
 	current_time = HAL_GetTick();
 
@@ -27,7 +29,7 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 		(mv_type == STRAIGHT_RUN) ? LED1_ON : ((mv_type == POINT_TURN) ? LED2_ON : LED3_ON);
 		sc_last_error = 0, ac_last_error = 0, fm_counter = 0;
 		previous_time = current_time;
-		last_exit_time = 0;
+		start_time = current_time, last_exit_time = 0;
 		assignParameters();
 		return false;
 	}
@@ -36,7 +38,7 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 	speedController();
 
 	//	 TERMINATION CODITION
-	if (fabs(PD_correction_sc) < fabs(TERMINATION_TH) || (last_exit_time != 0 && (last_exit_time - current_time)) > 300)
+	if (fabs(PD_correction_sc) < fabs(TERMINATION_TH) || (current_time - start_time > 2000) ||( (current_time - last_exit_time) > 100 && last_exit_time != 0))
 	{
 		if (fm_counter > 5)
 		{
@@ -46,7 +48,6 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 			return true;
 		}
 		fm_counter++;
-		last_exit_time = current_time;
 		HAL_Delay(20);
 	}
 
@@ -62,12 +63,13 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 		r_speed = +PD_correction_sc - PD_correction_ac;
 		break;
 	case FRONT_ALIGN:
-		l_speed = -PD_correction_sc + 3* PD_correction_ac;
-		r_speed = PD_correction_sc + 3* PD_correction_ac;
+		l_speed = -PD_correction_sc ;
+		r_speed = PD_correction_sc ;
 		break;
 	}
 	setWheels();
-	previous_time = current_time;align_select = false;
+	previous_time = current_time;
+	align_select = false;
 	return false;
 }
 
@@ -75,6 +77,7 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 //  PARAMETERS
 static float sc_kp = 0, sc_kd = 0, sc_red = 1e3;
 static float ac_kp = 0, ac_kd = 0, ac_red = 1e3;
+static float ir_kp = 0, ir_kd = 0, ir_red = 1e3;
 static float counts_ = 0; // CONVERTING ANGLE/ DISTANCE TO ENCODER COUNTS
 static float speed_th_ = 0;
 
@@ -92,13 +95,15 @@ void assignParameters(void)
 
 		if (fabs(st_speed - 0.3) < .1)
 		{
-			sc_kp = 1, sc_kd = 5e-3, sc_red = 100;
-			ac_kp = 1.1, ac_kd = 8e-3, ac_red = 10;
+			sc_kp = 1, sc_kd = 5e-3, sc_red = 200;
+			ac_kp = 1.1, ac_kd = 8e-2, ac_red = 100;
+			ir_kp = 1, ir_kd = 3e-2, ir_red = 5e2;
 		}
 		else
 		{
 			sc_kp = 1, sc_kd = 0, sc_red = 500;
-			ac_kp = 1.2, ac_kd = 1e-3, ac_red = 2;
+			// ac_kp = 1.2, ac_kd = 1e-3, ac_red = 2;
+			// ir_kp = 1, ir_kd = 3e-2, ir_red = 5e2;
 		}
 		break;
 
@@ -112,9 +117,7 @@ void assignParameters(void)
 
 	case FRONT_ALIGN:
 		speed_th_ = al_speed;
-		counts_ = (float)3950;
-		sc_kp = 1, sc_kd = 0, sc_red = 1000;
-		ac_kp = 1, ac_kd = 0, ac_red = 1000;
+		sc_kp = 1, sc_kd = 0, sc_red = 500;
 		break;
 	}
 	return;
@@ -163,7 +166,7 @@ void speedController(void)
 		}
 		return;
 	}
-	PD_correction_ac = 0;
+	// PD_correction_ac = 0;
 }
 
 ////////////////////////////////////////// ANGULAR CONTROLLER //////////////////////////////////////////////////////////
@@ -183,17 +186,14 @@ void angularController(void)
 	case (POINT_TURN):
 		ac_error = r_position, ac_error += l_position, ac_error -= (l_start + r_start), ac_error = (float)ac_error; // a_error = (l_position - l_start) + (r_position - r_start)
 		break;
-
-	// AT THE END
-	case (FRONT_ALIGN):
-		calculateAndSaveAverages();
-		ac_error = counts_ - (float)(averageFL + averageFR) / 2;
+	default:
+		ac_error = 0;
 		break;
 	}
 
 	PD_correction_ac = (ac_kp * ac_error + sc_kd * 1e3 * (sc_error - sc_last_error) / (current_time - previous_time)) / ac_red;
 	ac_last_error = ac_error;
-	if (fabs(PD_correction_ac) > .6 * speed_th_)
+	if (fabs(PD_correction_ac) > .5 * speed_th_)
 		PD_correction_ac = (PD_correction_ac > 0) ? .5 * speed_th_ : -.5 * speed_th_;
 
 	return;
@@ -201,8 +201,6 @@ void angularController(void)
 
 ///////////////////////////////////////////////////////  IR-CONTROLLER /////////////////////////////////////////////////////////////////////////////////
 static float ir_error = 0;
-// static float ir_kp = 1, ir_kd = 3e-2, ir_red = 1000;
-static float ir_kp = 1, ir_kd = 3e-2, ir_red = 500;
 const float MIDDLE_VALUE_DL = 1210;
 
 bool twoWalls(void)

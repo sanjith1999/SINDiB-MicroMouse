@@ -9,7 +9,7 @@
 #include <math.h>
 
 
-#define BUFFER_LENGTH ((u32)1000u)  // 1000u
+#define BUFFER_LENGTH ((u32)100u)  // 1000u
 
 extern float angle_z;
 extern uint8_t gyro_identity;

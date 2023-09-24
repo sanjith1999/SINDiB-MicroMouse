@@ -1,7 +1,7 @@
 Libs/Src/display.o: ../Libs/Src/display.c \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/display.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/typedefs.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/display.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/typedefs.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/read_sensors.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -34,32 +34,32 @@ Libs/Src/display.o: ../Libs/Src/display.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/floodfill.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/adc.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/typedefs.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/parameters_.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/melody.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PD.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/adc.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h \
- E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/display.h
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/display.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/typedefs.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/cppmain.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/floodfill.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/adc.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/typedefs.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/led.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/motor.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/parameters_.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/encoder.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/L3GD20.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/led.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/read_sensors.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/buzzer.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/melody.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/PD.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/motor.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/encoder.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/L3GD20.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/adc.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/buzzer.h \
+ F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/display.h
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/display.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/typedefs.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -93,26 +93,26 @@ E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/cppmain.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Program/Inc/floodfill.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/adc.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/typedefs.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/parameters_.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/led.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/melody.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/PD.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/motor.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/encoder.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/L3GD20.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/adc.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/buzzer.h:
-E:/SINDiB-MicroMouse/Code/SINDiB_Firmware/Libs/Inc/display.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/cppmain.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Program/Inc/floodfill.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/adc.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/typedefs.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/led.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/motor.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/parameters_.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/encoder.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/L3GD20.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/led.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/read_sensors.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_conf.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Drivers/SSD1306/Inc/ssd1306_fonts.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/buzzer.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/melody.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/PD.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/motor.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/encoder.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/L3GD20.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/adc.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/buzzer.h:
+F:/PROJECTS/SINDiB-MICROMOUSE/code/SINDiB_Firmware/Libs/Inc/display.h:

@@ -1,8 +1,8 @@
-../Libs/Src/PD.c:18:6:finishMove	16	static
-../Libs/Src/PD.c:81:6:assignParameters	16	static
-../Libs/Src/PD.c:125:6:speedController	32	static
-../Libs/Src/PD.c:172:6:angularController	40	static
-../Libs/Src/PD.c:208:6:twoWalls	4	static
-../Libs/Src/PD.c:215:6:leftWall	4	static
-../Libs/Src/PD.c:222:6:rightWall	4	static
-../Libs/Src/PD.c:230:6:irController	24	static
+../Libs/Src/PD.c:18:6:finishMove	24	static
+../Libs/Src/PD.c:84:6:assignParameters	16	static
+../Libs/Src/PD.c:128:6:speedController	32	static
+../Libs/Src/PD.c:175:6:angularController	40	static
+../Libs/Src/PD.c:206:6:twoWalls	4	static
+../Libs/Src/PD.c:213:6:leftWall	4	static
+../Libs/Src/PD.c:220:6:rightWall	4	static
+../Libs/Src/PD.c:228:6:irController	24	static
