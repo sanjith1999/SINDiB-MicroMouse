@@ -15469,11 +15469,12 @@ LOAD E:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x0000000008008f7c      0x160 ./Program/Src/cppmain.o
                 0x0000000008008f7c                initialization_block
  .text.HAL_TIM_PeriodElapsedCallback
-                0x00000000080090dc       0x48 ./Program/Src/cppmain.o
+                0x00000000080090dc       0x44 ./Program/Src/cppmain.o
                 0x00000000080090dc                HAL_TIM_PeriodElapsedCallback
  .text.HAL_GPIO_EXTI_Callback
-                0x0000000008009124       0x2c ./Program/Src/cppmain.o
-                0x0000000008009124                HAL_GPIO_EXTI_Callback
+                0x0000000008009120       0x2c ./Program/Src/cppmain.o
+                0x0000000008009120                HAL_GPIO_EXTI_Callback
+ *fill*         0x000000000800914c        0x4 
  .text._Z8mouseRunv
                 0x0000000008009150     0x1440 ./Program/Src/cppmain.o
                 0x0000000008009150                mouseRun()
@@ -23501,7 +23502,7 @@ LOAD E:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .comment       0x0000000000000043       0x44 ./Program/Src/cppmain.o
  .comment       0x0000000000000043       0x44 ./Program/Src/floodfill.o
 
-.debug_info     0x0000000000000000    0x26e2f
+.debug_info     0x0000000000000000    0x26e28
  .debug_info    0x0000000000000000     0x1b80 ./Core/Src/main.o
  .debug_info    0x0000000000001b80     0x17cd ./Core/Src/stm32f4xx_hal_msp.o
  .debug_info    0x000000000000334d      0x7a6 ./Core/Src/stm32f4xx_it.o
@@ -23530,8 +23531,8 @@ LOAD E:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_info    0x00000000000147a8      0x1ff ./Libs/Src/melody.o
  .debug_info    0x00000000000149a7      0x7f0 ./Libs/Src/motor.o
  .debug_info    0x0000000000015197      0xb8b ./Libs/Src/read_sensors.o
- .debug_info    0x0000000000015d22     0x29df ./Program/Src/cppmain.o
- .debug_info    0x0000000000018701     0xe72e ./Program/Src/floodfill.o
+ .debug_info    0x0000000000015d22     0x29d8 ./Program/Src/cppmain.o
+ .debug_info    0x00000000000186fa     0xe72e ./Program/Src/floodfill.o
 
 .debug_abbrev   0x0000000000000000     0x4887
  .debug_abbrev  0x0000000000000000      0x2fa ./Core/Src/main.o
@@ -23898,7 +23899,7 @@ LOAD E:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_macro   0x0000000000029cac       0x1c ./Program/Src/floodfill.o
  .debug_macro   0x0000000000029cc8      0x3cd ./Program/Src/floodfill.o
 
-.debug_line     0x0000000000000000    0x20b58
+.debug_line     0x0000000000000000    0x20b53
  .debug_line    0x0000000000000000      0xfae ./Core/Src/main.o
  .debug_line    0x0000000000000fae      0xe20 ./Core/Src/stm32f4xx_hal_msp.o
  .debug_line    0x0000000000001dce      0xc44 ./Core/Src/stm32f4xx_it.o
@@ -23927,8 +23928,8 @@ LOAD E:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_line    0x0000000000018fdf      0x44a ./Libs/Src/melody.o
  .debug_line    0x0000000000019429      0xc38 ./Libs/Src/motor.o
  .debug_line    0x000000000001a061      0xda4 ./Libs/Src/read_sensors.o
- .debug_line    0x000000000001ae05     0x1750 ./Program/Src/cppmain.o
- .debug_line    0x000000000001c555     0x4603 ./Program/Src/floodfill.o
+ .debug_line    0x000000000001ae05     0x174b ./Program/Src/cppmain.o
+ .debug_line    0x000000000001c550     0x4603 ./Program/Src/floodfill.o
 
 .debug_str      0x0000000000000000    0xe5aaa
  .debug_str     0x0000000000000000    0xcd252 ./Core/Src/main.o
@@ -23988,7 +23989,7 @@ LOAD E:/ST/STM32CubeIDE_1.13.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_str     0x00000000000d2fd8       0xb5 ./Libs/Src/read_sensors.o
                                       0xcc92c (size before relaxing)
  .debug_str     0x00000000000d308d     0x3198 ./Program/Src/cppmain.o
-                                      0xcf995 (size before relaxing)
+                                      0xcf97c (size before relaxing)
  .debug_str     0x00000000000d6225     0xf885 ./Program/Src/floodfill.o
                                       0xdf25d (size before relaxing)
 

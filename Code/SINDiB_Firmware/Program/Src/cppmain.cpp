@@ -61,27 +61,9 @@ int cppmain(void)
 	XY_prev.y = 0;
 	XY_prev.x = 0;
 
-//	bool run1 = true, run2 = false;
 	while (1)
 	{
-				// align_select = true;
-//		if (run1)
-//			if (finishMove(POINT_TURN, 90))
-//			{
-//				STOP_ROBOT;
-//				HAL_Delay(2000);
-//				run2 = true, run1 = false;
-//			}
-//		if (run2)
-
-			// if (finishMove(STRAIGHT_RUN, 16))
-			// {
-			// 	STOP_ROBOT;
-			// 	HAL_Delay(2000);
-			// }
-
-		  mouseRun();
-		//		getSensorReadings();
+		mouseRun();
 		i++;
 		HAL_Delay(1);
 	}
@@ -115,7 +97,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		;
 	else if (htim == &htim13)
 		gyroUpdate(),
-			readSensor(), calculateAndSaveAverages();
+			readSensor();
 	else if (htim == &htim6)
 		displayUpdate();
 }
