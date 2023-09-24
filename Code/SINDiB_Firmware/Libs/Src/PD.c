@@ -97,7 +97,7 @@ void assignParameters(void)
 		}
 		else
 		{
-			sc_kp = 1, sc_kd = 1e-2, sc_red = 90;
+			sc_kp = 1, sc_kd = 0, sc_red = 500;
 			ac_kp = 1.2, ac_kd = 1e-3, ac_red = 2;
 		}
 		break;
@@ -201,7 +201,8 @@ void angularController(void)
 
 ///////////////////////////////////////////////////////  IR-CONTROLLER /////////////////////////////////////////////////////////////////////////////////
 static float ir_error = 0;
-static float ir_kp = 1, ir_kd = 3e-2, ir_red = 1000;
+// static float ir_kp = 1, ir_kd = 3e-2, ir_red = 1000;
+static float ir_kp = 1, ir_kd = 3e-2, ir_red = 500;
 const float MIDDLE_VALUE_DL = 1210;
 
 bool twoWalls(void)

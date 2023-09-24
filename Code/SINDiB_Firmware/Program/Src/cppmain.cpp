@@ -49,22 +49,14 @@ int cppmain(void)
 	bool run1 = true, run2 = false;
 	while (1)
 	{
-		// if (run1)
-		// if (finishMove(FRONT_ALIGN, 0))
-		// 	{
-		// 		run2 = true, run1 = false;
-		// 		STOP_ROBOT;
-		// 		HAL_Delay(2000);
-		// 	}
-		// if (run2)
-		// 	if (finishMove(POINT_TURN, 90))
-		// 	{
-		// 		run1 = true, run2 = false;
-		// 		STOP_ROBOT;
-		// 		HAL_Delay(2000);
-		// 	}
+		align_select = true;
+		if (finishMove(STRAIGHT_RUN, 16))
+			{
+				STOP_ROBOT;
+				HAL_Delay(2000);
+			}
 
-		mouseRun();
+		// mouseRun();
 		//		getSensorReadings();
 		i++;
 		HAL_Delay(1);
