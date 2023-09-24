@@ -18,7 +18,7 @@
 #define FPS 2  // MIN_ALLOWED --> .5
 
 /////////////////////////////////Buzzer.h /////////////////////////////////
-#define BUZZ_LOUDNESS_ .03
+#define BUZZ_LOUDNESS_ .2
 
 
 #endif /* PARAMETERS__H_ */

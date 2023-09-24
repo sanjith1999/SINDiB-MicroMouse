@@ -109,7 +109,7 @@ void assignParameters(void)
 		}
 		else
 		{
-			sc_kp = 1.2, sc_kd = 2e-3, sc_red = 600;
+			sc_kp = 1.2, sc_kd = 2e-3, sc_red = 450;
 			ac_kp = 1.3, ac_kd = 1e-3, ac_red = 600;
 			ir_kp = 1, ir_kd = 1e-3, ir_red = 2500;
 		}

@@ -64,7 +64,7 @@ int cppmain(void)
 //	bool run1 = true, run2 = false;
 	while (1)
 	{
-		//		align_select = true;
+				// align_select = true;
 //		if (run1)
 //			if (finishMove(POINT_TURN, 90))
 //			{
@@ -73,12 +73,12 @@ int cppmain(void)
 //				run2 = true, run1 = false;
 //			}
 //		if (run2)
-//			if (finishMove(POINT_TURN, -180))
-//			{
-//				STOP_ROBOT;
-//				HAL_Delay(2000);
-//				run1 = true, run2 = false;
-//			}
+
+			// if (finishMove(STRAIGHT_RUN, 16))
+			// {
+			// 	STOP_ROBOT;
+			// 	HAL_Delay(2000);
+			// }
 
 		  mouseRun();
 		//		getSensorReadings();
@@ -141,7 +141,8 @@ void mouseRun()
 		if (buttonPress)
 		{
 			STOP_ROBOT;
-			HAL_Delay(1000);
+			playSound(TONE4);
+			HAL_Delay(500);
 			mouseState = 8;
 			buttonPress = false;
 			l_start = 0;
@@ -176,7 +177,8 @@ void mouseRun()
 		if (buttonPress)
 		{
 			STOP_ROBOT;
-			HAL_Delay(1000);
+			playSound(TONE4);
+			HAL_Delay(500);
 			mouseState = 4;
 			buttonPress = false;
 			runState = 0;
@@ -220,7 +222,7 @@ void mouseRun()
 
 				forwardtrack(dumXY, dumXY_prev, dumOrient);
 
-				playSound(TONE2);
+				 playSound(TONE2);
 
 				mouseState = 3;
 				runState = 1;
@@ -286,6 +288,7 @@ void mouseRun()
 			}
 			else if (direction == 'B')
 			{
+
 				if (finishMove(POINT_TURN, Angle180))
 				{
 					STOP_ROBOT;
@@ -329,7 +332,8 @@ void mouseRun()
 		if (buttonPress)
 		{
 			STOP_ROBOT;
-			HAL_Delay(1000);
+			playSound(TONE4);
+			HAL_Delay(500);
 			mouseState = 4;
 			buttonPress = false;
 			l_start = 0;
@@ -420,6 +424,7 @@ void mouseRun()
 			}
 			else if (direction == 'B')
 			{
+
 				if (finishMove(POINT_TURN, Angle180))
 				{
 					STOP_ROBOT;
@@ -462,7 +467,8 @@ void mouseRun()
 		if (buttonPress)
 		{
 			STOP_ROBOT;
-			HAL_Delay(1000);
+			playSound(TONE4);
+			HAL_Delay(500);
 			mouseState = 4;
 			buttonPress = false;
 			l_start = 0;
@@ -500,7 +506,8 @@ void mouseRun()
 		if (buttonPress)
 		{
 			STOP_ROBOT;
-			HAL_Delay(1000);
+			playSound(TONE4);
+			HAL_Delay(500);
 			mouseState = 7;
 
 			buttonPress = false;
@@ -610,6 +617,7 @@ void mouseRun()
 			}
 			else if (direction == 'B')
 			{
+				
 				if (finishMove(POINT_TURN, Angle180))
 				{
 					STOP_ROBOT;
@@ -663,7 +671,8 @@ void mouseRun()
 		if (buttonPress)
 		{
 			STOP_ROBOT;
-			HAL_Delay(1000);
+			playSound(TONE4);
+			HAL_Delay(500);
 			mouseState = 7;
 			buttonPress = false;
 			l_start = 0;
@@ -798,7 +807,8 @@ void mouseRun()
 		if (buttonPress)
 		{
 			STOP_ROBOT;
-			HAL_Delay(1000);
+			playSound(TONE4);
+			HAL_Delay(500);
 			mouseState = 7;
 			buttonPress = false;
 			l_start = 0;
@@ -808,18 +818,21 @@ void mouseRun()
 	case 7:
 		//			mouseState = speedAdjust();
 		if (rightIrBlink()){
-			HAL_Delay(1000);
+			playSound(TONE1);
 			st_speed += 0.1;
+			HAL_Delay(500);
 		}
 		if (leftIrBlink()){
-			HAL_Delay(1000);
+			playSound(TONE1);
 			st_speed -= 0.1;
+			HAL_Delay(500);
 		}
 
 		if (buttonPress)
 		{
 			STOP_ROBOT;
-			HAL_Delay(1000);
+			playSound(TONE4);
+			HAL_Delay(500);
 			mouseState = 0;
 			buttonPress = false;
 			l_start = 0;
@@ -834,10 +847,12 @@ void mouseRun()
 			HAL_Delay(1000);
 			if (ORIENT == 1)
 			{
+				playSound(TONE1);
 				ORIENT = 0;
 			}
 			else
 			{
+				playSound(TONE1);
 				ORIENT = 1;
 			}
 
@@ -861,7 +876,8 @@ void mouseRun()
 		if (buttonPress)
 		{
 			STOP_ROBOT;
-			HAL_Delay(1000);
+			playSound(TONE4);
+			HAL_Delay(500);
 			mouseState = 1;
 			buttonPress = false;
 			l_start = 0;

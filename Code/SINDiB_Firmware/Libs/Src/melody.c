@@ -55,11 +55,11 @@ const uint32_t winDuration[] = {
 };
 
 const uint32_t tone1[] = {
-		  NOTE_A4, 0, NOTE_F4
+		  NOTE_F5
 };
 
 const uint32_t tone1Duration[] = {
-		  8, 2, 8
+		  5
 };
 
 const uint32_t tone2[] = {
@@ -67,7 +67,7 @@ const uint32_t tone2[] = {
 };
 
 const uint32_t tone2Duration[] = {
-		  8, 4, 8, 4, 8
+		  4, 2, 4, 2, 4
 };
 
 const uint32_t tone3[] = {
@@ -75,7 +75,7 @@ const uint32_t tone3[] = {
 };
 
 const uint32_t tone3Duration[] = {
-		  8, 2, 8
+		  4, 2, 4
 };
 
 const uint32_t tone4[] = {
@@ -83,7 +83,7 @@ const uint32_t tone4[] = {
 };
 
 const uint32_t tone4Duration[] = {
-		  8
+		  4
 };
 
 
