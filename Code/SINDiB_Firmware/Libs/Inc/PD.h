@@ -17,6 +17,6 @@ void assignParameters(void);
 
 void speedController(void);
 void angularController(void);
-void irController(void);
+bool irController(void);
 
 #endif /* INC_PD_H_ */

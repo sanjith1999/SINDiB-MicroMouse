@@ -143,16 +143,16 @@ void displayUpdate(void)
 	case (SENSOR_READ):
 
 		putString("RF:",2,2,SMALL);
-		putFloat(averageFR,26,2, SMALL);
+		putFloat(LFSensor,26,2, SMALL);
 
 		putString("LF:",76,2,SMALL);
-		putFloat(averageFL,100,2, SMALL);
+		putFloat(RFSensor,100,2, SMALL);
 
 		putString("DR:",2,13,SMALL);
-		putFloat(averageR,26,13, SMALL);
+		putFloat(DRSensor,26,13, SMALL);
 
 		putString("DL:",76,13,SMALL);
-		putFloat(averageL,100,13, SMALL);
+		putFloat(DLSensor,100,13, SMALL);
 		
 		putString("ANGLE:",22,24,SMALL);
 		putFloat(angle_z,70,22, SMALL);

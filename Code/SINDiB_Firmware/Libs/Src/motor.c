@@ -21,7 +21,7 @@ void setLeftWheel(float l_speed)
 {
 	uint16_t l_pwma, l_pwmb;
 
-	if (abs(l_speed) > SPEED_THRESHOLD)
+	if (fabs(l_speed) > SPEED_THRESHOLD)
 		l_speed = (l_speed > 0) ? SPEED_THRESHOLD : -SPEED_THRESHOLD;
 
 	l_pwma = (l_speed < 0) ? (-l_speed) * u12_max : 0;
@@ -35,7 +35,7 @@ void setRightWheel(float r_speed)
 {
 	uint16_t r_pwma, r_pwmb;
 
-	if (abs(r_speed) > SPEED_THRESHOLD)
+	if (fabs(r_speed) > SPEED_THRESHOLD)
 		r_speed = (r_speed > 0) ? SPEED_THRESHOLD : -SPEED_THRESHOLD;
 	r_pwma = (r_speed < 0) ? (-r_speed) * u12_max : 0;
 	r_pwmb = (r_speed >= 0) ? r_speed * u12_max : 0;

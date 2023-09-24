@@ -1,9 +1,7 @@
 #include "PD.h"
 
-const float TERMINATION_TH = 4e-2;
-
 // VARIABLES
-static u32 l_start = 0, r_start = 0, previous_time = 0, current_time = 0; // STORE STARTING POSITION
+static u32 l_start = 0, r_start = 0, previous_time = 0, current_time = 0, last_exit_time = 0; // STORE STARTING POSITION
 static float start_angle = 0;
 
 static MV_Type mv_type = IDLE;
@@ -14,6 +12,7 @@ static float sc_last_error = 0, ac_last_error = 0, ir_last_error = 0;
 
 /////////////////////////////////////////////////// CONTROLLER /////////////////////////////////////////////////////////////////
 static int fm_counter = 0;
+const float TERMINATION_TH = 4e-2;
 
 bool finishMove(MV_Type mv_type_, float dist_ang_)
 {
@@ -33,18 +32,19 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 
 	// CORRECTIONS
 	speedController();
-	
-//	 TERMINATION CODITION
-	if (fabs(PD_correction_sc) < fabs(TERMINATION_TH))
+
+	//	 TERMINATION CODITION
+	if (fabs(PD_correction_sc) < fabs(TERMINATION_TH) || (last_exit_time - current_time) > 300)
 	{
 		if (fm_counter > 5)
 		{
 			l_start = 0, r_start = 0;
 			fm_counter = 0;
-			(mv_type == STRAIGHT_RUN) ? LED1_OFF:(mv_type==POINT_TURN)?LED2_OFF:LED3_OFF;
+			(mv_type == STRAIGHT_RUN) ? LED1_OFF : ((mv_type == POINT_TURN) ? LED2_OFF : LED3_OFF);
 			return true;
 		}
 		fm_counter++;
+		last_exit_time = current_time;
 		HAL_Delay(20);
 	}
 
@@ -52,8 +52,8 @@ bool finishMove(MV_Type mv_type_, float dist_ang_)
 	switch (mv_type)
 	{
 	case STRAIGHT_RUN:
-		l_speed = PD_correction_sc - PD_correction_ac;
-		r_speed = PD_correction_sc + PD_correction_ac;
+		l_speed = PD_correction_sc - PD_correction_ac + PD_correction_ir;
+		r_speed = PD_correction_sc + PD_correction_ac - PD_correction_ir;
 		break;
 	case POINT_TURN:
 		l_speed = -PD_correction_sc + PD_correction_ac;
@@ -88,7 +88,7 @@ void assignParameters(void)
 		speed_th_ = st_speed;
 		counts_ = dist_ang * LINEAR_SENSITIVITY;
 
-		if (fabs(st_speed - 0.3)<.1)
+		if (fabs(st_speed - 0.3) < .1)
 		{
 			sc_kp = 1, sc_kd = 5e-3, sc_red = 100;
 			ac_kp = 1.1, ac_kd = 5e-3, ac_red = 10;
@@ -104,7 +104,7 @@ void assignParameters(void)
 		counts_ = dist_ang * TURN_SENSITIVITY;
 		speed_th_ = rt_speed;
 
-		sc_kp = 1.2, sc_kd = 2e-3, sc_red =70; //2e-3
+		sc_kp = 1.2, sc_kd = 2e-3, sc_red = 70; // 2e-3
 		ac_kp = 1, ac_kd = 3e-3, ac_red = 100;
 		break;
 
@@ -149,7 +149,16 @@ void speedController(void)
 	if (fabs(PD_correction_sc) > speed_th_)
 	{
 		PD_correction_sc = (PD_correction_sc > 0) ? speed_th_ : -speed_th_;
-		angularController();
+		if (irController())
+		{
+			PD_correction_ac = 0;
+			irController();
+		}
+		else
+		{
+			PD_correction_ir = 0;
+			angularController();
+		}
 		return;
 	}
 	PD_correction_ac = 0;
@@ -175,13 +184,13 @@ void angularController(void)
 
 	// AT THE END
 	case (FRONT_ALIGN):
-		ac_error =( LFSensor - RFSensor)/10;
+		ac_error = (LFSensor - RFSensor) / 10;
 		break;
 	}
 
 	PD_correction_ac = (ac_kp * ac_error + sc_kd * 1e3 * (sc_error - sc_last_error) / (current_time - previous_time)) / ac_red;
 	ac_last_error = ac_error;
-	if (fabs(PD_correction_ac) > .6* speed_th_)
+	if (fabs(PD_correction_ac) > .6 * speed_th_)
 		PD_correction_ac = (PD_correction_ac > 0) ? .5 * speed_th_ : -.5 * speed_th_;
 
 	return;
@@ -190,24 +199,46 @@ void angularController(void)
 ///////////////////////////////////////////////////////  IR-CONTROLLER /////////////////////////////////////////////////////////////////////////////////
 static float ir_error = 0;
 static float ir_kp = 1, ir_kd = 0, ir_red = 100;
+const float MIDDLE_VALUE_DL = 160;
 
-bool notInThreshold()
+bool twoWalls(void)
 {
-	if (((DLSensor - 500) * (DLSensor - 2000) > 0) && ((DLSensor - 500) * (DLSensor - 2000) > 0))
+	if (((averageL - 500) * (averageL - 2000) < 0) && ((averageR - 500) * (averageR - 2000) < 0))
+		return true;
+	return false;
+}
+
+bool leftwall(void)
+{
+	if ((averageL - 500) * (averageR - 2000) < 0)
+		return true;
+	return false;
+}
+
+bool rightWall(void)
+{
+	if ((averageR - 500) * (averageR - 2000) < 0)
 		return true;
 	return false;
 }
 
 // DL SENSOR ALIGNMENT
-void irController(void)
+bool irController(void)
 {
-	if ((mv_type != STRAIGHT_RUN) || notInThreshold())
+	if ((mv_type != STRAIGHT_RUN))
 	{
-		ir_error = DLSensor - DRSensor;
+		if (twoWalls())
+			ir_error = averageL - averageR;
+		else if (leftWall())
+			ir_error = 2 * (averageL - MIDDLE_VALUE_DL);
+		else if (rightWall())
+			ir_error = 2 * (MIDDLE_VALUE_DL - averageR);
+		else
+			return false;
 		PD_correction_ir = (ir_kp * ir_error + ir_kd * 1e3 * (ir_error - ir_last_error) / (current_time - previous_time)) / ir_red;
 		ir_last_error = ir_error;
-		return;
+		return true;
 	}
 	PD_correction_ir = 0;
-	return;
+	return false;
 }

@@ -28,7 +28,7 @@ int cppmain(void)
 {
 	initialization_block();
 	HAL_Delay(1000);
-	disp_state = DEFAULT;
+	disp_state = SENSOR_READ;
 
 	if (orient == 1)
 	{
@@ -54,7 +54,7 @@ int cppmain(void)
 		// 	STOP_ROBOT;
 		// 	HAL_Delay(2000);
 		// }
-		mouseRun();
+		// mouseRun();
 		//		getSensorReadings();
 		i++;
 		HAL_Delay(1);
@@ -416,34 +416,34 @@ void mouseRun()
 
 		break;
 
-	case 8: // set initial
+	case 8: // set initial //////////////////////////////////////////////////////////// ASK FROM ISHRATH //////////////////////////////////////////////////////////
 
 		if (irBlink())
 		{
-			if (state == 1)
-			{
-				orient = 0;
-			}
-			else
-			{
-				orient = 1;
-			}
+			// if (state == 1)
+			// {
+			// 	orient = 0;
+			// }
+			// else
+			// {
+			// 	orient = 1;
+			// }
 
-			if (orient == 1)
-			{
-				XY.x = 1;
-				XY.y = 0;
-				cells[0][0] = 10;
-			}
-			else
-			{
-				XY.x = 0;
-				XY.y = 1;
-				cells[0][0] = 9;
-			}
+			// if (orient == 1)
+			// {
+			// 	XY.x = 1;
+			// 	XY.y = 0;
+			// 	cells[0][0] = 10;
+			// }
+			// else
+			// {
+			// 	XY.x = 0;
+			// 	XY.y = 1;
+			// 	cells[0][0] = 9;
+			// }
 
-			XY_prev.y = 0;
-			XY_prev.x = 0;
+			// XY_prev.y = 0;
+			// XY_prev.x = 0;
 		}
 
 		if (buttonPress)
