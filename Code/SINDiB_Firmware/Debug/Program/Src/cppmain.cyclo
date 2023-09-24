@@ -2,4 +2,4 @@
 ../Program/Src/cppmain.cpp:74:5:int initialization_block()	1
 ../Program/Src/cppmain.cpp:96:6:void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*)	4
 ../Program/Src/cppmain.cpp:107:6:void HAL_GPIO_EXTI_Callback(uint16_t)	2
-../Program/Src/cppmain.cpp:119:6:void mouseRun()	67
+../Program/Src/cppmain.cpp:119:6:void mouseRun()	69

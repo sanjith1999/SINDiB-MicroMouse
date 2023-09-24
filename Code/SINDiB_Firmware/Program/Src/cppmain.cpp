@@ -6,20 +6,20 @@
 #include "cppmain.h"
 
 u32 i;
-u32 DELAY_MID = 100;
+u32 DELAY_MID = 1;
 bool buttonPress = false;
 int mouseState = 0;
 int runState = 0;
 static coordinate XY;
 static coordinate XY_prev;
 
-int orient = 0;
+int orient = 1;
 char direction;
 bool starting = false;
-float edgeToCenter = 13;
+float edgeToCenter = 12.5;
 float centerToEdgeSides = 3;
-float centerToEdgeForward = 3;
-float centerToEdgeBack = 3;
+float centerToEdgeForward = 3.5;
+float centerToEdgeBack = 2;
 float Angle180 = 180;
 float centerToEdge;
 
@@ -182,7 +182,10 @@ void mouseRun()
 			break;
 
 		case 2: // move center
-			align_select = true;
+			if(!F){
+				align_select = true;
+			}
+			
 			if (finishMove(STRAIGHT_RUN, edgeToCenter))
 			{
 				STOP_ROBOT;
@@ -310,7 +313,9 @@ void mouseRun()
 			break;
 
 		case 2: // move center
-			align_select = true;
+			if(!F){
+				align_select = true;
+			}
 			if (finishMove(STRAIGHT_RUN, edgeToCenter))
 			{
 				STOP_ROBOT;
