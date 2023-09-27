@@ -1,8 +1,0 @@
-../Libs/Src/read_sensors.c:30:6:readSensor	8	static
-../Libs/Src/read_sensors.c:97:6:readVolMeter	8	static
-../Libs/Src/read_sensors.c:105:6:stop_it_all	8	static
-../Libs/Src/read_sensors.c:120:6:irBlink	4	static
-../Libs/Src/read_sensors.c:128:6:rightIrBlink	4	static
-../Libs/Src/read_sensors.c:136:6:leftIrBlink	4	static
-../Libs/Src/read_sensors.c:144:6:calculateAndSaveAverages	16	static
-../Libs/Src/read_sensors.c:161:6:getSensorReadings	8	static

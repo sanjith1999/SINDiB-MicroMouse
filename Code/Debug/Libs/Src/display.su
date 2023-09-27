@@ -1,8 +1,0 @@
-../Libs/Src/display.c:5:6:displayInit	8	static
-../Libs/Src/display.c:11:6:clearScreen	8	static
-../Libs/Src/display.c:16:6:writeString	16	static
-../Libs/Src/display.c:35:6:putString	24	static
-../Libs/Src/display.c:41:6:putChar	32	static
-../Libs/Src/display.c:52:6:putInt	88	static
-../Libs/Src/display.c:60:6:putFloat	96	static
-../Libs/Src/display.c:69:6:displayUpdate	16	static
