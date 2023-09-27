@@ -2,6 +2,12 @@
 
 Welcome to the repository for the SINDiB Micromouse project developed for RoboFest 2023 by the SINDiB team. In this project, we present our efforts to design and build a micromouse robot capable of navigating a maze autonomously. This README file provides an overview of the design details starting from the rough sketch. We wish to extend our heartfelt gratitude to [Mr. Kithmin Wickremasinghe](https://www.kithminrw.com/  ) for serving as an unwavering source of inspiration and mentorship throughout the entirety of this project
 
+<div style="display: flex;">
+    <img src="./photos/front_view.jpg" alt="After Power Circuit" style="Width: 30%; padding: 5px;">
+    <img src="./photos/back_view.jpg" alt="Image 2" style="Width: 30%; padding: 5px;">
+    <img src="./photos/top_view.jpg" alt="Image 3" style="Width: 30%; padding: 5px;">
+</div>
+
 ## Component Selection
 
 ### Microcontroller: STM32F405
@@ -88,12 +94,81 @@ Understand the design bettery by looking at the [schematic](./PCB/Design/schemat
 <br>
 Here is the complete PCB in a 3D view.
 <br>
-<img src="./body/3d_layout.jfif" alt="Image Description" style="width:700px; height:auto;">
+<img src="./body/3d_layout.jfif" alt="Image Description" style="width:400px; height:auto;">
 
-For more information, feel free to explore our repository's documentation and source code. We are excited to present our progress and look forward to showcasing our micromouse at RoboFest 2023!
+## Soldering
+1. **Power Circuit** : We begin by soldering the power circuit components. Once completed, we use test points to verify the voltage output, comparing it with the expected values.
+
+2. **Main Controller** : Next, we move on to soldering the microcontroller and establish a connection to upload the code. This step allows us to verify the basic functionality of the microcontroller.
+
+3. **Passive Components** : After confirming the proper functioning of the microcontroller, we proceed to solder all other components to complete the circuit. This step ensures that all elements of the project are integrated seamlessly.
+
+***Note***: We paid special attention to soldering the gyroscope, adhering to its footprint specifications to ensure precise and reliable connections. Infact we confirmed the connections from microcontroller end.
+
+<div style="display: flex;">
+    <img src="./photos/after_power.jpg" alt="After Power Circuit" style="Width: 18%; padding: 5px;">
+    <img src="./photos/after_power2.jpg" alt="Image 2" style="Width: 18%; padding: 5px;">
+    <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
+        &rarr; <!-- Right arrow entity -->
+    </div>
+    <img src="./photos/after_microcontroller.jpg" alt="Image 3" style="Width: 18%; padding: 5px;">
+    <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
+        &rarr; <!-- Right arrow entity -->
+    </div>
+    <img src="./photos/pcb_working.gif" alt="Image 5" style="Width: 18%; padding: 5px;">
+    <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
+        &rarr; <!-- Right arrow entity -->
+    </div>
+    <img src="./photos/soldered.jpg" alt="Image 4" style="Width: 18%; padding: 5px;">
+</div>
 
 
+## Firmware
+
+## Achievements
+We are proud to announce that our project achieved remarkable success at SLIIT Robofest 2023. We secured the prestigious position of 2nd runners up.
+
+<div style="display: flex;">
+    <img src="./photos/team2.jpg" alt="After Power Circuit" style="Width: 50%; padding: 5px;">
+    <img src="./photos/team3.jpg" alt="Image 2" style="Width: 50%; padding: 5px;">
+</div>
+
+**Search Run**<br>
+<img src="./photos/search_run.gif" alt="Image Description" style="width:500px; height:auto;">
+
+
+## Basic Tests
+1. **TEST 1:** Going straight with the help of encoder<br>
+<img src="./photos/straight_run.gif" alt="Image Description" style="width:500px; height:auto;">
+2. **TEST 2:** Aligning the robot normal to a wall in front on a specified distance.<br>
+<img src="./photos/front_align.gif" alt="Image Description" style="width:500px; height:auto;">
+3. **TEST 3:** Compass nature using gyroscope reading.<br>
+<img src="./photos/point_direction.gif" alt="Image Description" style="width:500px; height:auto;">
+
+## Hardware Offer
+We are pleased to offer the complete hardware package of our robot along with access to essential codes at an attractive price of 50,000 Sri Lankan Rupees (SLR).
+
+<img src="./photos/ad.JPG" alt="Image Description" style="width:500px; height:auto;">
+
+### What's Included
+
+- **Hardware**: You will receive the physical hardware components necessary to assemble and operate the robot. This includes all sensors, actuators, and the microcontroller.
+
+- **Libraries**: Gain access to fundamental hardware control codes that allow you to interact with and control the robot's components. These codes serve as a foundation for further development and customization.
+
+### Why Choose Our Offer
+
+Our goal is to make robotics accessible to everyone. By providing both the hardware and the essential software components, we aim to simplify the process of getting started with robotics projects.
+
+### How to Get Started
+
+To take advantage of this offer and begin your journey into robotics, please [contact us](mailto:shansanjithofficial@gmail.com). We will be happy to assist you in acquiring the hardware and access codes.
+
+Don't miss out on this opportunity to kickstart your robotics projects with a reliable foundation!
 
 ## References
 1. [STM32-ST Link V2 for programming STM32 microcontrollers.](https://www.robotics-university.com/2016/05/mini-st-linkv2-programming-tool-for-stm8-and-stm32.html)
-2. [Interfacing HC-06 bluetooth module via I2C communication.](https://www.etechnophiles.com/hc06-pinout-specifications-datasheet/)
+2. [Interfacing HC-06 bluetooth module via USART communication.](https://www.etechnophiles.com/hc06-pinout-specifications-datasheet/)
+3. [Interfacing OLED display via SPI communication.](https://github.com/lamik/OLED_SSD1306_STM32_HAL)
+4. 
+
