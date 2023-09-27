@@ -3,9 +3,9 @@
 Welcome to the repository for the SINDiB Micromouse project developed for RoboFest 2023 by the SINDiB team. In this project, we present our efforts to design and build a micromouse robot capable of navigating a maze autonomously. This README file provides an overview of the design details starting from the rough sketch. We wish to extend our heartfelt gratitude to [Mr. Kithmin Wickremasinghe](https://www.kithminrw.com/  ) for serving as an unwavering source of inspiration and mentorship throughout the entirety of this project
 
 <div style="display: flex;">
-    <img src="./photos/front_view.jpg" alt="After Power Circuit" style="Width: 30%; padding: 5px;">
-    <img src="./photos/back_view.jpg" alt="Image 2" style="Width: 30%; padding: 5px;">
-    <img src="./photos/top_view.jpg" alt="Image 3" style="Width: 30%; padding: 5px;">
+    <img src="./images/front_view.jpg" alt="After Power Circuit" style="Width: 30%; padding: 5px;">
+    <img src="./images/back_view.jpg" alt="Image 2" style="Width: 30%; padding: 5px;">
+    <img src="./images/top_view.jpg" alt="Image 3" style="Width: 30%; padding: 5px;">
 </div>
 
 ## Component Selection
@@ -75,26 +75,26 @@ Understand the design bettery by looking at the [schematic](./PCB/Design/schemat
 ### Design Flow
 1. Finishing the Placements and Outer Shape
 
-<img src="./body/placement.jfif" alt="Image Description" style="width:300px; height:auto;">
+<img src="./images/placement.jfif" alt="Image Description" style="width:300px; height:auto;">
 
 2. Routing the Design using Different Widths - Keep a rule of thumb!
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./body/top_route.jfif" alt="Top Track" style="width: 30%;">
-  <img src="./body/bottom_route.jfif" alt="Bottom Track" style="width: 27%;">
-  <img src="./body/route.jfif" alt="Tracks" style="width: 30%;">
+  <img src="./images/top_route.jfif" alt="Top Track" style="width: 30%;">
+  <img src="./images/bottom_route.jfif" alt="Bottom Track" style="width: 27%;">
+  <img src="./images/route.jfif" alt="Tracks" style="width: 30%;">
 </div>
 
 3. Filling Copper in our Design.
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="./body/top_pour.jfif" alt="Top Pour" style="width: 30%;">
-  <img src="./body/bottom_pour.jfif" alt="Bottom Pour" style="width: 28%;">
+  <img src="./images/top_pour.jfif" alt="Top Pour" style="width: 30%;">
+  <img src="./images/bottom_pour.jfif" alt="Bottom Pour" style="width: 28%;">
 </div>
 <br>
 Here is the complete PCB in a 3D view.
 <br>
-<img src="./body/3d_layout.jfif" alt="Image Description" style="width:400px; height:auto;">
+<img src="./images/3d_layout.jfif" alt="Image Description" style="width:400px; height:auto;">
 
 ## Soldering
 1. **Power Circuit** : We begin by soldering the power circuit components. Once completed, we use test points to verify the voltage output, comparing it with the expected values.
@@ -106,20 +106,20 @@ Here is the complete PCB in a 3D view.
 ***Note***: We paid special attention to soldering the gyroscope, adhering to its footprint specifications to ensure precise and reliable connections. Infact we confirmed the connections from microcontroller end.
 
 <div style="display: flex;">
-    <img src="./photos/after_power.jpg" alt="After Power Circuit" style="Width: 18%; padding: 5px;">
-    <img src="./photos/after_power2.jpg" alt="Image 2" style="Width: 18%; padding: 5px;">
+    <img src="./images/after_power.jpg" alt="After Power Circuit" style="Width: 18%; padding: 5px;">
+    <img src="./images/after_power2.jpg" alt="Image 2" style="Width: 18%; padding: 5px;">
     <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
         &rarr; <!-- Right arrow entity -->
     </div>
-    <img src="./photos/after_microcontroller.jpg" alt="Image 3" style="Width: 18%; padding: 5px;">
+    <img src="./images/after_microcontroller.jpg" alt="Image 3" style="Width: 18%; padding: 5px;">
     <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
         &rarr; <!-- Right arrow entity -->
     </div>
-    <img src="./photos/pcb_working.gif" alt="Image 5" style="Width: 18%; padding: 5px;">
+    <img src="./images/pcb_working.gif" alt="Image 5" style="Width: 18%; padding: 5px;">
     <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
         &rarr; <!-- Right arrow entity -->
     </div>
-    <img src="./photos/soldered.jpg" alt="Image 4" style="Width: 18%; padding: 5px;">
+    <img src="./images/soldered.jpg" alt="Image 4" style="Width: 18%; padding: 5px;">
 </div>
 
 
@@ -129,26 +129,26 @@ Here is the complete PCB in a 3D view.
 We are proud to announce that our project achieved remarkable success at SLIIT Robofest 2023. We secured the prestigious position of 2nd runners up.
 
 <div style="display: flex;">
-    <img src="./photos/team2.jpg" alt="After Power Circuit" style="Width: 50%; padding: 5px;">
-    <img src="./photos/team3.jpg" alt="Image 2" style="Width: 50%; padding: 5px;">
+    <img src="./images/team2.jpg" alt="After Power Circuit" style="Width: 50%; padding: 5px;">
+    <img src="./images/team3.jpg" alt="Image 2" style="Width: 50%; padding: 5px;">
 </div>
 
 **Search Run**<br>
-<img src="./photos/search_run.gif" alt="Image Description" style="width:500px; height:auto;">
+<img src="./images/search_run.gif" alt="Image Description" style="width:500px; height:auto;">
 
 
 ## Basic Tests
 1. **TEST 1:** Going straight with the help of encoder<br>
-<img src="./photos/straight_run.gif" alt="Image Description" style="width:500px; height:auto;">
+<img src="./images/straight_run.gif" alt="Image Description" style="width:500px; height:auto;">
 2. **TEST 2:** Aligning the robot normal to a wall in front on a specified distance.<br>
-<img src="./photos/front_align.gif" alt="Image Description" style="width:500px; height:auto;">
+<img src="./images/front_align.gif" alt="Image Description" style="width:500px; height:auto;">
 3. **TEST 3:** Compass nature using gyroscope reading.<br>
-<img src="./photos/point_direction.gif" alt="Image Description" style="width:500px; height:auto;">
+<img src="./images/point_direction.gif" alt="Image Description" style="width:500px; height:auto;">
 
 ## Hardware Offer
 We are pleased to offer the complete hardware package of our robot along with access to essential codes at an attractive price of 50,000 Sri Lankan Rupees (SLR).
 
-<img src="./photos/ad.JPG" alt="Image Description" style="width:500px; height:auto;">
+<img src="./images/ad.JPG" alt="Image Description" style="width:500px; height:auto;">
 
 ### What's Included
 
