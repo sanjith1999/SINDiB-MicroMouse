@@ -3,9 +3,9 @@
 Welcome to the repository for the SINDiB Micromouse project developed for RoboFest 2023 by the SINDiB team. In this project, we present our efforts to design and build a micromouse robot capable of navigating a maze autonomously. This README file provides an overview of the design details starting from the rough sketch. We wish to extend our heartfelt gratitude to [Mr. Kithmin Wickremasinghe](https://www.kithminrw.com/  ) for serving as an unwavering source of inspiration and mentorship throughout the entirety of this project
 
 <div style="display: flex;">
-    <img src="./images/front_view.jpg" alt="After Power Circuit" style="Width: 30%; padding: 5px;">
-    <img src="./images/back_view.jpg" alt="Image 2" style="Width: 30%; padding: 5px;">
-    <img src="./images/top_view.jpg" alt="Image 3" style="Width: 30%; padding: 5px;">
+    <img src="./images/front_view.jpg" alt="After Power Circuit" style="Height: 250px; padding: 5px;">
+    <img src="./images/back_view.jpg" alt="Image 2" style="Height: 250px; padding: 5px;">
+    <img src="./images/top_view.jpg" alt="Image 3" style="Height: 250px; padding: 5px;">
 </div>
 
 ## Component Selection
@@ -106,20 +106,20 @@ Here is the complete PCB in a 3D view.
 ***Note***: We paid special attention to soldering the gyroscope, adhering to its footprint specifications to ensure precise and reliable connections. Infact we confirmed the connections from microcontroller end.
 
 <div style="display: flex;">
-    <img src="./images/after_power.jpg" alt="After Power Circuit" style="Width: 18%; padding: 5px;">
-    <img src="./images/after_power2.jpg" alt="Image 2" style="Width: 18%; padding: 5px;">
+    <img src="./images/after_power.jpg" alt="After Power Circuit" style="Width: 15%; padding: 5px;">
+    <img src="./images/after_power2.jpg" alt="Image 2" style="Width: 15%; padding: 5px;">
     <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
         &rarr; <!-- Right arrow entity -->
     </div>
-    <img src="./images/after_microcontroller.jpg" alt="Image 3" style="Width: 18%; padding: 5px;">
+    <img src="./images/after_microcontroller.jpg" alt="Image 3" style="Width: 15%; padding: 5px;">
     <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
         &rarr; <!-- Right arrow entity -->
     </div>
-    <img src="./images/pcb_working.gif" alt="Image 5" style="Width: 18%; padding: 5px;">
+    <img src="./images/pcb_working.gif" alt="Image 5" style="Width: 15%; padding: 5px;">
     <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
         &rarr; <!-- Right arrow entity -->
     </div>
-    <img src="./images/soldered.jpg" alt="Image 4" style="Width: 18%; padding: 5px;">
+    <img src="./images/soldered.jpg" alt="Image 4" style="Width: 15%; padding: 5px;">
 </div>
 
 
@@ -129,8 +129,8 @@ Here is the complete PCB in a 3D view.
 We are proud to announce that our project achieved remarkable success at SLIIT Robofest 2023. We secured the prestigious position of 2nd runners up.
 
 <div style="display: flex;">
-    <img src="./images/team2.jpg" alt="After Power Circuit" style="Width: 50%; padding: 5px;">
-    <img src="./images/team3.jpg" alt="Image 2" style="Width: 50%; padding: 5px;">
+    <img src="./images/team2.jpg" alt="After Power Circuit" style="Height: 200px; padding: 5px;">
+    <img src="./images/team3.jpg" alt="Image 2" style="Height: 200px; padding: 5px;">
 </div>
 
 **Search Run**<br>
