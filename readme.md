@@ -106,20 +106,11 @@ Here is the complete PCB in a 3D view.
 ***Note***: We paid special attention to soldering the gyroscope, adhering to its footprint specifications to ensure precise and reliable connections. Infact we confirmed the connections from microcontroller end.
 
 <div style="display: flex;">
-    <img src="./images/after_power.jpg" alt="After Power Circuit" style="Width: 15%; padding: 5px;">
-    <img src="./images/after_power2.jpg" alt="Image 2" style="Width: 15%; padding: 5px;">
-    <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
-        &rarr; <!-- Right arrow entity -->
-    </div>
-    <img src="./images/after_microcontroller.jpg" alt="Image 3" style="Width: 15%; padding: 5px;">
-    <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
-        &rarr; <!-- Right arrow entity -->
-    </div>
-    <img src="./images/pcb_working.gif" alt="Image 5" style="Width: 15%; padding: 5px;">
-    <div style="Width: 5%; display: flex; align-items: center; justify-content: center;">
-        &rarr; <!-- Right arrow entity -->
-    </div>
-    <img src="./images/soldered.jpg" alt="Image 4" style="Width: 15%; padding: 5px;">
+    <img src="./images/after_power.jpg" alt="After Power Circuit" style="Height: 200px; padding: 5px;">
+    <img src="./images/after_power2.jpg" alt="Image 2" style="Height: 200px; padding: 5px;">
+    <img src="./images/after_microcontroller.jpg" alt="Image 3" style="Height: 200px; padding: 5px;">
+    <img src="./images/pcb_working.gif" alt="Image 5" style="Height: 200px; padding: 5px;">
+    <img src="./images/soldered.jpg" alt="Image 4" style="Height: 200px; padding: 5px;">
 </div>
 
 
@@ -139,11 +130,11 @@ We are proud to announce that our project achieved remarkable success at SLIIT R
 
 ## Basic Tests
 1. **TEST 1:** Going straight with the help of encoder<br>
-<img src="./images/straight_run.gif" alt="Image Description" style="width:500px; height:auto;">
+    <img src="./images/straight_run.gif" alt="Image Description" style="width:500px; height:auto;">
 2. **TEST 2:** Aligning the robot normal to a wall in front on a specified distance.<br>
-<img src="./images/front_align.gif" alt="Image Description" style="width:500px; height:auto;">
+    <img src="./images/front_align.gif" alt="Image Description" style="width:500px; height:auto;">
 3. **TEST 3:** Compass nature using gyroscope reading.<br>
-<img src="./images/point_direction.gif" alt="Image Description" style="width:500px; height:auto;">
+    <img src="./images/point_direction.gif" alt="Image Description" style="width:500px; height:auto;">
 
 ## Hardware Offer
 We are pleased to offer the complete hardware package of our robot along with access to essential codes at an attractive price of 50,000 Sri Lankan Rupees (SLR).
